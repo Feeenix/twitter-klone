@@ -7,4 +7,13 @@ async function readfile(File) {
         }
     });
     return loaded;
+}
+async function loadFiles(filesArray) {
+    let imageDataUrls = [];
+    for (let i = 0; i < filesArray.length; i++) {
+        let file = filesArray[i];
+        let imageDataUrl = await readfile(file);
+        imageDataUrls.push(imageDataUrl)
     }
+    return imageDataUrls;
+}

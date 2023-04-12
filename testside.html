@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script src="javascript/lib.js"></script>
 
 <body>
     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
 
 
-    <script src="javascript/lib.js"></script>
     <script>
         const avatar = document.getElementById('avatar');
         avatar.addEventListener('change', async (e) => {
@@ -20,15 +20,7 @@
             console.log(imageDataUrls);
         });
 
-        async function loadFiles(filesArray) {
-            let imageDataUrls = [];
-            for (let i = 0; i < filesArray.length; i++) {
-                let file = filesArray[i];
-                let imageDataUrl = await readfile(file);
-                imageDataUrls.push(imageDataUrl)
-            }
-            return imageDataUrls;
-        }
+        
         
 
 

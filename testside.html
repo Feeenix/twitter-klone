@@ -7,24 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<link rel="stylesheet" href="hoved.css">
 <script src="javascript/lib.js"></script>
 
 <body>
+    <label for="avatar">Profile picture</label>
+    <br>
+
     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+    <br>
+    <br>
+    <label for="banner">Profile banner</label>
+    <br>
+    <input type="file" id="banner" name="banner" accept="image/png, image/jpeg">
 
 
     <script>
         const avatar = document.getElementById('avatar');
-        avatar.addEventListener('change', async (e) => {
-            let imageDataUrls = await loadFiles(e.target.files)
-            console.log(imageDataUrls);
-        });
+        avatar.addEventListener('change', (
+            async function (e) {
+                let imageDataUrls = await readFiles(e.target.files) // readFiles er en funksjon fra javascript/lib.js
+                console.log(imageDataUrls);
+            })
+        );
 
-        
-        
 
 
-        
+
+
+
+
+
 
     </script>
 

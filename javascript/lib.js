@@ -5,10 +5,13 @@ async function readfile(File) {
         reader.onload = () => {
             resolve(reader.result);
         }
+        reader.onerror = () => {
+            reject(reader.error);
+        }
     });
     return loaded;
 }
-async function loadFiles(filesArray) {
+async function readFiles(filesArray) { // tar inn et array med fil-objekter og returnerer et array med base64 url strings
     let imageDataUrls = [];
     for (let i = 0; i < filesArray.length; i++) {
         let file = filesArray[i];

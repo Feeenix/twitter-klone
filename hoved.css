@@ -1,6 +1,45 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,700,300");
-@import url("http://fonts.googleapis.com/css?family=Inter:400,700,300");
+@import url("http://fonts.googleapis.com/css?family=Inter");
+/* @import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap"); */
+
+
 
 * {
     font-family: Inter;
+}
+
+.container {
+    /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
+     */
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    background-color: blueviolet;
+    
+}
+
+button{
+    display: block;
+    padding: 5px;
+}
+
+.inputfield {
+    background-color: antiquewhite;
+    max-width: 300px;
+    width: 100%;
+    /* denne klassen inneholder som oftest en label og en input
+     */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.inputfield input {
+    max-width: 300px;
+}
+
+.inputfield label {
+    margin-bottom: 5px;
 }

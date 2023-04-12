@@ -40,3 +40,15 @@ function imageToBase64(bytes) {
 
 }
 
+
+
+function _arrayBufferToBase64( buffer ) { // hentet fra https://stackoverflow.com/questions/9267899/arraybuffer-to-base64-encoded-string
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
+}
+function urlWithBase64ImageData(base64)

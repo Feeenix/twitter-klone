@@ -40,7 +40,7 @@ function importLocalStorage(jsonDataString) { // importerer localStorage fra en 
 
 
 function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
-    if (localStorage.getItem(key) === null) {
+    if (localStorage.getItem(key) === null) { // hvis det ikke finnes noe objekt med key i localStorage, returner et tomt objekt
         return {};
     }
     let data = localStorage.getItem(key);
@@ -48,8 +48,8 @@ function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
 }
 
 
-function brukernavnErLedig(brukernavn) {
-    let usernames = Object.keys(hentFraLocalStorage("users"));
+function brukernavnErLedig(brukernavn) { // sjekker om et brukernavn er ledig ved å lete gjennom eksisterende brukere i localStorage
+    let usernames = Object.keys(hentFraLocalStorage("users")); // lager en array med alle brukernavnene
     if (usernames.includes(brukernavn)) {
         return false;
     }

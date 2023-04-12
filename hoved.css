@@ -14,19 +14,23 @@
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 15px;
 
-    background-color: blueviolet;
-    
+    /* background-color: blueviolet; */
+    text-align: center;
 }
 
 button{
     display: block;
     padding: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .inputfield {
-    background-color: antiquewhite;
+    margin: 0 auto;
+    text-align: left;
+    /* background-color: antiquewhite; */
     max-width: 300px;
     width: 100%;
     /* denne klassen inneholder som oftest en label og en input
@@ -37,7 +41,8 @@ button{
 }
 
 .inputfield input {
-    max-width: 300px;
+    max-width: 292.5px;
+    width: 100%;
 }
 
 .inputfield label {

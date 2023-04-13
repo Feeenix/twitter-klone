@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,39 +11,70 @@
 <style>
     /* lokal stilark */
 
-    button{
+    button {
+        /* midtstilt med responsiv bredde */
         margin-left: auto;
         margin-right: auto;
         width: 100%;
+    }
+
+    .container {
         max-width: 300px;
     }
 
+    .container a {
+        text-align: justify;
+    }
 </style>
+
 <body>
     <!-- TODO:
-    Alt skal inn i en div som capper bredden til 800px og sentrerer innholdet.
+    Alt skal inn i en div som capper bredden til 300px og sentrerer innholdet.
     Bark-ikonet i øverst i midten.
     Tekst som sier "Logg inn til Barker". kanskje h1 eller h2.
     En input for brukernavn.
     En input for passord.
     En knapp som sier "Logg inn". denne må bruke en event listener som sjekker om brukernavn og passord er riktig.
-    en tekst som sier "Har du ikke en konto? Registrer deg her". dette skal være en link til registreringssiden som bruker "a href"
+    en tekst som sier "Har du ikke en konto? Registrer deg her". dette skal være en link til registreringssiden
       -->
 
-      <div class="container">
-            <img src="bilder/BARK.png" height="50px" alt="bark">
-            <h1>Logg inn til Barker</h1>
-            <div class="inputfield">
-                <label for="brukernavn">Brukernavn</label>
-                <input type="text" id="brukernavn" placeholder="">
-            </div>
-            <div class="inputfield">
-                <label for="passord">Passord</label>
-                <input type="password" id="passord" placeholder="">
-            </div>
-            <button type="submit">Logg inn</button>
-            <a href="registrering.html">Har du ikke en konto? Registrer deg her</a>
-      </div>
+    <div class="container">
+        <img src="bilder/BARK.png" height="50px" alt="bark">
+        <h1>Logg inn til Barker</h1>
+        <div class="inputfield">
+            <label for="brukernavn">Brukernavn</label>
+            <input type="text" id="brukernavn" placeholder="">
+        </div>
+        <div class="inputfield">
+            <label for="passord">Passord</label>
+            <input type="password" id="passord" placeholder="">
+        </div>
+        <button type="submit">Logg inn</button>
+        <a href="registrering.html">Har du ikke en konto? Registrer deg her</a>
+    </div>
 </body>
 <script src="javascript/lib.js"></script>
+<script>
+    // legger til event listener
+    let loggInnKnapp = document.querySelector('button');
+    loggInnKnapp.addEventListener('click', logInn);
+
+    function logInn(e) {
+        let brukernavnEl = document.querySelector('#brukernavn');
+        let passordEl = document.querySelector('#passord');
+        let brukernavn = brukernavnEl.value;
+        let passord = passordEl.value;
+
+        if (testBrukernavnOgPassord(brukernavn, passord)) {
+            console.log('Du er logget inn');
+            settInnloggetBruker(brukernavn);
+        } else {
+            console.log('Feil brukernavn eller passord');
+        }
+
+    }
+
+</script>
+
 </html>
+

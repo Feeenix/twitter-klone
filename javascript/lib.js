@@ -48,14 +48,22 @@ function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
 
 
 
-function brukernavnErLedig(brukernavn) { // sjekker om et brukernavn er ledig ved å lete gjennom eksisterende brukere i localStorage
+function brukernavnFinnes(brukernavn) { // sjekker om et brukernavn finnes ved å lete gjennom eksisterende brukere i localStorage
     let usernames = Object.keys(hentFraLocalStorage("users")); // lager en array med alle brukernavnene
     if (usernames.includes(brukernavn)) {
+        return true;
+    }
+    return false;
+}
+function testBrukernavnOgPassord(brukernavn, passord) {
+    if (!brukernavnFinnes(brukernavn)) {
         return false;
     }
-    return true;
+    let bruker = hentBruker(brukernavn); // bruker er json objekt
+    if (bruker["password"] === passord) {
+        return true;
+    }
 }
-
 
 
 function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorage
@@ -66,17 +74,19 @@ function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorag
     return users[brukernavn];
 }
 
-// function lagreData(location, key, data) {// for eksempel lagreData("users", "elonmusk", bruker-objekt)
-//     let locationData = hentFraLocalStorage(location);
-//     locationData[key] = data;
-//     localStorage.setItem(key, JSON.stringify(locationData));
 
 
-// }
-// function lagreBruker(brukerId, bruker, ) { // lagrer kun ett bruker-objekt til localStorage, brukes for eksempel i settings.html
-//     lagreData("users", brukerId, bruker);
+function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localStorage
+    localStorage.setItem("loggedInUser", JSON.stringify({"brukernavn":brukernavn, "utløpsdato":Date.now()+1000*60*60*24})); // utløpsdato er 24 timer fra nå
+}
+function hentInnloggetBrukerId() { // returnerer brukernavnet til den innlogget brukeren
+    return JSON.parse(localStorage.getItem("loggedInUser"))["brukernavn"];
+}
+function loggUtBruker() { // logger ut brukeren og redirecter til index.html
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "index.html";
+}
 
-// }
 
 function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elonmusk"] , bruker-objekt). 
     // Funksjonen lagrer data til en lokasjon i localStorage, locationPath er en array med keys til lokasjonen
@@ -100,17 +110,19 @@ function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elo
 /*
 eksempel på bruker-objekt:
 "elonmusk": {
-    bannerImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...",
-    profileImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...",
+    password: "passord123",
+    joined: "2020-12-12",
+
+    bannerImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...", // default er null
+    profileImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...", // default er null
     followers: ["billgates", "jeffbezos"],
     following: ["billgates", "jeffbezos"],
     posts: ["postId1", "postId2", "postId3"],
-    displayName: "Elon Musk",
-    pinnedPost: "postId1",
-    joined: "2020-12-12",
-    location: "",
-    bio: "I am the CEO of SpaceX and Tesla, and founder of Neuralink and OpenAI. I also advise on AI policy and invest in AI startups.",
-    status: "currently doing nothing",
+    displayName: "Elon Musk", // default er brukerId
+    pinnedPost: "postId1", // default er null
+    location: "", // default er null
+    bio: "I am the CEO of SpaceX and Tesla, and founder of Neuralink and OpenAI. I also advise on AI policy and invest in AI startups.", // default er null
+    status: "currently doing nothing", // default er null
     settings: {
         darkMode: false,
         background-color: "#ffffff", // default er #ffffff, 

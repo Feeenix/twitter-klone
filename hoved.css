@@ -11,9 +11,11 @@
 .container {
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
      */
+    
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
+    margin-top: 15px;
     padding: 15px;
 
     /* background-color: blueviolet; */
@@ -39,7 +41,6 @@ button:hover {
     margin: 0 auto;
     text-align: left;
     /* background-color: antiquewhite; */
-    max-width: 300px;
     width: 100%;
     /* denne klassen inneholder som oftest en label og en input
      */
@@ -49,7 +50,8 @@ button:hover {
 }
 
 .inputfield input {
-    max-width: 292.5px;
+    max-width: calc(100% - 7.5px);
+    /* 292.5px; */
     width: 100%;
 }
 

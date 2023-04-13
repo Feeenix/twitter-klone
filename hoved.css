@@ -11,27 +11,36 @@
 .container {
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
      */
+    
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
+    margin-top: 15px;
     padding: 15px;
 
     /* background-color: blueviolet; */
     text-align: center;
 }
 
-button{
+button {
     display: block;
     padding: 5px;
     cursor: pointer;
     margin-bottom: 15px;
+    background-color: #d6ccff;
+    border-radius: 10px;
+    border-color: #9279ff;
+}
+
+button:hover {
+    background-color: #9279ff;
+    color: white;
 }
 
 .inputfield {
     margin: 0 auto;
     text-align: left;
     /* background-color: antiquewhite; */
-    max-width: 300px;
     width: 100%;
     /* denne klassen inneholder som oftest en label og en input
      */
@@ -41,7 +50,8 @@ button{
 }
 
 .inputfield input {
-    max-width: 292.5px;
+    max-width: calc(100% - 7.5px);
+    /* 292.5px; */
     width: 100%;
 }
 

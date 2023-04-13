@@ -55,3 +55,70 @@ function brukernavnErLedig(brukernavn) { // sjekker om et brukernavn er ledig ve
     }
     return true;
 }
+
+
+
+function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorage
+    let users = hentFraLocalStorage("users");
+    if (users[brukernavn] === undefined) { // hvis brukeren ikke finnes, returner et tomt objekt
+        return {};
+    }
+    return users[brukernavn];
+}
+
+function lagreBruker(bruker) { // lagrer kun ett bruker-objekt til localStorage, brukes for eksempel i settings.html
+    let users = hentFraLocalStorage("users");
+    users[bruker.username] = bruker;
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+
+
+/*
+eksempel på bruker-objekt:
+"elonmusk": {
+    bannerImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...",
+    profileImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...",
+    followers: ["billgates", "jeffbezos"],
+    following: ["billgates", "jeffbezos"],
+    posts: ["postId1", "postId2", "postId3"],
+    displayName: "Elon Musk",
+    pinnedPost: "postId1",
+    joined: "2020-12-12",
+    location: "",
+    bio: "I am the CEO of SpaceX and Tesla, and founder of Neuralink and OpenAI. I also advise on AI policy and invest in AI startups.",
+    status: "currently doing nothing",
+    settings: {
+        darkMode: false,
+        background-color: "#ffffff",
+        text-color: "#000000",
+        font: "Inter",
+        font-size: "1em", // 1em = 16px
+            
+    }
+}
+*/
+
+/*
+eksempel på tweet-objekt:
+"postId1": {
+    path: ["postId1", "postId2", "postId3"], // path er en array med id-er til alle tweets som er i samme tråd, brukes for kommentarer på en strukturert måte
+    text: "Hello world!",
+    images: ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA..."],
+    author: "elonmusk", // brukerid
+    posted: "1618123456789", // timestamp
+    likes: ["billgates", "jeffbezos"],
+    retweets: ["billgates", "jeffbezos"],
+    comments: ["postId2", "postId3"] // id-er til kommentarer
+    views: 1000,
+}
+*/
+
+/*
+eksempel på retweet-objekt:
+"postId4": {
+    "tweetId": "postId1", // id til tweeten som er retweetet
+    author: "billgates", // brukerid
+    posted: "1618123456789", // timestamp
+}
+*/

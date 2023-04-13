@@ -28,7 +28,7 @@ function exportLocalStorage() { // exporterer localStorage til en string
     console.log(data.replace(/"/g, "\\\"")); // bruker regex til å erstatte alle " med \"
 }
 function importLocalStorage(jsonDataString) { // importerer localStorage fra en string
-    // jsonDataString = ""
+    // jsonDataString = '{\"users\":\"{\\"undefined\\":{\\"admin\\":{\\"password\\":\\"passord123\\",\\"joined\\":\\"2023-04-13\\",\\"bannerImage\\":null,\\"profileImage\\":null,\\"followers\\":[],\\"following\\":[],\\"posts\\":[],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":null,\\"bio\\":null,\\"status\\":null,\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}}\",\"tweets\":\"{\\"uucg96qh\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"bilder\\":[],\\"text\\":\\"hallo dette er den første tweeten!\\",\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1681420842384}}\"}'
     localStorage.clear();
     let jsonData = JSON.parse(jsonDataString);
     for (let key in jsonData) {
@@ -46,10 +46,15 @@ function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
 }
 
 
-
+// denne funksjonen brukes blant annet når vi lager en ny tweet, slik at den vet konteksten, fordi det må være på en ny side i følge oppgaven.
 function hentURLSearchParams() { // returnerer en json-objekt med alle url parametrene
     let urlSearchParams = new URLSearchParams(window.location.search) // https://stackoverflow.com/a/901144, det ser ut som å bruke Proxy er 25% raskere, men dette er mer lesbart og forståelig
     return Object.fromEntries(urlSearchParams.entries());
+}
+// gjør det motsatte av hentURLSearchParams. for eksempel paramifyLink("index.html", {"brukernavn": "admin"}) returnerer "index.html?brukernavn=admin"
+function paramifyLink(url,json){
+    let urlSearchParams = new URLSearchParams(json);
+    return url + "?" + urlSearchParams.toString();
 }
 
 
@@ -83,7 +88,7 @@ function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorag
 
 
 function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localStorage
-    localStorage.setItem("loggedInUser", JSON.stringify({"brukernavn":brukernavn, "utløpsdato":Date.now()+1000*60*60*24})); // utløpsdato er 24 timer fra nå
+    localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utløpsdato": Date.now() + 1000 * 60 * 60 * 24 })); // utløpsdato er 24 timer fra nå
 }
 function hentInnloggetBrukerId() { // returnerer brukernavnet til den innlogget brukeren
     return JSON.parse(localStorage.getItem("loggedInUser"))["brukernavn"];
@@ -102,7 +107,7 @@ function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elo
 
     // hentet fra https://stackoverflow.com/a/71720800
     let pointer = locationData // kopierer minne adressen til locationData til pointer, slik at endringer gjort på pointer også endrer locationData
-    while (keys.length>1)
+    while (keys.length > 1)
         pointer = pointer[keys.shift()] // endrer pointer til å peke på neste key i locationPath, fjerner den første keyen fra locationPath. og beholder minne adressen til locationData
     pointer[keys.shift()] = data
 
@@ -112,12 +117,16 @@ function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elo
     localStorage.setItem(mainPath, JSON.stringify(locationData));
 }
 
+function genererId() { // genererer en tilfeldig id
+    return Math.random().toString(36).slice(2, 10);
+}
+
 function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bare de nødvendige feltene
     let users = hentFraLocalStorage("users");
     users[brukernavn] = {
         password: passord,
         joined: new Date().toISOString().split("T")[0], // https://stackoverflow.com/a/29774197 
-        
+
         bannerImage: null,
         profileImage: null,
         followers: [],
@@ -139,8 +148,40 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
     lagreData(["users"], users);
 }
 
+function lagNyTweet(brukernavn, path, bilder, text) {
+    let id = genererId();
+    let tweet = {
+        "author": brukernavn,
+        "path": path,
+        "bilder": bilder,
+        "text": text,
+        "likes": [],
+        "retweets": [],
+        "comments": [],
+        "views": 0,
+        "posted": Date.now()
+    }
+    lagreData(["tweets", id], tweet);
+    // legg til tweet i bruker sin liste over tweets
+    let bruker = hentBruker(brukernavn);
+    bruker["posts"].push(id);
+    lagreData(["users", brukernavn], bruker);
+}
 
+function lagNyRetweet(postId, brukernavn) {
+    let id = genererId();
+    let retweet = {
+        "author": brukernavn,
+        "tweetId": postId,
+        "posted": Date.now()
+    }
+    lagreData(["tweets", id], retweet);
+    // legg til retweet i postId sine retweets
+    let tweet = hentFraLocalStorage("tweets", postId);
+    tweet["retweets"].push(id);
+    lagreData(["tweets", postId], tweet);
 
+}
 
 /*
 eksempel på bruker-objekt:

@@ -47,6 +47,12 @@ function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
 
 
 
+function hentURLSearchParams() { // returnerer en json-objekt med alle url parametrene
+    let urlSearchParams = new URLSearchParams(window.location.search) // https://stackoverflow.com/a/901144, det ser ut som å bruke Proxy er 25% raskere, men dette er mer lesbart og forståelig
+    return Object.fromEntries(urlSearchParams.entries());
+}
+
+
 
 function brukernavnFinnes(brukernavn) { // sjekker om et brukernavn finnes ved å lete gjennom eksisterende brukere i localStorage
     let usernames = Object.keys(hentFraLocalStorage("users")); // lager en array med alle brukernavnene
@@ -105,6 +111,35 @@ function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elo
     // lagrer dataen til localStorage
     localStorage.setItem(mainPath, JSON.stringify(locationData));
 }
+
+function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bare de nødvendige feltene
+    let users = hentFraLocalStorage("users");
+    users[brukernavn] = {
+        password: passord,
+        joined: new Date().toISOString().split("T")[0], // https://stackoverflow.com/a/29774197 
+        
+        bannerImage: null,
+        profileImage: null,
+        followers: [],
+        following: [],
+        posts: [],
+        displayName: brukernavn,
+        pinnedPost: null,
+        location: null,
+        bio: null,
+        status: null,
+        settings: {
+            darkMode: false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
+    }
+    lagreData(["users"], users);
+}
+
+
 
 
 /*

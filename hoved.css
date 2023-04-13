@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700,300");
 @import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=Tangerine");
 /* @import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap"); */
 
 
 
 * {
     font-family: Inter;
+    /* font-family: Tangerine; */
 }
 
 .container {
@@ -57,4 +59,10 @@ button:hover {
 
 .inputfield label {
     margin-bottom: 5px;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 1em;
+    margin-bottom: 15px;
 }

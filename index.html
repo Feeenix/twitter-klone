@@ -40,8 +40,9 @@
 
 
     <div class="container">
-        <img src="bilder/BARK.png" height="50px" alt="bark">
+        <img src="bilder/BARK.png" height="50px" alt="bark icon">
         <h1>Logg inn til Barker</h1>
+        <p class="errorMessage"></p>
         <div class="inputfield">
             <label for="brukernavn">Brukernavn</label>
             <input type="text" id="brukernavn" placeholder="">
@@ -51,26 +52,74 @@
             <input type="password" id="passord" placeholder="">
         </div>
         <button type="submit">Logg inn</button>
-        <a href="registrering.html">Har du ikke en konto? Registrer deg her</a>
+        <a href="registrere.html">Har du ikke en konto? Registrer deg her</a>
     </div>
 </body>
 <script src="javascript/lib.js"></script>
 <script>
-    // legger til event listener
+    // legger til event listeners
     let loggInnKnapp = document.querySelector('button');
     loggInnKnapp.addEventListener('click', logInn);
+
+    let inputBrukernavn = document.querySelector('#brukernavn');
+    let inputPassord = document.querySelector('#passord');
+
+    inputBrukernavn.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') {
+            inputPassord.focus();
+        }
+    });
+
+    inputPassord.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') {
+            logInn();
+        }
+    });
+
+    loggInnKnapp.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') {
+            logInn();
+        }
+    });
+
+
+
+
+
+
 
     function logInn(e) {
         let brukernavnEl = document.querySelector('#brukernavn');
         let passordEl = document.querySelector('#passord');
         let brukernavn = brukernavnEl.value;
         let passord = passordEl.value;
+        
+        if (brukernavn.length === 0) {
+            console.log('Du må skrive inn brukernavn');
+            let errorMessage = document.querySelector('.errorMessage');
+            errorMessage.innerHTML = 'Du må skrive inn brukernavn';
+            brukernavnEl.focus();
+            return
+        }
+        if (passord.length === 0) {
+            console.log('Du må skrive inn passord');
+            let errorMessage = document.querySelector('.errorMessage');
+            errorMessage.innerHTML = 'Du må skrive inn passord';
+            passordEl.focus();
+            return
+        }
+
 
         if (testBrukernavnOgPassord(brukernavn, passord)) {
             console.log('Du er logget inn');
             settInnloggetBruker(brukernavn);
+            window.location.href = 'home.html';
         } else {
             console.log('Feil brukernavn eller passord');
+            let errorMessage = document.querySelector('.errorMessage');
+            errorMessage.innerHTML = 'Feil brukernavn eller passord';
+            brukernavnEl.focus();
+
         }
 
     }

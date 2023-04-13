@@ -20,11 +20,19 @@
     text-align: center;
 }
 
-button{
+button {
     display: block;
     padding: 5px;
     cursor: pointer;
     margin-bottom: 15px;
+    background-color: #d6ccff;
+    border-radius: 10px;
+    border-color: #9279ff;
+}
+
+button:hover {
+    background-color: #9279ff;
+    color: white;
 }
 
 .inputfield {

@@ -37,8 +37,6 @@ function importLocalStorage(jsonDataString) { // importerer localStorage fra en 
 }
 
 
-
-
 function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
     if (localStorage.getItem(key) === null) { // hvis det ikke finnes noe objekt med key i localStorage, returner et tomt objekt
         return {};
@@ -46,6 +44,8 @@ function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
     let data = localStorage.getItem(key);
     return JSON.parse(data);
 }
+
+
 
 
 function brukernavnErLedig(brukernavn) { // sjekker om et brukernavn er ledig ved å lete gjennom eksisterende brukere i localStorage
@@ -66,12 +66,35 @@ function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorag
     return users[brukernavn];
 }
 
-function lagreBruker(bruker) { // lagrer kun ett bruker-objekt til localStorage, brukes for eksempel i settings.html
-    let users = hentFraLocalStorage("users");
-    users[bruker.username] = bruker;
-    localStorage.setItem("users", JSON.stringify(users));
-}
+// function lagreData(location, key, data) {// for eksempel lagreData("users", "elonmusk", bruker-objekt)
+//     let locationData = hentFraLocalStorage(location);
+//     locationData[key] = data;
+//     localStorage.setItem(key, JSON.stringify(locationData));
 
+
+// }
+// function lagreBruker(brukerId, bruker, ) { // lagrer kun ett bruker-objekt til localStorage, brukes for eksempel i settings.html
+//     lagreData("users", brukerId, bruker);
+
+// }
+
+function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elonmusk"] , bruker-objekt). 
+    // Funksjonen lagrer data til en lokasjon i localStorage, locationPath er en array med keys til lokasjonen
+    let mainPath = locationPath.shift(); // henter ut første key i locationPath, for å hente ut dataen fra localStorage
+    let locationData = hentFraLocalStorage(mainPath);
+    let keys = locationPath; // locationPath inneholder nå bare keys til lokasjonen, uten den første keyen
+
+    // hentet fra https://stackoverflow.com/a/71720800
+    let pointer = locationData // kopierer minne adressen til locationData til pointer, slik at endringer gjort på pointer også endrer locationData
+    while (keys.length>1)
+        pointer = pointer[keys.shift()] // endrer pointer til å peke på neste key i locationPath, fjerner den første keyen fra locationPath. og beholder minne adressen til locationData
+    pointer[keys.shift()] = data
+
+    // console.log(locationData)
+
+    // lagrer dataen til localStorage
+    localStorage.setItem(mainPath, JSON.stringify(locationData));
+}
 
 
 /*
@@ -90,8 +113,8 @@ eksempel på bruker-objekt:
     status: "currently doing nothing",
     settings: {
         darkMode: false,
-        background-color: "#ffffff",
-        text-color: "#000000",
+        background-color: "#ffffff", // default er #ffffff, 
+        text-color: "#000000", // default er #000000
         font: "Inter",
         font-size: "1em", // 1em = 16px
             
@@ -122,3 +145,4 @@ eksempel på retweet-objekt:
     posted: "1618123456789", // timestamp
 }
 */
+

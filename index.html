@@ -59,7 +59,7 @@
 <script>
     // legger til event listeners
     let loggInnKnapp = document.querySelector('button');
-    loggInnKnapp.addEventListener('click', logInn);
+    loggInnKnapp.addEventListener('click', loggInn);
 
     let inputBrukernavn = document.querySelector('#brukernavn');
     let inputPassord = document.querySelector('#passord');
@@ -72,13 +72,13 @@
 
     inputPassord.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
-            logInn();
+            loggInn();
         }
     });
 
     loggInnKnapp.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
-            logInn();
+            loggInn();
         }
     });
 
@@ -88,17 +88,18 @@
 
 
 
-    function logInn(e) {
+    function loggInn(e) {
         let brukernavnEl = document.querySelector('#brukernavn');
         let passordEl = document.querySelector('#passord');
         let brukernavn = brukernavnEl.value;
         let passord = passordEl.value;
-        
+
         if (brukernavn.length === 0) {
             console.log('Du må skrive inn brukernavn');
             let errorMessage = document.querySelector('.errorMessage');
             errorMessage.innerHTML = 'Du må skrive inn brukernavn';
             brukernavnEl.focus();
+            errorMessage.style.display = 'block';
             return
         }
         if (passord.length === 0) {
@@ -106,6 +107,7 @@
             let errorMessage = document.querySelector('.errorMessage');
             errorMessage.innerHTML = 'Du må skrive inn passord';
             passordEl.focus();
+            errorMessage.style.display = 'block';
             return
         }
 
@@ -113,7 +115,7 @@
         if (testBrukernavnOgPassord(brukernavn, passord)) {
             console.log('Du er logget inn');
             settInnloggetBruker(brukernavn);
-            window.location.href = 'home.html';
+            window.location.href = 'viewprofile.html?brukernavn=' + brukernavn;
         } else {
             console.log('Feil brukernavn eller passord');
             let errorMessage = document.querySelector('.errorMessage');
@@ -127,4 +129,3 @@
 </script>
 
 </html>
-

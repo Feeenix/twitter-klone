@@ -15,10 +15,10 @@
      */
     
     max-width: 800px;
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     margin-top: 15px;
-    padding: 15px;
+    /* padding: 15px; */
 
     /* background-color: blueviolet; */
     text-align: center;
@@ -62,7 +62,14 @@ button:hover {
 }
 
 .errorMessage {
+    display: none;
     color: red;
     font-size: 1em;
     margin-bottom: 15px;
+    max-width: calc(100% - 34px);
+    width: 100%;
+    border-radius: 10px;
+    border: solid #ffbbbb 2px;
+    background-color: #ffdddd;
+    padding: 15px;
 }

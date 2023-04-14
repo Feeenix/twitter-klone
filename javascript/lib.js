@@ -1,3 +1,5 @@
+let ls = localStorage
+
 async function readfile(File) {
     const reader = new FileReader();
     reader.readAsDataURL(File); // gjør om et fil-objekt til en base64 url string (data:image/png;base64,....)
@@ -27,8 +29,9 @@ function exportLocalStorage() { // exporterer localStorage til en string
     let data = JSON.stringify((localStorage));
     console.log(data.replace(/"/g, "\\\"")); // bruker regex til å erstatte alle " med \"
 }
-function importLocalStorage(jsonDataString) { // importerer localStorage fra en string
-    // jsonDataString = '{\"users\":\"{\\"undefined\\":{\\"admin\\":{\\"password\\":\\"passord123\\",\\"joined\\":\\"2023-04-13\\",\\"bannerImage\\":null,\\"profileImage\\":null,\\"followers\\":[],\\"following\\":[],\\"posts\\":[],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":null,\\"bio\\":null,\\"status\\":null,\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}}\",\"tweets\":\"{\\"uucg96qh\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"bilder\\":[],\\"text\\":\\"hallo dette er den første tweeten!\\",\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1681420842384}}\"}'
+function importLocalStorage(jsonDataString='{\"users\":\"{\\"admin\\":{\\"password\\":\\"admin\\",\\"joined\\":\\"2023-04-14\\",\\"bannerImage\\":null,\\"profileImage\\":null,\\"followers\\":[],\\"following\\":[],\\"posts\\":[\\"9913ih12\\"],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":null,\\"bio\\":null,\\"status\\":null,\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}\",\"tweets\":\"{\\"9913ih12\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"bilder\\":[],\\"text\\":\\"hallo dette er en test\\",\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1681468679815}}\"}') { // importerer localStorage fra en string
+    // jsonDataString = '{\"users\":\"{}\",\"tweets\":\"{}\",\"retweets\":\"{}\"}'
+    // jsonDataString = '{\"users\":\"{\\"admin\\":{\\"password\\":\\"admin\\",\\"joined\\":\\"2023-04-14\\",\\"bannerImage\\":null,\\"profileImage\\":null,\\"followers\\":[],\\"following\\":[],\\"posts\\":[\\"9913ih12\\"],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":null,\\"bio\\":null,\\"status\\":null,\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}\",\"tweets\":\"{\\"9913ih12\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"bilder\\":[],\\"text\\":\\"hallo dette er en test\\",\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1681468679815}}\"}'
     localStorage.clear();
     let jsonData = JSON.parse(jsonDataString);
     for (let key in jsonData) {
@@ -42,6 +45,7 @@ function hentFraLocalStorage(key) { // returnerer et objekt fra localStorage
         return {};
     }
     let data = localStorage.getItem(key);
+    // console.log(key,data);
     return JSON.parse(data);
 }
 
@@ -52,7 +56,7 @@ function hentURLSearchParams() { // returnerer en json-objekt med alle url param
     return Object.fromEntries(urlSearchParams.entries());
 }
 // gjør det motsatte av hentURLSearchParams. for eksempel paramifyLink("index.html", {"brukernavn": "admin"}) returnerer "index.html?brukernavn=admin"
-function paramifyLink(url,json){
+function paramifyLink(url, json) {
     let urlSearchParams = new URLSearchParams(json);
     return url + "?" + urlSearchParams.toString();
 }
@@ -88,7 +92,7 @@ function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorag
 
 
 function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localStorage
-    localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utløpsdato": Date.now() + 1000 * 60 * 60 * 24 })); // utløpsdato er 24 timer fra nå
+    localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utlopstid": Date.now() + 1000 * 60 * 60 * 24 * 7 })); // utløpsdato er 7 dager fra nå
 }
 function hentInnloggetBrukerId() { // returnerer brukernavnet til den innlogget brukeren
     return JSON.parse(localStorage.getItem("loggedInUser"))["brukernavn"];
@@ -106,14 +110,16 @@ function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elo
     let keys = locationPath; // locationPath inneholder nå bare keys til lokasjonen, uten den første keyen
 
     // hentet fra https://stackoverflow.com/a/71720800
-    let pointer = locationData // kopierer minne adressen til locationData til pointer, slik at endringer gjort på pointer også endrer locationData
-    while (keys.length > 1)
+    let pointer = locationData // kopierer minneadressen til locationData til pointer, slik at endringer gjort på pointer også endrer locationData
+    while (keys.length > 1) {
         pointer = pointer[keys.shift()] // endrer pointer til å peke på neste key i locationPath, fjerner den første keyen fra locationPath. og beholder minne adressen til locationData
+    }
     pointer[keys.shift()] = data
 
     // console.log(locationData)
 
     // lagrer dataen til localStorage
+    // console.log("mainPath: " + mainPath, "locationData: " + JSON.stringify(locationData))
     localStorage.setItem(mainPath, JSON.stringify(locationData));
 }
 
@@ -122,8 +128,7 @@ function genererId() { // genererer en tilfeldig id
 }
 
 function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bare de nødvendige feltene
-    let users = hentFraLocalStorage("users");
-    users[brukernavn] = {
+    let bruker = {
         password: passord,
         joined: new Date().toISOString().split("T")[0], // https://stackoverflow.com/a/29774197 
 
@@ -145,7 +150,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
             "font-size": "1em"
         }
     }
-    lagreData(["users"], users);
+    lagreData(["users",brukernavn], bruker);
 }
 
 function lagNyTweet(brukernavn, path, bilder, text) {

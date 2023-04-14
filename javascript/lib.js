@@ -168,6 +168,24 @@ function lagNyTweet(brukernavn, path, bilder, text) {
     lagreData(["users", brukernavn], bruker);
 }
 
+
+function leggTilDataPaaBruker(brukernavn, data) { // data er en json.
+    let bruker = hentBruker(brukernavn);
+    for (let key in data) {
+        bruker[key] = data[key];
+    }
+    lagreData(["users", brukernavn], bruker);
+}
+
+
+function leggTilDataPaaTweet(postId, data) { // data er en json.
+    let tweet = hentFraLocalStorage("tweets", postId);
+    for (let key in data) {
+        tweet[key] = data[key];
+    }
+    lagreData(["tweets", postId], tweet);
+}
+
 function lagNyRetweet(postId, brukernavn) {
     let id = genererId();
     let retweet = {

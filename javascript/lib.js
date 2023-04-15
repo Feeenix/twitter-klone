@@ -3,15 +3,12 @@ let ls = localStorage
 async function readfile(File) {
     const reader = new FileReader();
     reader.readAsDataURL(File); // gjør om et fil-objekt til en base64 url string (data:image/png;base64,....)
-    let loaded = await new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
         reader.onload = () => {
             resolve(reader.result);
-        }
-        reader.onerror = () => {
-            reject(reader.error);
-        }
+        };
+        reader.onerror = reject;
     });
-    return loaded;
 }
 async function readFiles(filesArray) { // tar inn et array med fil-objekter og returnerer et array med base64 url strings. Brukes når man har mer enn en fil
     let imageDataUrls = [];
@@ -23,6 +20,17 @@ async function readFiles(filesArray) { // tar inn et array med fil-objekter og r
     return imageDataUrls;
 }
 
+async function fileToDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+    });
+  }
+  
 
 // disse to funksjonene brukes for å omgjøre localStorage til en string, som vi kan dele med andre folk som så kan importere den til sin egen localStorage
 function exportLocalStorage() { // exporterer localStorage til en string

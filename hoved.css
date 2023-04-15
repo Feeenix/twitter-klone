@@ -14,7 +14,7 @@
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
      */
     
-    max-width: 800px;
+    max-width: 1200px;
     width: 90%;
     margin: 0 auto;
     margin-top: 15px;

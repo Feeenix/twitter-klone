@@ -21,13 +21,16 @@
     <br>
     <input type="file" id="banner" name="banner" accept="image/png, image/jpeg">
 
+    <img src="" alt="preview">
 
     <script>
         const avatar = document.getElementById('avatar');
         avatar.addEventListener('change', (
             async function (e) {
-                let imageDataUrls = await readFiles(e.target.files) // readFiles er en funksjon fra javascript/lib.js
-                console.log(imageDataUrls);
+                // let imageDataUrls = await readFiles(e.target.files) // readFiles er en funksjon fra javascript/lib.js
+                let imageDataUrl = await fileToDataURL(e.target.files[0]) // readFiles er en funksjon fra javascript/lib.js
+                console.log(imageDataUrl);
+                document.querySelector('img').src = imageDataUrl;
             })
         );
 

@@ -330,3 +330,20 @@ body {
 .boldText {
     font-weight: 700;
 }
+
+.aatweetknapp {
+    background-color: #baaaff;
+    color: white;
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    padding: 15px;
+    padding-left: 55px;
+    padding-right: 55px;
+    font-size: 1.25em;
+    border-radius: 9999px;
+}
+.aatweetknapp:hover {
+    background-color: #a99aff;
+    cursor: pointer;
+}

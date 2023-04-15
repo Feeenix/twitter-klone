@@ -8,25 +8,25 @@
 * {
     font-family: Inter;
     /* font-family: Tangerine; */
+    color: #404040;
 }
 
 .container {
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
      */
-    
+
     max-width: 1500px;
     width: 90%;
     margin: 0 auto;
     margin-top: 15px;
     /* padding: 15px; */
 
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
 }
 
 .vanligKnapp {
     display: block;
     padding: 5px;
-    cursor: pointer;
     margin-bottom: 15px;
     background-color: #d6ccff;
     border-radius: 10px;
@@ -36,6 +36,7 @@
 .vanligKnapp:hover {
     background-color: #9279ff;
     color: white;
+    cursor: pointer;
 }
 
 .inputfield {
@@ -73,57 +74,142 @@
     padding: 15px;
 }
 
-.hovedflex{
+.hovedflex {
     display: flex;
 
 }
 
 
-#venstrekolonne{
-flex:1;
-background-color: yellow;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+.hiddenbutton {
+    background-color: #80808000;
+    transition-duration: 100ms;
+    border: none;
+}
+
+.hiddenbutton:hover {
+    background-color: #80808020;
+    transition-duration: 100ms;
+}
+
+.genericButton {
+    display: block;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 9999px;
+    text-align: left;
 
 
 }
 
-#hoyrekolonne{
-flex:3;
-background-color: lightblue;
-display: flex;
+.genericButton:hover {
+    cursor: pointer;
+}
+
+
+#venstrekolonne {
+    flex: 0.6;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 500px;
+    border-right: solid rgb(239,243,244) 1px;
+
+}
+
+#hoyrekolonne {
+    flex: 3;
+    background-color: lightblue;
+    display: flex;
 
 }
 
 
-#midtkolonne{
+#midtkolonne {
     background-color: blue;
     flex: 2;
 }
-#sidebar{
+
+#sidebar {
     background-color: green;
     flex: 1;
 }
-#overskrift{
+
+#overskrift {
     background-color: red;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-#overskrifttabs{
+
+#overskrifttabs {
     display: flex;
 }
-#overskrifttabs > * {
-    flex:1;
+
+#overskrifttabs>* {
+    flex: 1;
 }
-#meny{
-    background-color: purple;
+
+#meny {
+    /* background-color: purple; */
     display: flex;
     flex-direction: column;
 }
-#menyknapper{
+
+#menyknapper {
     display: flex;
     flex-direction: column;
+}
+
+#menyknapper>* {
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 1.25em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    /* justify-content: space-around; */
+}
+
+#menyknapper>*>img {
+    margin-right: 10px;
+}
+
+.profilknapp{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    padding: 10px;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.profilknapp>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+}
+.profilknapp>div>img{
+    margin-right: 10px;
+}
+
+#logo.hiddenbutton {
+    border-radius: 9999px;
+    width: fit-content;
+    padding: 15px;
+}
+
+
+#overskrifttekst{
+    margin: 15px;
+    font-size: 1.25em;
+    font-weight: 700;
 }
 

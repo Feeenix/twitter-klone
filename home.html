@@ -32,7 +32,7 @@
                         <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home.html" class="hiddenbutton genericButton" id="hjem">
+                        <a href="home.html" class="boldText hiddenbutton genericButton" id="hjem">
                             <img src="bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
@@ -266,5 +266,18 @@
 
 <script src="javascript/lib.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
+<script>
+    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
+    fjernQueryKnapp.addEventListener("click", clearSearch);
+
+    function clearSearch() {
+        let sokfeltEl = document.querySelector("#sokfelt");
+        sokfeltEl.value = "";
+        sokfeltEl.focus();
+    }
+
+
+
+</script>
 
 </html>

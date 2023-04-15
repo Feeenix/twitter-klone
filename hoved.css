@@ -3,7 +3,9 @@
 @import url("https://fonts.googleapis.com/css?family=Tangerine");
 /* @import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap"); */
 
-
+body {
+    margin: 0px;
+}
 
 * {
     font-family: Inter;
@@ -18,7 +20,6 @@
     max-width: 1500px;
     width: 90%;
     margin: 0 auto;
-    margin-top: 15px;
     /* padding: 15px; */
 
     /* background-color: blueviolet; */
@@ -27,7 +28,6 @@
 .vanligKnapp {
     display: block;
     padding: 5px;
-    margin-bottom: 15px;
     background-color: #d6ccff;
     border-radius: 10px;
     border-color: #9279ff;
@@ -108,6 +108,7 @@
 
 
 #venstrekolonne {
+    padding-top: 5px;
     flex: 0.6;
     /* background-color: yellow; */
     display: flex;
@@ -115,31 +116,43 @@
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 20px;
-    min-height: 500px;
-    border-right: solid rgb(239,243,244) 1px;
+    height: 95vh;
+    position: sticky;
+    top: 0px;
+    border-right: solid rgb(239, 243, 244) 1px;
 
 }
 
 #hoyrekolonne {
     flex: 3;
-    background-color: lightblue;
+    /* background-color: lightblue; */
     display: flex;
 
 }
 
 
 #midtkolonne {
-    background-color: blue;
+    /* background-color: blue; */
     flex: 2;
+    border-right: rgb(239, 243, 244) solid 1px;
 }
 
 #sidebar {
-    background-color: green;
+    padding-top: 5px;
+    /* background-color: green; */
     flex: 1;
+    height: 95vh;
+    position: sticky;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #overskrift {
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -179,7 +192,13 @@
     margin-right: 10px;
 }
 
-.profilknapp{
+.profilbilde {
+    border-radius: 9999px;
+    width: 50px;
+    height: 50px;
+}
+
+.profilknapp {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -190,14 +209,57 @@
 
 }
 
-.profilknapp>div{
+.profilknapp>div {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: fit-content;
 }
-.profilknapp>div>img{
+
+
+.profilknapp>div>img {
     margin-right: 10px;
+}
+
+.folgePerson>div>img {
+    margin-right: 10px;
+}
+
+.folgePerson>button {
+    margin-right: 10px;
+}
+
+.folgePerson>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+}
+
+.folgePerson {
+    /* background-color: ; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    padding: 10px;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    border-radius: 10px;
+
+}
+
+.whotofollowheader {
+    margin-bottom: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+.whotofollow {
+    background-color: #fafafa;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #logo.hiddenbutton {
@@ -206,10 +268,62 @@
     padding: 15px;
 }
 
+#overskrift {
+    backdrop-filter: blur(6px);
+    background-color: rgba(255, 255, 255, 0.8);
+    position: sticky;
+    top: -0.5px;
+    border-bottom: rgb(239, 243, 244) solid 1px;
+}
 
-#overskrifttekst{
+#overskrifttekst {
     margin: 15px;
     font-size: 1.25em;
     font-weight: 700;
 }
+
+.overskriftknapp>div {
+    font-size: 1.125em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* background-color: goldenrod; */
+    width: fit-content;
+    margin: 0 auto;
+    border-bottom: #baaaff solid 5px;
+    border-bottom-left-radius: 1px;
+}
+
+.tweet {
+    margin-bottom: 1000px;
+}
+
+#sok {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: space-between;
+    background-color: #fafafa;
+    border-radius: 9999px;
+    border: rgb(239, 243, 244) solid 1px;
+}
+
+#sok>button {
+    border-radius: 9999px;
+    padding: 10px;
+}
+
+#sok>input {
+    border: none;
+
+    font-size: 1em;
+    max-width: 240px;
+    background-color: #fafafa;
+
+}
+
 

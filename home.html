@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page </title>
+    <link rel="stylesheet" href="hoved.css">
 </head>
 
 <body>
@@ -18,42 +19,40 @@
     Midtkolonnen vil bli delt opp i 2 deler overskift/tabs og den andre delen vil være en feed. -->
 
 
+
     <div class="container">
-
-        <div id="venstrekolonne">
-
-            <div id="meny">
-                <div id="logo"></div>
-                <div id="menyknapper">
-                    <div id="hjem"></div>
-                    <div id="profil"></div>
-                    <div id="innstillinger"></div>
+        <div class="hovedflex"> 
+            <div id="venstrekolonne">
+                <div id="meny">
+                    <div id="logo">
+                        <img src="bilder/BARK.png" width="50" alt="BARK.png">
+                    </div>
+                    <div id="menyknapper">
+                        <button id="hjem">hjem</button>
+                        <button id="profil">profil</button>
+                        <button id="innstillinger">instillinger</button>
+                    </div>
+                    
                 </div>
-
                 <div id="profil">
-                    <button class="profilknapp">
-                        <div id="profilbilde"></div>
-                        <div id="profilnavn"></div>
-                        <div id="menyindikator">
-                            <!-- tre prikker -->
-                        </div>
-                    </button>
-                </div>
-
+                        <button class="profilknapp">
+                            <div id="profilbilde"></div>
+                            <div id="profilnavn"></div>
+                            <div id="menyindikator">
+                                <!-- tre prikker -->
+                            </div>
+                        </button>
+                    </div>
             </div>
-
             <div id="hoyrekolonne">
-
                 <div id="midtkolonne">
-
                     <div id="overskrift">
-                        <div id="overskrifttekst"></div>
-                        <div id="tabs">
-                            <button id="following"></button>
-                            <button id="All"></button>
+                        <div id="overskrifttekst">Home</div>
+                        <div id="overskrifttabs">
+                            <button id="overskriftfollowing">Following</button>
+                            <button id="overskriftall">All</button>
                         </div>
                     </div>
-
                     <div id="feed">
                         <div class="tweet">
                             <div class="profilbildekolonne"></div>
@@ -71,34 +70,104 @@
                                     <!-- optional: button to copy url -->
                                 </div>
                             </div>
-
                         </div>
-
-                    </div>
-
-                    <div id="sidebar">
-                        <div id="sok">
-                            <div id="sokfelt"></div>
-                            <div id="sokknapp"></div>
+                        <div class="tweet">
+                            <div class="profilbildekolonne"></div>
+                            <div class="tweetkolonne">
+                                <div class="forfatterinfo"></div>
+                                <div class="tweettekst">
+                                </div>
+                                <div class="tweetbilde">
+                                </div>
+                                <div class="tweetknapper">
+                                    <button id="commentar" class="tweetknapp"></button>
+                                    <button id="retweet" class="tweetknapp"></button>
+                                    <button id="likes" class="tweetknapp"></button>
+                                    <button id="views" class="tweetknapp"></button>
+                                    <!-- optional: button to copy url -->
+                                </div>
+                            </div>
                         </div>
-                        <div class="whotofollow">
-                            <div class="whotofollowheader"></div>
-                            <div class="whotofollowbody">
-                                <div class="whotofollowperson">
-                                    <div class="whotofollowpersonbilde"></div>
-                                    <div class="whotofollowpersonnavn"></div>
-                                    <div class="whotofollowpersonknapp"></div>
+                        <div class="tweet">
+                            <div class="profilbildekolonne"></div>
+                            <div class="tweetkolonne">
+                                <div class="forfatterinfo"></div>
+                                <div class="tweettekst">
+                                </div>
+                                <div class="tweetbilde">
+                                </div>
+                                <div class="tweetknapper">
+                                    <button id="commentar" class="tweetknapp"></button>
+                                    <button id="retweet" class="tweetknapp"></button>
+                                    <button id="likes" class="tweetknapp"></button>
+                                    <button id="views" class="tweetknapp"></button>
+                                    <!-- optional: button to copy url -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tweet">
+                            <div class="profilbildekolonne"></div>
+                            <div class="tweetkolonne">
+                                <div class="forfatterinfo"></div>
+                                <div class="tweettekst">
+                                </div>
+                                <div class="tweetbilde">
+                                </div>
+                                <div class="tweetknapper">
+                                    <button id="commentar" class="tweetknapp"></button>
+                                    <button id="retweet" class="tweetknapp"></button>
+                                    <button id="likes" class="tweetknapp"></button>
+                                    <button id="views" class="tweetknapp"></button>
+                                    <!-- optional: button to copy url -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tweet">
+                            <div class="profilbildekolonne"></div>
+                            <div class="tweetkolonne">
+                                <div class="forfatterinfo"></div>
+                                <div class="tweettekst">
+                                </div>
+                                <div class="tweetbilde">
+                                </div>
+                                <div class="tweetknapper">
+                                    <button id="commentar" class="tweetknapp"></button>
+                                    <button id="retweet" class="tweetknapp"></button>
+                                    <button id="likes" class="tweetknapp"></button>
+                                    <button id="views" class="tweetknapp"></button>
+                                    <!-- optional: button to copy url -->
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    
                 </div>
-
+                <div id="sidebar">
+                    <div id="sok">
+                        <div id="sokfelt"></div>
+                        <div id="sokknapp"></div>
+                    </div>
+                    <div class="whotofollow">
+                        <div class="whotofollowheader"></div>
+                        <div class="whotofollowbody">
+                            <div class="whotofollowperson">
+                                <div class="whotofollowpersonbilde"></div>
+                                <div class="whotofollowpersonnavn"></div>
+                                <div class="whotofollowpersonknapp"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
 
 
 
 </body>
+
+<script src="javascript/lib.js"></script>
+<script src="javascript/redirectHvisLoggetUt.js"></script>
 
 </html>

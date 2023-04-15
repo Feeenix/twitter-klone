@@ -14,17 +14,16 @@
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
      */
     
-    max-width: 1200px;
+    max-width: 1500px;
     width: 90%;
     margin: 0 auto;
     margin-top: 15px;
     /* padding: 15px; */
 
-    /* background-color: blueviolet; */
-    text-align: center;
+    background-color: blueviolet;
 }
 
-button {
+.vanligKnapp {
     display: block;
     padding: 5px;
     cursor: pointer;
@@ -34,7 +33,7 @@ button {
     border-color: #9279ff;
 }
 
-button:hover {
+.vanligKnapp:hover {
     background-color: #9279ff;
     color: white;
 }
@@ -73,3 +72,58 @@ button:hover {
     background-color: #ffdddd;
     padding: 15px;
 }
+
+.hovedflex{
+    display: flex;
+
+}
+
+
+#venstrekolonne{
+flex:1;
+background-color: yellow;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+
+
+}
+
+#hoyrekolonne{
+flex:3;
+background-color: lightblue;
+display: flex;
+
+}
+
+
+#midtkolonne{
+    background-color: blue;
+    flex: 2;
+}
+#sidebar{
+    background-color: green;
+    flex: 1;
+}
+#overskrift{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#overskrifttabs{
+    display: flex;
+}
+#overskrifttabs > * {
+    flex:1;
+}
+#meny{
+    background-color: purple;
+    display: flex;
+    flex-direction: column;
+}
+#menyknapper{
+    display: flex;
+    flex-direction: column;
+}
+

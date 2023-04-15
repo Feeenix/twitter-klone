@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page </title>
+</head>
+
+<body>
+    <!-- To do!
+    Nettsiden skal ha konstant bredde hvis bredden på skjermen er større en 1200 px 
+    .container gjør dette for oss
+    vi skal dele opp .container i en venstre- og høyrekolonne der høyrekolonne tar størst plass
+    venstrekolonne vil bli delt opp i 2 deler den ene er logo + meny. den andre delen er bruker sin profil
+    Høyre kolonne vil bli delt opp i 2 deler den ene er størst og vil ligge mer mot midten av siden vi kaller denne Midtkolonne. den andre delen vil fungere som en sidebar hvor man kan søke etter bruker og kunen følge tilfeldige bruker som er valgt av programmet 
+    Midtkolonnen vil bli delt opp i 2 deler overskift/tabs og den andre delen vil være en feed. -->
+
+
+    <div class="container">
+
+        <div id="venstrekolonne">
+
+            <div id="meny">
+                <div id="logo"></div>
+                <div id="menyknapper">
+                    <div id="hjem"></div>
+                    <div id="profil"></div>
+                    <div id="innstillinger"></div>
+                </div>
+
+                <div id="profil">
+                    <button class="profilknapp">
+                        <div id="profilbilde"></div>
+                        <div id="profilnavn"></div>
+                        <div id="menyindikator">
+                            <!-- tre prikker -->
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+
+            <div id="hoyrekolonne">
+
+                <div id="midtkolonne">
+
+                    <div id="overskrift">
+                        <div id="overskrifttekst"></div>
+                        <div id="tabs">
+                            <button id="following"></button>
+                            <button id="All"></button>
+                        </div>
+                    </div>
+
+                    <div id="feed">
+                        <div class="tweet">
+                            <div class="profilbildekolonne"></div>
+                            <div class="tweetkolonne">
+                                <div class="forfatterinfo"></div>
+                                <div class="tweettekst">
+                                </div>
+                                <div class="tweetbilde">
+                                </div>
+                                <div class="tweetknapper">
+                                    <button id="commentar" class="tweetknapp"></button>
+                                    <button id="retweet" class="tweetknapp"></button>
+                                    <button id="likes" class="tweetknapp"></button>
+                                    <button id="views" class="tweetknapp"></button>
+                                    <!-- optional: button to copy url -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="sidebar">
+                        <div id="sok">
+                            <div id="sokfelt"></div>
+                            <div id="sokknapp"></div>
+                        </div>
+                        <div class="whotofollow">
+                            <div class="whotofollowheader"></div>
+                            <div class="whotofollowbody">
+                                <div class="whotofollowperson">
+                                    <div class="whotofollowpersonbilde"></div>
+                                    <div class="whotofollowpersonnavn"></div>
+                                    <div class="whotofollowpersonknapp"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+</body>
+
+</html>

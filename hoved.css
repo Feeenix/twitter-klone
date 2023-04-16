@@ -125,7 +125,7 @@ body {
     position: sticky;
     top: 0px;
     border-right: solid rgb(239, 243, 244) 1px;
-
+    min-width: 250px;
 }
 
 #hoyrekolonne {
@@ -347,6 +347,7 @@ body {
     padding-right: 55px;
     font-size: 1.25em;
     border-radius: 9999px;
+    
 }
 .aatweetknapp:hover {
     background-color: #a99aff;
@@ -415,4 +416,10 @@ body {
 }
 .tweetknapp{
     display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tweetknapp>*:nth-child(1){
+    margin-right: 5px;
 }

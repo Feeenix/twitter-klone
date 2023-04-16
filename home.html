@@ -32,19 +32,26 @@
                         <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home.html" class="boldText hiddenButton genericButton" id="hjem">
+                        <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
                             <img src="bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
+
+                        <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
+                            <img src="bilder/search_hul.png" height="30" alt="">
+                            <div class="buttonText">Søk</div>
+                        </a>
+
                         <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
-                            class="profil">
+                            id="menyprofil">
                             <img src="bilder/profil_hul.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
-                        <a href="settings.html" class="hiddenButton genericButton" id="innstillinger">
+                        <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
                             <img src="bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
+                        
                     </div>
 
                 </div>
@@ -55,13 +62,13 @@
                             <img class="profilbilde"
                                 src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
                                 alt="pfp" height="50" width="50">
-                            <div class="profilnavn">
-                                <div class="profilNavnNavn">Navn</div>
-                                <div class="profilNavnId">@Brukernavn</div>
+                            <div class="mediumWidth profilnavn">
+                                <div class="mediumWidth profilNavnNavn">Navn</div>
+                                <div class="mediumWidth profilNavnId">@Brukernavn</div>
                             </div>
                         </div>
-                        <div id="menyindikator">
-                            <img src="bilder/tredots.png" width="30" height="30" alt="">
+                        <div id="mediumWidth menyindikator">
+                            <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
                         </div>
                     </button>
                 </div>
@@ -112,7 +119,7 @@
                                     I am a tweet
                                 </div>
                                 <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
-                                
+
                                 <div class="tweetknapper">
 
                                     <button title="trykk for å legge til en kommentar"
@@ -149,11 +156,14 @@
 
 
 
-
+                        <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
+                            BARK!
+                            <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+                        </a>
 
 
                     </div>
-
+                    
                 </div>
                 <div id="sidebar">
                     <div id="sok">
@@ -244,7 +254,7 @@
                     </div>
 
 
-                    <a class="aatweetknapp" tabindex="0">
+                    <a class="bunnhoyre aatweetknapp " tabindex="0">
                         BARK!
                         <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                     </a>

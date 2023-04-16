@@ -18,7 +18,7 @@ body {
      */
 
     max-width: 1500px;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     /* padding: 15px; */
 
@@ -113,7 +113,7 @@ body {
 
 
 #venstrekolonne {
-    padding-top: 5px;
+    padding-top: 15px;
     flex: 0.6;
     /* background-color: yellow; */
     display: flex;
@@ -352,12 +352,22 @@ body {
     font-weight: 700;
 }
 
-.aatweetknapp {
-    background-color: #baaaff;
-    color: white;
+.fixedbunnhoyre{
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    margin: none;
+}
+.bunnhoyre{
     position: absolute;
     bottom: 100px;
     right: 100px;
+    margin: none;
+}
+.aatweetknapp {
+    background-color: #baaaff;
+    color: white;
+    margin: 0 auto;
     padding: 15px;
     padding-left: 55px;
     padding-right: 55px;
@@ -438,3 +448,62 @@ body {
 .tweetknapp>*:nth-child(1){
     margin-right: 5px;
 }
+
+@media only screen and (max-width: 1200px) {
+    .buttonText{
+        display: none;
+    }
+    #venstrekolonne {
+        width: min-content;
+        min-width: 60px;
+        padding-left: 15px;
+        padding-right: 15px;
+        flex: 0;
+    }
+    
+    .profilknapp{
+        width: min-content;
+        margin: 0 auto;
+    }
+
+    .profil > button {
+        padding:0px;
+
+    }
+    .profilknapp > div > img{
+        margin-right: 0;
+        
+    }
+    #menyknapper > * > img {
+        margin-right: 0px;
+    }
+    .genericButton{
+        padding:10px;
+        margin: 0 auto;
+    }
+    #logo.hiddenButton{
+        padding:10px;
+        margin: 0 auto;
+    }
+    .mediumWidth{
+        display:none;
+    }
+}
+
+@media only screen and (max-width: 880px) { /* når det er mindre enn 1000px*/
+    #sidebar,.largeWidth{
+        display:none;
+    }
+    
+  }
+
+  @media only screen and (min-width: 880px) {
+    
+    #menysok, #menytweet {
+        display:none;
+    }
+    .smallWidth{
+        display:none;
+    }
+    
+  }

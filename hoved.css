@@ -261,7 +261,7 @@ body {
 }
 
 .whotofollow {
-    background-color: #fafafa;
+    background-color: #8080800c;
     margin-top: 20px;
     padding: 20px;
     border-radius: 10px;
@@ -289,13 +289,25 @@ body {
 
 .overskriftknapp>div {
     font-size: 1.125em;
+    padding: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
     /* background-color: goldenrod; */
     width: fit-content;
+    min-width: 50px;
     margin: 0 auto;
-    border-bottom: #baaaff solid 5px;
-    border-bottom-left-radius: 1px;
+    
+    position: relative;
+    
+}
+.line{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
+    height: 5px;
+    background-color: #baaaff;
+    border-radius: 9999px;
 }
 
 .tweet {
@@ -312,21 +324,25 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     justify-content: space-between;
-    background-color: #fafafa;
+    background-color: #8080800c;
     border-radius: 9999px;
     border: rgb(239, 243, 244) solid 1px;
 }
 
-#sok>button {
+#sok button {
     border-radius: 9999px;
     padding: 10px;
+}
+#sok > div {
+    display: flex;
+    flex-direction: row;
 }
 
 #sok>input {
     border: none;
 
     font-size: 1em;
-    max-width: 240px;
+    max-width: 200px;
     background-color: #fafafa;
 
 }
@@ -366,13 +382,12 @@ body {
     justify-content: space-between;
 
     padding: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 
 .profilbildekolonne {
-    padding: 20px;
-    padding-top: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
     padding-bottom: 10px;
 }
 .forfatterinfo{

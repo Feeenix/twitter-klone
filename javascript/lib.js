@@ -237,7 +237,9 @@ eksempel på bruker-objekt:
         font: "Inter",
         font-size: "1em", // 1em = 16px
             
-    }
+    },
+    likedPosts: ["postId1", "postId2", "postId3"], // id-er til tweets som brukeren har likt
+    retweetedPosts: ["postId1", "postId2", "postId3"], // id-er til tweets som brukeren har retweetet
 }
 */
 

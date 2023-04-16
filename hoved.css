@@ -80,13 +80,18 @@ body {
 }
 
 
-.hiddenbutton {
+.hiddenButton {
+    background-color: #80808000;
+    transition-duration: 100ms;
+    border: none;
+}
+.hidden{
     background-color: #80808000;
     transition-duration: 100ms;
     border: none;
 }
 
-.hiddenbutton:hover {
+.hiddenButton:hover {
     background-color: #80808020;
     transition-duration: 100ms;
 }
@@ -262,7 +267,7 @@ body {
     border-radius: 10px;
 }
 
-#logo.hiddenbutton {
+#logo.hiddenButton {
     border-radius: 9999px;
     width: fit-content;
     padding: 15px;
@@ -346,4 +351,68 @@ body {
 .aatweetknapp:hover {
     background-color: #a99aff;
     cursor: pointer;
+}
+
+.tweet {
+    display: flex;
+    flex-direction: row;
+    border-bottom: rgb(239, 243, 244) solid 1px;
+}
+.tweetkolonne {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.profilbildekolonne {
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.forfatterinfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 10px;
+}
+.forfatterinfo >*{
+    margin-right: 15px;
+    opacity: 0.8;
+}
+.forfatterinfo>*:nth-child(1){
+    font-weight: 700;
+    opacity: 1;
+}
+.tweettekst {
+    font-size: 1.25em;
+    max-width: 450px;
+    margin-bottom: 10px;
+}
+.tweetbilde {
+    width: 100%;
+    max-width: 550px;
+    min-width: 385px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+.tweetknapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 10px;
+}
+.tweetknapp{
+    display: inline-block;
 }

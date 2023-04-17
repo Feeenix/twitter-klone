@@ -75,6 +75,13 @@
                         </div>
                     </button>
                 </div>
+                <div id="popupLogout" tabindex="0">
+                    <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
+                        class="genericButton hiddenButton">Profil</a>
+                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+                    <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
+                </div>
+        
             </div>
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
@@ -269,13 +276,7 @@
             </div>
 
         </div>
-        <div id="popupLogout" tabindex="0">
-            <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
-                class="genericButton hiddenButton">Profil</a>
-            <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
-            <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
-        </div>
-
+        
     </div>
 
 
@@ -288,7 +289,7 @@
 <script>
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);
-    
+
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
 

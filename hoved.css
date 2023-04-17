@@ -15,7 +15,8 @@ body {
 
 .container {
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
-     */
+     */ 
+    position: relative;
 
     max-width: 1500px;
     width: 100%;
@@ -457,9 +458,9 @@ body {
 
 #popupLogout{
     /* display: none; */
-    position: fixed;
-    bottom:100px;
-    left: 5%;
+    position: absolute;
+    bottom:12%;
+    left: calc(5% + 30px);
     /* width: 300px; */
     background-color: #f0f0f0f0;;
     z-index: 2;

@@ -269,11 +269,11 @@
             </div>
 
         </div>
-        <div id="popupLogout">
-            <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile"
+        <div id="popupLogout" tabindex="0">
+            <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
                 class="genericButton hiddenButton">Profil</a>
-            <a href="settings.html" id="popupSettings" class="genericButton hiddenButton">Innstillinger</a>
-            <button id="popupLogoutButton" class="genericButton hiddenButton">Logg ut</button>
+            <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+            <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
         </div>
 
     </div>
@@ -295,6 +295,51 @@
         sokfeltEl.focus();
     }
 
+
+    function search() {
+        let sokfeltEl = document.querySelector("#sokfelt");
+        let query = sokfeltEl.value;
+        if (query.length > 0) {
+            window.location.href = "search.html?query=" + query;
+        }
+    }
+
+
+
+
+    let profil = document.querySelector(".profil > button");
+    let popupElement = document.querySelector("#popupLogout");
+
+    popupElement.addEventListener("blur", gjemPopup);
+
+    profil.addEventListener("focus", visPopup);
+
+    profil.addEventListener("blur", gjemPopup);
+    gjemPopup();
+    async function gjemPopup() {
+        await sleep(10);
+
+        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
+        let harFokus = false;
+        for (let i = 0; i < elementer.length; i++) {
+            if (elementer[i] == document.activeElement) {
+                harFokus = true;
+            }
+        }
+        if (harFokus) {
+            return
+        }
+
+        console.log("gjemPopup");
+        let popupLogout = document.querySelector("#popupLogout");
+        popupLogout.style.display = "none";
+
+    }
+    function visPopup() {
+        console.log("visPopup");
+        let popupLogout = document.querySelector("#popupLogout");
+        popupLogout.style.display = "block";
+    }
 
 
 </script>

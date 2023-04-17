@@ -30,7 +30,11 @@ async function fileToDataURL(file) {
       reader.onerror = reject;
     });
   }
+ 
   
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // disse to funksjonene brukes for å omgjøre localStorage til en string, som vi kan dele med andre folk som så kan importere den til sin egen localStorage
 function exportLocalStorage() { // exporterer localStorage til en string

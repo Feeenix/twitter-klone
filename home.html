@@ -51,7 +51,7 @@
                             <img src="bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
-                        
+
                     </div>
 
                 </div>
@@ -66,6 +66,9 @@
                                 <div class="mediumWidth profilNavnNavn">Navn</div>
                                 <div class="mediumWidth profilNavnId">@Brukernavn</div>
                             </div>
+
+
+
                         </div>
                         <div id="mediumWidth menyindikator">
                             <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
@@ -157,13 +160,13 @@
 
 
                         <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
-                            BARK!
+                            BARK
                             <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                         </a>
 
 
                     </div>
-                    
+
                 </div>
                 <div id="sidebar">
                     <div id="sok">
@@ -182,9 +185,11 @@
                     <div class="whotofollow">
                         <div class="whotofollowheader">Who to follow</div>
                         <div class="whotofollowbody">
+
                             <div class="whotofollowperson">
 
-                                <div class="folgePerson hiddenButton">
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
                                             src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
@@ -194,14 +199,14 @@
                                             <div class="profilNavnId">@Brukernavn</div>
                                         </div>
                                     </div>
-                                    <button class="follow vanligKnapp">Follow</button>
-                                </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
 
                             </div>
-
                             <div class="whotofollowperson">
 
-                                <div class="folgePerson hiddenButton">
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
                                             src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
@@ -211,14 +216,14 @@
                                             <div class="profilNavnId">@Brukernavn</div>
                                         </div>
                                     </div>
-                                    <button class="follow vanligKnapp">Follow</button>
-                                </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
 
                             </div>
-
                             <div class="whotofollowperson">
 
-                                <div class="folgePerson hiddenButton">
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
                                             src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
@@ -228,14 +233,14 @@
                                             <div class="profilNavnId">@Brukernavn</div>
                                         </div>
                                     </div>
-                                    <button class="follow vanligKnapp">Follow</button>
-                                </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
 
                             </div>
-
                             <div class="whotofollowperson">
 
-                                <div class="folgePerson hiddenButton">
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
                                             src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
@@ -245,8 +250,8 @@
                                             <div class="profilNavnId">@Brukernavn</div>
                                         </div>
                                     </div>
-                                    <button class="follow vanligKnapp">Follow</button>
-                                </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
 
                             </div>
 
@@ -255,7 +260,7 @@
 
 
                     <a class="bunnhoyre aatweetknapp " tabindex="0">
-                        BARK!
+                        BARK
                         <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                     </a>
 
@@ -264,7 +269,12 @@
             </div>
 
         </div>
-
+        <div id="popupLogout">
+            <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile"
+                class="genericButton hiddenButton">Profil</a>
+            <a href="settings.html" id="popupSettings" class="genericButton hiddenButton">Innstillinger</a>
+            <button id="popupLogoutButton" class="genericButton hiddenButton">Logg ut</button>
+        </div>
 
     </div>
 

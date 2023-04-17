@@ -76,7 +76,7 @@ body {
 
 .hovedflex {
     display: flex;
-
+    flex-direction: row;
 }
 
 
@@ -110,7 +110,9 @@ body {
 .genericButton:hover {
     cursor: pointer;
 }
-
+.tweetknappviews:hover{
+    cursor: unset;
+}
 
 #venstrekolonne {
     padding-top: 15px;
@@ -132,6 +134,7 @@ body {
     flex: 3;
     /* background-color: lightblue; */
     display: flex;
+    flex-direction: row;
 
 }
 
@@ -161,6 +164,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
 }
 
 #overskrifttabs {
@@ -242,6 +246,7 @@ body {
 }
 
 .folgePerson {
+    text-decoration: none;
     /* background-color: ; */
     display: flex;
     flex-direction: row;
@@ -449,6 +454,39 @@ body {
     margin-right: 5px;
 }
 
+
+#popupLogout{
+    /* display: none; */
+    position: fixed;
+    bottom:100px;
+    left: 5%;
+    /* width: 300px; */
+    background-color: #f0f0f0f0;;
+    z-index: 2;
+    padding: 15px;
+    border-radius: 20px;
+    min-width: 170px;
+    /* width: 100px; */
+}
+#popupLogout>*{
+    text-decoration: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+}
+#popupLogout>#popupLogoutButton{
+    color: #ff0000;
+    background-color: #ffdddd;
+    border: #ffbbbb solid 1px;
+    margin-bottom: 0px;
+}
+#popupLogout>#popupLogoutButton:hover{
+    background-color: #ffcccc;
+}
+
 @media only screen and (max-width: 1200px) {
     .buttonText{
         display: none;
@@ -507,3 +545,6 @@ body {
     }
     
   }
+
+
+

@@ -286,6 +286,9 @@
 <script src="javascript/lib.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script>
+    let buttonLogout = document.querySelector("#popupLogoutButton");
+    buttonLogout.addEventListener("click", loggUtBruker);
+    
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
 

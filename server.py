@@ -158,7 +158,8 @@ def registerPOST():
         hashed_password = password
         new_user = {"username": username,
                     "hashedPassword": hashed_password,
-                    "name": "Elon Musk 2.0"}
+                    "name": "Elon Musk 2.0",
+                    "tweets:" []}
 
         users.append(new_user)
         with open("users.txt", "w") as f:

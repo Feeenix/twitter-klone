@@ -84,7 +84,11 @@
                     <div id="overskrift">
                         <div id="viewprofileTopp">
                             <button class="genericButton hiddenButton">Back</button>
-                            <h2>Elon Musk</h2>
+                            {% if user["username"] != None %}
+                                <h2>{{ user["username"] }}</h2>
+                            {% else %}
+                                <h2>User does not exist</h2>
+                            {% endif %}
                         </div>
                         <img src="static/" alt="profilebanner" id="profilebanner">
 

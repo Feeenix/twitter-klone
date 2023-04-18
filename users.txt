@@ -1,1 +1,1 @@
-[{"username": "NicoDatBoi", "hashedPassword": "passord", "name": "Elon Musk 2.0"}]
+[]

@@ -79,7 +79,9 @@
                     <a href="viewprofile?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
                         class="genericButton hiddenButton">Profil</a>
                     <a href="settings" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
-                    <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
+                    <form action="/logout" method="GET">
+                        <button type="submit" id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
+                    <form>
                 </div>
             </div>
             <div id="hoyrekolonne">
@@ -286,9 +288,6 @@
 
 <script src="static/javascript/lib.js"></script>
 <script>
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
-
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
 

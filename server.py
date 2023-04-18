@@ -115,8 +115,6 @@ def loginPOST():
         if not username or not password:
             return render_template("login.html", error="Error in form")
 
-        logInfo("Yuuuh got stuff")
-
         # TODO Check if credentials are an actual user
         #return render_template("login.html", error="Invalid credentials")
 
@@ -159,7 +157,7 @@ def registerPOST():
         new_user = {"username": username,
                     "hashedPassword": hashed_password,
                     "name": "Elon Musk 2.0",
-                    "tweets:" []}
+                    "tweets": []}
 
         users.append(new_user)
         with open("users.txt", "w") as f:

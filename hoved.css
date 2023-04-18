@@ -15,7 +15,7 @@ body {
 
 .container {
     /* denne klassen endrer bredden responsivt avhengig av skjermstørrelse
-     */ 
+     */
     position: relative;
 
     max-width: 1500px;
@@ -86,7 +86,8 @@ body {
     transition-duration: 100ms;
     border: none;
 }
-.hidden{
+
+.hidden {
     background-color: #80808000;
     transition-duration: 100ms;
     border: none;
@@ -111,7 +112,8 @@ body {
 .genericButton:hover {
     cursor: pointer;
 }
-.tweetknappviews:hover{
+
+.tweetknappviews:hover {
     cursor: unset;
 }
 
@@ -302,15 +304,16 @@ body {
     width: fit-content;
     min-width: 50px;
     margin: 0 auto;
-    
+
     position: relative;
-    
+
 }
-.line{
+
+.line {
     position: absolute;
     bottom: 0;
     left: 0;
-    right:0;
+    right: 0;
     height: 5px;
     background-color: #baaaff;
     border-radius: 9999px;
@@ -339,7 +342,8 @@ body {
     border-radius: 9999px;
     padding: 10px;
 }
-#sok > div {
+
+#sok>div {
     display: flex;
     flex-direction: row;
 }
@@ -358,18 +362,20 @@ body {
     font-weight: 700;
 }
 
-.fixedbunnhoyre{
+.fixedbunnhoyre {
     position: fixed;
     bottom: 50px;
     right: 50px;
     margin: none;
 }
-.bunnhoyre{
+
+.bunnhoyre {
     position: absolute;
     bottom: 100px;
     right: 100px;
     margin: none;
 }
+
 .aatweetknapp {
     background-color: #baaaff;
     color: white;
@@ -379,8 +385,9 @@ body {
     padding-right: 55px;
     font-size: 1.25em;
     border-radius: 9999px;
-    
+
 }
+
 .aatweetknapp:hover {
     background-color: #a99aff;
     cursor: pointer;
@@ -391,6 +398,7 @@ body {
     flex-direction: row;
     border-bottom: rgb(239, 243, 244) solid 1px;
 }
+
 .tweetkolonne {
     flex: 1;
     display: flex;
@@ -406,7 +414,8 @@ body {
     padding-top: 20px;
     padding-bottom: 10px;
 }
-.forfatterinfo{
+
+.forfatterinfo {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -415,19 +424,23 @@ body {
     max-width: 450px;
     margin-bottom: 10px;
 }
-.forfatterinfo >*{
+
+.forfatterinfo>* {
     margin-right: 15px;
     opacity: 0.8;
 }
-.forfatterinfo>*:nth-child(1){
+
+.forfatterinfo>*:nth-child(1) {
     font-weight: 700;
     opacity: 1;
 }
+
 .tweettekst {
     font-size: 1.25em;
     max-width: 450px;
     margin-bottom: 10px;
 }
+
 .tweetbilde {
     width: 100%;
     max-width: 550px;
@@ -436,7 +449,7 @@ body {
     border-radius: 20px;
 }
 
-.tweetknapper{
+.tweetknapper {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -445,31 +458,35 @@ body {
     max-width: 450px;
     margin-bottom: 10px;
 }
-.tweetknapp{
+
+.tweetknapp {
     display: inline-block;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.tweetknapp>*:nth-child(1){
+
+.tweetknapp>*:nth-child(1) {
     margin-right: 5px;
 }
 
 
-#popupLogout{
+#popupLogout {
     /* display: none; */
     position: absolute;
-    bottom:12%;
+    bottom: 12%;
     left: calc(5% + 30px);
     /* width: 300px; */
-    background-color: #f0f0f0f0;;
+    background-color: #f0f0f0f0;
+    ;
     z-index: 2;
     padding: 15px;
     border-radius: 20px;
     min-width: 170px;
     /* width: 100px; */
 }
-#popupLogout>*{
+
+#popupLogout>* {
     text-decoration: none;
     margin: 0 auto;
     text-align: center;
@@ -478,20 +495,23 @@ body {
     padding-right: 0;
     margin-bottom: 10px;
 }
-#popupLogout>#popupLogoutButton{
+
+#popupLogout>#popupLogoutButton {
     color: #ff0000;
     background-color: #ffdddd;
     border: #ffbbbb solid 1px;
     margin-bottom: 0px;
 }
-#popupLogout>#popupLogoutButton:hover{
+
+#popupLogout>#popupLogoutButton:hover {
     background-color: #ffcccc;
 }
 
 @media only screen and (max-width: 1200px) {
-    .buttonText{
+    .buttonText {
         display: none;
     }
+
     #venstrekolonne {
         width: min-content;
         min-width: 60px;
@@ -499,53 +519,88 @@ body {
         padding-right: 15px;
         flex: 0;
     }
-    
-    .profilknapp{
+
+    .profilknapp {
         width: min-content;
         margin: 0 auto;
     }
 
-    .profil > button {
-        padding:0px;
+    .profil>button {
+        padding: 0px;
 
     }
-    .profilknapp > div > img{
+
+    .profilknapp>div>img {
         margin-right: 0;
-        
+
     }
-    #menyknapper > * > img {
+
+    #menyknapper>*>img {
         margin-right: 0px;
     }
-    .genericButton{
-        padding:10px;
+
+    .genericButton {
+        padding: 10px;
         margin: 0 auto;
     }
-    #logo.hiddenButton{
-        padding:10px;
+
+    #logo.hiddenButton {
+        padding: 10px;
         margin: 0 auto;
     }
-    .mediumWidth{
-        display:none;
+
+    .mediumWidth {
+        display: none;
     }
 }
 
-@media only screen and (max-width: 880px) { /* når det er mindre enn 1000px*/
-    #sidebar,.largeWidth{
-        display:none;
+@media only screen and (max-width: 880px) {
+
+    /* når det er mindre enn 1000px*/
+    #sidebar,
+    .largeWidth {
+        display: none;
     }
-    
-  }
 
-  @media only screen and (min-width: 880px) {
-    
-    #menysok, #menytweet {
-        display:none;
+}
+
+@media only screen and (min-width: 880px) {
+
+    #menysok,
+    #menytweet {
+        display: none;
     }
-    .smallWidth{
-        display:none;
+
+    .smallWidth {
+        display: none;
     }
-    
-  }
+
+}
 
 
 
+#profilebanner {
+    height: 250px;
+    width: 100%;
+    background-color: cornflowerblue;
+}
+
+#overskriftPfpShare {
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 75px;
+}
+#overskriftPfpShare>div {
+    position: relative;
+}
+#overskriftPfpShare>div>img {
+    position: absolute;
+    top: -75px;
+    border-radius: 9999px;
+    /* border: white solid 5px; */
+    box-shadow: 0px 0px 10px 10px white;
+}

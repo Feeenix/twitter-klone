@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page </title>
+    <title>brukernavn's profile</title>
     <link rel="stylesheet" href="hoved.css">
 </head>
 <style>
@@ -32,8 +32,8 @@
                         <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
-                            <img src="bilder/home.png" height="30" alt="">
+                        <a href="home.html" class="hiddenButton genericButton" id="menyhjem">
+                            <img src="bilder/home_hul.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
 
@@ -42,22 +42,19 @@
                             <div class="buttonText">Søk</div>
                         </a>
 
-                        <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
+                        <a href="viewprofile.html?brukernavn=brukernavn" class="boldText hiddenButton genericButton"
                             id="menyprofil">
-                            <img src="bilder/profil_hul.png" height="30" alt="">
+                            <img src="bilder/profil.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
                         <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
                             <img src="bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
-
                     </div>
-
                 </div>
                 <div class="profil">
                     <button class="profilknapp genericButton hiddenButton">
-
                         <div>
                             <img class="profilbilde"
                                 src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
@@ -66,9 +63,6 @@
                                 <div class="mediumWidth profilNavnNavn">Navn</div>
                                 <div class="mediumWidth profilNavnId">@Brukernavn</div>
                             </div>
-
-
-
                         </div>
                         <div id="mediumWidth menyindikator">
                             <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
@@ -78,13 +72,30 @@
                 <div id="popupLogout" tabindex="0">
                     <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
                         class="genericButton hiddenButton">Profil</a>
-                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton"
+                        tabindex="0">Innstillinger</a>
                     <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
                 </div>
             </div>
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
+
+
                     <div id="overskrift">
+                        <div id="viewprofileTopp">
+                            <button class="genericButton hiddenButton">Back</button>
+                            <h2>Elon Musk</h2>
+                        </div>
+                        <img src="" alt="profilebanner" id="profilebanner">
+
+                        <div id="overskriftPfpShare">
+                            <div>
+                                <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                    alt="pfp" id="overskriftPfp" width="150" height="150">
+                            </div>
+                            <button class="genericButton hiddenButton">Share</button>
+                        </div>
+
                         <div id="overskrifttekst">Home</div>
                         <div id="overskrifttabs">
                             <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
@@ -101,17 +112,9 @@
                             </button>
                         </div>
                     </div>
+
+
                     <div id="feed">
-
-
-
-
-
-
-
-
-
-
                         <div class="tweet">
                             <div class="profilbildekolonne">
                                 <img class="profilbilde"
@@ -159,20 +162,11 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                         <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
                             BARK
                             <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                         </a>
-
-
                     </div>
-
                 </div>
                 <div id="sidebar">
                     <div id="sok">
@@ -207,10 +201,8 @@
                                     </div>
                                     <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
                                 </a>
-
                             </div>
                             <div class="whotofollowperson">
-
                                 <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
@@ -224,10 +216,8 @@
                                     </div>
                                     <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
                                 </a>
-
                             </div>
                             <div class="whotofollowperson">
-
                                 <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
@@ -241,10 +231,8 @@
                                     </div>
                                     <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
                                 </a>
-
                             </div>
                             <div class="whotofollowperson">
-
                                 <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
@@ -258,30 +246,17 @@
                                     </div>
                                     <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
                                 </a>
-
                             </div>
-
                         </div>
                     </div>
-
-
                     <a class="bunnhoyre aatweetknapp " tabindex="0">
                         BARK
                         <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                     </a>
-
                 </div>
-
             </div>
-
         </div>
-        
-
     </div>
-
-
-
-
 </body>
 
 <script src="javascript/lib.js"></script>

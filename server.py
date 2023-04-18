@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from flask import Flask
-from flask import render_template
+from flask import render_template, redirect, url_for
 import traceback
 
 def log(s):
@@ -10,6 +10,14 @@ def log(s):
         f.write(f"Error: {s}\nTraceback: {tb}\n")
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
+
+@app.route("/favicon.ico")
+def favicon():
+    try:
+        return redirect(url_for("static", filename="favicon.ico"))
+    except Exception as e:
+        log(e)
+        return f"Error {e}"
 
 @app.route("/")
 def index():

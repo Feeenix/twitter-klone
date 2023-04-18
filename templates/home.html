@@ -28,26 +28,26 @@
         <div class="hovedflex">
             <div id="venstrekolonne">
                 <div id="meny">
-                    <a href="home.html" id="logo" class="hiddenButton">
+                    <a href="home" id="logo" class="hiddenButton">
                         <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
+                        <a href="home" class="boldText hiddenButton genericButton" id="menyhjem">
                             <img src="static/bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
 
-                        <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
+                        <a href="sok?query=" class="largeWidth hiddenButton genericButton" id="menysok">
                             <img src="static/bilder/search_hul.png" height="30" alt="">
                             <div class="buttonText">Søk</div>
                         </a>
 
-                        <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
+                        <a href="viewprofile?brukernavn=brukernavn" class="hiddenButton genericButton"
                             id="menyprofil">
                             <img src="static/bilder/profil_hul.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
-                        <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
+                        <a href="settings" class="hiddenButton genericButton" id="menyinnstillinger">
                             <img src="static/bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
@@ -76,9 +76,9 @@
                     </button>
                 </div>
                 <div id="popupLogout" tabindex="0">
-                    <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
+                    <a href="viewprofile?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
                         class="genericButton hiddenButton">Profil</a>
-                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+                    <a href="settings" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
                     <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
                 </div>
             </div>
@@ -194,7 +194,7 @@
 
                             <div class="whotofollowperson">
 
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
@@ -211,7 +211,7 @@
                             </div>
                             <div class="whotofollowperson">
 
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
@@ -228,7 +228,7 @@
                             </div>
                             <div class="whotofollowperson">
 
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
@@ -245,7 +245,7 @@
                             </div>
                             <div class="whotofollowperson">
 
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
                                     <div>
                                         <img class="profilbilde"
@@ -285,7 +285,6 @@
 </body>
 
 <script src="static/javascript/lib.js"></script>
-<script src="static/javascript/redirectHvisLoggetUt.js"></script>
 <script>
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);
@@ -304,7 +303,7 @@
         let sokfeltEl = document.querySelector("#sokfelt");
         let query = sokfeltEl.value;
         if (query.length > 0) {
-            window.location.href = "search.html?query=" + query;
+            window.location.href = "search?query=" + query;
         }
     }
 

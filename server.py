@@ -30,6 +30,14 @@ app.config.update(
 Session(app)
 
 
+
+def getUserFromUsername(username):
+    # TODO get profile
+    user = {"username": username}
+    return user
+
+
+
 @app.get("/favicon.ico")
 def favicon():
     try:
@@ -37,6 +45,12 @@ def favicon():
     except Exception as e:
         logError(e)
         return f"Error {e}"
+
+
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
 
 
 @app.get("/")
@@ -73,7 +87,7 @@ def logout():
 @app.get("/login", strict_slashes=False)
 def loginGET():
     try:
-        return render_template("/index.html")
+        return render_template("/login.html")
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -85,12 +99,12 @@ def loginPOST():
         username = request.form.get("brukernavn")
         password = request.form.get("passord")
         if not username or not password:
-            return render_template("index.html", error="Error in form")
+            return render_template("login.html", error="Error in form")
 
         logInfo("Yuuuh got stuff")
 
         # TODO Check if credentials are an actual user
-        #return render_template("index.html", error="Invalid credentials")
+        #return render_template("login.html", error="Invalid credentials")
 
         session["name"] = username
 
@@ -100,5 +114,27 @@ def loginPOST():
         return f"Error {e}"
 
 
-app.run(host="127.0.0.1", port=8080)
+@app.get("/viewprofile")
+def viewprofile():
+    try:
+        username = request.args.get("brukernavn", default=session["name"], type=str)
+        user = getUserFromUsername(username)
+        return render_template("viewprofile.html", user=user)
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
+
+@app.get("/settings")
+def settings():
+    try:
+        user = getUserFromUsername(session["name"])
+        return render_template("settings.html", user=user)
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
+
+
+app.run(host="127.0.0.1", port=8080, debug=True)
 

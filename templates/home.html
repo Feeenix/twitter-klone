@@ -28,11 +28,11 @@
         <div class="hovedflex">
             <div id="venstrekolonne">
                 <div id="meny">
-                    <a href="home" id="logo" class="hiddenButton">
+                    <a href="/home" id="logo" class="hiddenButton">
                         <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home" class="boldText hiddenButton genericButton" id="menyhjem">
+                        <a href="/home" class="boldText hiddenButton genericButton" id="menyhjem">
                             <img src="static/bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
@@ -42,12 +42,12 @@
                             <div class="buttonText">Søk</div>
                         </a>
 
-                        <a href="viewprofile?brukernavn=brukernavn" class="hiddenButton genericButton"
+                        <a href="/viewprofile" class="hiddenButton genericButton"
                             id="menyprofil">
                             <img src="static/bilder/profil_hul.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
-                        <a href="settings" class="hiddenButton genericButton" id="menyinnstillinger">
+                        <a href="/settings" class="hiddenButton genericButton" id="menyinnstillinger">
                             <img src="static/bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
@@ -79,9 +79,7 @@
                     <a href="viewprofile?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
                         class="genericButton hiddenButton">Profil</a>
                     <a href="settings" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
-                    <form action="/logout" method="GET">
-                        <button type="submit" id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
-                    <form>
+                    <a href="logout" id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0">Logg ut</a>
                 </div>
             </div>
             <div id="hoyrekolonne">
@@ -178,17 +176,19 @@
                 </div>
                 <div id="sidebar">
                     <div id="sok">
-                        <input type="text" placeholder="Search on the Bark web..." id="sokfelt"></input>
-                        <div>
-                            <button id="fjernQueryKnapp" class="hiddenButton">
-                                <img src="static/bilder/clear_hul.png" width="20" height="20" alt="fjernQueryKnapp">
-                            </button>
-                            <button id="sokknapp" class="hiddenButton">
-                                <!-- når denne trykkes skal vi navigere til en ny side som ligner
-                                 -->
-                                <img src="static/bilder/search_hul.png" width="25" height="25" alt="sokeknapp">
-                            </button>
-                        </div>
+                        <form action="/search" method="GET">
+                            <input type="text" placeholder="Search on the Bark web..." id="sokfelt"></input>
+                            <div>
+                                <button id="fjernQueryKnapp" class="hiddenButton">
+                                    <img src="static/bilder/clear_hul.png" width="20" height="20" alt="fjernQueryKnapp">
+                                </button>
+                                <button id="sokknapp" class="hiddenButton">
+                                    <!-- når denne trykkes skal vi navigere til en ny side som ligner
+                                     -->
+                                    <img src="static/bilder/search_hul.png" width="25" height="25" alt="sokeknapp">
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     <div class="whotofollow">
                         <div class="whotofollowheader">Who to follow</div>
@@ -296,16 +296,6 @@
         sokfeltEl.value = "";
         sokfeltEl.focus();
     }
-
-
-    function search() {
-        let sokfeltEl = document.querySelector("#sokfelt");
-        let query = sokfeltEl.value;
-        if (query.length > 0) {
-            window.location.href = "search?query=" + query;
-        }
-    }
-
 
 
 

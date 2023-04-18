@@ -46,21 +46,23 @@
     <div class="container">
         <img src="static/bilder/BARK.png" height="50px" alt="bark icon">
         <h1>Registrer en ny bruker til Barker</h1>
-        <p class="errorMessage"></p>
-        <div class="inputfield">
-            <label for="brukernavn">Nytt brukernavn</label>
-            <input type="text" id="brukernavn" placeholder="">
-        </div>
-        <div class="inputfield">
-            <label for="passord">Nytt Passord</label>
-            <input type="password" id="passord" placeholder="">
-        </div>
-        <div class="inputfield">
-            <label for="passord-repeat">Gjenta Passord</label>
-            <input type="password" id="passord-repeat" placeholder="">
-        </div>
-        <button class="vanligKnapp" type="submit">Lag Bruker</button>
-        <a href="index.html">Har du allerede en bruker? Logg inn her</a>
+        <p class="errorMessage">{{ error }}</p>
+        <form action="/register" method="POST">
+            <div class="inputfield">
+                <label for="brukernavn">Nytt brukernavn</label>
+                <input type="text" id="brukernavn" name="brukernavn" placeholder="" required>
+            </div>
+            <div class="inputfield">
+                <label for="passord">Nytt Passord</label>
+                <input type="password" id="passord" name="passord" placeholder="" required>
+            </div>
+            <div class="inputfield">
+                <label for="passord-repeat">Gjenta Passord</label>
+                <input type="password" id="passord-repeat" placeholder="" required>
+            </div>
+            <button class="vanligKnapp" type="submit">Lag Bruker</button>
+        </form>
+        <a href="/login">Har du allerede en bruker? Logg inn her</a>
     </div>
 </body>
 <script src="static/javascript/lib.js"></script>
@@ -150,33 +152,6 @@
             errorMessage.style.display = 'block';
             return
         }
-        if (brukernavnFinnes(brukernavn)) {
-            console.log('Brukernavnet er opptatt');
-            let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Brukernavnet er allerede tatt, velg et annet';
-            brukernavnEl.focus();
-            errorMessage.style.display = 'block';
-            return
-        }
-
-
-        lagNyBruker(brukernavn, passord);
-
-
-
-        if (testBrukernavnOgPassord(brukernavn, passord)) { // kopiert kode fra index.html
-            console.log('Du er logget inn');
-            settInnloggetBruker(brukernavn);
-            window.location.href = 'customize.html';
-        } else {
-            // ↓ dette burde aldri skje hvis alt er riktig
-            console.log('Feil brukernavn eller passord');
-            let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Feil brukernavn eller passord';
-            brukernavnEl.focus();
-
-        }
-
     }
 
 </script>

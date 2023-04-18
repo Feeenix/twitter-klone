@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page </title>
+    <title>Customize</title>
     <link rel="stylesheet" href="static/css/hoved.css">
 </head>
 <style>
@@ -28,26 +28,26 @@
         <div class="hovedflex">
             <div id="venstrekolonne">
                 <div id="meny">
-                    <a href="home.html" id="logo" class="hiddenButton">
+                    <a href="/home" id="logo" class="hiddenButton">
                         <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
+                        <a href="/home" class="boldText hiddenButton genericButton" id="menyhjem">
                             <img src="static/bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
 
-                        <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
+                        <a href="/sok?query=" class="largeWidth hiddenButton genericButton" id="menysok">
                             <img src="static/bilder/search_hul.png" height="30" alt="">
                             <div class="buttonText">Søk</div>
                         </a>
 
-                        <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
+                        <a href="/viewprofile" class="hiddenButton genericButton"
                             id="menyprofil">
                             <img src="static/bilder/profil_hul.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
-                        <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
+                        <a href="/settings" class="hiddenButton genericButton" id="menyinnstillinger">
                             <img src="static/bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
@@ -63,8 +63,8 @@
                                 src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
                                 alt="pfp" height="50" width="50">
                             <div class="mediumWidth profilnavn">
-                                <div class="mediumWidth profilNavnNavn">Navn</div>
-                                <div class="mediumWidth profilNavnId">@Brukernavn</div>
+                                <div class="mediumWidth profilNavnNavn">{{ user["name"] }}</div>
+                                <div class="mediumWidth profilNavnId">@{{ user.username }}</div>
                             </div>
 
 
@@ -76,10 +76,10 @@
                     </button>
                 </div>
                 <div id="popupLogout" tabindex="0">
-                    <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
+                    <a href="/viewprofile" id="popupViewProfile" tabindex="0"
                         class="genericButton hiddenButton">Profil</a>
-                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
-                    <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
+                    <a href="/settings" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+                    <a href="/logout" id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</a>
                 </div>
         
             </div>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page </title>
-    <link rel="stylesheet" href="hoved.css">
+    <link rel="stylesheet" href="static/css/hoved.css">
 </head>
 <style>
 
@@ -29,26 +29,26 @@
             <div id="venstrekolonne">
                 <div id="meny">
                     <a href="home.html" id="logo" class="hiddenButton">
-                        <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
+                        <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
                         <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
-                            <img src="bilder/home.png" height="30" alt="">
+                            <img src="static/bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
 
                         <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
-                            <img src="bilder/search_hul.png" height="30" alt="">
+                            <img src="static/bilder/search_hul.png" height="30" alt="">
                             <div class="buttonText">Søk</div>
                         </a>
 
                         <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
                             id="menyprofil">
-                            <img src="bilder/profil_hul.png" height="30" alt="">
+                            <img src="static/bilder/profil_hul.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
                         <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
-                            <img src="bilder/settings_hul.png" height="30" alt="">
+                            <img src="static/bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
 
@@ -71,7 +71,7 @@
 
                         </div>
                         <div id="mediumWidth menyindikator">
-                            <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
+                            <img src="static/bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
                         </div>
                     </button>
                 </div>
@@ -97,8 +97,8 @@
 
 </body>
 
-<script src="javascript/lib.js"></script>
-<script src="javascript/redirectHvisLoggetUt.js"></script>
+<script src="static/javascript/lib.js"></script>
+<script src="static/javascript/redirectHvisLoggetUt.js"></script>
 <script>
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);

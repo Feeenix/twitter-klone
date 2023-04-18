@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page </title>
-    <link rel="stylesheet" href="hoved.css">
+    <link rel="stylesheet" href="static/css/hoved.css">
 </head>
 <style>
 
@@ -29,26 +29,26 @@
             <div id="venstrekolonne">
                 <div id="meny">
                     <a href="home.html" id="logo" class="hiddenButton">
-                        <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
+                        <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
                         <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
-                            <img src="bilder/home.png" height="30" alt="">
+                            <img src="static/bilder/home.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
 
                         <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
-                            <img src="bilder/search_hul.png" height="30" alt="">
+                            <img src="static/bilder/search_hul.png" height="30" alt="">
                             <div class="buttonText">Søk</div>
                         </a>
 
                         <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
                             id="menyprofil">
-                            <img src="bilder/profil_hul.png" height="30" alt="">
+                            <img src="static/bilder/profil_hul.png" height="30" alt="">
                             <div class="buttonText">Profil</div>
                         </a>
                         <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
-                            <img src="bilder/settings_hul.png" height="30" alt="">
+                            <img src="static/bilder/settings_hul.png" height="30" alt="">
                             <div class="buttonText">Innstillinger</div>
                         </a>
 
@@ -71,7 +71,7 @@
 
                         </div>
                         <div id="mediumWidth menyindikator">
-                            <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
+                            <img src="static/bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
                         </div>
                     </button>
                 </div>
@@ -134,26 +134,26 @@
                                     <button title="trykk for å legge til en kommentar"
                                         class="tweetknappkommentar tweetknapp genericButton hiddenButton">
                                         <span title="10000">10.0k</span>
-                                        <img src="bilder/comment_hul.png" height="20" alt="Kommentarer">
+                                        <img src="static/bilder/comment_hul.png" height="20" alt="Kommentarer">
                                     </button>
 
                                     <button title="trykk for å retweete"
                                         class="tweetknappretweet tweetknapp genericButton hiddenButton">
                                         <span title="10000">10.0k</span>
-                                        <img src="bilder/retweet_hul.png" height="20" alt="Retweets">
+                                        <img src="static/bilder/retweet_hul.png" height="20" alt="Retweets">
 
                                     </button>
 
                                     <button title="trykk for å like"
                                         class="tweetknapplikes tweetknapp genericButton hiddenButton">
                                         <span title="10000">10.0k</span>
-                                        <img src="bilder/heart_hul.png" height="20" alt="Likes">
+                                        <img src="static/bilder/heart_hul.png" height="20" alt="Likes">
 
                                     </button>
 
                                     <button title="Views" class="tweetknappviews tweetknapp genericButton hidden">
                                         <span title="10000">10.0k</span>
-                                        <img src="bilder/eye_hul.png" height="30" alt="Views">
+                                        <img src="static/bilder/eye_hul.png" height="30" alt="Views">
 
                                     </button>
                                 </div>
@@ -167,7 +167,7 @@
 
                         <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
                             BARK
-                            <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+                            <!-- <img src="static/bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                         </a>
 
 
@@ -179,12 +179,12 @@
                         <input type="text" placeholder="Search on the Bark web..." id="sokfelt"></input>
                         <div>
                             <button id="fjernQueryKnapp" class="hiddenButton">
-                                <img src="bilder/clear_hul.png" width="20" height="20" alt="fjernQueryKnapp">
+                                <img src="static/bilder/clear_hul.png" width="20" height="20" alt="fjernQueryKnapp">
                             </button>
                             <button id="sokknapp" class="hiddenButton">
                                 <!-- når denne trykkes skal vi navigere til en ny side som ligner
                                  -->
-                                <img src="bilder/search_hul.png" width="25" height="25" alt="sokeknapp">
+                                <img src="static/bilder/search_hul.png" width="25" height="25" alt="sokeknapp">
                             </button>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
 
                     <a class="bunnhoyre aatweetknapp " tabindex="0">
                         BARK
-                        <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+                        <!-- <img src="static/bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
                     </a>
 
                 </div>
@@ -284,8 +284,8 @@
 
 </body>
 
-<script src="javascript/lib.js"></script>
-<script src="javascript/redirectHvisLoggetUt.js"></script>
+<script src="static/javascript/lib.js"></script>
+<script src="static/javascript/redirectHvisLoggetUt.js"></script>
 <script>
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);

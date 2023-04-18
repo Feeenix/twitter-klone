@@ -203,5 +203,14 @@ def customize():
         return f"Error {e}"
 
 
+@app.get("/search")
+def search():
+    try:
+        user = getUserFromUsername(session["name"])
+        return render_template("sok.html", user=user)
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
 app.run(host="127.0.0.1", port=8080, debug=True)
 

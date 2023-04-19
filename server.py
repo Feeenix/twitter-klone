@@ -186,9 +186,10 @@ def registerPOST():
 @app.get("/viewprofile")
 def viewprofile():
     try:
+        user = getUserFromUsername(session["name"])
         username = request.args.get("brukernavn", default=session["name"], type=str)
-        user = getUserFromUsername(username)
-        return render_template("viewprofile.html", user=user)
+        otherUser = getUserFromUsername(username)
+        return render_template("viewprofile.html", user=user, otherUser=otherUser)
     except Exception as e:
         logError(e)
         return f"Error {e}"

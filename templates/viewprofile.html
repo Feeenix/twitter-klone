@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user['username'] }}'s profile</title>
+    <title>{{ otherUser['username'] }}'s profile</title>
     <link rel="stylesheet" href="static/css/hoved.css">
 </head>
 <style>
@@ -63,8 +63,8 @@
                                 src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
                                 alt="pfp" height="50" width="50">
                             <div class="mediumWidth profilnavn">
-                                <div class="mediumWidth profilNavnNavn">Navn</div>
-                                <div class="mediumWidth profilNavnId">@Brukernavn</div>
+                                <div class="mediumWidth profilNavnNavn">{{ user['name'] }}</div>
+                                <div class="mediumWidth profilNavnId">@{{ user['usernae' ]}}</div>
                             </div>
                         </div>
                         <div id="mediumWidth menyindikator">
@@ -87,8 +87,8 @@
                     <div id="overskrift">
                         <div id="viewprofileTopp">
                             <button class="genericButton hiddenButton">Back</button>
-                            {% if user["username"] != None %}
-                                <h2>{{ user["username"] }}</h2>
+                            {% if otherUser %}
+                                <h2>{{ otherUser["username"] }}</h2>
                             {% else %}
                                 <h2>User does not exist</h2>
                             {% endif %}

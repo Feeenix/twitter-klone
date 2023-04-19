@@ -168,7 +168,21 @@ def registerPOST():
         new_user = {"username": username,
                     "hashedPassword": hashed_password,
                     "name": "Elon Musk 2.0",
-                    "tweets": []}
+                    "pfp": "mypfp.png",
+                    "pfb": "mybanner.png",
+                    "posts": [],
+                    "followers": [],
+                    "following": [],
+                    "pinnedPost": None,
+                    "bio": None,
+                    "status": None,
+                    "settings": {
+                        "darkMode": False,
+                        "background-color": "#ffffff",
+                        "text-color": "#000000",
+                        "font": "Inter",
+                        "font-size": "1em",
+                    }}
 
         users.append(new_user)
         with open("users.txt", "w") as f:

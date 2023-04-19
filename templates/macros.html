@@ -100,3 +100,79 @@
     </div>
 {% endmacro %}
 
+{% macro leftSidebar(user, page) %}
+
+    <div id="venstrekolonne">
+        <div id="meny">
+            <a href="/home" id="logo" class="hiddenButton">
+                <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
+            </a>
+            <div id="menyknapper">
+                <a href="/home" class="boldText hiddenButton genericButton" id="menyhjem">
+                    {% if page == "home" %}
+                        <img src="static/bilder/home.png" height="30" alt="">
+                    {% else %}
+                        <img src="static/bilder/home_hul.png" height="30" alt="">
+                    {% endif %}
+                    <div class="buttonText">Hjem</div>
+                </a>
+
+                <a href="sok?query=" class="largeWidth hiddenButton genericButton" id="menysok">
+                    {% if page == "search" %}
+                        <img src="static/bilder/search.png" height="30" alt="">
+                    {% else %}
+                        <img src="static/bilder/search_hul.png" height="30" alt="">
+                    {% endif %}
+                    <div class="buttonText">Søk</div>
+                </a>
+
+                <a href="/viewprofile" class="hiddenButton genericButton"
+                    id="menyprofil">
+                    {% if page == "profile" %}
+                        <img src="static/bilder/profil.png" height="30" alt="">
+                    {% else %}
+                        <img src="static/bilder/profil_hul.png" height="30" alt="">
+                    {% endif %}
+                    <div class="buttonText">Profil</div>
+                </a>
+                <a href="/settings" class="hiddenButton genericButton" id="menyinnstillinger">
+                    {% if page == "settings" %}
+                        <img src="static/bilder/settings.png" height="30" alt="">
+                    {% else %}
+                        <img src="static/bilder/settings_hul.png" height="30" alt="">
+                    {% endif %}
+                    <div class="buttonText">Innstillinger</div>
+                </a>
+
+            </div>
+
+        </div>
+        <div class="profil">
+            <button class="profilknapp genericButton hiddenButton">
+
+                <div>
+                    <img class="profilbilde"
+                        src="static/userpics/{{ user['pfp'] }}"
+                        alt="pfp" height="50" width="50">
+                    <div class="mediumWidth profilnavn">
+                        <div class="mediumWidth profilNavnNavn">{{ user['name'] }}</div>
+                        <div class="mediumWidth profilNavnId">@{{ user['username'] }}</div>
+                    </div>
+
+
+
+                </div>
+                <div id="mediumWidth menyindikator">
+                    <img src="static/bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
+                </div>
+            </button>
+        </div>
+        <div id="popupLogout" style="display: none;" tabindex="0">
+            <a href="/viewprofile" id="popupViewProfile" tabindex="0"
+                class="genericButton hiddenButton">Profil</a>
+            <a href="/settings" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+            <a href="/logout" id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0">Logg ut</a>
+        </div>
+    </div>
+{% endmacro %}
+

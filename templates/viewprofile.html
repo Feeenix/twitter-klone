@@ -1,5 +1,6 @@
 
 {% from 'macros.html' import rightSidebar %}
+{% from 'macros.html' import leftSidebar %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,57 +30,7 @@
 
     <div class="container">
         <div class="hovedflex">
-            <div id="venstrekolonne">
-                <div id="meny">
-                    <a href="/home" id="logo" class="hiddenButton">
-                        <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
-                    </a>
-                    <div id="menyknapper">
-                        <a href="/home" class="hiddenButton genericButton" id="menyhjem">
-                            <img src="static/bilder/home_hul.png" height="30" alt="">
-                            <div class="buttonText">Hjem</div>
-                        </a>
-
-                        <a href="sok?query=" class="largeWidth hiddenButton genericButton" id="menysok">
-                            <img src="static/bilder/search_hul.png" height="30" alt="">
-                            <div class="buttonText">Søk</div>
-                        </a>
-
-                        <a href="viewprofile?brukernavn=brukernavn" class="boldText hiddenButton genericButton"
-                            id="menyprofil">
-                            <img src="static/bilder/profil.png" height="30" alt="">
-                            <div class="buttonText">Profil</div>
-                        </a>
-                        <a href="settings" class="hiddenButton genericButton" id="menyinnstillinger">
-                            <img src="static/bilder/settings_hul.png" height="30" alt="">
-                            <div class="buttonText">Innstillinger</div>
-                        </a>
-                    </div>
-                </div>
-                <div class="profil">
-                    <button class="profilknapp genericButton hiddenButton">
-                        <div>
-                            <img class="profilbilde"
-                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                alt="pfp" height="50" width="50">
-                            <div class="mediumWidth profilnavn">
-                                <div class="mediumWidth profilNavnNavn">{{ user['name'] }}</div>
-                                <div class="mediumWidth profilNavnId">@{{ user['usernae' ]}}</div>
-                            </div>
-                        </div>
-                        <div id="mediumWidth menyindikator">
-                            <img src="static/bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
-                        </div>
-                    </button>
-                </div>
-                <div id="popupLogout" tabindex="0">
-                    <a href="viewprofile?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
-                        class="genericButton hiddenButton">Profil</a>
-                    <a href="settings" id="popupSettings" class="genericButton hiddenButton"
-                        tabindex="0">Innstillinger</a>
-                    <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
-                </div>
-            </div>
+            {{ leftSidebar(user, "profile") }}
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
 
@@ -93,11 +44,11 @@
                                 <h2>User does not exist</h2>
                             {% endif %}
                         </div>
-                        <img src="static/" alt="profilebanner" id="profilebanner">
+                        <img src="static/userpics/{{ otherUser['pfb'] }}" alt="profilebanner" id="profilebanner">
 
                         <div id="overskriftPfpShare">
                             <div>
-                                <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                <img src="static/userpics/{{ otherUser['pfp'] }}"
                                     alt="pfp" id="overskriftPfp" width="150" height="150">
                             </div>
                             <button class="genericButton hiddenButton">Share</button>
@@ -183,56 +134,7 @@
 
 <script src="static/javascript/lib.js"></script>
 <script src="static/javascript/redirectHvisLoggetUt.js"></script>
-<script>
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
-
-    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
-    fjernQueryKnapp.addEventListener("click", clearSearch);
-
-    function clearSearch() {
-        let sokfeltEl = document.querySelector("#sokfelt");
-        sokfeltEl.value = "";
-        sokfeltEl.focus();
-    }
-
-
-
-    let profil = document.querySelector(".profil > button");
-    let popupElement = document.querySelector("#popupLogout");
-    document.querySelector("#overskriftfollowing").addEventListener("focus", gjemPopup)
-    popupElement.addEventListener("blur", gjemPopup);
-
-    profil.addEventListener("focus", visPopup);
-
-    profil.addEventListener("blur", gjemPopup);
-    gjemPopup();
-    async function gjemPopup() {
-        await sleep(10);
-
-        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
-        let harFokus = false;
-        for (let i = 0; i < elementer.length; i++) {
-            if (elementer[i] == document.activeElement) {
-                harFokus = true;
-            }
-        }
-        if (harFokus) {
-            return
-        }
-
-        console.log("gjemPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "none";
-
-    }
-    function visPopup() {
-        console.log("visPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "block";
-    }
-
-
-</script>
+<script src="static/javascript/leftSidebar.js"></script>
+<script src="static/javascript/rightSidebar.js"></script>
 
 </html>

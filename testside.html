@@ -13,47 +13,33 @@
 <body>
     <label for="avatar">Profile picture</label>
     <br>
-
     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
     <br>
-    <br>
-    <label for="banner">Profile banner</label>
-    <br>
-    <input type="file" id="banner" name="banner" accept="image/png, image/jpeg">
-
-    <img src="" alt="preview">
+    <img src="" alt="preview" id="avatarPreview">
 
 
 
-    <ul>
-        <li></li>
-        <li class="different"></li>
-        <li></li>
-    </ul>
-
-    <style>
-        /* Style everything but the .different class */
-        li:not(.different) {
-            font-size: 3em;
-        }
-    </style>
     <script>
-        const avatar = document.getElementById('avatar');
-        avatar.addEventListener('change', (
+        
+    async function readfile(File) {
+        const reader = new FileReader();
+        reader.readAsDataURL(File); // gjør om et fil-objekt til en base64 url string (data:image/png;base64,....)
+        return await new Promise((resolve, reject) => {
+            reader.onload = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = reject;
+        });
+    }
+
+        const avatar = document.querySelector("#avatar");
+        avatar.addEventListener("change", (
             async function (e) {
-                // let imageDataUrls = await readFiles(e.target.files) // readFiles er en funksjon fra javascript/lib.js
-                let imageDataUrl = await fileToDataURL(e.target.files[0]) // readFiles er en funksjon fra javascript/lib.js
+                let imageDataUrl = await readfile(e.target.files[0]) // readFiles er en funksjon fra javascript/lib.js
                 console.log(imageDataUrl);
-                document.querySelector('img').src = imageDataUrl;
+                document.querySelector("#avatarPreview").src = imageDataUrl;
             })
         );
-
-
-
-
-
-
-
 
 
     </script>

@@ -1,0 +1,102 @@
+
+{% macro rightSidebar() %}
+
+    <div id="sidebar">
+        <form action="/search" method="GET">
+            <div id="sok">
+                <input name="v" type="text" placeholder="Search on the Bark web..." id="sokfelt"></input>
+                <div>
+                    <button type="button" id="fjernQueryKnapp" class="hiddenButton">
+                        <img src="static/bilder/clear_hul.png" width="20" height="20" alt="fjernQueryKnapp">
+                    </button>
+                    <button id="sokknapp" class="hiddenButton">
+                        <!-- når denne trykkes skal vi navigere til en ny side som ligner
+                         -->
+                        <img src="static/bilder/search_hul.png" width="25" height="25" alt="sokeknapp">
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="whotofollow">
+            <div class="whotofollowheader">Who to follow</div>
+            <div class="whotofollowbody">
+
+                <div class="whotofollowperson">
+
+                    <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                        class="folgePerson hiddenButton">
+                        <div>
+                            <img class="profilbilde"
+                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                alt="pfp" height="50" width="50">
+                            <div class="profilnavn">
+                                <div class="profilNavnNavn">Navn</div>
+                                <div class="profilNavnId">@Brukernavn</div>
+                            </div>
+                        </div>
+                        <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                    </a>
+
+                </div>
+                <div class="whotofollowperson">
+
+                    <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                        class="folgePerson hiddenButton">
+                        <div>
+                            <img class="profilbilde"
+                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                alt="pfp" height="50" width="50">
+                            <div class="profilnavn">
+                                <div class="profilNavnNavn">Navn</div>
+                                <div class="profilNavnId">@Brukernavn</div>
+                            </div>
+                        </div>
+                        <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                    </a>
+
+                </div>
+                <div class="whotofollowperson">
+
+                    <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                        class="folgePerson hiddenButton">
+                        <div>
+                            <img class="profilbilde"
+                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                alt="pfp" height="50" width="50">
+                            <div class="profilnavn">
+                                <div class="profilNavnNavn">Navn</div>
+                                <div class="profilNavnId">@Brukernavn</div>
+                            </div>
+                        </div>
+                        <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                    </a>
+
+                </div>
+                <div class="whotofollowperson">
+
+                    <a href="viewprofile?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                        class="folgePerson hiddenButton">
+                        <div>
+                            <img class="profilbilde"
+                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                alt="pfp" height="50" width="50">
+                            <div class="profilnavn">
+                                <div class="profilNavnNavn">Navn</div>
+                                <div class="profilNavnId">@Brukernavn</div>
+                            </div>
+                        </div>
+                        <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <a class="bunnhoyre aatweetknapp " tabindex="0">
+            BARK
+            <!-- <img src="static/bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+        </a>
+    </div>
+{% endmacro %}
+

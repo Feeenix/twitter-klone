@@ -46,7 +46,11 @@
     <div class="container">
         <img src="static/bilder/BARK.png" height="50px" alt="bark icon">
         <h1>Registrer en ny bruker til Barker</h1>
-        <p class="errorMessage">{{ error }}</p>
+        {% if error %}
+            <p class="visibleErrorMessage">{{ error }}</p>
+        {% else %}
+            <p class="errorMessage"></p>
+        {% endif %}
         <form action="/register" method="POST">
             <div class="inputfield">
                 <label for="brukernavn">Nytt brukernavn</label>

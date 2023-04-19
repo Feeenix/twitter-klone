@@ -1,1 +1,1 @@
-[{"username": "NicoDatBoi", "hashedPassword": "123123", "name": "Elon Musk 2.0", "tweets": []}]
+[{"username": "NicoDatBoi", "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e", "name": "Elon Musk 2.0", "tweets": []}]

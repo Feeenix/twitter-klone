@@ -45,7 +45,9 @@
     <div class="container">
         <img src="static/bilder/BARK.png" height="50px" alt="bark icon">
         <h1>Logg inn til Barker</h1>
-        <p class="errorMessage"></p>
+        {% if error %}
+            <p class="visibleErrorMessage">{{ error }}</p>
+        {% endif %}
         <form action="/login" method="POST">
             <div class="inputfield">
                 <label for="brukernavn">Brukernavn</label>

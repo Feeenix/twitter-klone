@@ -75,6 +75,18 @@ body {
     padding: 15px;
 }
 
+.visibleErrorMessage {
+    color: red;
+    font-size: 1em;
+    margin-bottom: 15px;
+    max-width: calc(100% - 34px);
+    width: 100%;
+    border-radius: 10px;
+    border: solid #ffbbbb 2px;
+    background-color: #ffdddd;
+    padding: 15px;
+}
+
 .hovedflex {
     display: flex;
     flex-direction: row;

@@ -32,6 +32,8 @@ app.config.update(
 Session(app)
 
 
+def hashPassword(password):
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def getUserFromUsername(username):
     with open("users.txt", "r") as f:
@@ -44,6 +46,16 @@ def getUserFromUsername(username):
     return None
 
 
+def validateUserCredentials(username, password):
+    with open("users.txt", "r") as f:
+        users = json.load(f)
+
+    hashed_password = hashPassword(password)
+    for user in users:
+        if user["username"] == username and user["hashedPassword"] == hashed_password:
+            return True
+
+    return False
 
 
 @app.get("/favicon.ico")
@@ -115,12 +127,12 @@ def loginPOST():
         if not username or not password:
             return render_template("login.html", error="Error in form")
 
-        # TODO Check if credentials are an actual user
-        #return render_template("login.html", error="Invalid credentials")
+        if validateUserCredentials(username, password):
+            session["name"] = username
+            return redirect("/home")
+        else:
+            return render_template("login.html", error="Invalid credentials")
 
-        session["name"] = username
-
-        return redirect("/home")
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -152,8 +164,7 @@ def registerPOST():
                 logInfo("Username already exists")
                 return render_template("registrere.html", error="Username already exists")
 
-        # TODO temporary no hashing
-        hashed_password = password
+        hashed_password = hashPassword(password)
         new_user = {"username": username,
                     "hashedPassword": hashed_password,
                     "name": "Elon Musk 2.0",
@@ -161,9 +172,9 @@ def registerPOST():
 
         users.append(new_user)
         with open("users.txt", "w") as f:
-            json.dump(new_user, f)
+            json.dump(users, f)
 
-        logInfo("Successfully registered new user")
+        logInfo(f"Successfully registered new user '{username}'")
 
         session["name"] = username
         return redirect("/home")
@@ -212,5 +223,9 @@ def search():
         logError(e)
         return f"Error {e}"
 
-app.run(host="127.0.0.1", port=8080, debug=True)
+
+if __name__ == '__main__':
+    context = ("server.crt", "server.key")
+    #app.run(host="127.0.0.1", port=8080, ssl_context=context, debug=True)
+    app.run(host="127.0.0.1", port=8080, debug=True)
 

@@ -23,6 +23,20 @@
 
     <img src="" alt="preview">
 
+
+
+    <ul>
+        <li></li>
+        <li class="different"></li>
+        <li></li>
+    </ul>
+
+    <style>
+        /* Style everything but the .different class */
+        li:not(.different) {
+            font-size: 3em;
+        }
+    </style>
     <script>
         const avatar = document.getElementById('avatar');
         avatar.addEventListener('change', (

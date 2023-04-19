@@ -539,7 +539,7 @@ body {
         margin-right: 0px;
     }
 
-    .genericButton {
+    .genericButton:not(#overskriftPfpShare *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -556,11 +556,13 @@ body {
 
 @media only screen and (max-width: 880px) {
 
-    /* når det er mindre enn 1000px*/
+    /* når det er mindre enn 880px*/
     #sidebar,
     .largeWidth {
         display: none;
     }
+
+
 
 }
 
@@ -578,11 +580,22 @@ body {
 }
 
 
+.profileDisplay {
+    position: relative;
+    display: block;
+}
+
 
 #profilebanner {
-    height: 250px;
+    height: 200px;
     width: 100%;
-    background-color: cornflowerblue;
+    /* background-color: cornflowerblue; */
+    background-color: #7a5901;
+}
+
+#profilebannerimg {
+    height: 100%;
+    width: 100%;
 }
 
 #overskriftPfpShare {
@@ -594,13 +607,32 @@ body {
     justify-content: space-between;
     min-height: 75px;
 }
+
 #overskriftPfpShare>div {
     position: relative;
 }
+
 #overskriftPfpShare>div>img {
     position: absolute;
     top: -75px;
     border-radius: 9999px;
     /* border: white solid 5px; */
     box-shadow: 0px 0px 10px 10px white;
+}
+#viewprofileTopp {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 10px;
+    align-items: center;
+}
+#viewprofileTopp >button {
+    margin-right: 10px;
+}
+.profileDisplay button,#overskrift button{
+    padding: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+    font-size: 1em;
 }

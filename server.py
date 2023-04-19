@@ -57,6 +57,8 @@ def validateUserCredentials(username, password):
 
     return False
 
+def userLoggedIn():
+    return session.get("user")
 
 @app.get("/favicon.ico")
 def favicon():
@@ -94,7 +96,7 @@ def index():
 def home():
     try:
         # If user is not logged in then redirect to login page
-        if not session.get("name"):
+        if not userLoggedIn():
             return redirect("/")
 
         user = session["user"]
@@ -106,7 +108,7 @@ def home():
 
 @app.route("/logout", strict_slashes=False)
 def logout():
-    session["name"] = None
+    session["user"] = None
     return redirect("/login")
 
 

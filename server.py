@@ -69,7 +69,10 @@ def favicon():
 
 @app.after_request
 def after_request(response):
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    logInfo(f"response {request.url}")
+    if "logout" in request.url:
+        #response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers['Clear-Site-Data'] = '"cache"'
     return response
 
 
@@ -79,9 +82,6 @@ def index():
         # If user is not logged in then redirect to login page
         if not session.get("name"):
             return redirect("/login")
-
-        # Get user
-        user = getUserFromUsername(session["name"])
 
         # Redirect to home
         return redirect("/home")
@@ -97,7 +97,7 @@ def home():
         if not session.get("name"):
             return redirect("/")
 
-        user = getUserFromUsername(session["name"])
+        user = session["user"]
         return render_template("home.html", user=user)
     except Exception as e:
         logError(e)
@@ -128,7 +128,8 @@ def loginPOST():
             return render_template("login.html", error="Error in form")
 
         if validateUserCredentials(username, password):
-            session["name"] = username
+            user = getUserFromUsername(username)
+            session["user"] = user
             return redirect("/home")
         else:
             return render_template("login.html", error="Invalid credentials")
@@ -190,7 +191,7 @@ def registerPOST():
 
         logInfo(f"Successfully registered new user '{username}'")
 
-        session["name"] = username
+        session["user"] = new_user
         return redirect("/home")
     except Exception as e:
         logError(e)
@@ -200,8 +201,8 @@ def registerPOST():
 @app.get("/viewprofile")
 def viewprofile():
     try:
-        user = getUserFromUsername(session["name"])
-        username = request.args.get("brukernavn", default=session["name"], type=str)
+        user = session["user"]
+        username = request.args.get("brukernavn", default=user["username"], type=str)
         otherUser = getUserFromUsername(username)
         return render_template("viewprofile.html", user=user, otherUser=otherUser)
     except Exception as e:
@@ -212,7 +213,7 @@ def viewprofile():
 @app.get("/settings")
 def settings():
     try:
-        user = getUserFromUsername(session["name"])
+        user = session["user"]
         return render_template("settings.html", user=user)
     except Exception as e:
         logError(e)
@@ -222,7 +223,7 @@ def settings():
 @app.get("/customize")
 def customize():
     try:
-        user = getUserFromUsername(session["name"])
+        user = session["user"]
         return render_template("customize.html", user=user)
     except Exception as e:
         logError(e)
@@ -232,7 +233,7 @@ def customize():
 @app.get("/search")
 def search():
     try:
-        user = getUserFromUsername(session["name"])
+        user = session["user"]
         return render_template("sok.html", user=user)
     except Exception as e:
         logError(e)

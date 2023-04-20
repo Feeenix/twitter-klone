@@ -37,32 +37,15 @@
 
                     <div id="overskrift">
                         <div id="viewprofileTopp">
-                            <button class="genericButton hiddenButton">
+                            <a href="/home" class="genericButton hiddenButton">
                                 <img src="static/bilder/pil_svart.png" alt="arrow" width="30" >
-                            </button>
+                            </a>
                             {% if otherUser %}
                                 <h3>{{ otherUser["username"] }}</h3>
                             {% else %}
                                 <h3>User does not exist</h3>
                             {% endif %}
                         </div>
-
-                        <div id="overskrifttabs">
-                            <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
-                                <div>
-                                    Following
-                                    <div class="line"></div>
-                                </div>
-                            </button>
-                            <button id="overskriftall" class="overskriftknapp hiddenButton">
-                                <div>
-                                    All
-                                    <div class="line"></div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-
 
                     <div id="feed">
                         <div class="profileDisplay">

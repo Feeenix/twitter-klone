@@ -1,1 +1,1 @@
-[]
+[{"username": "NicoDatBoi", "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e", "name": "Elon Musk 2.0", "pfp": "mypfp.png", "pfb": "mybanner.png", "posts": [], "followers": [], "following": [], "pinnedPost": null, "bio": null, "status": null, "settings": {"darkMode": false, "background-color": "#ffffff", "text-color": "#000000", "font": "Inter", "font-size": "1em"}}]

@@ -1,0 +1,5 @@
+
+localStorage for:
+ - Tilbake knapp (trengs ikke https://stackoverflow.com/questions/63905241/return-button-in-flask)
+ - Drafte tweets
+

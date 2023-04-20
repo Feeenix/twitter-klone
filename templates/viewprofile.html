@@ -37,24 +37,16 @@
 
                     <div id="overskrift">
                         <div id="viewprofileTopp">
-                            <button class="genericButton hiddenButton">Back</button>
+                            <button class="genericButton hiddenButton">
+                                <img src="static/bilder/pil_svart.png" alt="arrow" width="30" >
+                            </button>
                             {% if otherUser %}
-                                <h2>{{ otherUser["username"] }}</h2>
+                                <h3>{{ otherUser["username"] }}</h3>
                             {% else %}
-                                <h2>User does not exist</h2>
+                                <h3>User does not exist</h3>
                             {% endif %}
                         </div>
-                        <img src="static/userpics/{{ otherUser['pfb'] }}" alt="profilebanner" id="profilebanner">
 
-                        <div id="overskriftPfpShare">
-                            <div>
-                                <img src="static/userpics/{{ otherUser['pfp'] }}"
-                                    alt="pfp" id="overskriftPfp" width="150" height="150">
-                            </div>
-                            <button class="genericButton hiddenButton">Share</button>
-                        </div>
-
-                        <div id="overskrifttekst">Home</div>
                         <div id="overskrifttabs">
                             <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
                                 <div>
@@ -73,6 +65,50 @@
 
 
                     <div id="feed">
+                        <div class="profileDisplay">
+                            <div id="profilebanner">
+                                <img src="static/userpics/{{ otherUser['pfb'] }}" alt="profilebanner" id="profilebannerimg">
+                            </div>
+                            <div id="profilePfpShare">
+                                <div>
+                                    <img src="static/userpics/{{ otherUser['pfp'] }}"
+                                        alt="pfp" id="overskriftPfp" width="150" height="150">
+                                </div>
+                                <button class="genericButton vanligKnapp">Share</button>
+                            </div>
+                            <div id="profileTextBody">
+
+                                <h3 id="profileDisplayName">{{ otherUser['name'] }}</h3>
+                                <div id="profileBrukernavn">@{{ otherUser['username'] }}</div>
+                                <div id="profileBio">{{ otherUser['bio'] }}</div>
+                                <div id="profileLocation">{{ otherUser['location'] }}</div>
+
+                                <div id="profileFollowingFollowers">
+                                    <div id="profileFollowing">
+                                        <div>300</div>
+                                        <div>Following</div>
+                                    </div>
+                                    <div id="profileFollowers">
+                                        <div>300</div>
+                                        <div>Followers</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="overskrifttabs">
+                                <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
+                                    <div>
+                                        Tweets & Retweets
+                                        <div class="line"></div>
+                                    </div>
+                                </button>
+                                <button id="overskriftall" class="overskriftknapp hiddenButton">
+                                    <div>
+                                        Comments
+                                        <div class="line"></div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                         <div class="tweet">
                             <div class="profilbildekolonne">
                                 <img class="profilbilde"

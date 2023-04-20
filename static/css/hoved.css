@@ -4,13 +4,32 @@
 /* @import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap"); */
 
 body {
+
+    /* darkmode */
+
+    /* --globalbg: #282c34;
+    --globalbg2: #282c34cd;
+    --globalfg: #ffffff; */
+
+    /* lightmode */
+
+    --globalbg: #ffffff;
+    --globalbg2: #ffffffcd;
+    --globalfg: #404040;
+
+
+
+    color: var(--globalfg);
+    --overskriftfarge: var(--globalbg2);
+    background-color: var(--globalbg);
     margin: 0px;
 }
+
 
 * {
     font-family: Inter;
     /* font-family: Tangerine; */
-    color: #404040;
+    color: inherit;
 }
 
 .container {
@@ -32,6 +51,7 @@ body {
     background-color: #d6ccff;
     border-radius: 10px;
     border-color: #9279ff;
+    color: #404040;
 }
 
 .vanligKnapp:hover {
@@ -100,7 +120,7 @@ body {
 }
 
 .hidden {
-    background-color: #80808000;
+    background-color: transparent;
     transition-duration: 100ms;
     border: none;
 }
@@ -141,7 +161,7 @@ body {
     height: 95vh;
     position: sticky;
     top: 0px;
-    border-right: solid rgb(239, 243, 244) 1px;
+    border-right: solid rgba(222, 230, 232, 0.6) 1px;
     min-width: 250px;
 }
 
@@ -157,7 +177,8 @@ body {
 #midtkolonne {
     /* background-color: blue; */
     flex: 2;
-    border-right: rgb(239, 243, 244) solid 1px;
+    border-right: rgba(222, 230, 232, 0.6) solid 1px;
+    max-width: 750px;
 }
 
 #sidebar {
@@ -281,7 +302,7 @@ body {
 }
 
 .whotofollow {
-    background-color: #8080800c;
+    background-color: #aaaaaa20;
     margin-top: 20px;
     padding: 20px;
     border-radius: 10px;
@@ -295,10 +316,10 @@ body {
 
 #overskrift {
     backdrop-filter: blur(6px);
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--overskriftfarge);
     position: sticky;
     top: -0.5px;
-    border-bottom: rgb(239, 243, 244) solid 1px;
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
 #overskrifttekst {
@@ -345,9 +366,9 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     justify-content: space-between;
-    background-color: #8080800c;
+    background-color: #aaaaaa20;
     border-radius: 9999px;
-    border: rgb(239, 243, 244) solid 1px;
+    border: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
 #sok button {
@@ -363,9 +384,10 @@ body {
 #sok>input {
     border: none;
 
+    height: 100%;
     font-size: 1em;
     max-width: 200px;
-    background-color: #fafafa;
+    background-color: transparent;
 
 }
 
@@ -408,7 +430,7 @@ body {
 .tweet {
     display: flex;
     flex-direction: row;
-    border-bottom: rgb(239, 243, 244) solid 1px;
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
 .tweetkolonne {
@@ -484,7 +506,7 @@ body {
 
 
 #popupLogout {
-    /* display: none; */
+    display: none;
     position: absolute;
     bottom: 12%;
     left: calc(5% + 30px);
@@ -551,7 +573,7 @@ body {
         margin-right: 0px;
     }
 
-    .genericButton {
+    .genericButton:not(#profilePfpShare *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -568,7 +590,7 @@ body {
 
 @media only screen and (max-width: 880px) {
 
-    /* når det er mindre enn 1000px*/
+    /* når det er mindre enn 880px*/
     #sidebar,
     .largeWidth {
         display: none;
@@ -590,14 +612,26 @@ body {
 }
 
 
-
-#profilebanner {
-    height: 250px;
-    width: 100%;
-    background-color: cornflowerblue;
+.profileDisplay {
+    position: relative;
+    display: block;
 }
 
-#overskriftPfpShare {
+
+#profilebanner {
+    height: 200px;
+    width: 100%;
+    /* background-color: cornflowerblue; */
+    background-color: #7a5901;
+}
+
+#profilebannerimg {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#profilePfpShare {
     margin-top: 10px;
     margin-left: 30px;
     margin-right: 30px;
@@ -606,13 +640,73 @@ body {
     justify-content: space-between;
     min-height: 75px;
 }
-#overskriftPfpShare>div {
+#profilePfpShare>div {
     position: relative;
 }
-#overskriftPfpShare>div>img {
+#profilePfpShare>div>img {
     position: absolute;
     top: -75px;
     border-radius: 9999px;
     /* border: white solid 5px; */
-    box-shadow: 0px 0px 10px 10px white;
+    box-shadow: 0px 0px 10px 10px var(--globalbg);
+}
+
+#viewprofileTopp {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 10px;
+    align-items: center;
+}
+
+#viewprofileTopp>button {
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileDisplay button,
+#overskrift button {
+    padding: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+    font-size: 1em;
+}
+
+#profileFollowingFollowers {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#profileFollowingFollowers>* {
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+#profileFollowingFollowers>*>*:nth-child(1) {
+    margin-right: 5px;
+    font-weight: 700;
+}
+
+#profileFollowingFollowers>*:nth-child(1) {
+    margin-right: 20px;
+}
+
+#profileTextBody {
+    padding-left: 20px;
+}
+
+#profileTextBody>*:nth-child(1) {
+    font-weight: 700;
+}
+
+#profileTextBody>* {
+    margin-bottom: 5px;
 }

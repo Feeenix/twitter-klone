@@ -1,5 +1,6 @@
 
 {% from 'macros.html' import leftSidebar %}
+{% from 'macros.html' import rightSidebar %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +32,58 @@
         <div class="hovedflex">
             {{ leftSidebar(user, "profile") }}
             <div id="hoyrekolonne">
-                
+                <div id="midtkolonne">
+                    <div id="overskrift">
+                        <div id="overskrifttekst">Velkommen til Barker</div>
+                        <div id="overskrifttabs">
+                            <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
+                                <div>
+                                    Profile
+                                    <div class="line"></div>
+                                </div>
+                            </button>
+                            <button id="overskriftall" class="overskriftknapp hiddenButton">
+                                <div>
+                                    Apperance
+                                    <div class="line"></div>
+                                </div>
+                            </button>
+                            <button id="overskriftall" class="overskriftknapp hiddenButton">
+                                <div>
+                                    Sound
+                                    <div class="line"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="feed">
+
+
+
+
+
+
+
+
+
+
+                        
+
+
+
+
+
+
+                        <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
+                            BARK
+                            <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {{ rightSidebar() }}
 
             </div>
 
@@ -45,7 +97,6 @@
 </body>
 
 <script src="static/javascript/lib.js"></script>
-<script src="static/javascript/redirectHvisLoggetUt.js"></script>
 <script src="static/javascript/leftSidebar.js"></script>
 <script src="static/javascript/rightSidebar.js"></script>
 

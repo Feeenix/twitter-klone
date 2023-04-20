@@ -10,6 +10,7 @@ async function readfile(File) {
         reader.onerror = reject;
     });
 }
+
 async function readFiles(filesArray) { // tar inn et array med fil-objekter og returnerer et array med base64 url strings. Brukes når man har mer enn en fil
     let imageDataUrls = [];
     for (let i = 0; i < filesArray.length; i++) {

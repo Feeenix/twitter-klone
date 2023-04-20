@@ -60,6 +60,16 @@ def validateUserCredentials(username, password):
 def userLoggedIn():
     return session.get("user")
 
+def newPost(post):
+    with open("posts.txt", "r") as f:
+        posts = json.load(f)
+
+    posts["count"] += 1
+    posts["posts"][posts["count"]] = post
+
+    with open("posts.txt", "w") as f:
+        json.dump(posts, f)
+
 @app.get("/favicon.ico")
 def favicon():
     try:
@@ -167,13 +177,33 @@ def registerPOST():
                 logInfo("Username already exists")
                 return render_template("registrere.html", error="Username already exists")
 
+        #posts = {
+        #   "username": "elonmusk",
+        #   "content": "I am a tweet",
+        #   "coments": [],
+        #   "retweets": 10,
+        #   "likes": 10,
+        #   "views": 10,
+        #}
+
+        # comments follow same structure as posts
+
+        post = {
+            "content": "This is a cool tweet",
+            "coments": [],
+            "retweets": 10,
+            "likes": 20,
+            "views": 10,
+        };
+        newPost(post)
+
         hashed_password = hashPassword(password)
         new_user = {"username": username,
                     "hashedPassword": hashed_password,
                     "name": "Elon Musk 2.0",
                     "pfp": "mypfp.png",
                     "pfb": "mybanner.png",
-                    "posts": [],
+                    "posts": [0],
                     "followers": [],
                     "following": [],
                     "pinnedPost": None,

@@ -177,8 +177,9 @@ def registerPOST():
                     "followers": [],
                     "following": [],
                     "pinnedPost": None,
-                    "bio": None,
-                    "status": None,
+                    "bio": "Nothing yet...",
+                    "status": "Offline",
+                    "location": "Mars",
                     "settings": {
                         "darkMode": False,
                         "background-color": "#ffffff",

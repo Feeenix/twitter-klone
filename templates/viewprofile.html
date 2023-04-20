@@ -85,11 +85,11 @@
 
                                 <div id="profileFollowingFollowers">
                                     <div id="profileFollowing">
-                                        <div>300</div>
+                                        <div>{{ otherUser['following']|length }}</div>
                                         <div>Following</div>
                                     </div>
                                     <div id="profileFollowers">
-                                        <div>300</div>
+                                        <div>{{ otherUser['followers']|length }}</div>
                                         <div>Followers</div>
                                     </div>
                                 </div>

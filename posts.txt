@@ -1,1 +1,1 @@
-{"count": 0, "posts": []}
+{"count": 1, "posts": {"1": {"content": "This is a cool tweet", "coments": [], "retweets": 10, "likes": 20, "views": 10}}}

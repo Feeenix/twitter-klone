@@ -225,7 +225,7 @@ def registerPOST():
         logInfo(f"Successfully registered new user '{username}'")
 
         session["user"] = new_user
-        return redirect("/home")
+        return redirect("/customize")
     except Exception as e:
         logError(e)
         return f"Error {e}"

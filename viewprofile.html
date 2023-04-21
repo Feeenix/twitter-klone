@@ -84,7 +84,7 @@
                     <div id="overskrift">
                         <div id="viewprofileTopp">
                             <button class="genericButton hiddenButton">
-                                <img src="bilder/pil_svart.png" alt="arrow" width="30" >
+                                <img src="bilder/pil_svart.png" alt="arrow" width="30">
                             </button>
                             <h3>Elon Musk</h3>
                         </div>
@@ -96,7 +96,8 @@
 
                         <div class="profileDisplay">
                             <div id="profilebanner">
-                                <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="profilebanner" id="profilebannerimg">
+                                <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                    alt="profilebanner" id="profilebannerimg">
 
                             </div>
 
@@ -112,7 +113,11 @@
                                 <h3 id="profileDisplayName">Elon Musk</h3>
                                 <div id="profileBrukernavn">@elonmusk</div>
                                 <div id="profileBio">i am a spaceX engineer bla bla bal...</div>
-                                <div id="profileLocation">MArs</div>
+
+                                <div id="profileLocation">
+                                    <img id="profileLocationIcon" src="" alt="map marker icon">
+                                    <div id="profileLocationName">MArs</div>
+                                </div>
 
                                 <div id="profileFollowingFollowers">
                                     <div id="profileFollowing">
@@ -226,57 +231,13 @@
                                             alt="pfp" height="50" width="50">
                                         <div class="profilnavn">
                                             <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
+                                            <div class="profilNavnId">@elonmusk</div>
                                         </div>
                                     </div>
                                     <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
                                 </a>
                             </div>
-                            <div class="whotofollowperson">
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
-                                    class="folgePerson hiddenButton">
-                                    <div>
-                                        <img class="profilbilde"
-                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                            alt="pfp" height="50" width="50">
-                                        <div class="profilnavn">
-                                            <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
-                                        </div>
-                                    </div>
-                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
-                                </a>
-                            </div>
-                            <div class="whotofollowperson">
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
-                                    class="folgePerson hiddenButton">
-                                    <div>
-                                        <img class="profilbilde"
-                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                            alt="pfp" height="50" width="50">
-                                        <div class="profilnavn">
-                                            <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
-                                        </div>
-                                    </div>
-                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
-                                </a>
-                            </div>
-                            <div class="whotofollowperson">
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
-                                    class="folgePerson hiddenButton">
-                                    <div>
-                                        <img class="profilbilde"
-                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                            alt="pfp" height="50" width="50">
-                                        <div class="profilnavn">
-                                            <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
-                                        </div>
-                                    </div>
-                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                     <a class="bunnhoyre aatweetknapp " tabindex="0">
@@ -291,7 +252,21 @@
 
 <script src="javascript/lib.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
+<script src="javascript/visprofil.js"></script>
+<script src="javascript/whotofollow_buttons.js"></script>
 <script>
+    oppdaterProfil(hentURLSearchParams()["brukernavn"]);
+
+
+
+
+
+
+
+
+
+
+
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);
 

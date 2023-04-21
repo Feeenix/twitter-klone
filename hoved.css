@@ -297,6 +297,10 @@ body {
     border-radius: 10px;
 }
 
+/* .whotofollowperson a{
+
+} */
+
 #logo.hiddenButton {
     border-radius: 9999px;
     width: fit-content;
@@ -499,7 +503,7 @@ body {
     bottom: 12%;
     left: calc(5% + 30px);
     /* width: 300px; */
-    background-color: #f0f0f0f0;
+    background-color: #aaaaaa20;
     ;
     z-index: 2;
     padding: 15px;
@@ -702,3 +706,4 @@ body {
 #profileTextBody>* {
     margin-bottom: 5px;
 }
+

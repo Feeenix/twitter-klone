@@ -23,16 +23,16 @@ async function readFiles(filesArray) { // tar inn et array med fil-objekter og r
 
 async function fileToDataURL(file) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.onerror = reject;
     });
-  }
- 
-  
+}
+
+
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -42,9 +42,7 @@ function exportLocalStorage() { // exporterer localStorage til en string
     let data = JSON.stringify((localStorage));
     console.log(data.replace(/"/g, "\\\"")); // bruker regex til å erstatte alle " med \"
 }
-function importLocalStorage(jsonDataString='{\"users\":\"{\\"admin\\":{\\"password\\":\\"admin\\",\\"joined\\":\\"2023-04-14\\",\\"bannerImage\\":null,\\"profileImage\\":null,\\"followers\\":[],\\"following\\":[],\\"posts\\":[\\"9913ih12\\"],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":null,\\"bio\\":null,\\"status\\":null,\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}\",\"tweets\":\"{\\"9913ih12\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"bilder\\":[],\\"text\\":\\"hallo dette er en test\\",\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1681468679815}}\"}') { // importerer localStorage fra en string
-    // jsonDataString = '{\"users\":\"{}\",\"tweets\":\"{}\",\"retweets\":\"{}\"}'
-    // jsonDataString = '{\"users\":\"{\\"admin\\":{\\"password\\":\\"admin\\",\\"joined\\":\\"2023-04-14\\",\\"bannerImage\\":null,\\"profileImage\\":null,\\"followers\\":[],\\"following\\":[],\\"posts\\":[\\"9913ih12\\"],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":null,\\"bio\\":null,\\"status\\":null,\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}\",\"tweets\":\"{\\"9913ih12\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"bilder\\":[],\\"text\\":\\"hallo dette er en test\\",\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1681468679815}}\"}'
+function importLocalStorage(jsonDataString = ' {\"loggedInUser\":\"{\\"brukernavn\\":\\"admin\\",\\"utlopstid\\":1682623180913}\",\"users\":\"{\\"admin\\":{\\"password\\":\\"admin\\",\\"joined\\":\\"2023-04-20\\",\\"bannerImage\\":\\"\\",\\"bannerColor\\":\\"#808080\\",\\"profileImage\\":\\"https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png\\",\\"followers\\":[],\\"following\\":[\\"brukernavn\\"],\\"posts\\":[\\"jm71fzfo\\"],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":\\"\\",\\"bio\\":\\"\\",\\"status\\":\\"\\",\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}},\\"brukernavn\\":{\\"password\\":\\"passord\\",\\"joined\\":\\"2023-04-20\\",\\"bannerImage\\":\\"\\",\\"bannerColor\\":\\"#808080\\",\\"profileImage\\":\\"https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png\\",\\"followers\\":[\\"admin\\"],\\"following\\":[],\\"posts\\":[],\\"displayName\\":\\"brukernavn\\",\\"pinnedPost\\":null,\\"location\\":\\"\\",\\"bio\\":\\"\\",\\"status\\":\\"\\",\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}\",\"tweets\":\"{\\"jm71fzfo\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1682018365824}}\"}') { // importerer localStorage fra en string
     localStorage.clear();
     let jsonData = JSON.parse(jsonDataString);
     for (let key in jsonData) {
@@ -140,21 +138,25 @@ function genererId() { // genererer en tilfeldig id
     return Math.random().toString(36).slice(2, 10);
 }
 
+
+
+
 function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bare de nødvendige feltene
     let bruker = {
         password: passord,
         joined: new Date().toISOString().split("T")[0], // https://stackoverflow.com/a/29774197 
 
-        bannerImage: null,
-        profileImage: null,
+        bannerImage: "",
+        bannerColor: "#808080",
+        profileImage: "https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png",
         followers: [],
         following: [],
         posts: [],
         displayName: brukernavn,
         pinnedPost: null,
-        location: null,
-        bio: null,
-        status: null,
+        location: "",
+        bio: "",
+        status: "",
         settings: {
             darkMode: false,
             "background-color": "#ffffff",
@@ -163,7 +165,42 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
             "font-size": "1em"
         }
     }
-    lagreData(["users",brukernavn], bruker);
+    lagreData(["users", brukernavn], bruker);
+}
+
+function lagTilfeldigeBrukere(antall) {
+    for (let i = 0; i < antall; i++) {
+        let brukernavn = genererId();
+        let passord = "passord";
+        lagNyBruker(brukernavn, passord);
+        
+    }
+}
+
+
+function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en array med brukernavn som ikke er følgt av brukernavn
+    let bruker = hentBruker(brukernavn);
+    let following = bruker["following"];
+    let users = hentFraLocalStorage("users")
+    let usernames = Object.keys(users);
+    let ikkeFolgt = [];
+    for (let i = 0; i < usernames.length; i++) {
+        if (!following.includes(usernames[i]) && usernames[i] !== brukernavn) {
+            ikkeFolgt.push(usernames[i]);
+        }
+    }
+    let output = [];
+    let looplengde = Math.min(antall, ikkeFolgt.length)
+    for (let i = 0; i < looplengde; i++) {
+        let randomIndex = Math.floor(Math.random() * ikkeFolgt.length);
+        let randomUsername = ikkeFolgt.splice(randomIndex, 1)[0]
+        output.push([
+            randomUsername,
+            users[randomUsername]["displayName"],
+            users[randomUsername]["profileImage"]
+        ]);
+    }
+    return output;
 }
 
 function lagNyTweet(brukernavn, path, bilder, text) {
@@ -219,6 +256,30 @@ function lagNyRetweet(postId, brukernavn) {
 
 }
 
+function folgerBruker(brukerSomFolger, brukerSomBlirFolgt) {
+    let bruker1 = hentBruker(brukerSomFolger);
+    let bruker2 = hentBruker(brukerSomBlirFolgt);
+    return bruker1["following"].includes(brukerSomBlirFolgt) && bruker2["followers"].includes(brukerSomFolger);
+}
+
+function followBruker(brukerSomFolger, brukerSomBlirFolgt) {
+    let bruker1 = hentBruker(brukerSomFolger);
+    let bruker2 = hentBruker(brukerSomBlirFolgt);
+    bruker1["following"].push(brukerSomBlirFolgt);
+    bruker2["followers"].push(brukerSomFolger);
+    lagreData(["users", brukerSomFolger], bruker1);
+    lagreData(["users", brukerSomBlirFolgt], bruker2);
+}
+
+function unfollowBruker(brukerSomFolger, brukerSomBlirFolgt) {
+    let bruker1 = hentBruker(brukerSomFolger);
+    let bruker2 = hentBruker(brukerSomBlirFolgt);
+    bruker1["following"].splice(bruker1["following"].indexOf(brukerSomBlirFolgt), 1);
+    bruker2["followers"].splice(bruker2["followers"].indexOf(brukerSomFolger), 1);
+    lagreData(["users", brukerSomFolger], bruker1);
+    lagreData(["users", brukerSomBlirFolgt], bruker2);
+}
+
 /*
 eksempel på bruker-objekt:
 "elonmusk": {
@@ -226,6 +287,7 @@ eksempel på bruker-objekt:
     joined: "2020-12-12",
 
     bannerImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...", // default er null
+    bannerColor: "#808080",
     profileImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYA...", // default er null
     followers: ["billgates", "jeffbezos"],
     following: ["billgates", "jeffbezos"],

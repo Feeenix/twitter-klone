@@ -11,6 +11,8 @@ import os
 import json
 import hashlib
 
+import datetime
+
 def logError(s):
     tb = traceback.format_exc()
     with open("err.log", "a") as f:
@@ -57,18 +59,51 @@ def validateUserCredentials(username, password):
 
     return False
 
-def userLoggedIn():
-    return session.get("user")
-
 def newPost(post):
     with open("posts.txt", "r") as f:
         posts = json.load(f)
 
+    postID = str(posts["count"])
+    posts["posts"][postID] = post
     posts["count"] += 1
-    posts["posts"][posts["count"]] = post
 
     with open("posts.txt", "w") as f:
-        json.dump(posts, f)
+        json.dump(posts, f, default=str, indent=4)
+    
+    return postID
+
+def getPosts():
+    with open("posts.txt", "r") as f:
+        posts = json.load(f)
+
+    posts = posts["posts"]
+
+    for postID in posts:
+        posts[postID]["timePosted"] = datetime.datetime.strptime(posts[postID]["timePosted"], "%Y-%m-%d %H:%M:%S")
+
+    return posts
+
+def prettyFormatTime(cur, posted):
+    time = cur - posted
+
+    if time.days > 7:
+        return f"{posted.date()}"
+
+    if time.days > 0:
+        return f"{time.days}d"
+
+    hours = time.seconds // 3600
+    if hours > 0:
+        return f"{hours}h"
+
+    minutes = (time.seconds // 60) % 60
+    if minutes > 0:
+        return f"{minutes}m"
+
+    # Just now?
+
+    return f"{time.seconds}s"
+
 
 @app.get("/favicon.ico")
 def favicon():
@@ -92,7 +127,7 @@ def after_request(response):
 def index():
     try:
         # If user is not logged in then redirect to login page
-        if not session.get("name"):
+        if "username" not in session:
             return redirect("/login")
 
         # Redirect to home
@@ -106,10 +141,15 @@ def index():
 def home():
     try:
         # If user is not logged in then redirect to login page
-        if not userLoggedIn():
-            return redirect("/")
+        if "username" not in session:
+            return redirect("/login")
 
-        user = session["user"]
+        username = session["username"]
+        user = getUserFromUsername(username)
+
+        if not user:
+            return redirect("/login")
+
         return render_template("home.html", user=user)
     except Exception as e:
         logError(e)
@@ -118,7 +158,7 @@ def home():
 
 @app.route("/logout", strict_slashes=False)
 def logout():
-    session["user"] = None
+    session["username"] = None
     return redirect("/login")
 
 
@@ -141,7 +181,7 @@ def loginPOST():
 
         if validateUserCredentials(username, password):
             user = getUserFromUsername(username)
-            session["user"] = user
+            session["username"] = username
             return redirect("/home")
         else:
             return render_template("login.html", error="Invalid credentials")
@@ -189,13 +229,15 @@ def registerPOST():
         # comments follow same structure as posts
 
         post = {
+            "username": username,
             "content": "This is a cool tweet",
-            "coments": [],
+            "timePosted": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "comments": [],
             "retweets": 10,
             "likes": 20,
             "views": 10,
         };
-        newPost(post)
+        postID = newPost(post)
 
         hashed_password = hashPassword(password)
         new_user = {"username": username,
@@ -203,7 +245,7 @@ def registerPOST():
                     "name": "Elon Musk 2.0",
                     "pfp": "mypfp.png",
                     "pfb": "mybanner.png",
-                    "posts": [0],
+                    "posts": [postID],
                     "followers": [],
                     "following": [],
                     "pinnedPost": None,
@@ -220,11 +262,11 @@ def registerPOST():
 
         users.append(new_user)
         with open("users.txt", "w") as f:
-            json.dump(users, f)
+            json.dump(users, f, indent=4)
 
         logInfo(f"Successfully registered new user '{username}'")
 
-        session["user"] = new_user
+        session["username"] = username
         return redirect("/customize")
     except Exception as e:
         logError(e)
@@ -234,10 +276,20 @@ def registerPOST():
 @app.get("/viewprofile")
 def viewprofile():
     try:
-        user = session["user"]
-        username = request.args.get("brukernavn", default=user["username"], type=str)
+        if "username" not in session:
+            return redirect("/login")
+
+        username = session["username"]
+        user = getUserFromUsername(username)
+        if not user:
+            return redirect("/login")
+
+        username = request.args.get("brukernavn", default=session["username"], type=str)
         otherUser = getUserFromUsername(username)
-        return render_template("viewprofile.html", user=user, otherUser=otherUser)
+        posts = getPosts()
+        #comments = getComments()
+        currentTime = datetime.datetime.now()
+        return render_template("viewprofile.html", user=user, otherUser=otherUser, posts=posts, currentTime=currentTime, prettyFormatTime=prettyFormatTime)
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -246,7 +298,8 @@ def viewprofile():
 @app.get("/settings")
 def settings():
     try:
-        user = session["user"]
+        username = session["username"]
+        user = getUserFromUsername(username)
         return render_template("settings.html", user=user)
     except Exception as e:
         logError(e)
@@ -256,7 +309,15 @@ def settings():
 @app.get("/customize")
 def customize():
     try:
-        user = session["user"]
+        if "username" not in session:
+            return redirect("/login")
+
+        username = session["username"]
+        user = getUserFromUsername(username)
+
+        if not user:
+            return redirect("/login")
+
         return render_template("customize.html", user=user)
     except Exception as e:
         logError(e)
@@ -266,7 +327,15 @@ def customize():
 @app.get("/search")
 def search():
     try:
-        user = session["user"]
+        if "username" not in session:
+            return redirect("/login")
+
+        username = session["username"]
+        user = getUserFromUsername(username)
+
+        if not user:
+            return redirect("/login")
+
         return render_template("sok.html", user=user)
     except Exception as e:
         logError(e)

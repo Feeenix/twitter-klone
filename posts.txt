@@ -1,1 +1,14 @@
-{"count": 1, "posts": {"1": {"content": "This is a cool tweet", "coments": [], "retweets": 10, "likes": 20, "views": 10}}}
+{
+    "count": 1,
+    "posts": {
+        "0": {
+            "username": "NicoDatBoi",
+            "content": "This is a cool tweet",
+            "timePosted": "2023-04-21 22:54:59",
+            "comments": [],
+            "retweets": 10,
+            "likes": 20,
+            "views": 10
+        }
+    }
+}

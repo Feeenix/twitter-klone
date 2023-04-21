@@ -99,47 +99,51 @@
                                 <img class="profilbilde"
                                     src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
                                     alt="pfp" height="50" width="50">
+
                             </div>
-                            <div class="tweetkolonne">
-                                <div class="forfatterinfo">
-                                    <div>Name Lastname</div>
-                                    <div>@elonmusk</div>
-                                    <div>14h</div>
+                            {% for postID in otherUser['posts'] %}
+                                <div class="tweetkolonne">
+                                    <div class="forfatterinfo">
+                                        <div>{{ otherUser['name'] }}</div>
+                                        <div>@{{ otherUser['username'] }}</div>
+                                        <div>{{ prettyFormatTime(currentTime, posts[postID]['timePosted']) }}</div>
+                                    </div>
+                                    <div class="tweettekst">
+                                        {{ posts[postID]['content'] }}
+                                    </div>
+                                    <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
+
+                                    <div class="tweetknapper">
+
+                                        <button title="trykk for å legge til en kommentar"
+                                            class="tweetknappkommentar tweetknapp genericButton hiddenButton">
+                                            <span title="10000">{{ posts[postID]['comments']|length }}</span>
+                                            <img src="static/bilder/comment_hul.png" height="20" alt="Kommentarer">
+                                        </button>
+
+                                        <button title="trykk for å retweete"
+                                            class="tweetknappretweet tweetknapp genericButton hiddenButton">
+                                            <span title="10000">{{ posts[postID]['retweets'] }}</span>
+                                            <img src="static/bilder/retweet_hul.png" height="20" alt="Retweets">
+
+                                        </button>
+
+                                        <button title="trykk for å like"
+                                            class="tweetknapplikes tweetknapp genericButton hiddenButton">
+                                            <span title="10000">{{ posts[postID]['likes'] }}</span>
+                                            <img src="static/bilder/heart_hul.png" height="20" alt="Likes">
+
+                                        </button>
+
+                                        <button title="Views" class="tweetknappviews tweetknapp genericButton hidden">
+                                            <span title="10000">{{ posts[postID]['views'] }}</span>
+                                            <img src="static/bilder/eye_hul.png" height="30" alt="Views">
+
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="tweettekst">
-                                    I am a tweet
-                                </div>
-                                <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
+                            {% endfor %}
 
-                                <div class="tweetknapper">
-
-                                    <button title="trykk for å legge til en kommentar"
-                                        class="tweetknappkommentar tweetknapp genericButton hiddenButton">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/comment_hul.png" height="20" alt="Kommentarer">
-                                    </button>
-
-                                    <button title="trykk for å retweete"
-                                        class="tweetknappretweet tweetknapp genericButton hiddenButton">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/retweet_hul.png" height="20" alt="Retweets">
-
-                                    </button>
-
-                                    <button title="trykk for å like"
-                                        class="tweetknapplikes tweetknapp genericButton hiddenButton">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/heart_hul.png" height="20" alt="Likes">
-
-                                    </button>
-
-                                    <button title="Views" class="tweetknappviews tweetknapp genericButton hidden">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/eye_hul.png" height="30" alt="Views">
-
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                         <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
                             BARK

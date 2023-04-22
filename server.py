@@ -38,9 +38,7 @@ def hashPassword(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 def getUserFromUsername(username):
-    with open("users.txt", "r") as f:
-        users = json.load(f)
-
+    users = getUsers()
     if username in users:
         return users[username]
 
@@ -48,9 +46,7 @@ def getUserFromUsername(username):
 
 
 def validateUserCredentials(username, password):
-    with open("users.txt", "r") as f:
-        users = json.load(f)
-
+    users = getUsers()
     hashed_password = hashPassword(password)
     return username in users and users["hashedPassword"] == hashed_password
 
@@ -75,9 +71,7 @@ def newPost(username, content):
     with open("posts.txt", "w") as f:
         json.dump(posts, f, default=str, indent=4)
 
-    with open("users.txt", "r") as f:
-        users = json.load(f)
-
+    users = getUsers()
     users[username]["posts"].append(postID)
 
     with open("users.txt", "w") as f:
@@ -95,6 +89,12 @@ def getPosts():
         posts[postID]["timePosted"] = datetime.datetime.strptime(posts[postID]["timePosted"], "%Y-%m-%d %H:%M:%S")
 
     return posts
+
+def getUsers():
+    with open("users.txt", "r") as f:
+        users = json.load(f)
+
+    return users
 
 def prettyFormatTime(cur, posted):
     time = cur - posted
@@ -118,8 +118,7 @@ def prettyFormatTime(cur, posted):
     return f"{time.seconds}s"
 
 def newUser(username, password):
-    with open("users.txt", "r") as f:
-        users = json.load(f)
+    users = getUsers()
 
     # Check for duplicates
     if username in users:
@@ -154,6 +153,15 @@ def newUser(username, password):
 
     return True
 
+def getWhoToFollowForUser(user):
+    users = getUsers()
+    users.pop(user["username"])
+    whotofollow = []
+    for i, username in enumerate(users):
+        if i == 10:
+            break
+        whotofollow.append(users[username])
+    return whotofollow
 
 @app.get("/favicon.ico")
 def favicon():
@@ -200,7 +208,8 @@ def home():
         if not user:
             return redirect("/login")
 
-        return render_template("home.html", user=user)
+        whotofollow = getWhoToFollowForUser(user)
+        return render_template("home.html", user=user, whotofollow=whotofollow)
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -301,7 +310,8 @@ def viewprofile():
         posts = getPosts()
         #comments = getComments()
         currentTime = datetime.datetime.now()
-        return render_template("viewprofile.html", user=user, otherUser=otherUser, posts=posts, currentTime=currentTime, prettyFormatTime=prettyFormatTime)
+        whotofollow = getWhoToFollowForUser(user)
+        return render_template("viewprofile.html", user=user, whotofollow=whotofollow, otherUser=otherUser, posts=posts, currentTime=currentTime, prettyFormatTime=prettyFormatTime)
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -312,7 +322,8 @@ def settings():
     try:
         username = session["username"]
         user = getUserFromUsername(username)
-        return render_template("settings.html", user=user)
+        whotofollow = getWhoToFollowForUser(user)
+        return render_template("settings.html", user=user, whotofollow=whotofollow)
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -330,7 +341,8 @@ def customize():
         if not user:
             return redirect("/login")
 
-        return render_template("customize.html", user=user)
+        whotofollow = getWhoToFollowForUser(user)
+        return render_template("customize.html", user=user, whotofollow=whotofollow)
     except Exception as e:
         logError(e)
         return f"Error {e}"
@@ -348,7 +360,8 @@ def search():
         if not user:
             return redirect("/login")
 
-        return render_template("sok.html", user=user)
+        whotofollow = getWhoToFollowForUser(user)
+        return render_template("sok.html", user=user, whotofollow=whotofollow)
     except Exception as e:
         logError(e)
         return f"Error {e}"

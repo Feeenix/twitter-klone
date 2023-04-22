@@ -23,5 +23,120 @@
             "font": "Inter",
             "font-size": "1em"
         }
+    },
+    "sadDingo7": {
+        "username": "sadDingo7",
+        "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+        "name": "Elon Musk 2.0",
+        "profileImage": "mypfp.png",
+        "bannerImage": "mybanner.png",
+        "bannerColor": "#808080",
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "pinnedPost": null,
+        "bio": "Nothing yet...",
+        "status": "Offline",
+        "location": "Mars",
+        "joined": "2023-04-22 22:21:44",
+        "settings": {
+            "darkMode": false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
+    },
+    "wakefulBagels8": {
+        "username": "wakefulBagels8",
+        "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+        "name": "Elon Musk 2.0",
+        "profileImage": "mypfp.png",
+        "bannerImage": "mybanner.png",
+        "bannerColor": "#808080",
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "pinnedPost": null,
+        "bio": "Nothing yet...",
+        "status": "Offline",
+        "location": "Mars",
+        "joined": "2023-04-22 22:21:44",
+        "settings": {
+            "darkMode": false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
+    },
+    "scornfulRuffs5": {
+        "username": "scornfulRuffs5",
+        "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+        "name": "Elon Musk 2.0",
+        "profileImage": "mypfp.png",
+        "bannerImage": "mybanner.png",
+        "bannerColor": "#808080",
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "pinnedPost": null,
+        "bio": "Nothing yet...",
+        "status": "Offline",
+        "location": "Mars",
+        "joined": "2023-04-22 22:21:44",
+        "settings": {
+            "darkMode": false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
+    },
+    "pleasedCoati9": {
+        "username": "pleasedCoati9",
+        "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+        "name": "Elon Musk 2.0",
+        "profileImage": "mypfp.png",
+        "bannerImage": "mybanner.png",
+        "bannerColor": "#808080",
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "pinnedPost": null,
+        "bio": "Nothing yet...",
+        "status": "Offline",
+        "location": "Mars",
+        "joined": "2023-04-22 22:21:44",
+        "settings": {
+            "darkMode": false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
+    },
+    "obsessedBasmati6": {
+        "username": "obsessedBasmati6",
+        "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+        "name": "Elon Musk 2.0",
+        "profileImage": "mypfp.png",
+        "bannerImage": "mybanner.png",
+        "bannerColor": "#808080",
+        "posts": [],
+        "followers": [],
+        "following": [],
+        "pinnedPost": null,
+        "bio": "Nothing yet...",
+        "status": "Offline",
+        "location": "Mars",
+        "joined": "2023-04-22 22:21:44",
+        "settings": {
+            "darkMode": false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
     }
 }

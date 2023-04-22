@@ -98,14 +98,14 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="tweet">
-                            <div class="profilbildekolonne">
-                                <img class="profilbilde"
-                                    src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                    alt="pfp" height="50" width="50">
+                        {% for postID in otherUser['posts'] %}
+                            <div class="tweet">
+                                <div class="profilbildekolonne">
+                                    <img class="profilbilde"
+                                        src="static/userpics/{{ otherUser['profileImage'] }}"
+                                        alt="pfp" height="50" width="50">
 
-                            </div>
-                            {% for postID in otherUser['posts'] %}
+                                </div>
                                 <div class="tweetkolonne">
                                     <div class="forfatterinfo">
                                         <div>{{ otherUser['name'] }}</div>
@@ -146,9 +146,8 @@
                                         </button>
                                     </div>
                                 </div>
-                            {% endfor %}
-
-                        </div>
+                            </div>
+                        {% endfor %}
                         <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
                             BARK
                             <!-- <img src="static/bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->

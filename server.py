@@ -48,7 +48,7 @@ def getUserFromUsername(username):
 def validateUserCredentials(username, password):
     users = getUsers()
     hashed_password = hashPassword(password)
-    return username in users and users["hashedPassword"] == hashed_password
+    return username in users and users[username]["hashedPassword"] == hashed_password
 
 def newPost(username, content):
     with open("posts.txt", "r") as f:

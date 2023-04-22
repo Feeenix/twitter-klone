@@ -2,12 +2,14 @@
     "NicoDatBoi": {
         "username": "NicoDatBoi",
         "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
-        "name": "Elon Musk 2.0",
+        "name": "Nicolai Bush",
         "profileImage": "mypfp.png",
         "bannerImage": "mybanner.png",
         "bannerColor": "#808080",
         "posts": [
-            "0"
+            "0",
+            "3",
+            "4"
         ],
         "followers": [],
         "following": [],
@@ -133,6 +135,31 @@
         "joined": "2023-04-22 22:21:44",
         "settings": {
             "darkMode": false,
+            "background-color": "#ffffff",
+            "text-color": "#000000",
+            "font": "Inter",
+            "font-size": "1em"
+        }
+    },
+    "ooga": {
+        "username": "ooga",
+        "hashedPassword": "f6e0a1e2ac41945a9aa7ff8a8aaa0cebc12a3bcc981a929ad5cf810a090e11ae",
+        "name": "Elon Musk 2.0",
+        "profileImage": "mypfp.png",
+        "bannerImage": "mybanner.png",
+        "bannerColor": "#808080",
+        "posts": [
+            "1"
+        ],
+        "followers": [],
+        "following": [],
+        "pinnedPost": null,
+        "bio": "Kul bio",
+        "status": "Offline",
+        "location": "Mars",
+        "joined": "2023-04-22 23:13:13",
+        "settings": {
+            "darkMode": true,
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",

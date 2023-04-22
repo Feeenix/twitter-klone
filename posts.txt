@@ -1,10 +1,70 @@
 {
-    "count": 1,
+    "count": 5,
     "posts": {
         "0": {
             "username": "NicoDatBoi",
             "content": "This is a cool tweet",
             "timePosted": "2023-04-22 22:21:03",
+            "comments": [],
+            "retweets": 10,
+            "likes": 20,
+            "views": 10
+        },
+        "1": {
+            "username": "ooga",
+            "content": "This is a cool tweet",
+            "timePosted": "2023-04-22 23:13:13",
+            "comments": [],
+            "retweets": 10,
+            "likes": 20,
+            "views": 10
+        },
+        "2": {
+            "username": {
+                "username": "NicoDatBoi",
+                "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+                "name": "Nicolai Bush",
+                "profileImage": "mypfp.png",
+                "bannerImage": "mybanner.png",
+                "bannerColor": "#808080",
+                "posts": [
+                    "0"
+                ],
+                "followers": [],
+                "following": [],
+                "pinnedPost": null,
+                "bio": "Nothing yet...",
+                "status": "Offline",
+                "location": "Mars",
+                "joined": "2023-04-22 22:21:03",
+                "settings": {
+                    "darkMode": true,
+                    "background-color": "#ffffff",
+                    "text-color": "#000000",
+                    "font": "Inter",
+                    "font-size": "1em"
+                }
+            },
+            "content": "Shiish very cool stuff",
+            "timePosted": "2023-04-22 23:15:18",
+            "comments": [],
+            "retweets": 10,
+            "likes": 20,
+            "views": 10
+        },
+        "3": {
+            "username": "NicoDatBoi",
+            "content": "Shiish very cool stuff",
+            "timePosted": "2023-04-22 23:15:36",
+            "comments": [],
+            "retweets": 10,
+            "likes": 20,
+            "views": 10
+        },
+        "4": {
+            "username": "NicoDatBoi",
+            "content": "More cool",
+            "timePosted": "2023-04-22 23:25:52",
             "comments": [],
             "retweets": 10,
             "likes": 20,

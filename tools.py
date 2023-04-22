@@ -8,7 +8,7 @@ import argparse
 import server
 
 
-EMPTY_USERS = []
+EMPTY_USERS = {}
 EMPTY_POSTS = {"count": 0, "posts": {}}
 
 

@@ -40,10 +40,9 @@ def hashPassword(password):
 def getUserFromUsername(username):
     with open("users.txt", "r") as f:
         users = json.load(f)
-    
-    for u in users:
-        if u["username"] == username:
-            return u
+
+    if username in users:
+        return users[username]
 
     return None
 
@@ -53,15 +52,21 @@ def validateUserCredentials(username, password):
         users = json.load(f)
 
     hashed_password = hashPassword(password)
-    for user in users:
-        if user["username"] == username and user["hashedPassword"] == hashed_password:
-            return True
+    return username in users and users["hashedPassword"] == hashed_password
 
-    return False
-
-def newPost(post):
+def newPost(username, content):
     with open("posts.txt", "r") as f:
         posts = json.load(f)
+
+    post = {
+        "username": username,
+        "content": content,
+        "timePosted": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "comments": [],
+        "retweets": 10,
+        "likes": 20,
+        "views": 10,
+    }
 
     postID = str(posts["count"])
     posts["posts"][postID] = post
@@ -69,7 +74,15 @@ def newPost(post):
 
     with open("posts.txt", "w") as f:
         json.dump(posts, f, default=str, indent=4)
-    
+
+    with open("users.txt", "r") as f:
+        users = json.load(f)
+
+    users[username]["posts"].append(postID)
+
+    with open("users.txt", "w") as f:
+        json.dump(users, f, indent=4)
+
     return postID
 
 def getPosts():
@@ -103,6 +116,43 @@ def prettyFormatTime(cur, posted):
     # Just now?
 
     return f"{time.seconds}s"
+
+def newUser(username, password):
+    with open("users.txt", "r") as f:
+        users = json.load(f)
+
+    # Check for duplicates
+    if username in users:
+        return False
+
+    hashed_password = hashPassword(password)
+    new_user = {"username": username,
+                "hashedPassword": hashed_password,
+                "name": "Elon Musk 2.0",
+                "profileImage": "mypfp.png",
+                "bannerImage": "mybanner.png",
+                "bannerColor": "#808080",
+                "posts": [],
+                "followers": [],
+                "following": [],
+                "pinnedPost": None,
+                "bio": "Nothing yet...",
+                "status": "Offline",
+                "location": "Mars",
+                "joined": datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"),
+                "settings": {
+                    "darkMode": False,
+                    "background-color": "#ffffff",
+                    "text-color": "#000000",
+                    "font": "Inter",
+                    "font-size": "1em",
+                }}
+
+    users[username] = new_user
+    with open("users.txt", "w") as f:
+        json.dump(users, f, indent=4)
+
+    return True
 
 
 @app.get("/favicon.ico")
@@ -208,15 +258,6 @@ def registerPOST():
         if not username or not password:
             return render_template("registrere.html", error="Error in form")
 
-        with open("users.txt", "r") as f:
-            users = json.load(f)
-
-        # Check for duplicates
-        for user in users:
-            if username == user["username"]:
-                logInfo("Username already exists")
-                return render_template("registrere.html", error="Username already exists")
-
         #posts = {
         #   "username": "elonmusk",
         #   "content": "I am a tweet",
@@ -228,43 +269,12 @@ def registerPOST():
 
         # comments follow same structure as posts
 
-        post = {
-            "username": username,
-            "content": "This is a cool tweet",
-            "timePosted": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "comments": [],
-            "retweets": 10,
-            "likes": 20,
-            "views": 10,
-        }
-        postID = newPost(post)
+        success = newUser(username, password)
+        if not success:
+            logInfo("Username already exists")
+            return render_template("registrere.html", error="Username already exists")
 
-        hashed_password = hashPassword(password)
-        new_user = {"username": username,
-                    "hashedPassword": hashed_password,
-                    "name": "Elon Musk 2.0",
-                    "profileImage": "mypfp.png",
-                    "bannerImage": "mybanner.png",
-                    "bannerColor": "#808080",
-                    "posts": [postID],
-                    "followers": [],
-                    "following": [],
-                    "pinnedPost": None,
-                    "bio": "Nothing yet...",
-                    "status": "Offline",
-                    "location": "Mars",
-                    "joined": datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"),
-                    "settings": {
-                        "darkMode": False,
-                        "background-color": "#ffffff",
-                        "text-color": "#000000",
-                        "font": "Inter",
-                        "font-size": "1em",
-                    }}
-
-        users.append(new_user)
-        with open("users.txt", "w") as f:
-            json.dump(users, f, indent=4)
+        newPost(username, "This is a cool tweet")
 
         logInfo(f"Successfully registered new user '{username}'")
 

@@ -108,41 +108,54 @@
                 <img src="static/bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
             </a>
             <div id="menyknapper">
-                <a href="/home" class="boldText hiddenButton genericButton" id="menyhjem">
-                    {% if page == "home" %}
+                {% if page == "home" %}
+                    <a href="/home" class="boldText hiddenButton genericButton" id="menyhjem">
                         <img src="static/bilder/home.png" height="30" alt="">
-                    {% else %}
+                        <div class="buttonText">Hjem</div>
+                    </a>
+                {% else %}
+                    <a href="/home" class="hiddenButton genericButton" id="menyhjem">
                         <img src="static/bilder/home_hul.png" height="30" alt="">
-                    {% endif %}
-                    <div class="buttonText">Hjem</div>
-                </a>
+                        <div class="buttonText">Hjem</div>
+                    </a>
+                {% endif %}
 
-                <a href="sok?query=" class="largeWidth hiddenButton genericButton" id="menysok">
-                    {% if page == "search" %}
+                {% if page == "search" %}
+                    <a href="sok?query=" class="boldText largeWidth hiddenButton genericButton" id="menysok">
                         <img src="static/bilder/search.png" height="30" alt="">
-                    {% else %}
+                        <div class="buttonText">Søk</div>
+                    </a>
+                {% else %}
+                    <a href="sok?query=" class="largeWidth hiddenButton genericButton" id="menysok">
                         <img src="static/bilder/search_hul.png" height="30" alt="">
-                    {% endif %}
-                    <div class="buttonText">Søk</div>
-                </a>
+                        <div class="buttonText">Søk</div>
+                    </a>
+                {% endif %}
 
-                <a href="/viewprofile" class="hiddenButton genericButton"
-                    id="menyprofil">
-                    {% if page == "profile" %}
+                {% if page == "profile" %}
+                    <a href="/viewprofile" class="boldText hiddenButton genericButton" id="menyprofil">
                         <img src="static/bilder/profil.png" height="30" alt="">
-                    {% else %}
+                        <div class="buttonText">Profil</div>
+                    </a>
+                {% else %}
+                    <a href="/viewprofile" class="hiddenButton genericButton" id="menyprofil">
                         <img src="static/bilder/profil_hul.png" height="30" alt="">
-                    {% endif %}
-                    <div class="buttonText">Profil</div>
-                </a>
-                <a href="/settings" class="hiddenButton genericButton" id="menyinnstillinger">
-                    {% if page == "settings" %}
+                        <div class="buttonText">Profil</div>
+                    </a>
+                {% endif %}
+
+
+                {% if page == "settings" %}
+                    <a href="/settings" class="boldText hiddenButton genericButton" id="menyinnstillinger">
                         <img src="static/bilder/settings.png" height="30" alt="">
-                    {% else %}
+                        <div class="buttonText">Innstillinger</div>
+                    </a>
+                {% else %}
+                    <a href="/settings" class="hiddenButton genericButton" id="menyinnstillinger">
                         <img src="static/bilder/settings_hul.png" height="30" alt="">
-                    {% endif %}
-                    <div class="buttonText">Innstillinger</div>
-                </a>
+                        <div class="buttonText">Innstillinger</div>
+                    </a>
+                {% endif %}
 
             </div>
 
@@ -152,7 +165,7 @@
 
                 <div>
                     <img class="profilbilde"
-                        src="static/userpics/{{ user['pfp'] }}"
+                        src="static/userpics/{{ user['profileImage'] }}"
                         alt="pfp" height="50" width="50">
                     <div class="mediumWidth profilnavn">
                         <div class="mediumWidth profilNavnNavn">{{ user['name'] }}</div>

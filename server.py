@@ -236,7 +236,7 @@ def registerPOST():
             "retweets": 10,
             "likes": 20,
             "views": 10,
-        };
+        }
         postID = newPost(post)
 
         hashed_password = hashPassword(password)

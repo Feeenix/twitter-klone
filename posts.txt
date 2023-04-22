@@ -1,19 +1,10 @@
 {
-    "count": 2,
+    "count": 1,
     "posts": {
         "0": {
             "username": "NicoDatBoi",
             "content": "This is a cool tweet",
-            "timePosted": "2023-04-22 12:44:37",
-            "comments": [],
-            "retweets": 10,
-            "likes": 20,
-            "views": 10
-        },
-        "1": {
-            "username": "NicoDatBoi",
-            "content": "This is a cool tweet",
-            "timePosted": "2023-04-22 12:44:57",
+            "timePosted": "2023-04-22 20:28:01",
             "comments": [],
             "retweets": 10,
             "likes": 20,

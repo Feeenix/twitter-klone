@@ -34,9 +34,17 @@ app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Lax",
-    SECRET_KEY="83012c07d4bc053fc8028c1d14fc065b65c5feff90e2b44f"
+    SECRET_KEY="83012c07d4bc053fc8028c1d14fc065b65c5feff90e2b44f",
+    UPLOAD_FOLDER=os.path.join(os.getcwd(), "static/userpics")
 )
 Session(app)
+
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def hashPassword(password):
@@ -408,6 +416,90 @@ def followPOST():
 
         users[username]["following"].append(usernameToFollow)
         users[usernameToFollow]["followers"].append(username)
+
+        saveUsers(users)
+
+        return "a"
+
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
+
+@app.post("/customizeStep")
+def customizeStepPOST():
+    try:
+        first = request.form.get("first")
+        third = request.form.get("third")
+        stage = request.form.get("stage")
+        logInfo(f"Stage: {stage}\nForm: {request.form}")
+        #if not first or not second or not third or not stage:
+        #    logError("Error in post in customizeStepPOST")
+        #    return "a"
+
+        username = session["username"]
+
+        users = getUsers()
+        if username not in users:
+            return redirect("/login")
+
+        # Name
+        if stage == "0":
+            users[username]["name"] = first
+
+        # Profile picture
+        elif stage == "1":
+            logInfo(request.files)
+            if "second" not in request.files:
+                logError("No file part")
+                return "a"
+
+            file = request.files["second"]
+            if file.filename == "":
+                logError("No file selected")
+                return "a"
+
+            if not file or not allowed_file(file.filename):
+                logError("File not allowed")
+
+            fn, extension = os.path.splitext(file.filename)
+            filename = f"{username}_profileImage{extension}"
+            path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(path)
+            users[username]["profileImage"] = filename
+
+        # Bio
+        elif stage == "2":
+            users[username]["bio"] = third
+
+        # Banner
+        elif stage == "3":
+            logInfo(request.files)
+            if "second" not in request.files:
+                logError("No file part")
+                return "a"
+
+            file = request.files["second"]
+            if file.filename == "":
+                logError("No file selected")
+                return "a"
+
+            if not file or not allowed_file(file.filename):
+                logError("File not allowed")
+
+            fn, extension = os.path.splitext(file.filename)
+            filename = f"{username}_bannerImage{extension}"
+            path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(path)
+            users[username]["bannerImage"] = filename
+
+        # Location
+        elif stage == "4":
+            users[username]["location"] = first
+
+        else:
+            logError(f"Unknown stage {stage} in customizeStepPOST")
+            return "a"
 
         saveUsers(users)
 

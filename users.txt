@@ -2,21 +2,20 @@
     "nicodatboi": {
         "username": "nicodatboi",
         "hashedPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
-        "name": "Nicolai Buch",
-        "profileImage": "mypfp.png",
-        "bannerImage": "mybanner.png",
+        "name": "Nico",
+        "profileImage": "nicodatboi_profileImage.png",
+        "bannerImage": "nicodatboi_bannerImage.png",
         "bannerColor": "#808080",
         "posts": [
             "0",
             "1"
         ],
         "followers": [],
-        "following": [
-        ],
+        "following": [],
         "pinnedPost": null,
-        "bio": "Nothing yet...",
+        "bio": "My bio",
         "status": "Offline",
-        "location": "Mars",
+        "location": "Norway",
         "joined": "2023-04-23 11:27:12",
         "settings": {
             "darkMode": true,
@@ -34,9 +33,7 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [
-
-        ],
+        "followers": [],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",
@@ -59,9 +56,7 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [
-
-        ],
+        "followers": [],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",
@@ -84,8 +79,7 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [
-        ],
+        "followers": [],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",
@@ -108,9 +102,7 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [
-
-        ],
+        "followers": [],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",
@@ -133,8 +125,7 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [
-        ],
+        "followers": [],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",

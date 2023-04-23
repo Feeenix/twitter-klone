@@ -45,19 +45,22 @@
                     <div id="feed">
                         <div id="setupProfile">
                             <div class="settingsheader" value="0">What do you want to be called?</div>
-                            <div class="inputfield">
+                            <form onsubmit="return formSubmit();" id="customizeForm" action="/customizeStep" method="POST" target="invisibleIframe" enctype="multipart/form-data">
+                                <div class="inputfield">
 
-                                <input style="display: block;" type="text" class="inputText"
-                                    placeholder="Håkon lærerson...">
-                                <input style="display: none;" type="file" accept="image/*" class="inputFile">
-                                <textarea style="display: none;" class="inputTextarea"
-                                    placeholder="Write your bio..."></textarea>
-                            </div>
-                            <div id="setupButtons">
-                                <button class="vanligKnapp genericButton">Skip</button>
-                                <button class="vanligKnapp genericButton">Next</button>
+                                    <input name="first" style="display: block;" type="text" class="inputText"
+                                        placeholder="Håkon lærerson...">
+                                    <input name="second" style="display: none;" type="file" accept="image/*" class="inputFile">
+                                    <textarea name="third" style="display: none;" class="inputTextarea"
+                                        placeholder="Write your bio..."></textarea>
+                                    <input id="stageInput" name="stage" type="hidden">
+                                </div>
+                                <div id="setupButtons">
+                                    <button onclick="nextPrompt(skip=true);" type="button" class="vanligKnapp genericButton">Skip</button>
+                                    <button class="vanligKnapp genericButton">Next</button>
 
-                            </div>
+                                </div>
+                            </form>
                         </div>
 
                     </div>
@@ -72,6 +75,7 @@
 
 
 
+<iframe id="invisibleIframe" name="invisibleIframe" style="display: none;"></iframe>
 
 </body>
 
@@ -79,15 +83,10 @@
 <script src="static/javascript/leftSidebar.js"></script>
 <script>
 
-    let knapper = document.querySelectorAll("#setupButtons>*")
+    let stageInputEl = document.querySelector("#stageInput");
+    stageInputEl.value = "0";
 
-    for (let i = 0; i < knapper.length; i++) {
-        knapper[i].addEventListener("click", function () {
-            nextPrompt(skip=(i!=1));
-        })
-    }
-
-    async function nextPrompt(skip = false) {
+    function nextPrompt(skip = false) {
         let setupInputs = document.querySelectorAll(".inputfield>*"); // array med 3 inputs
         let setupHeader = document.querySelector(".settingsheader");
 
@@ -98,31 +97,13 @@
         let listeOverNokler = ["displayName", "profileImage", "bio", "bannerImage", "location"];
         let listeOverSprml = ["What do you want to be called?", "What do you want your profile picture to be?", "What do you want your bio to be?", "What do you want your profile banner to be?", "What is your location?"]
 
-        let nokkel = listeOverNokler[stage];
-        let type = listeOverType[stage];
-
-        if (!skip) {
-            // lagre dataen
-            let data = ""
-
-            if (type != "file") {
-                data = setupInputs[listeOverIndexer[stage]].value;
-            } else {
-                let File = setupInputs[listeOverIndexer[stage]].files[0];
-                data = await readfile(File);
-            }
-
-            console.log(type, data)
-            if (data.length > 0) {
-                let objektTing = {[nokkel]:data};
-            }
-        }
-
         setupInputs[listeOverIndexer[stage]].value = "";
 
         setupInputs[listeOverIndexer[stage]].style.display = "none";
 
         stage++;
+        let stageInputEl = document.querySelector("#stageInput");
+        stageInputEl.value = stage;
 
         if (stage > 4) {
             // gå til home
@@ -151,6 +132,20 @@
         4: What is your location?
         */
 
+    }
+
+    function formSubmit() {
+        var callback = function() {
+            nextPrompt(skip=false);
+            frame.onload = null;
+        };
+
+        let frame = document.querySelector("#invisibleIframe");
+        let form = document.querySelector("#customizeForm");
+
+        frame.onload = callback;
+        //form.submit();
+        return true;
     }
 
 </script>

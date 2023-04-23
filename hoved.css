@@ -744,15 +744,38 @@ body {
     margin-bottom: 30px;
     margin-top: 10px;
 }
-#settingsinput {
+/* #settingsinput {
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: center;
     margin-bottom: 10px;
+} */
+
+.setupInputFile {
+    padding: 10px;
+    border: 2px solid #aaaaaa80;
+    border-radius: 9999px;
+    background-color: #baaaff30;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
+
+    
+
+    
 }
 
-#settingsinput>*:nth-child(1) {
-    margin-right: 10px;
-    font-weight: 700;
+.inputTextarea{
+    padding: 10px;
+    border: 2px solid #aaaaaa80;
+    border-radius: 5px;
+    
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    resize: vertical;
+    
 }

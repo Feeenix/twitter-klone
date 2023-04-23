@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="hoved.css">
 </head>
 <style>
-    .inputfield>input {
+    .setupInputText {
 
         padding: 12px 20px;
         margin: 8px 0;
         box-sizing: border-box;
-        border: 2px solid #ccc;
+        border: 2px solid #aaaaaa80;
         border-radius: 20px;
         outline: none;
 
@@ -49,8 +49,8 @@
                         <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
                     </a>
                     <div id="menyknapper">
-                        <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
-                            <img src="bilder/home.png" height="30" alt="">
+                        <a href="home.html" class="hiddenButton genericButton" id="menyhjem">
+                            <img src="bilder/home_hul.png" height="30" alt="">
                             <div class="buttonText">Hjem</div>
                         </a>
 
@@ -82,10 +82,10 @@
                             <div class="settingsheader" value="0">What do you want to be called?</div>
                             <div class="inputfield">
 
-                                <input style="display: block;" type="text" class="setupInput "
+                                <input style="display: block;" type="text" class="setupInputText"
                                     placeholder="Håkon lærerson...">
-                                <input style="display: block;" type="file" class="setupInput">
-                                <textarea style="display: block;" class="setupInput"
+                                <input style="display: none;" type="file" accept="image/*" class="setupInputFile">
+                                <textarea style="display: none;" class="inputTextarea"
                                     placeholder="Write your bio..."></textarea>
                             </div>
                             <div id="setupButtons">
@@ -138,7 +138,7 @@
     }
 
     async function nextPrompt(skip = false) {
-        let setupInputs = document.querySelectorAll(".setupInput"); // array med 3 inputs
+        let setupInputs = document.querySelectorAll(".inputfield>*"); // array med 3 inputs
         let setupHeader = document.querySelector(".settingsheader");
 
         let stage = Number(setupHeader.getAttribute("value"));

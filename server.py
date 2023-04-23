@@ -11,6 +11,8 @@ import os
 import json
 import hashlib
 
+from socket import gethostname
+
 import datetime
 
 def logError(s):
@@ -369,7 +371,8 @@ def search():
 
 
 if __name__ == '__main__':
-    context = ("server.crt", "server.key")
-    #app.run(host="127.0.0.1", port=8080, ssl_context=context, debug=True)
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    if 'liveconsole' not in gethostname():
+        context = ("server.crt", "server.key")
+        #app.run(host="127.0.0.1", port=8080, ssl_context=context, debug=True)
+        app.run(host="127.0.0.1", port=8080, debug=True)
 

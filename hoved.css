@@ -641,8 +641,9 @@ body {
     position: absolute;
     top: -75px;
     border-radius: 9999px;
-    /* border: white solid 5px; */
-    box-shadow: 0px 0px 10px 10px var(--globalbg);
+    border: #aaaaaa20 solid 5px;
+    /* box-shadow: 0px 0px 10px 10px var(--globalbg); */
+    object-fit: fill;
 }
 
 #viewprofileTopp {

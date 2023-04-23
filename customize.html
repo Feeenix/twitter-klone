@@ -167,7 +167,6 @@
             console.log(type, data)
             if (data.length > 0) {
                 let objektTing = {[nokkel]:data}
-                // objektTing[nokkel] = data;
                 leggTilDataPaaBruker(loggetInnBruker, objektTing)
             }
         }
@@ -184,7 +183,7 @@
 
         if (stage > 4) {
             // gå til home
-            window.location.href = "home.html";
+            window.location.href = "viewprofile.html?brukernavn=" + loggetInnBruker;
         } else {
             // gå til neste prompt
             setupHeader.setAttribute("value", stage);

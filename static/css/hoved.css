@@ -5,23 +5,24 @@
 
 body {
 
+    /* darkmode */
+
+    /* --globalbg: #282c34;
+    --globalbg2: #282c34cd;
+    --globalfg: #ffffff; */
+
     /* lightmode */
+
     --globalbg: #ffffff;
     --globalbg2: #ffffffcd;
     --globalfg: #404040;
 
+    /* font-size: 16px; */
 
     color: var(--globalfg);
     --overskriftfarge: var(--globalbg2);
     background-color: var(--globalbg);
     margin: 0px;
-}
-
-.darkMode {
-    /* darkmode */
-    --globalbg: #282c34;
-    --globalbg2: #282c34cd;
-    --globalfg: #ffffff;
 }
 
 
@@ -51,6 +52,7 @@ body {
     border-radius: 10px;
     border-color: #9279ff;
     color: #404040;
+
 }
 
 .vanligKnapp:hover {
@@ -314,6 +316,7 @@ body {
 }
 
 /* .whotofollowperson a{
+
 } */
 
 #logo.hiddenButton {
@@ -361,7 +364,7 @@ body {
 }
 
 .tweet {
-    /*margin-bottom: 1000px;*/
+    margin-bottom: 1000px;
 }
 
 #sok {
@@ -391,7 +394,6 @@ body {
 
 #sok>input {
     border: none;
-
     height: 100%;
     font-size: 1em;
     max-width: 200px;
@@ -569,19 +571,17 @@ body {
 
     .profil>button {
         padding: 0px;
-
     }
 
     .profilknapp>div>img {
         margin-right: 0;
-
     }
 
     #menyknapper>*>img {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *) {
+    .genericButton:not(#profilePfpShare *,#setupProfile * ) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -603,6 +603,8 @@ body {
     .largeWidth {
         display: none;
     }
+
+
 
 }
 
@@ -648,15 +650,18 @@ body {
     justify-content: space-between;
     min-height: 75px;
 }
+
 #profilePfpShare>div {
     position: relative;
 }
+
 #profilePfpShare>div>img {
     position: absolute;
     top: -75px;
     border-radius: 9999px;
-    /* border: white solid 5px; */
-    box-shadow: 0px 0px 10px 10px var(--globalbg);
+    border: #aaaaaa20 solid 5px;
+    /* box-shadow: 0px 0px 10px 10px var(--globalbg); */
+    object-fit: fill;
 }
 
 #viewprofileTopp {
@@ -719,3 +724,182 @@ body {
     margin-bottom: 5px;
 }
 
+#profileLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+#setupButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#setupButtons>* {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.settingsheader {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    margin-top: 40px;
+}
+
+#setupProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+#setupProfile>*:nth-child(2) {
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.inputFile {
+    padding: 10px;
+    border: 2px solid #aaaaaa80;
+    border-radius: 9999px;
+    /* background-color: #baaaff30; */
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.inputTextarea{
+    padding: 10px;
+    border: 2px solid #aaaaaa80;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    resize: vertical;
+}
+.inputText {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #aaaaaa80;
+    border-radius: 20px;
+    outline: none;
+
+}
+
+.settingsTabKeys {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+
+}
+
+
+.settingsTabKeys input, .settingsTabKeys textarea {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    width: 300px;
+    margin-left: 25px;
+    margin-right: 20px;
+}
+.settingsTabKeys .settingssTitles {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 1.25em;
+    margin-left: 20px;
+    margin-right: 20px;}
+
+.settingsTabKeys .inputfield {
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
+}
+
+.horisontalFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.radioElement {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: left;
+    margin: 5px;
+    margin-bottom: 10px;
+}
+.radioElement>input{
+    /* width: 10px;
+    height: 10px; */
+    width: 100%;
+    height: 2em;
+    margin: 5px;
+    vertical-align: baseline;
+}
+.radioElement>*{
+    margin: 5px;
+}
+.radioElement label {
+margin-top: 7.1px;
+}
+
+.grayBorder {
+    padding: 10px;
+    border: 2px solid #aaaaaa80;
+    border-radius: 9999px;
+}
+.colorThemes>*:nth-child(1){
+    background-color: white;
+    color: #404040;
+    margin-left: 25px;
+}
+.colorThemes>*:nth-child(2){
+    background-color: #282c34;
+    color: white;
+}
+
+.colorThemes>*:nth-child(3) {
+    background: linear-gradient(
+        100deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 154, 0, 1) 15%,
+        rgba(208, 222, 33, 1) 28%,
+        rgba(79, 220, 74, 1) 39%,
+        rgba(63, 218, 216, 1) 50%,
+        rgba(47, 201, 226, 1) 55%,
+        rgba(28, 127, 238, 1) 60%,
+        rgba(95, 21, 242, 1) 66%,
+        rgba(186, 12, 248, 1) 72%,
+        rgba(251, 7, 217, 1) 85%,
+        rgba(255, 0, 0, 1) 100%
+    );
+}
+
+
+.customColors{
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    width: fit-content;
+    border-radius: 15px;
+    margin-top: 30px;
+
+}
+.customColors label {
+    font-weight: 400;
+}
+.customColors input {
+
+    width: 50px;
+    height: 30px;
+    margin: 5px;
+}

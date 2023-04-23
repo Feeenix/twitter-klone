@@ -34,97 +34,157 @@
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
                     <div id="overskrift">
-                        <div id="overskrifttekst">Home</div>
+                        <div id="overskrifttekst">Settings</div>
                         <div id="overskrifttabs">
-                            <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
+                            <button id="settingsProfile" class="overskriftknapp hiddenButton">
                                 <div>
-                                    Following
+                                    Profile
                                     <div class="line"></div>
                                 </div>
                             </button>
-                            <button id="overskriftall" class="overskriftknapp hiddenButton">
+                            <button id="settingsAppearance" class="overskriftknapp hiddenButton">
                                 <div>
-                                    All
+                                    Appearance
+                                    <div class="line"></div>
+                                </div>
+                            </button>
+                            <button id="settingsOther" class="overskriftknapp hiddenButton">
+                                <div>
+                                    Other
                                     <div class="line"></div>
                                 </div>
                             </button>
                         </div>
                     </div>
                     <div id="feed">
+                        <div id="settingsEditProfile" class="settingsTabKeys" style="display: block;">
 
-
-
-
-
-
-
-
-
-
-                        <div class="tweet">
-                            <div class="profilbildekolonne">
-                                <img class="profilbilde"
-                                    src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                    alt="pfp" height="50" width="50">
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditProfileDisplayName">Name</label>
+                                <input type="text" id="settingsEditProfileDisplayName"
+                                    name="settingsEditProfileDisplayName" class="inputText"
+                                    placeholder="Micahale jacksonscript">
                             </div>
-                            <div class="tweetkolonne">
-                                <div class="forfatterinfo">
-                                    <div>Name Lastname</div>
-                                    <div>@elonmusk</div>
-                                    <div>14h</div>
-                                </div>
-                                <div class="tweettekst">
-                                    I am a tweet
-                                </div>
-                                <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
-
-                                <div class="tweetknapper">
-
-                                    <button title="trykk for å legge til en kommentar"
-                                        class="tweetknappkommentar tweetknapp genericButton hiddenButton">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/comment_hul.png" height="20" alt="Kommentarer">
-                                    </button>
-
-                                    <button title="trykk for å retweete"
-                                        class="tweetknappretweet tweetknapp genericButton hiddenButton">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/retweet_hul.png" height="20" alt="Retweets">
-
-                                    </button>
-
-                                    <button title="trykk for å like"
-                                        class="tweetknapplikes tweetknapp genericButton hiddenButton">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/heart_hul.png" height="20" alt="Likes">
-
-                                    </button>
-
-                                    <button title="Views" class="tweetknappviews tweetknapp genericButton hidden">
-                                        <span title="10000">10.0k</span>
-                                        <img src="static/bilder/eye_hul.png" height="30" alt="Views">
-
-                                    </button>
-                                </div>
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditProfileBanner">Profile banner</label>
+                                <input type="file" id="settingsEditProfileBanner" name="settingsEditProfileBanner"
+                                    class="inputFile">
                             </div>
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditProfilePicture">Profile picture</label>
+                                <input type="file" id="settingsEditProfilePicture" name="settingsEditProfilePicture"
+                                    class="inputFile">
+                            </div>
+
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditProfileBio">Bio</label>
+                                <textarea id="settingsEditBio" name="settingsEditProfilePicture" class="inputTextarea"
+                                    placeholder="Rewrite your bio..."></textarea>
+                            </div>
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditProfileLocation">Location</label>
+                                <input type="text" id="settingsEditProfileLocation" name="settingsEditProfileLocation"
+                                    class="inputText" placeholder="Mars">
+                            </div>
+
+
                         </div>
+                        <div id="settingsEditAppearance" class="settingsTabKeys" style="display: block;">
+                            <div class="inputfield">
+                                <div class="settingssTitles">Color theme</div>
+
+                                <div class="horisontalFlex colorThemes">
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeLight">Light</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeLight"
+                                            class="settingsEditAppearanceColorThemeType" checked>
+                                    </div>
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeDark">Dark</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeDark"
+                                            class="settingsEditAppearanceColorThemeType">
+                                    </div>
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeCustom"
+                                            class="settingsEditAppearanceColorThemeType">
+                                    </div>
+                                </div>
+
+                                <div class="customColors grayBorder">
+                                    <div class="horisontalFlex">
+                                        <label for="customColorBackground">Background Color:</label>
+                                        <input type="color" name="" id="customColorBackground">
+                                    </div>
+                                    <div class="horistontalFlex">
+                                        <label for="customColorText">Text Color:</label>
+                                        <input type="color" name="" id="customColorText">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div id="settingsEditOther" class="settingsTabKeys" style="display: none;">
 
 
-
-
-
-
-                        <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
-                            BARK
-                            <!-- <img src="static/bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
-                        </a>
-
-
+                        </div>
                     </div>
 
                 </div>
 
-                {{ rightSidebar(whotofollow) }}
+                <div id="sidebar">
+
+                    <div class="whotofollow">
+                        <div class="whotofollowheader">Preview</div>
+                        <div class="whotofollowbody">
+                            <div class="profileDisplay">
+                                <div id="profilebanner">
+                                    <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                        alt="profilebanner" id="profilebannerimg">
+
+                                </div>
+
+                                <div id="profilePfpShare">
+                                    <div>
+                                        <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                            alt="pfp" id="overskriftPfp" width="150" height="150">
+                                    </div>
+                                    <button class="genericButton vanligKnapp">Follow</button>
+                                </div>
+                                <div id="profileTextBody">
+
+                                    <h3 id="profileDisplayName">Elon Musk</h3>
+                                    <div id="profileBrukernavn">@elonmusk</div>
+                                    <div id="profileBio">i am a spaceX engineer bla bla bal...</div>
+
+                                    <div id="profileLocation">
+                                        <img id="profileLocationIcon" src="" alt="map marker icon">
+                                        <div id="profileLocationName">MArs</div>
+                                    </div>
+
+                                    <div id="profileFollowingFollowers">
+                                        <div id="profileFollowing">
+                                            <div>300</div>
+                                            <div>Following</div>
+                                        </div>
+                                        <div id="profileFollowers">
+                                            <div>300</div>
+                                            <div>Followers</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -138,8 +198,32 @@
 </body>
 
 <script src="static/javascript/lib.js"></script>
-<script src="static/javascript/redirectHvisLoggetUt.js"></script>
 <script src="static/javascript/leftSidebar.js"></script>
-<script src="static/javascript/rightSidebar.js"></script>
+<script>
+
+    function selectRadioIfClicked(e) {
+        let id = ""
+        if (e.target.tagName != "DIV") {
+            e.target.parentElement.children[1].checked = true;
+            id = e.target.parentElement.children[1].id;
+        } else {
+            id = e.target.children[1].id;
+            e.target.children[1].checked = true;
+        }
+
+        if (id == "settingsEditAppearanceColorThemeCustom") {
+            document.querySelector(".customColors").style.display = "flex";
+        } else {
+            document.querySelector(".customColors").style.display = "none";
+        }
+
+    }
+    let colorThemeButtons = document.querySelectorAll(".radioElement");
+    for (let i = 0; i < colorThemeButtons.length; i++) {
+        colorThemeButtons[i].addEventListener("click", selectRadioIfClicked);
+    }
+
+
+</script>
 
 </html>

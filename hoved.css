@@ -713,3 +713,42 @@ body {
     align-items: center;
     justify-content: left;
 }
+
+#setupButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#setupButtons>* {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.settingsheader {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    margin-top: 40px;
+}
+
+#setupProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+#setupProfile>*:nth-child(2) {
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+#settingsinput {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 10px;
+}

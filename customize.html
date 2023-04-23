@@ -8,7 +8,21 @@
     <link rel="stylesheet" href="hoved.css">
 </head>
 <style>
+ .inputfield>input {
+        
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 20px;
+        outline: none;
 
+    }
+    .inputfield {
+        display: flex;
+        width: 300px;
+        justify-content: center;
+    }    
 
 </style>
 
@@ -60,13 +74,16 @@
 
                     </div>
                     <div id="feed">
-                        <div id="settingsprofile">
-                            <div class="settingsheader">Whats ur name</div>
-                            <div class="settingsbodyinput">
-                                <input type="text" name="" id="">
+                        <div id="setupProfile">
+                            <div class="settingsheader">What do you want to be called?</div>
+                            <div class="inputfield">
+                                
+                                <input type="text" id="setupDisplayName" placeholder="Håkon lærerson...">
                             </div>
-                            <div id="buttons">
-                                <button class="genericButton">Next</button>
+                            <div id="setupButtons">
+                                <button class="vanligKnapp genericButton">Skip</button>
+                                <button class="vanligKnapp genericButton">Next</button>
+                                
                             </div>
                         </div>
 

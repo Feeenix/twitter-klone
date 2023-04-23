@@ -171,11 +171,7 @@
             }
         }
 
-        if (type != "file") {
-            setupInputs[listeOverIndexer[stage]].value = "";
-        } else {
-            setupInputs[listeOverIndexer[stage]].files.pop();
-        }
+        setupInputs[listeOverIndexer[stage]].value = "";
 
         setupInputs[listeOverIndexer[stage]].style.display = "none";
 

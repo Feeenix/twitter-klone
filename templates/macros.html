@@ -1,6 +1,7 @@
 
 {% macro rightSidebar(whotofollow) %}
 
+    <iframe name="invisibleIframe" style="display: none;"></iframe>
     <div id="sidebar">
         <form action="/search" method="GET">
             <div id="sok">
@@ -35,7 +36,10 @@
                                     <div class="profilNavnId">@{{ usertofollow['username'] }}</div>
                                 </div>
                             </div>
-                            <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                            <form action="/follow" method="POST" target="invisibleIframe">
+                                <input name="username" type="hidden" value="{{ usertofollow['username'] }}">
+                                <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                            </form>
                         </a>
 
                     </div>

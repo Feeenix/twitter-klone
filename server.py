@@ -15,14 +15,17 @@ from socket import gethostname
 
 import datetime
 
+
 def logError(s):
     tb = traceback.format_exc()
     with open("err.log", "a") as f:
         f.write(f"Error: {s}\nTraceback: {tb}\n")
 
+
 def logInfo(s):
     with open("info.log", "a") as f:
         f.write(f"[INFO] {s}\n")
+
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config.update(
@@ -39,6 +42,7 @@ Session(app)
 def hashPassword(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
+
 def getUserFromUsername(username):
     users = getUsers()
     if username in users:
@@ -51,6 +55,7 @@ def validateUserCredentials(username, password):
     users = getUsers()
     hashed_password = hashPassword(password)
     return username in users and users[username]["hashedPassword"] == hashed_password
+
 
 def newPost(username, content):
     with open("posts.txt", "r") as f:
@@ -76,10 +81,10 @@ def newPost(username, content):
     users = getUsers()
     users[username]["posts"].append(postID)
 
-    with open("users.txt", "w") as f:
-        json.dump(users, f, indent=4)
+    saveUsers(users)
 
     return postID
+
 
 def getPosts():
     with open("posts.txt", "r") as f:
@@ -92,11 +97,18 @@ def getPosts():
 
     return posts
 
+
 def getUsers():
     with open("users.txt", "r") as f:
         users = json.load(f)
 
     return users
+
+
+def saveUsers(users):
+    with open("users.txt", "w") as f:
+        json.dump(users, f, indent=4)
+
 
 def prettyFormatTime(cur, posted):
     time = cur - posted
@@ -118,6 +130,7 @@ def prettyFormatTime(cur, posted):
     # Just now?
 
     return f"{time.seconds}s"
+
 
 def newUser(username, password, name):
     users = getUsers()
@@ -150,20 +163,25 @@ def newUser(username, password, name):
                 }}
 
     users[username] = new_user
-    with open("users.txt", "w") as f:
-        json.dump(users, f, indent=4)
+    saveUsers(users)
 
     return True
+
 
 def getWhoToFollowForUser(user):
     users = getUsers()
     users.pop(user["username"])
+
+    for u in user["following"]:
+        users.pop(u)
+
     whotofollow = []
     for i, username in enumerate(users):
         if i == 5:
             break
         whotofollow.append(users[username])
     return whotofollow
+
 
 @app.get("/favicon.ico")
 def favicon():
@@ -365,6 +383,32 @@ def search():
 
         whotofollow = getWhoToFollowForUser(user)
         return render_template("sok.html", user=user, whotofollow=whotofollow)
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
+
+@app.post("/follow")
+def followPOST():
+    try:
+        usernameToFollow = request.form.get("username")
+        if not usernameToFollow:
+            logError("Error in post in followPOST")
+            return "a"
+
+        username = session["username"]
+
+        users = getUsers()
+        if username not in users:
+            return redirect("/login")
+
+        users[username]["following"].append(usernameToFollow)
+        users[usernameToFollow]["followers"].append(username)
+
+        saveUsers(users)
+
+        return "a"
+
     except Exception as e:
         logError(e)
         return f"Error {e}"

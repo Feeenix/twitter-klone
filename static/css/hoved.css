@@ -5,12 +5,6 @@
 
 body {
 
-    /* darkmode */
-
-    /* --globalbg: #282c34;
-    --globalbg2: #282c34cd;
-    --globalfg: #ffffff; */
-
     /* lightmode */
 
     --globalbg: #ffffff;
@@ -23,6 +17,15 @@ body {
     --overskriftfarge: var(--globalbg2);
     background-color: var(--globalbg);
     margin: 0px;
+}
+
+body.darkMode {
+
+    /* darkmode */
+
+    --globalbg: #282c34;
+    --globalbg2: #282c34cd;
+    --globalfg: #ffffff;
 }
 
 

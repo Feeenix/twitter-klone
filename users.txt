@@ -13,7 +13,7 @@
         "followers": [],
         "following": [],
         "pinnedPost": null,
-        "bio": "My bio",
+        "bio": "My bio is very cool",
         "status": "Offline",
         "location": "Norway",
         "joined": "2023-04-23 11:27:12",

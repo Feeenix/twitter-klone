@@ -59,73 +59,103 @@
                     <div id="feed">
                         <div id="settingsEditProfile" class="settingsTabKeys" style="display: block;">
 
-                            <div class="inputfield">
-                                <label class="settingssTitles" for="settingsEditProfileDisplayName">Name</label>
-                                <input type="text" id="settingsEditProfileDisplayName"
-                                    name="settingsEditProfileDisplayName" class="inputText"
-                                    placeholder="Micahale jacksonscript">
-                            </div>
-                            <div class="inputfield">
-                                <label class="settingssTitles" for="settingsEditProfileBanner">Profile banner</label>
-                                <input type="file" id="settingsEditProfileBanner" name="settingsEditProfileBanner"
-                                    class="inputFile">
-                            </div>
-                            <div class="inputfield">
-                                <label class="settingssTitles" for="settingsEditProfilePicture">Profile picture</label>
-                                <input type="file" id="settingsEditProfilePicture" name="settingsEditProfilePicture"
-                                    class="inputFile">
-                            </div>
+                            <form action="/updateProfile" method="POST" target="invisibleIframe">
+                                <div class="inputfield">
+                                    <label class="settingssTitles" for="settingsEditProfileDisplayName">Name</label>
+                                    <input type="text" id="settingsEditProfileDisplayName"
+                                        name="settingsEditProfileDisplayName" class="inputText"
+                                        value="{{ user['name'] }}" placeholder="Micahale jacksonscript"
+                                        oninput="formSubmit(this);">
+                                    <input type="hidden" name="field" value="name">
+                                </div>
+                            </form>
 
-                            <div class="inputfield">
-                                <label class="settingssTitles" for="settingsEditProfileBio">Bio</label>
-                                <textarea id="settingsEditBio" name="settingsEditProfilePicture" class="inputTextarea"
-                                    placeholder="Rewrite your bio..."></textarea>
-                            </div>
-                            <div class="inputfield">
-                                <label class="settingssTitles" for="settingsEditProfileLocation">Location</label>
-                                <input type="text" id="settingsEditProfileLocation" name="settingsEditProfileLocation"
-                                    class="inputText" placeholder="Mars">
-                            </div>
+                            <form action="/updateProfile" method="POST" target="invisibleIframe" enctype="multipart/form-data">
+                                <div class="inputfield">
+                                    <label class="settingssTitles" for="settingsEditProfileBanner">Profile banner</label>
+                                    <input type="file" id="settingsEditProfileBanner" name="settingsEditProfileBanner"
+                                        class="inputFile" onchange="formSubmit(this);">
+                                    <input type="hidden" name="field" value="profileBanner">
+                                </div>
+                            </form>
+
+                            <form action="/updateProfile" method="POST" target="invisibleIframe" enctype="multipart/form-data">
+                                <div class="inputfield">
+                                    <label class="settingssTitles" for="settingsEditProfilePicture">Profile picture</label>
+                                    <input type="file" id="settingsEditProfilePicture" name="settingsEditProfilePicture"
+                                        class="inputFile" onchange="formSubmit(this);">
+                                    <input type="hidden" name="field" value="profilePicture">
+                                </div>
+                            </form>
+
+                            <form action="/updateProfile" method="POST" target="invisibleIframe">
+                                <div class="inputfield">
+                                    <label class="settingssTitles" for="settingsEditProfileBio">Bio</label>
+                                    <textarea id="settingsEditProfileBio" name="settingsEditProfileBio" class="inputTextarea"
+                                        placeholder="Rewrite your bio..." oninput="formSubmit(this);">{{ user['bio'] }}</textarea>
+                                    <input type="hidden" name="field" value="bio">
+                                </div>
+                            </form>
+
+                            <form action="/updateProfile" method="POST" target="invisibleIframe">
+                                <div class="inputfield">
+                                    <label class="settingssTitles" for="settingsEditProfileLocation">Location</label>
+                                    <input type="text" id="settingsEditProfileLocation" name="settingsEditProfileLocation"
+                                        class="inputText" value="{{ user['location'] }}" placeholder="Mars" oninput="formSubmit(this);">
+                                    <input type="hidden" name="field" value="location">
+                                </div>
+                            </form>
 
 
                         </div>
                         <div id="settingsEditAppearance" class="settingsTabKeys" style="display: block;">
-                            <div class="inputfield">
-                                <div class="settingssTitles">Color theme</div>
+                            <form action="/updateProfile" method="POST" target="invisibleIframe">
+                                <div class="inputfield">
+                                    <div class="settingssTitles">Color theme</div>
 
-                                <div class="horisontalFlex colorThemes">
-                                    <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeLight">Light</label>
-                                        <input type="radio" name="colorThemeType"
-                                            id="settingsEditAppearanceColorThemeLight"
-                                            class="settingsEditAppearanceColorThemeType" checked>
+                                    <div class="horisontalFlex colorThemes">
+                                        <div class="radioElement grayBorder">
+                                            <label for="settingsEditAppearanceColorThemeLight">Light</label>
+                                            <input type="radio" name="colorThemeType"
+                                                id="settingsEditAppearanceColorThemeLight"
+                                                class="settingsEditAppearanceColorThemeType"
+                                                value="0"
+                                                {% if not user['settings']['darkMode'] %}
+                                                    checked
+                                                {% endif %}>
+                                        </div>
+                                        <div class="radioElement grayBorder">
+                                            <label for="settingsEditAppearanceColorThemeDark">Dark</label>
+                                            <input type="radio" name="colorThemeType"
+                                                id="settingsEditAppearanceColorThemeDark"
+                                                class="settingsEditAppearanceColorThemeType"
+                                                value="1"
+                                                {% if user['settings']['darkMode'] %}
+                                                    checked
+                                                {% endif %}>
+                                        </div>
+                                        <div class="radioElement grayBorder">
+                                            <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
+                                            <input type="radio" name="colorThemeType"
+                                                id="settingsEditAppearanceColorThemeCustom"
+                                                class="settingsEditAppearanceColorThemeType"
+                                                value="2">
+                                        </div>
                                     </div>
-                                    <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeDark">Dark</label>
-                                        <input type="radio" name="colorThemeType"
-                                            id="settingsEditAppearanceColorThemeDark"
-                                            class="settingsEditAppearanceColorThemeType">
+
+                                    <div class="customColors grayBorder">
+                                        <div class="horisontalFlex">
+                                            <label for="customColorBackground">Background Color:</label>
+                                            <input type="color" name="" id="customColorBackground">
+                                        </div>
+                                        <div class="horistontalFlex">
+                                            <label for="customColorText">Text Color:</label>
+                                            <input type="color" name="" id="customColorText">
+                                        </div>
                                     </div>
-                                    <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
-                                        <input type="radio" name="colorThemeType"
-                                            id="settingsEditAppearanceColorThemeCustom"
-                                            class="settingsEditAppearanceColorThemeType">
-                                    </div>
+                                    <input type="hidden" name="field" value="theme">
                                 </div>
-
-                                <div class="customColors grayBorder">
-                                    <div class="horisontalFlex">
-                                        <label for="customColorBackground">Background Color:</label>
-                                        <input type="color" name="" id="customColorBackground">
-                                    </div>
-                                    <div class="horistontalFlex">
-                                        <label for="customColorText">Text Color:</label>
-                                        <input type="color" name="" id="customColorText">
-                                    </div>
-                                </div>
-
-                            </div>
+                            </form>
 
                         </div>
                         <div id="settingsEditOther" class="settingsTabKeys" style="display: none;">
@@ -193,7 +223,7 @@
     </div>
 
 
-
+<iframe id="invisibleIframe" name="invisibleIframe" style="display: none;"></iframe>
 
 </body>
 
@@ -217,10 +247,17 @@
             document.querySelector(".customColors").style.display = "none";
         }
 
+        input = document.querySelector("#" + id);
+        input.parentElement.parentElement.parentElement.parentElement.submit();
+
     }
     let colorThemeButtons = document.querySelectorAll(".radioElement");
     for (let i = 0; i < colorThemeButtons.length; i++) {
         colorThemeButtons[i].addEventListener("click", selectRadioIfClicked);
+    }
+
+    function formSubmit(input) {
+        input.parentElement.parentElement.submit();
     }
 
 

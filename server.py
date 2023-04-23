@@ -510,6 +510,118 @@ def customizeStepPOST():
         return f"Error {e}"
 
 
+@app.post("/updateProfile")
+def updateProfilePOST():
+    try:
+        field = request.form.get("field")
+        logInfo(f"Field: {field}")
+        #if not first or not second or not third or not stage:
+        #    logError("Error in post in customizeStepPOST")
+        #    return "a"
+
+        username = session["username"]
+
+        users = getUsers()
+        if username not in users:
+            return redirect("/login")
+
+        # Name
+        if field == "name":
+            name = request.form.get("settingsEditProfileDisplayName")
+            if not name:
+                logError("No name in form")
+                return "a"
+            users[username]["name"] = name
+
+        # Banner
+        elif field == "profileBanner":
+            logInfo(request.files)
+            if "settingsEditProfileBanner" not in request.files:
+                logError("No file part")
+                return "a"
+
+            file = request.files["settingsEditProfileBanner"]
+            if file.filename == "":
+                logError("No file selected")
+                return "a"
+
+            if not file or not allowed_file(file.filename):
+                logError("File not allowed")
+
+            fn, extension = os.path.splitext(file.filename)
+            filename = f"{username}_bannerImage{extension}"
+            path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(path)
+            users[username]["bannerImage"] = filename
+
+        # Profile picture
+        elif field == "profilePicture":
+            logInfo(request.files)
+            if "settingsEditProfilePicture" not in request.files:
+                logError("No file part")
+                return "a"
+
+            file = request.files["settingsEditProfilePicture"]
+            if file.filename == "":
+                logError("No file selected")
+                return "a"
+
+            if not file or not allowed_file(file.filename):
+                logError("File not allowed")
+
+            fn, extension = os.path.splitext(file.filename)
+            filename = f"{username}_profileImage{extension}"
+            path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(path)
+            users[username]["profileImage"] = filename
+
+        # Bio
+        elif field == "bio":
+            bio = request.form.get("settingsEditProfileBio")
+            if not bio:
+                logError("No bio in form")
+                return "a"
+            users[username]["bio"] = bio
+
+        # Location
+        elif field == "location":
+            location = request.form.get("settingsEditProfileLocation")
+            if not location:
+                logError("No location in form")
+                return "a"
+            users[username]["location"] = location
+
+        # Theme
+        elif field == "theme":
+            logInfo(f"f: {request.form}")
+            themeType = request.form.get("colorThemeType")
+            if not themeType:
+                logError("No themeType in form")
+                return "a"
+
+            if themeType == "0":
+                users[username]["settings"]["darkMode"] = False
+            elif themeType == "1":
+                users[username]["settings"]["darkMode"] = True
+            elif themeType == "2":
+                users[username]["settings"]["darkMode"] = False
+                # some stuff here
+            else:
+                logError(f"Unknown themeType {themeType} in updateProfilePOST")
+                return "a"
+        else:
+            logError(f"Unknown field {field} in updateProfilePOST")
+            return "a"
+
+        saveUsers(users)
+
+        return "a"
+
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
+
 if __name__ == '__main__':
     if 'liveconsole' not in gethostname():
         context = ("server.crt", "server.key")

@@ -148,7 +148,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
 
         bannerImage: "",
         bannerColor: "#808080",
-        profileImage: "https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png",
+        profileImage: "https://cdn.discordapp.com/attachments/1095708777027739668/1099642253909172305/default_profilbilde.png",
         followers: [],
         following: [],
         posts: [],
@@ -173,7 +173,7 @@ function lagTilfeldigeBrukere(antall) {
         let brukernavn = genererId();
         let passord = "passord";
         lagNyBruker(brukernavn, passord);
-        
+
     }
 }
 

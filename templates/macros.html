@@ -36,7 +36,7 @@
                                     <div class="profilNavnId">@{{ usertofollow['username'] }}</div>
                                 </div>
                             </div>
-                            <form action="/follow" method="POST" target="invisibleIframe">
+                            <form onsubmit="followUser(this);" action="/follow" method="POST" target="invisibleIframe">
                                 <input name="username" type="hidden" value="{{ usertofollow['username'] }}">
                                 <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
                             </form>

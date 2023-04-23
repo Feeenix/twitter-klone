@@ -177,7 +177,7 @@ def getWhoToFollowForUser(user):
 
     whotofollow = []
     for i, username in enumerate(users):
-        if i == 5:
+        if i == 20:
             break
         whotofollow.append(users[username])
     return whotofollow
@@ -401,6 +401,10 @@ def followPOST():
         users = getUsers()
         if username not in users:
             return redirect("/login")
+
+        if usernameToFollow in users[username]["following"]:
+            logError("User already following")
+            return "a"
 
         users[username]["following"].append(usernameToFollow)
         users[usernameToFollow]["followers"].append(username)

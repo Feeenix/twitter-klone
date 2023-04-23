@@ -12,9 +12,6 @@
         ],
         "followers": [],
         "following": [
-            "aboardThrush9",
-            "goofyApricots2",
-            "unhappyHeron8"
         ],
         "pinnedPost": null,
         "bio": "Nothing yet...",
@@ -38,7 +35,7 @@
         "bannerColor": "#808080",
         "posts": [],
         "followers": [
-            "nicodatboi"
+
         ],
         "following": [],
         "pinnedPost": null,
@@ -63,7 +60,7 @@
         "bannerColor": "#808080",
         "posts": [],
         "followers": [
-            "nicodatboi"
+
         ],
         "following": [],
         "pinnedPost": null,
@@ -88,7 +85,6 @@
         "bannerColor": "#808080",
         "posts": [],
         "followers": [
-            "nicodatboi"
         ],
         "following": [],
         "pinnedPost": null,
@@ -112,7 +108,9 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [],
+        "followers": [
+
+        ],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",
@@ -135,7 +133,8 @@
         "bannerImage": "default_banner.png",
         "bannerColor": "#808080",
         "posts": [],
-        "followers": [],
+        "followers": [
+        ],
         "following": [],
         "pinnedPost": null,
         "bio": "Nothing yet...",

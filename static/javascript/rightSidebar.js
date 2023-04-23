@@ -9,3 +9,8 @@ function clearSearch() {
     sokfeltEl.focus();
 }
 
+function followUser(formEl) {
+    console.log(formEl);
+    formEl.parentElement.parentElement.remove();
+}
+

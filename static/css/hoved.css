@@ -305,6 +305,12 @@ body {
     margin-top: 20px;
     padding: 20px;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.whotofollowbody {
+    max-height: 60%;
+    overflow-y: scroll;
 }
 
 /* .whotofollowperson a{

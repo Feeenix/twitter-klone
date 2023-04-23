@@ -117,7 +117,7 @@ def prettyFormatTime(cur, posted):
 
     return f"{time.seconds}s"
 
-def newUser(username, password):
+def newUser(username, password, name):
     users = getUsers()
 
     # Check for duplicates
@@ -127,9 +127,9 @@ def newUser(username, password):
     hashed_password = hashPassword(password)
     new_user = {"username": username,
                 "hashedPassword": hashed_password,
-                "name": "Elon Musk 2.0",
-                "profileImage": "mypfp.png",
-                "bannerImage": "mybanner.png",
+                "name": name,
+                "profileImage": "default_pfp.png",
+                "bannerImage": "default_banner.png",
                 "bannerColor": "#808080",
                 "posts": [],
                 "followers": [],
@@ -158,7 +158,7 @@ def getWhoToFollowForUser(user):
     users.pop(user["username"])
     whotofollow = []
     for i, username in enumerate(users):
-        if i == 10:
+        if i == 5:
             break
         whotofollow.append(users[username])
     return whotofollow
@@ -264,7 +264,8 @@ def registerPOST():
     try:
         username = request.form.get("brukernavn")
         password = request.form.get("passord")
-        if not username or not password:
+        name = request.form.get("navn")
+        if not username or not password or not name:
             return render_template("registrere.html", error="Error in form")
 
         #posts = {
@@ -278,7 +279,7 @@ def registerPOST():
 
         # comments follow same structure as posts
 
-        success = newUser(username, password)
+        success = newUser(username, password, name)
         if not success:
             logInfo("Username already exists")
             return render_template("registrere.html", error="Username already exists")

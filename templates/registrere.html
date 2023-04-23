@@ -53,11 +53,15 @@
         {% endif %}
         <form action="/register" method="POST">
             <div class="inputfield">
-                <label for="brukernavn">Nytt brukernavn</label>
+                <label for="navn">Navn</label>
+                <input type="text" id="navn" name="navn" placeholder="" required>
+            </div>
+            <div class="inputfield">
+                <label for="brukernavn">Brukernavn</label>
                 <input type="text" id="brukernavn" name="brukernavn" placeholder="" required>
             </div>
             <div class="inputfield">
-                <label for="passord">Nytt Passord</label>
+                <label for="passord">Passord</label>
                 <input type="password" id="passord" name="passord" placeholder="" required>
             </div>
             <div class="inputfield">

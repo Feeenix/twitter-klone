@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 
-from random_username.generate import generate_username
 import json
 import sys
 import argparse
+
+from random_username.generate import generate_username
+import names
 
 import server
 
@@ -23,7 +25,8 @@ def reset():
 def createUsers(n):
     usernames = generate_username(n)
     for username in usernames:
-        server.newUser(username, "123123")
+        name = names.get_full_name()
+        server.newUser(username, "123123", name)
 
 def main():
     parser = argparse.ArgumentParser(

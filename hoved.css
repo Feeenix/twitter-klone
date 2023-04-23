@@ -553,19 +553,17 @@ body {
 
     .profil>button {
         padding: 0px;
-
     }
 
     .profilknapp>div>img {
         margin-right: 0;
-
     }
 
     #menyknapper>*>img {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *) {
+    .genericButton:not(#profilePfpShare *,#setupProfile * ) {
         padding: 10px;
         margin: 0 auto;
     }

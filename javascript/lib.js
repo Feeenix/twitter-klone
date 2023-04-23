@@ -21,16 +21,16 @@ async function readFiles(filesArray) { // tar inn et array med fil-objekter og r
     return imageDataUrls;
 }
 
-async function fileToDataURL(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            resolve(reader.result);
-        };
-        reader.onerror = reject;
-    });
-}
+// async function fileToDataURL(file) {
+//     return new Promise((resolve, reject) => {
+//         const reader = new FileReader();
+//         reader.readAsDataURL(file);
+//         reader.onload = () => {
+//             resolve(reader.result);
+//         };
+//         reader.onerror = reject;
+//     });
+// }
 
 
 async function sleep(ms) {

@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="hoved.css">
 </head>
 <style>
- .inputfield>input {
-        
+    .inputfield>input {
+
         padding: 12px 20px;
         margin: 8px 0;
         box-sizing: border-box;
@@ -18,12 +18,16 @@
         outline: none;
 
     }
+
     .inputfield {
         display: flex;
         width: 300px;
         justify-content: center;
-    }    
+    }
 
+    #midtkolonne {
+        max-width: 1000px;
+    }
 </style>
 
 <body>
@@ -75,22 +79,26 @@
                     </div>
                     <div id="feed">
                         <div id="setupProfile">
-                            <div class="settingsheader">What do you want to be called?</div>
+                            <div class="settingsheader" value="0">What do you want to be called?</div>
                             <div class="inputfield">
-                                
-                                <input type="text" id="setupDisplayName" placeholder="Håkon lærerson...">
+
+                                <input style="display: block;" type="text" class="setupInput"
+                                    placeholder="Håkon lærerson...">
+                                <input style="display: none;" type="file" class="setupInput">
+                                <textarea style="display: none;" class="setupInput"
+                                    placeholder="Write your bio..."></textarea>
                             </div>
                             <div id="setupButtons">
                                 <button class="vanligKnapp genericButton">Skip</button>
                                 <button class="vanligKnapp genericButton">Next</button>
-                                
+
                             </div>
                         </div>
 
                     </div>
 
                 </div>
-                <div id="sidebar">
+                <!-- <div id="sidebar">
 
                     <div class="whotofollow">
                         <div class="whotofollowheader">Preview</div>
@@ -103,7 +111,7 @@
 
 
 
-                </div>
+                </div> -->
 
             </div>
 
@@ -120,65 +128,88 @@
 <script src="javascript/lib.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script>
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
 
-    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
-    fjernQueryKnapp.addEventListener("click", clearSearch);
-
-    function clearSearch() {
-        let sokfeltEl = document.querySelector("#sokfelt");
-        sokfeltEl.value = "";
-        sokfeltEl.focus();
+    let knapper = document.querySelectorAll("#setupButtons>*")
+    
+    for (let i = 0; i < knapper.length; i++) {
+        knapper[i].addEventListener("click", function () {
+            nextPrompt(skip=(i!=1));
+        })
     }
 
+    async function nextPrompt(skip = false) {
+        let setupInputs = document.querySelectorAll(".setupInput"); // array med 3 inputs
+        let setupHeader = document.querySelector(".settingsheader");
 
-    function search() {
-        let sokfeltEl = document.querySelector("#sokfelt");
-        let query = sokfeltEl.value;
-        if (query.length > 0) {
-            window.location.href = "search.html?query=" + query;
-        }
-    }
+        let stage = Number(setupHeader.getAttribute("value"));
 
+        let loggetInnBruker = hentInnloggetBrukerId();
+        console.log(loggetInnBruker)
+        let listeOverType = ["text", "file", "textarea", "file", "text"];
+        let listeOverIndexer = [0, 1, 2, 1, 0];
+        let listeOverNokler = ["displayName", "profileImage", "bio", "bannerImage", "location"];
+        let listeOverSprml = ["What do you want to be called?", "What do you want your profile picture to be?", "What do you want your bio to be?", "What do you want your profile banner to be?", "What is your location?"]
 
+        let nokkel = listeOverNokler[stage];
+        let type = listeOverType[stage];
 
+        if (!skip) {
+            // lagre dataen
+            let data = ""
 
-    let profil = document.querySelector(".profil > button");
-    let popupElement = document.querySelector("#popupLogout");
+            if (type != "file") {
+                data = setupInputs[listeOverIndexer[stage]].value;
+            } else {
+                let File = setupInputs[listeOverIndexer[stage]].files[0];
+                data = await readfile(File);
+            }
 
-    document.querySelector("#overskriftfollowing").addEventListener("focus", gjemPopup)
-    popupElement.addEventListener("blur", gjemPopup);
-
-    profil.addEventListener("focus", visPopup);
-
-    profil.addEventListener("blur", gjemPopup);
-    gjemPopup();
-    async function gjemPopup() {
-        await sleep(10);
-
-        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
-        let harFokus = false;
-        for (let i = 0; i < elementer.length; i++) {
-            if (elementer[i] == document.activeElement) {
-                harFokus = true;
+            console.log(type, data)
+            if (data.length > 0) {
+                let objektTing = {[nokkel]:data}
+                // objektTing[nokkel] = data;
+                leggTilDataPaaBruker(loggetInnBruker, objektTing)
             }
         }
-        if (harFokus) {
-            return
+
+        if (type != "file") {
+            setupInputs[listeOverIndexer[stage]].value = "";
+        } else {
+            setupInputs[listeOverIndexer[stage]].files[0] = null;
         }
 
-        console.log("gjemPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "none";
+        setupInputs[listeOverIndexer[stage]].style.display = "none";
+
+        stage++;
+
+        if (stage > 4) {
+            // gå til home
+            window.location.href = "home.html";
+        } else {
+            // gå til neste prompt
+            setupHeader.setAttribute("value", stage);
+            setupHeader.innerHTML = listeOverSprml[stage];
+
+            setupInputs[listeOverIndexer[stage]].style.display = "block";
+            setupInputs[listeOverIndexer[stage]].focus();
+        }
+
+
+
+        /* 
+        Displayname
+        0: What do you want to be called?
+        Profile picture
+        1: What do you want your profile picture to be?
+        Bio
+        2: What do you want your bio to be?
+        Profile banner
+        3: What do you want your profile banner to be?
+        location
+        4: What is your location?
+        */
 
     }
-    function visPopup() {
-        console.log("visPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "block";
-    }
-
 
 </script>
 

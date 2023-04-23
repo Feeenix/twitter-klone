@@ -751,3 +751,8 @@ body {
     align-items: center;
     margin-bottom: 10px;
 }
+
+#settingsinput>*:nth-child(1) {
+    margin-right: 10px;
+    font-weight: 700;
+}

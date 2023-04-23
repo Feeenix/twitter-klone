@@ -83,7 +83,7 @@
 
                     <div id="overskrift">
                         <div id="viewprofileTopp">
-                            <button class="genericButton hiddenButton">
+                            <button class="backButton genericButton hiddenButton">
                                 <img src="bilder/pil_svart.png" alt="arrow" width="30">
                             </button>
                             <h3>Elon Musk</h3>
@@ -254,18 +254,12 @@
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script src="javascript/visprofil.js"></script>
 <script src="javascript/whotofollow_buttons.js"></script>
+<script src="javascript/urlbarHistory.js"></script>
 <script>
+    leggTilHistory();
+
+
     oppdaterProfil(hentURLSearchParams()["brukernavn"]);
-
-
-
-
-
-
-
-
-
-
 
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);
@@ -327,7 +321,11 @@
 
     let menyprofil = document.querySelector("#menyprofil");
     menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-
+    menyprofil.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearHistory();
+        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
+    });
 
 </script>
 

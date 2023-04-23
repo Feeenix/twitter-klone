@@ -118,7 +118,9 @@
 
 <script src="javascript/lib.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
+<script src="javascript/urlbarHistory.js"></script>
 <script>
+    clearHistory();
 
     let knapper = document.querySelectorAll("#setupButtons>*")
     
@@ -200,7 +202,11 @@
 
     let menyprofil = document.querySelector("#menyprofil");
     menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-
+    menyprofil.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearHistory();
+        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
+    });
 
 </script>
 

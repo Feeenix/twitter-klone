@@ -286,7 +286,11 @@
 
 <script src="javascript/lib.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
+<script src="javascript/urlbarHistory.js"></script>
 <script>
+    clearHistory();
+    leggTilHistory();
+
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);
 
@@ -346,10 +350,14 @@
         popupLogout.style.display = "block";
     }
 
-    
+
     let menyprofil = document.querySelector("#menyprofil");
     menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-
+    menyprofil.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearHistory();
+        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
+    });
 
 
 </script>

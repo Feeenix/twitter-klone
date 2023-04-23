@@ -56,10 +56,16 @@ function oppdaterProfil(brukernavn) {
 
     profilePfp.src = bruker["profileImage"];
     profileDisplayName.innerHTML = bruker["displayName"];
-    profileBrukernavn.innerHTML = bruker["brukernavn"];
+    profileBrukernavn.innerHTML = "@"+brukernavn;
     profileBio.innerHTML = bruker["bio"];
+
     profileLocationName.innerHTML = bruker["location"];
 
+    if (bruker["location"] == "") {
+        document.querySelector("#profileLocation").style.display = "none";
+    } else {
+        document.querySelector("#profileLocation").style.display = "flex";
+    }
     profileFollowing.innerHTML = bruker["following"].length;
     profileFollowers.innerHTML = bruker["followers"].length;
 

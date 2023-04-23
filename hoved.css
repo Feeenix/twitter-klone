@@ -707,3 +707,9 @@ body {
     margin-bottom: 5px;
 }
 
+#profileLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}

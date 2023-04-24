@@ -389,6 +389,7 @@ body {
 }
 
 .aatweetknapp {
+    border: none;
     background-color: #baaaff;
     color: white;
     margin: 0 auto;
@@ -396,7 +397,7 @@ body {
     padding-left: 55px;
     padding-right: 55px;
     font-size: 1.25em;
-    border-radius: 9999px;
+    border-radius: 20px;
 }
 
 .aatweetknapp:hover {
@@ -429,6 +430,7 @@ body {
 .forfatterinfo {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: left;
     width: 100%;
@@ -451,6 +453,23 @@ body {
     max-width: 450px;
     margin-bottom: 10px;
 }
+
+.tweettekstBark {
+    font-size: 1.25em;
+    max-width: 450px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.characterIndicator {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    font-size: 0.75em;
+    opacity: 0.5;
+}
+
+
 
 .tweetbilde {
     width: 100%;
@@ -547,7 +566,7 @@ body {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *, #setupProfile *) {
+    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -749,7 +768,8 @@ body {
     margin-bottom: 10px;
     margin-top: 10px;
 }
-.inputFile + .vanligKnapp{
+
+.inputFile+.vanligKnapp {
     margin: 0 auto;
 }
 
@@ -953,8 +973,9 @@ input[type='range']::-webkit-slider-thumb {
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    
+
 }
+
 .tweetheader {
     font-weight: 700;
     margin-bottom: 10px;
@@ -974,11 +995,11 @@ input[type='range']::-webkit-slider-thumb {
 
 }
 
-.barker{
+.barker {
     display: flex;
-   
     justify-content: center;
-    
+    max-width: 550px;
+    width: 100%;
 }
 
 #feeden {
@@ -987,34 +1008,79 @@ input[type='range']::-webkit-slider-thumb {
     justify-content: center;
     align-items: center;
     padding: none;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px;
     margin-left: 25px;
-    margin-right: 20px;
+    margin-right: 20px; */
     width: 100%;
 }
 
 
 
 #tweetTextArea {
-    width: 90%;
+    width: 100%;
     height: 200px;
-    border-radius: 15px;
-    border: #aaaaaa20 solid 5px;
+    border: none;
     padding: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
     margin-top: 10px;
     resize: none;
     font-size: 1.25em;
     font-weight: 400;
 }
-
-#tweetTextArea:focus {
+.tweetInputs{
+    border-radius: 15px;
+    border: #aaaaaa20 solid 5px;
+}
+.tweetInputs:focus{
     outline: none;
     border: #aaaaaa60 solid 5px;
+}
+#tweetTextArea:focus {
+    outline: none;
+    
 }
 
 #tweetTextArea::placeholder {
     font-size: 1.125em;
-    
+
 }
 
+.tweetBottomRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+
+}
+
+.tweetBottomRow>*:nth-child(1) {
+    margin-left: 10px;
+}
+
+.tweetBottomRow>*:nth-child(1)>* {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.tweetBottomRow>*:nth-child(2) {
+    margin: 0;
+    margin-right: 15px;
+    width: 100%;
+    max-width: 280px;
+}
+
+.tweetImagePreview {
+    border-top: #aaaaaa20 solid 5px;
+    width: 100%;
+    height: 200px;
+}
+.tweetImagePreview > img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+    border-radius: 15px;
+}

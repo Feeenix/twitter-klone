@@ -43,7 +43,6 @@
                             <div class="buttonText">Hjem</div>
                         </a>
 
-
                         <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
                             id="menyprofil">
                             <img src="bilder/profil_hul.png" height="30" alt="">
@@ -58,50 +57,88 @@
 
                 </div>
 
-
+                <div class="profil">
+                    <button class="profilknapp genericButton hiddenButton">
+                        <div>
+                            <img class="profilbilde"
+                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                alt="pfp" height="50" width="50">
+                            <div class="mediumWidth profilnavn">
+                                <div class="mediumWidth profilNavnNavn">Navn</div>
+                                <div class="mediumWidth profilNavnId">@Brukernavn</div>
+                            </div>
+                        </div>
+                        <div id="mediumWidth menyindikator">
+                            <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
+                        </div>
+                    </button>
+                </div>
+                <div id="popupLogout" tabindex="0">
+                    <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
+                        class="genericButton hiddenButton">Profil</a>
+                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton"
+                        tabindex="0">Innstillinger</a>
+                    <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
+                </div>
             </div>
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
                     <button class="backButton genericButton hiddenButton">
                         <img src="bilder/pil_svart.png" alt="arrow" width="30">
                     </button>
-                    
+
 
                     <div id="feeden">
-                        
-
-                            <div class="tweetheader" value="0">Make a Bark</div>
-                            <div class="barker">
-                                <div class="profilbildekolonne">
-                                    <img class="profilbilde"
-                                        src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                        alt="pfp" height="50" width="50">
-                                </div>
-                                <div class="tweetkolonne ">
-                                    <div class="forfatterinfo">
-                                        <div>Name Lastname</div>
-                                        <div>@elonmusk</div>
-                                        <div>14h</div>
-                                    </div>
-                                    <div class="tweettekst">
-                                         <textarea name="" id="tweetTextArea" cols="30" rows="10" placeholder="Want to bark?"></textarea>
-                                    </div>
 
 
-                            
-
-                                 </div>
-                        
-                                <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
-
-                               
+                        <div class="tweetheader" value="0">Make a Bark</div>
+                        <div class="barker">
+                            <div class="profilbildekolonne">
+                                <img class="profilbilde"
+                                    src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                    alt="pfp" height="50" width="50">
                             </div>
-                        </div>
+                            <div class="tweetkolonne ">
+                                <div class="forfatterinfo">
+                                    <div>Name Lastname</div>
+                                    <div>@elonmusk</div>
+                                    <div>14h</div>
+                                </div>
+                                <div class="tweetInputs">
+                                    <div class="tweettekstBark">
+                                        <textarea name="" id="tweetTextArea" cols="30" rows="10"
+                                            placeholder="Want to bark?"></textarea>
+                                        <div class="characterIndicator">230/250</div>
+                                    </div>
+                                    <div class="tweetImagePreview" style="display: block;">
+                                        <img src="bilder/comment_hul.png" alt="">
+                                    </div>
+                                </div>
 
+                                <div class="tweetBottomRow">
+                                    <div class="tweetUploads">
+                                        <button id="tweetUploadButton" class="hiddenButton">
+                                            <img src="bilder/imageupload.png" width="45" height="45" alt="icon">
+                                        </button>
+                                        <input style="display: none;" type="file" name="tweetUploadInput" id="tweetUploadInput" accept="image/*">
+                                    </div>
+                                    <button class="aatweetknapp">BARK</button>
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
+
+
+                        </div>
                     </div>
 
-
                 </div>
+
+
+            </div>
 
 
 
@@ -114,82 +151,74 @@
 <script>
     leggTilHistory();
 
-    let knapper = document.querySelectorAll("#setupButtons>*")
 
-    for (let i = 0; i < knapper.length; i++) {
-        knapper[i].addEventListener("click", function () {
-            nextPrompt(skip = (i != 1));
-        })
-    }
-
-    async function nextPrompt(skip = false) {
-        let setupInputs = document.querySelectorAll(".inputfield>*"); // array med 3 inputs
-        let setupHeader = document.querySelector(".settingsheader");
-
-        let stage = Number(setupHeader.getAttribute("value"));
-
-        let loggetInnBruker = hentInnloggetBrukerId();
-        console.log(loggetInnBruker)
-        let listeOverType = ["text", "file", "textarea", "file", "text"];
-        let listeOverIndexer = [0, 1, 2, 1, 0];
-        let listeOverNokler = ["displayName", "profileImage", "bio", "bannerImage", "location"];
-        let listeOverSprml = ["What do you want to be called?", "What do you want your profile picture to be?", "What do you want your bio to be?", "What do you want your profile banner to be?", "What is your location?"]
-
-        let nokkel = listeOverNokler[stage];
-        let type = listeOverType[stage];
-
-        if (!skip) {
-            // lagre dataen
-            let data = ""
-
-            if (type != "file") {
-                data = setupInputs[listeOverIndexer[stage]].value;
-            } else {
-                let File = setupInputs[listeOverIndexer[stage]].files[0];
-                data = await readfile(File);
-            }
-
-            console.log(type, data)
-            if (data.length > 0) {
-                let objektTing = { [nokkel]: data }
-                leggTilDataPaaBruker(loggetInnBruker, objektTing)
-            }
+    let tweetTextArea = document.querySelector("#tweetTextArea");
+    let characterIndicator = document.querySelector(".characterIndicator");
+    tweetTextArea.addEventListener("input", changeWhenInput);
+    function changeWhenInput() {
+        if (tweetTextArea.value.length > 250) {
+            tweetTextArea.value = tweetTextArea.value.substring(0, 250);
         }
 
-        setupInputs[listeOverIndexer[stage]].value = "";
+        tweetTextArea.value = tweetTextArea.value.toUpperCase().replace(/(\.|:|;)/g, "!");
 
-        setupInputs[listeOverIndexer[stage]].style.display = "none";
 
-        stage++;
+        characterIndicator.innerHTML = tweetTextArea.value.length + "/250";
+    }
+    changeWhenInput();
+    tweetTextArea.addEventListener("focus", function (e) {
+        console.log(document.querySelector(".tweetImagePreview").style.border)
+        document.querySelector(".tweetImagePreview").style.borderTopColor = "#aaaaaa60;";
+        e.target.parentElement.parentElement.style.border = "#aaaaaa60 solid 5px";
+    });
+    tweetTextArea.addEventListener("blur", function (e) {
+        document.querySelector(".tweetImagePreview").style.borderTopColor = "#aaaaaa20;";
+        e.target.parentElement.parentElement.style.border = "#aaaaaa20 solid 5px";
+    });
 
-        if (stage > 4) {
-            // gå til home
-            window.location.href = "viewprofile.html?brukernavn=" + loggetInnBruker;
-        } else {
-            // gå til neste prompt
-            setupHeader.setAttribute("value", stage);
-            setupHeader.innerHTML = listeOverSprml[stage];
 
-            setupInputs[listeOverIndexer[stage]].style.display = "block";
-            setupInputs[listeOverIndexer[stage]].focus();
+
+
+
+    let buttonLogout = document.querySelector("#popupLogoutButton");
+    buttonLogout.addEventListener("click", loggUtBruker);
+
+
+    let profil = document.querySelector(".profil > button");
+    let popupElement = document.querySelector("#popupLogout");
+    document.querySelector(".backButton").addEventListener("focus", gjemPopup)
+    popupElement.addEventListener("blur", gjemPopup);
+
+    profil.addEventListener("focus", visPopup);
+
+    profil.addEventListener("blur", gjemPopup);
+    gjemPopup();
+    async function gjemPopup() {
+        await sleep(10);
+
+        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
+        let harFokus = false;
+        for (let i = 0; i < elementer.length; i++) {
+            if (elementer[i] == document.activeElement) {
+                harFokus = true;
+            }
+        }
+        if (harFokus) {
+            return
         }
 
-
-
-        /* 
-        Displayname
-        0: What do you want to be called?
-        Profile picture
-        1: What do you want your profile picture to be?
-        Bio
-        2: What do you want your bio to be?
-        Profile banner
-        3: What do you want your profile banner to be?
-        location
-        4: What is your location?
-        */
+        console.log("gjemPopup");
+        let popupLogout = document.querySelector("#popupLogout");
+        popupLogout.style.display = "none";
 
     }
+    function visPopup() {
+        console.log("visPopup");
+        let popupLogout = document.querySelector("#popupLogout");
+        popupLogout.style.display = "block";
+    }
+
+    
 
 
     let menyprofil = document.querySelector("#menyprofil");

@@ -618,6 +618,14 @@ def updateProfilePOST():
             users[username]["settings"]["background-color"] = bgColor
             users[username]["settings"]["text-color"] = fgColor
 
+        elif field == "fontSize":
+            fontSize = request.form.get("fontSize")
+            if not fontSize:
+                logError("No fontSize in form")
+                return "a"
+
+            users[username]["settings"]["font-size"] = fontSize
+
         else:
             logError(f"Unknown field {field} in updateProfilePOST")
             return "a"
@@ -626,6 +634,26 @@ def updateProfilePOST():
 
         return "a"
 
+    except Exception as e:
+        logError(e)
+        return f"Error {e}"
+
+
+@app.get("/bark", strict_slashes=False)
+def bark():
+    try:
+        # If user is not logged in then redirect to login page
+        if "username" not in session:
+            return redirect("/login")
+
+        username = session["username"]
+        user = getUserFromUsername(username)
+
+        if not user:
+            return redirect("/login")
+
+        whotofollow = getWhoToFollowForUser(user)
+        return render_template("lagtweet.html", user=user, whotofollow=whotofollow)
     except Exception as e:
         logError(e)
         return f"Error {e}"

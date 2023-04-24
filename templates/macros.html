@@ -146,13 +146,16 @@
 {% macro pageTheme(user) %}
     {% if user['settings']['theme'] == 'light' %}
         class="lightMode"
+        style="font-size:{{user['settings']['font-size']}}em;"
     {% elif user['settings']['theme'] == 'dark' %}
         class="darkMode"
+        style="font-size:{{user['settings']['font-size']}}em;"
     {% else %}
         class="customTheme"
         style="--globalbg:{{ user['settings']['background-color'] }};
             --globalbg2:{{ user['settings']['background-color'] }};
-            --globalfg:{{ user['settings']['text-color'] }};"
+            --globalfg:{{ user['settings']['text-color'] }};
+            font-size:{{user['settings']['font-size']}}em;"
     {% endif %}
 {% endmacro %}
 

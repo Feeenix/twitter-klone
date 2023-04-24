@@ -682,6 +682,20 @@ body.customTheme {
     background-color: var(--globalbg);
 }
 
+.imagePreview>.profileImgCustomize {
+    border-radius: 9999px;
+    border: #aaaaaa20 solid 5px;
+    object-fit: fill;
+    width: 150px;
+    height: 150px;
+}
+.imagePreview>.bannerImgCustomize {
+    /* border: #aaaaaa20 solid 5px; */
+    height: 200px;
+    width: 700px;
+    object-fit: cover;
+}
+
 #viewprofileTopp {
     display: flex;
     flex-direction: row;
@@ -789,7 +803,10 @@ body.customTheme {
     margin-bottom: 10px;
     margin-top: 10px;
 }
-.inputTextarea{
+.inputFile + .vanligKnapp{
+    margin: 0 auto;
+}
+.inputTextarea {
     padding: 10px;
     border: 2px solid #aaaaaa80;
     background-color: var(--globalbg);
@@ -823,7 +840,8 @@ body.customTheme {
 }
 
 
-.settingsTabKeys input, .settingsTabKeys textarea {
+.settingsTabKeys input,
+.settingsTabKeys textarea {
     margin-bottom: 15px;
     margin-top: 10px;
     width: 300px;
@@ -836,13 +854,14 @@ body.customTheme {
     font-weight: 700;
     font-size: 1.25em;
     margin-left: 20px;
-    margin-right: 20px;}
+    margin-right: 20px;
+}
 
 .settingsTabKeys .inputfield {
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
-.horisontalFlex{
+.horisontalFlex {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -869,7 +888,7 @@ body.customTheme {
     margin: 5px;
 }
 .radioElement label {
-margin-top: 7.1px;
+    margin-top: 7.1px;
 }
 
 .grayBorder {
@@ -877,19 +896,18 @@ margin-top: 7.1px;
     border: 2px solid #aaaaaa80;
     border-radius: 9999px;
 }
-.colorThemes>*:nth-child(1){
+.colorThemes>*:nth-child(1) {
     background-color: white;
     color: #404040;
     margin-left: 25px;
 }
-.colorThemes>*:nth-child(2){
+.colorThemes>*:nth-child(2) {
     background-color: #282c34;
     color: white;
 }
 
 .colorThemes>*:nth-child(3) {
-    background: linear-gradient(
-        100deg,
+    background: linear-gradient(100deg,
         rgba(255, 0, 0, 1) 0%,
         rgba(255, 154, 0, 1) 15%,
         rgba(208, 222, 33, 1) 28%,
@@ -900,8 +918,7 @@ margin-top: 7.1px;
         rgba(95, 21, 242, 1) 66%,
         rgba(186, 12, 248, 1) 72%,
         rgba(251, 7, 217, 1) 85%,
-        rgba(255, 0, 0, 1) 100%
-    );
+        rgba(255, 0, 0, 1) 100%);
 }
 
 
@@ -912,7 +929,7 @@ margin-top: 7.1px;
     width: fit-content;
     border-radius: 15px;
     margin-top: 30px;
-
+    margin-bottom: 30px;
 }
 .customColors label {
     font-weight: 400;
@@ -922,4 +939,130 @@ margin-top: 7.1px;
     width: 50px;
     height: 30px;
     margin: 5px;
+}
+
+.fontsizeflex {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-left: 25px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.fontsizeflex>* {
+    margin: 5px;
+}
+
+/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+input[type='range'] {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 5px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    margin-top: 20px;
+}
+
+input[type='range']:hover {
+    opacity: 1;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #baaaff;
+    cursor: pointer;
+}
+
+.storfontsizetext {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.litenfontsizetext {
+    font-size: 0.75em;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#fontsizepreview {
+    font-size: 1.125em;
+    font-weight: 400;
+    margin-left: 25px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.tweetheader {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+#flexBark {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-right: 20px;
+    width: 100%;
+
+}
+
+.barker{
+    display: flex;
+
+    justify-content: center;
+
+}
+
+#feeden {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: none;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    margin-right: 20px;
+    width: 100%;
+}
+
+
+
+#tweetTextArea {
+    width: 90%;
+    height: 200px;
+    border-radius: 15px;
+    border: #aaaaaa20 solid 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    resize: none;
+    font-size: 1.25em;
+    font-weight: 400;
+}
+
+#tweetTextArea:focus {
+    outline: none;
+    border: #aaaaaa60 solid 5px;
+}
+
+#tweetTextArea::placeholder {
+    font-size: 1.125em;
+
 }

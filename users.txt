@@ -22,7 +22,7 @@
             "background-color": "#d35f5f",
             "text-color": "#2406bc",
             "font": "Inter",
-            "font-size": "1em"
+            "font-size": "1"
         }
     },
     "aboardThrush9": {

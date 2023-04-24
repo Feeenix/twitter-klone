@@ -1,6 +1,6 @@
 
-{% from 'macros.html' import rightSidebar %}
 {% from 'macros.html' import leftSidebar %}
+{% from 'macros.html' import rightSidebar %}
 {% from 'macros.html' import pageTheme %}
 
 <!DOCTYPE html>
@@ -164,9 +164,55 @@
                                     <input type="hidden" name="field" value="customColors">
                                 </form>
                             </div>
+                            <form action="/updateProfile" method="POST" target="invisibleIframe">
+                                <div class="inputfield">
+                                    <div class="settingssTitles">Font Size</div>
+                                    <div id="fontsizepreview">
+                                        Current Fontsize is {{ user['settings']['font-size'] }}x
+                                    </div>
+                                    <div class="fontsizeflex">
+
+                                        <div class="litenfontsizetext"> aA </div>
+                                        <input name="fontSize" onchange="fontSizeFormSubmit(this);" type="range" step="0.2" min="0.4" max="1.6" value="{{ user['settings']['font-size'] }}">
+                                        <div class="storfontsizetext"> aA </div>
+                                    </div>
+                                    <input type="hidden" name="field" value="fontSize">
+                                </div>
+                            </form>
                         </div>
                         <div id="settingsEditOther" class="settingsTabKeys" style="display: none;">
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditOtherSound">Bark sounds</label>
+                                <div class="horisontalFlex">
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditOtherSoundOn">On</label>
+                                        <input type="radio" name="barkSound" id="settingsEditOtherSoundOn"
+                                            class="settingsEditOtherSoundType" checked>
+                                    </div>
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditOtherSoundOff">Off</label>
+                                        <input type="radio" name="barkSound" id="settingsEditOtherSoundOff"
+                                            class="settingsEditOtherSoundType">
+                                    </div>
 
+                                </div>
+                            </div>
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditOtherText">Bark text</label>
+                                <div class="horisontalFlex">
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeLight">On</label>
+                                        <input type="radio" name="barkText" id="settingsEditAppearanceColorThemeLight"
+                                            class="settingsEditAppearanceColorThemeType" checked>
+                                    </div>
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeDark">Off</label>
+                                        <input type="radio" name="barkText" id="settingsEditAppearanceColorThemeDark"
+                                            class="settingsEditAppearanceColorThemeType">
+                                    </div>
+
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -308,6 +354,10 @@
         output.onload = function() {
             URL.revokeObjectURL(output.src) // free memory
         };
+    }
+
+    function fontSizeFormSubmit(input) {
+        input.parentElement.parentElement.parentElement.submit();
     }
 
 

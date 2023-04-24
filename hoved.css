@@ -25,7 +25,6 @@ body {
     margin: 0px;
 }
 
-
 * {
     font-family: Inter;
     /* font-family: Tangerine; */
@@ -52,7 +51,6 @@ body {
     border-radius: 10px;
     border-color: #9279ff;
     color: #404040;
-
 }
 
 .vanligKnapp:hover {
@@ -101,7 +99,6 @@ body {
     flex-direction: row;
 }
 
-
 .hiddenButton {
     background-color: #80808000;
     transition-duration: 100ms;
@@ -126,8 +123,6 @@ body {
     padding-right: 15px;
     border-radius: 9999px;
     text-align: left;
-
-
 }
 
 .genericButton:hover {
@@ -159,9 +154,7 @@ body {
     /* background-color: lightblue; */
     display: flex;
     flex-direction: row;
-
 }
-
 
 #midtkolonne {
     /* background-color: blue; */
@@ -240,7 +233,6 @@ body {
     padding: 10px;
     justify-content: space-between;
     width: 100%;
-
 }
 
 .profilknapp>div {
@@ -249,7 +241,6 @@ body {
     align-items: center;
     width: fit-content;
 }
-
 
 .profilknapp>div>img {
     margin-right: 10px;
@@ -281,7 +272,6 @@ body {
     justify-content: space-between;
     width: calc(100% - 20px);
     border-radius: 10px;
-
 }
 
 .whotofollowheader {
@@ -298,7 +288,6 @@ body {
 }
 
 /* .whotofollowperson a{
-
 } */
 
 #logo.hiddenButton {
@@ -332,7 +321,6 @@ body {
     margin: 0 auto;
 
     position: relative;
-
 }
 
 .line {
@@ -380,9 +368,7 @@ body {
     font-size: 1em;
     max-width: 200px;
     background-color: transparent;
-
 }
-
 
 .boldText {
     font-weight: 700;
@@ -411,7 +397,6 @@ body {
     padding-right: 55px;
     font-size: 1.25em;
     border-radius: 9999px;
-
 }
 
 .aatweetknapp:hover {
@@ -495,7 +480,6 @@ body {
 .tweetknapp>*:nth-child(1) {
     margin-right: 5px;
 }
-
 
 #popupLogout {
     display: none;
@@ -585,9 +569,6 @@ body {
     .largeWidth {
         display: none;
     }
-
-
-
 }
 
 @media only screen and (min-width: 880px) {
@@ -600,15 +581,12 @@ body {
     .smallWidth {
         display: none;
     }
-
 }
-
 
 .profileDisplay {
     position: relative;
     display: block;
 }
-
 
 #profilebanner {
     height: 200px;
@@ -791,7 +769,6 @@ body {
     border: 2px solid #aaaaaa80;
     border-radius: 20px;
     outline: none;
-
 }
 
 .settingsTabKeys {
@@ -800,10 +777,7 @@ body {
     justify-content: left;
     margin-top: 10px;
     margin-bottom: 10px;
-
-
 }
-
 
 .settingsTabKeys input,
 .settingsTabKeys textarea {
@@ -892,7 +866,6 @@ body {
             rgba(255, 0, 0, 1) 100%);
 }
 
-
 .customColors {
     display: flex;
     flex-direction: column;
@@ -901,7 +874,6 @@ body {
     border-radius: 15px;
     margin-top: 30px;
     margin-bottom: 30px;
-
 }
 
 .customColors label {
@@ -929,6 +901,7 @@ body {
     margin: 5px;
 }
 
+/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
 input[type='range'] {
     -webkit-appearance: none;
     width: 50%;
@@ -943,7 +916,6 @@ input[type='range'] {
 input[type='range']:hover {
     opacity: 1;
 }
-
 
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -976,7 +948,4 @@ input[type='range']::-webkit-slider-thumb {
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-
-
-
 }

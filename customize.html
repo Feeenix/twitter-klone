@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="hoved.css">
 </head>
 <style>
-    
-
     .inputfield {
         display: flex;
         width: 300px;
@@ -70,12 +68,17 @@
                     </div>
                     <div id="feed">
                         <div id="setupProfile">
+
                             <div class="settingsheader" value="0">What do you want to be called?</div>
                             <div class="inputfield">
 
                                 <input style="display: block;" type="text" class="inputText"
                                     placeholder="Håkon lærerson...">
-                                <input style="display: none;" type="file" accept="image/*" class="inputFile">
+
+
+                                <button style="display: none;">Upload Image</button>
+                                <input id="uploadFile" style="display: none;" type="file" accept="image/*" class="inputFile">
+
                                 <textarea style="display: none;" class="inputTextarea"
                                     placeholder="Write your bio..."></textarea>
                             </div>
@@ -123,10 +126,10 @@
     clearHistory();
 
     let knapper = document.querySelectorAll("#setupButtons>*")
-    
+
     for (let i = 0; i < knapper.length; i++) {
         knapper[i].addEventListener("click", function () {
-            nextPrompt(skip=(i!=1));
+            nextPrompt(skip = (i != 1));
         })
     }
 
@@ -159,7 +162,7 @@
 
             console.log(type, data)
             if (data.length > 0) {
-                let objektTing = {[nokkel]:data}
+                let objektTing = { [nokkel]: data }
                 leggTilDataPaaBruker(loggetInnBruker, objektTing)
             }
         }

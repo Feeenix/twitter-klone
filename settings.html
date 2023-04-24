@@ -194,34 +194,34 @@
 
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditOtherSound">Bark sounds</label>
-                                <div class="horisontalFlex colorThemes">
+                                <div class="horisontalFlex ">
                                     <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeLight">On</label>
-                                        <input type="radio" name="colorThemeType"
-                                            id="settingsEditAppearanceColorThemeLight"
-                                            class="settingsEditAppearanceColorThemeType" checked>
+                                        <label for="settingsEditOtherSoundOn">On</label>
+                                        <input type="radio" name="barkSound"
+                                            id="settingsEditOtherSoundOn"
+                                            class="settingsEditOtherSoundType" checked>
                                     </div>
                                     <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeDark">Off</label>
-                                        <input type="radio" name="colorThemeType"
-                                            id="settingsEditAppearanceColorThemeDark"
-                                            class="settingsEditAppearanceColorThemeType">
+                                        <label for="settingsEditOtherSoundOff">Off</label>
+                                        <input type="radio" name="barkSound"
+                                            id="settingsEditOtherSoundOff"
+                                            class="settingsEditOtherSoundType">
                                     </div>
                                   
                                 </div>
                             </div>
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditOtherText">Bark text</label>
-                                <div class="horisontalFlex colorThemes">
+                                <div class="horisontalFlex">
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeLight">On</label>
-                                        <input type="radio" name="colorThemeType"
+                                        <input type="radio" name="barkText"
                                             id="settingsEditAppearanceColorThemeLight"
                                             class="settingsEditAppearanceColorThemeType" checked>
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeDark">Off</label>
-                                        <input type="radio" name="colorThemeType"
+                                        <input type="radio" name="barkText"
                                             id="settingsEditAppearanceColorThemeDark"
                                             class="settingsEditAppearanceColorThemeType">
                                     </div>
@@ -337,7 +337,7 @@
         }
 
     }
-    let colorThemeButtons = document.querySelectorAll(".radioElement");
+    let colorThemeButtons = document.querySelectorAll(".colorThemes .radioElement");
     for (let i = 0; i < colorThemeButtons.length; i++) {
         colorThemeButtons[i].addEventListener("click", selectRadioIfClicked);
     }

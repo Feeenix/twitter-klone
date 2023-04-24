@@ -953,4 +953,23 @@ input[type='range']::-webkit-slider-thumb {
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    
+}
+.tweetheader {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    margin-top: 40px;
+}
+
+#flexBark {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-right: 20px;
+    width: 100%;
+
 }

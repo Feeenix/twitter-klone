@@ -138,7 +138,7 @@
 
 
                         </div>
-                        <div id="settingsEditAppearance" class="settingsTabKeys" style="display: block;">
+                        <div id="settingsEditAppearance" class="settingsTabKeys" style="display: none;">
                             <div class="inputfield">
                                 <div class="settingssTitles">Color theme</div>
 
@@ -190,24 +190,22 @@
 
 
                         </div>
-                        <div id="settingsEditOther" class="settingsTabKeys" style="display: block;">
+                        <div id="settingsEditOther" class="settingsTabKeys" style="display: none;">
 
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditOtherSound">Bark sounds</label>
                                 <div class="horisontalFlex ">
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherSoundOn">On</label>
-                                        <input type="radio" name="barkSound"
-                                            id="settingsEditOtherSoundOn"
+                                        <input type="radio" name="barkSound" id="settingsEditOtherSoundOn"
                                             class="settingsEditOtherSoundType" checked>
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherSoundOff">Off</label>
-                                        <input type="radio" name="barkSound"
-                                            id="settingsEditOtherSoundOff"
+                                        <input type="radio" name="barkSound" id="settingsEditOtherSoundOff"
                                             class="settingsEditOtherSoundType">
                                     </div>
-                                  
+
                                 </div>
                             </div>
                             <div class="inputfield">
@@ -215,17 +213,15 @@
                                 <div class="horisontalFlex">
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeLight">On</label>
-                                        <input type="radio" name="barkText"
-                                            id="settingsEditAppearanceColorThemeLight"
+                                        <input type="radio" name="barkText" id="settingsEditAppearanceColorThemeLight"
                                             class="settingsEditAppearanceColorThemeType" checked>
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeDark">Off</label>
-                                        <input type="radio" name="barkText"
-                                            id="settingsEditAppearanceColorThemeDark"
+                                        <input type="radio" name="barkText" id="settingsEditAppearanceColorThemeDark"
                                             class="settingsEditAppearanceColorThemeType">
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
@@ -307,6 +303,57 @@
     clearHistory();
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
+
+    velgeoverskrifttabknapp({ target: { parentElement: { id: "settingsProfile" } } });
+
+    function velgeoverskrifttabknapp(e) {
+        let overskriftprofilknapp = document.querySelector("#settingsProfile");
+        let overskriftappearanceknapp = document.querySelector("#settingsAppearance");
+        let overskriftotherknapp = document.querySelector("#settingsOther");
+        let underline = document.querySelectorAll(".line");
+        let settingsProfile = document.querySelector("#settingsEditProfile");
+        let settingsAppearance = document.querySelector("#settingsEditAppearance");
+        let settingsOther = document.querySelector("#settingsEditOther");
+
+        if (e.target.parentElement.id == "settingsProfile") {
+            overskriftprofilknapp.children[0].children[0].style.display = "block"
+            overskriftappearanceknapp.children[0].children[0].style.display = "none"
+            overskriftotherknapp.children[0].children[0].style.display = "none"
+
+            settingsProfile.style.display = "block";
+            settingsAppearance.style.display = "none";
+            settingsOther.style.display = "none";
+
+
+        }
+        if (e.target.parentElement.id == "settingsAppearance") {
+            overskriftprofilknapp.children[0].children[0].style.display = "none"
+            overskriftappearanceknapp.children[0].children[0].style.display = "block"
+            overskriftotherknapp.children[0].children[0].style.display = "none"
+
+            settingsProfile.style.display = "none";
+            settingsAppearance.style.display = "block";
+            settingsOther.style.display = "none";
+
+        }
+        if (e.target.parentElement.id == "settingsOther") {
+            overskriftprofilknapp.children[0].children[0].style.display = "none"
+            overskriftappearanceknapp.children[0].children[0].style.display = "none"
+            overskriftotherknapp.children[0].children[0].style.display = "block"
+
+            settingsProfile.style.display = "none";
+            settingsAppearance.style.display = "none";
+            settingsOther.style.display = "block";
+
+
+
+        }
+    }
+    let overskriftKnapper = document.querySelectorAll(".overskriftknapp");
+    for (let i = 0; i < overskriftKnapper.length; i++) {
+        overskriftKnapper[i].addEventListener("click", velgeoverskrifttabknapp);
+    }
+
 
     let range = document.querySelector(".fontsizeflex input");
     range.addEventListener("change", changefontsizepreview);

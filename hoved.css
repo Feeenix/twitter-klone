@@ -6,16 +6,16 @@
 body {
 
     /* darkmode */
-
+/* 
     --globalbg: #282c34;
     --globalbg2: #282c34cd;
-    --globalfg: #ffffff;
+    --globalfg: #ffffff; */
 
     /* lightmode */
 
-    /* --globalbg: #ffffff;
+    --globalbg: #ffffff;
     --globalbg2: #ffffffcd;
-    --globalfg: #404040; */
+    --globalfg: #404040;
 
     /* font-size: 16px; */
 

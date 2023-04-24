@@ -959,7 +959,7 @@ input[type='range']::-webkit-slider-thumb {
     font-weight: 700;
     margin-bottom: 10px;
     font-size: 1.5em;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 #flexBark {
@@ -973,3 +973,48 @@ input[type='range']::-webkit-slider-thumb {
     width: 100%;
 
 }
+
+.barker{
+    display: flex;
+   
+    justify-content: center;
+    
+}
+
+#feeden {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: none;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    margin-right: 20px;
+    width: 100%;
+}
+
+
+
+#tweetTextArea {
+    width: 90%;
+    height: 200px;
+    border-radius: 15px;
+    border: #aaaaaa20 solid 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    resize: none;
+    font-size: 1.25em;
+    font-weight: 400;
+}
+
+#tweetTextArea:focus {
+    outline: none;
+    border: #aaaaaa60 solid 5px;
+}
+
+#tweetTextArea::placeholder {
+    font-size: 1.125em;
+    
+}
+

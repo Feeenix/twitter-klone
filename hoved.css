@@ -749,6 +749,9 @@ body {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+.inputFile + .vanligKnapp{
+    margin: 0 auto;
+}
 
 .inputTextarea {
     padding: 10px;

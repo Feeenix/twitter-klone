@@ -6,7 +6,7 @@
 body {
 
     /* darkmode */
-/* 
+    /* 
     --globalbg: #282c34;
     --globalbg2: #282c34cd;
     --globalfg: #ffffff; */
@@ -24,7 +24,6 @@ body {
     background-color: var(--globalbg);
     margin: 0px;
 }
-
 
 * {
     font-family: Inter;
@@ -52,7 +51,6 @@ body {
     border-radius: 10px;
     border-color: #9279ff;
     color: #404040;
-
 }
 
 .vanligKnapp:hover {
@@ -101,7 +99,6 @@ body {
     flex-direction: row;
 }
 
-
 .hiddenButton {
     background-color: #80808000;
     transition-duration: 100ms;
@@ -126,8 +123,6 @@ body {
     padding-right: 15px;
     border-radius: 9999px;
     text-align: left;
-
-
 }
 
 .genericButton:hover {
@@ -159,9 +154,7 @@ body {
     /* background-color: lightblue; */
     display: flex;
     flex-direction: row;
-
 }
-
 
 #midtkolonne {
     /* background-color: blue; */
@@ -240,7 +233,6 @@ body {
     padding: 10px;
     justify-content: space-between;
     width: 100%;
-
 }
 
 .profilknapp>div {
@@ -249,7 +241,6 @@ body {
     align-items: center;
     width: fit-content;
 }
-
 
 .profilknapp>div>img {
     margin-right: 10px;
@@ -281,7 +272,6 @@ body {
     justify-content: space-between;
     width: calc(100% - 20px);
     border-radius: 10px;
-
 }
 
 .whotofollowheader {
@@ -298,7 +288,6 @@ body {
 }
 
 /* .whotofollowperson a{
-
 } */
 
 #logo.hiddenButton {
@@ -332,7 +321,6 @@ body {
     margin: 0 auto;
 
     position: relative;
-
 }
 
 .line {
@@ -380,9 +368,7 @@ body {
     font-size: 1em;
     max-width: 200px;
     background-color: transparent;
-
 }
-
 
 .boldText {
     font-weight: 700;
@@ -411,7 +397,6 @@ body {
     padding-right: 55px;
     font-size: 1.25em;
     border-radius: 9999px;
-
 }
 
 .aatweetknapp:hover {
@@ -496,7 +481,6 @@ body {
     margin-right: 5px;
 }
 
-
 #popupLogout {
     display: none;
     position: absolute;
@@ -563,7 +547,7 @@ body {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *,#setupProfile * ) {
+    .genericButton:not(#profilePfpShare *, #setupProfile *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -585,9 +569,6 @@ body {
     .largeWidth {
         display: none;
     }
-
-
-
 }
 
 @media only screen and (min-width: 880px) {
@@ -600,15 +581,12 @@ body {
     .smallWidth {
         display: none;
     }
-
 }
-
 
 .profileDisplay {
     position: relative;
     display: block;
 }
-
 
 #profilebanner {
     height: 200px;
@@ -644,6 +622,22 @@ body {
     border: #aaaaaa20 solid 5px;
     /* box-shadow: 0px 0px 10px 10px var(--globalbg); */
     object-fit: fill;
+    background-color: var(--globalbg);
+}
+
+.imagePreview>.profileImgCustomize {
+    border-radius: 9999px;
+    border: #aaaaaa20 solid 5px;
+    object-fit: fill;
+    width: 150px;
+    height: 150px;
+}
+
+.imagePreview>.bannerImgCustomize {
+    /* border: #aaaaaa20 solid 5px; */
+    height: 200px;
+    width: 700px;
+    object-fit: cover;
 }
 
 #viewprofileTopp {
@@ -720,6 +714,7 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 #setupButtons>* {
     margin-right: 10px;
     margin-left: 10px;
@@ -744,15 +739,21 @@ body {
     margin-bottom: 30px;
     margin-top: 10px;
 }
+
 .inputFile {
     padding: 10px;
     border: 2px solid #aaaaaa80;
+    background-color: var(--globalbg);
     border-radius: 9999px;
     /* background-color: #baaaff30; */
     margin-bottom: 10px;
     margin-top: 10px;
 }
-.inputTextarea{
+.inputFile + .vanligKnapp{
+    margin: 0 auto;
+}
+
+.inputTextarea {
     padding: 10px;
     background-color: var(--globalbg);
     border: 2px solid #aaaaaa80;
@@ -764,6 +765,7 @@ body {
     max-height: 200px;
     resize: vertical;
 }
+
 .inputText {
     background-color: var(--globalbg);
     padding: 12px 20px;
@@ -772,7 +774,6 @@ body {
     border: 2px solid #aaaaaa80;
     border-radius: 20px;
     outline: none;
-
 }
 
 .settingsTabKeys {
@@ -781,31 +782,31 @@ body {
     justify-content: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    
-
 }
 
-
-.settingsTabKeys input, .settingsTabKeys textarea {
+.settingsTabKeys input,
+.settingsTabKeys textarea {
     margin-bottom: 15px;
     margin-top: 10px;
     width: 300px;
     margin-left: 25px;
     margin-right: 20px;
 }
+
 .settingsTabKeys .settingssTitles {
     margin-bottom: 10px;
     margin-top: 10px;
     font-weight: 700;
     font-size: 1.25em;
     margin-left: 20px;
-    margin-right: 20px;}
+    margin-right: 20px;
+}
 
 .settingsTabKeys .inputfield {
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
-.horisontalFlex{
+.horisontalFlex {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -820,7 +821,8 @@ body {
     margin: 5px;
     margin-bottom: 10px;
 }
-.radioElement>input{
+
+.radioElement>input {
     /* width: 10px;
     height: 10px; */
     width: 100%;
@@ -828,11 +830,13 @@ body {
     margin: 5px;
     vertical-align: baseline;
 }
-.radioElement>*{
+
+.radioElement>* {
     margin: 5px;
 }
+
 .radioElement label {
-margin-top: 7.1px;
+    margin-top: 7.1px;
 }
 
 .grayBorder {
@@ -840,36 +844,34 @@ margin-top: 7.1px;
     border: 2px solid #aaaaaa80;
     border-radius: 9999px;
 }
-.colorThemes>*:nth-child(1){
+
+.colorThemes>*:nth-child(1) {
     background-color: white;
     color: #404040;
     margin-left: 25px;
 }
-.colorThemes>*:nth-child(2){
+
+.colorThemes>*:nth-child(2) {
     background-color: #282c34;
     color: white;
 }
 
 .colorThemes>*:nth-child(3) {
-    background: linear-gradient(
-        100deg,
-        rgba(255, 0, 0, 1) 0%,
-        rgba(255, 154, 0, 1) 15%,
-        rgba(208, 222, 33, 1) 28%,
-        rgba(79, 220, 74, 1) 39%,
-        rgba(63, 218, 216, 1) 50%,
-        rgba(47, 201, 226, 1) 55%,
-        rgba(28, 127, 238, 1) 60%,
-        rgba(95, 21, 242, 1) 66%,
-        rgba(186, 12, 248, 1) 72%,
-        rgba(251, 7, 217, 1) 85%,
-        rgba(255, 0, 0, 1) 100%
-    );
-    color: white
+    background: linear-gradient(100deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 15%,
+            rgba(208, 222, 33, 1) 28%,
+            rgba(79, 220, 74, 1) 39%,
+            rgba(63, 218, 216, 1) 50%,
+            rgba(47, 201, 226, 1) 55%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 66%,
+            rgba(186, 12, 248, 1) 72%,
+            rgba(251, 7, 217, 1) 85%,
+            rgba(255, 0, 0, 1) 100%);
 }
 
-
-.customColors{
+.customColors {
     display: flex;
     flex-direction: column;
     margin-left: 25px;
@@ -877,11 +879,12 @@ margin-top: 7.1px;
     border-radius: 15px;
     margin-top: 30px;
     margin-bottom: 30px;
-
 }
+
 .customColors label {
     font-weight: 400;
 }
+
 .customColors input {
 
     width: 50px;
@@ -898,11 +901,13 @@ margin-top: 7.1px;
     margin-right: 20px;
     margin-bottom: 10px;
 }
+
 .fontsizeflex>* {
     margin: 5px;
 }
 
-input[type='range']{
+/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+input[type='range'] {
     -webkit-appearance: none;
     width: 50%;
     height: 5px;
@@ -912,10 +917,10 @@ input[type='range']{
     opacity: 0.7;
     margin-top: 20px;
 }
-input[type='range']:hover{
+
+input[type='range']:hover {
     opacity: 1;
 }
-
 
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -941,15 +946,13 @@ input[type='range']::-webkit-slider-thumb {
     margin-right: 10px;
 }
 
-#fontsizepreview{
+#fontsizepreview {
     font-size: 1.125em;
     font-weight: 400;
     margin-left: 25px;
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    
-    
     
 }
 .tweetheader {
@@ -968,4 +971,5 @@ input[type='range']::-webkit-slider-thumb {
     margin-left: 25px;
     margin-right: 20px;
     width: 100%;
+
 }

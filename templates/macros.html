@@ -143,3 +143,16 @@
     </div>
 {% endmacro %}
 
+{% macro pageTheme(user) %}
+    {% if user['settings']['theme'] == 'light' %}
+        class="lightMode"
+    {% elif user['settings']['theme'] == 'dark' %}
+        class="darkMode"
+    {% else %}
+        class="customTheme"
+        style="--globalbg:{{ user['settings']['background-color'] }};
+            --globalbg2:{{ user['settings']['background-color'] }};
+            --globalfg:{{ user['settings']['text-color'] }};"
+    {% endif %}
+{% endmacro %}
+

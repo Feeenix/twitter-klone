@@ -1,5 +1,6 @@
 
 {% from 'macros.html' import leftSidebar %}
+{% from 'macros.html' import pageTheme %}
 
 <html lang="en">
 
@@ -23,7 +24,7 @@
     }
 </style>
 
-<body class="{{ 'darkMode' if user['settings']['darkMode'] }}">
+<body {{ pageTheme(user) }}>
     <!-- To do!
     Nettsiden skal ha konstant bredde hvis bredden på skjermen er større en 1200 px 
     .container gjør dette for oss

@@ -1,6 +1,7 @@
 
 {% from 'macros.html' import rightSidebar %}
 {% from 'macros.html' import leftSidebar %}
+{% from 'macros.html' import pageTheme %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,17 +18,7 @@
 
 </style>
 
-<body
-    {% if user['settings']['theme'] == 'light' %}
-        class="lightMode"
-    {% elif user['settings']['theme'] == 'dark' %}
-        class="darkMode"
-    {% else %}
-        class="customTheme"
-        style="--globalbg:{{ user['settings']['background-color'] }};
-            --globalbg2:{{ user['settings']['background-color'] }};
-            --globalfg:{{ user['settings']['text-color'] }};"
-    {% endif %}">
+<body {{ pageTheme(user) }}>
     <!-- To do!
     Nettsiden skal ha konstant bredde hvis bredden på skjermen er større en 1200 px 
     .container gjør dette for oss

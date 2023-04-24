@@ -18,9 +18,9 @@
         "location": "Norway",
         "joined": "2023-04-23 11:27:12",
         "settings": {
-            "theme": "custom",
-            "background-color": "#b9b6b6",
-            "text-color": "#000000",
+            "theme": "dark",
+            "background-color": "#d35f5f",
+            "text-color": "#2406bc",
             "font": "Inter",
             "font-size": "1em"
         }

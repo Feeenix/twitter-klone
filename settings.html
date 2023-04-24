@@ -175,9 +175,60 @@
                                 </div>
 
                             </div>
+                            <div class="inputfield">
+                                <div class="settingssTitles">Font Size</div>
+                                <div id="fontsizepreview">
+                                    Current Fontsize is 16px
+                                </div>
+                                <div class="fontsizeflex">
+
+                                    <div class="litenfontsizetext"> aA </div>
+                                    <input type="range" step="4" min="12" max="24">
+                                    <div class="storfontsizetext"> aA </div>
+                                </div>
+                            </div>
+
 
                         </div>
-                        <div id="settingsEditOther" class="settingsTabKeys" style="display: none;">
+                        <div id="settingsEditOther" class="settingsTabKeys" style="display: block;">
+
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditOtherSound">Bark sounds</label>
+                                <div class="horisontalFlex colorThemes">
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeLight">On</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeLight"
+                                            class="settingsEditAppearanceColorThemeType" checked>
+                                    </div>
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeDark">Off</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeDark"
+                                            class="settingsEditAppearanceColorThemeType">
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <div class="inputfield">
+                                <label class="settingssTitles" for="settingsEditOtherText">Bark text</label>
+                                <div class="horisontalFlex colorThemes">
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeLight">On</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeLight"
+                                            class="settingsEditAppearanceColorThemeType" checked>
+                                    </div>
+                                    <div class="radioElement grayBorder">
+                                        <label for="settingsEditAppearanceColorThemeDark">Off</label>
+                                        <input type="radio" name="colorThemeType"
+                                            id="settingsEditAppearanceColorThemeDark"
+                                            class="settingsEditAppearanceColorThemeType">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
 
 
                         </div>
@@ -257,8 +308,16 @@
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
 
+    let range = document.querySelector(".fontsizeflex input");
+    range.addEventListener("change", changefontsizepreview);
 
+    function changefontsizepreview() {
+        let fontsize = document.querySelector("#fontsizepreview");
+        let fontsizeinput = document.querySelector(".fontsizeflex input");
+        fontsize.innerHTML = "Current Fontsize is " + fontsizeinput.value + "px";
 
+    }
+    changefontsizepreview()
 
 
     function selectRadioIfClicked(e) {

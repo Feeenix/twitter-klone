@@ -6,7 +6,7 @@
 body {
 
     /* darkmode */
-/* 
+    /* 
     --globalbg: #282c34;
     --globalbg2: #282c34cd;
     --globalfg: #ffffff; */
@@ -563,7 +563,7 @@ body {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *,#setupProfile * ) {
+    .genericButton:not(#profilePfpShare *, #setupProfile *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -646,6 +646,21 @@ body {
     object-fit: fill;
 }
 
+.imagePreview>.profileImgCustomize {
+    border-radius: 9999px;
+    border: #aaaaaa20 solid 5px;
+    object-fit: fill;
+    width: 150px;
+    height: 150px;
+}
+
+.imagePreview>.bannerImgCustomize {
+    /* border: #aaaaaa20 solid 5px; */
+    height: 200px;
+    width: 700px;
+    object-fit: cover;
+}
+
 #viewprofileTopp {
     display: flex;
     flex-direction: row;
@@ -720,6 +735,7 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 #setupButtons>* {
     margin-right: 10px;
     margin-left: 10px;
@@ -744,6 +760,7 @@ body {
     margin-bottom: 30px;
     margin-top: 10px;
 }
+
 .inputFile {
     padding: 10px;
     border: 2px solid #aaaaaa80;
@@ -752,7 +769,8 @@ body {
     margin-bottom: 10px;
     margin-top: 10px;
 }
-.inputTextarea{
+
+.inputTextarea {
     padding: 10px;
     background-color: var(--globalbg);
     border: 2px solid #aaaaaa80;
@@ -764,6 +782,7 @@ body {
     max-height: 200px;
     resize: vertical;
 }
+
 .inputText {
     background-color: var(--globalbg);
     padding: 12px 20px;
@@ -781,31 +800,34 @@ body {
     justify-content: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    
+
 
 }
 
 
-.settingsTabKeys input, .settingsTabKeys textarea {
+.settingsTabKeys input,
+.settingsTabKeys textarea {
     margin-bottom: 15px;
     margin-top: 10px;
     width: 300px;
     margin-left: 25px;
     margin-right: 20px;
 }
+
 .settingsTabKeys .settingssTitles {
     margin-bottom: 10px;
     margin-top: 10px;
     font-weight: 700;
     font-size: 1.25em;
     margin-left: 20px;
-    margin-right: 20px;}
+    margin-right: 20px;
+}
 
 .settingsTabKeys .inputfield {
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
-.horisontalFlex{
+.horisontalFlex {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -820,7 +842,8 @@ body {
     margin: 5px;
     margin-bottom: 10px;
 }
-.radioElement>input{
+
+.radioElement>input {
     /* width: 10px;
     height: 10px; */
     width: 100%;
@@ -828,11 +851,13 @@ body {
     margin: 5px;
     vertical-align: baseline;
 }
-.radioElement>*{
+
+.radioElement>* {
     margin: 5px;
 }
+
 .radioElement label {
-margin-top: 7.1px;
+    margin-top: 7.1px;
 }
 
 .grayBorder {
@@ -840,35 +865,35 @@ margin-top: 7.1px;
     border: 2px solid #aaaaaa80;
     border-radius: 9999px;
 }
-.colorThemes>*:nth-child(1){
+
+.colorThemes>*:nth-child(1) {
     background-color: white;
     color: #404040;
     margin-left: 25px;
 }
-.colorThemes>*:nth-child(2){
+
+.colorThemes>*:nth-child(2) {
     background-color: #282c34;
     color: white;
 }
 
 .colorThemes>*:nth-child(3) {
-    background: linear-gradient(
-        100deg,
-        rgba(255, 0, 0, 1) 0%,
-        rgba(255, 154, 0, 1) 15%,
-        rgba(208, 222, 33, 1) 28%,
-        rgba(79, 220, 74, 1) 39%,
-        rgba(63, 218, 216, 1) 50%,
-        rgba(47, 201, 226, 1) 55%,
-        rgba(28, 127, 238, 1) 60%,
-        rgba(95, 21, 242, 1) 66%,
-        rgba(186, 12, 248, 1) 72%,
-        rgba(251, 7, 217, 1) 85%,
-        rgba(255, 0, 0, 1) 100%
-    );
+    background: linear-gradient(100deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 15%,
+            rgba(208, 222, 33, 1) 28%,
+            rgba(79, 220, 74, 1) 39%,
+            rgba(63, 218, 216, 1) 50%,
+            rgba(47, 201, 226, 1) 55%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 66%,
+            rgba(186, 12, 248, 1) 72%,
+            rgba(251, 7, 217, 1) 85%,
+            rgba(255, 0, 0, 1) 100%);
 }
 
 
-.customColors{
+.customColors {
     display: flex;
     flex-direction: column;
     margin-left: 25px;
@@ -878,9 +903,11 @@ margin-top: 7.1px;
     margin-bottom: 30px;
 
 }
+
 .customColors label {
     font-weight: 400;
 }
+
 .customColors input {
 
     width: 50px;
@@ -897,11 +924,12 @@ margin-top: 7.1px;
     margin-right: 20px;
     margin-bottom: 10px;
 }
+
 .fontsizeflex>* {
     margin: 5px;
 }
 
-input[type='range']{
+input[type='range'] {
     -webkit-appearance: none;
     width: 50%;
     height: 5px;
@@ -911,7 +939,8 @@ input[type='range']{
     opacity: 0.7;
     margin-top: 20px;
 }
-input[type='range']:hover{
+
+input[type='range']:hover {
     opacity: 1;
 }
 
@@ -940,14 +969,14 @@ input[type='range']::-webkit-slider-thumb {
     margin-right: 10px;
 }
 
-#fontsizepreview{
+#fontsizepreview {
     font-size: 1.125em;
     font-weight: 400;
     margin-left: 25px;
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    
-    
-    
+
+
+
 }

@@ -163,7 +163,7 @@ def newUser(username, password, name):
                 "location": "Mars",
                 "joined": datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"),
                 "settings": {
-                    "darkMode": False,
+                    "theme": "light",
                     "background-color": "#ffffff",
                     "text-color": "#000000",
                     "font": "Inter",
@@ -593,22 +593,31 @@ def updateProfilePOST():
 
         # Theme
         elif field == "theme":
-            logInfo(f"f: {request.form}")
             themeType = request.form.get("colorThemeType")
             if not themeType:
                 logError("No themeType in form")
                 return "a"
 
             if themeType == "0":
-                users[username]["settings"]["darkMode"] = False
+                users[username]["settings"]["theme"] = "light"
             elif themeType == "1":
-                users[username]["settings"]["darkMode"] = True
+                users[username]["settings"]["theme"] = "dark"
             elif themeType == "2":
-                users[username]["settings"]["darkMode"] = False
-                # some stuff here
+                users[username]["settings"]["theme"] = "custom"
             else:
                 logError(f"Unknown themeType {themeType} in updateProfilePOST")
                 return "a"
+
+        elif field == "customColors":
+            bgColor = request.form.get("bgColor")
+            fgColor = request.form.get("fgColor")
+            if not bgColor or not fgColor:
+                logError("No bgColor or fgColor in form")
+                return "a"
+
+            users[username]["settings"]["background-color"] = bgColor
+            users[username]["settings"]["text-color"] = fgColor
+
         else:
             logError(f"Unknown field {field} in updateProfilePOST")
             return "a"

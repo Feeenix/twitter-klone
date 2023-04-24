@@ -18,8 +18,8 @@
         "location": "Norway",
         "joined": "2023-04-23 11:27:12",
         "settings": {
-            "darkMode": true,
-            "background-color": "#ffffff",
+            "theme": "custom",
+            "background-color": "#b9b6b6",
             "text-color": "#000000",
             "font": "Inter",
             "font-size": "1em"
@@ -41,7 +41,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -64,7 +64,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -87,7 +87,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -110,7 +110,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -133,7 +133,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -156,7 +156,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -179,7 +179,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -202,7 +202,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -225,7 +225,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -248,7 +248,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:51:55",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
@@ -273,7 +273,7 @@
         "location": "Mars",
         "joined": "2023-04-23 11:54:23",
         "settings": {
-            "darkMode": false,
+            "theme": "ligt",
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",

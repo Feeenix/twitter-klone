@@ -5,18 +5,23 @@
 
 body {
 
-    /* lightmode */
-
-    --globalbg: #ffffff;
-    --globalbg2: #ffffffcd;
-    --globalfg: #404040;
-
     /* font-size: 16px; */
 
     color: var(--globalfg);
     --overskriftfarge: var(--globalbg2);
     background-color: var(--globalbg);
     margin: 0px;
+}
+
+body.lightMode {
+
+    /* lightmode */
+
+    --globalbg: #ffffff;
+    --globalbg2: #ffffffcd;
+    --globalfg: #404040;
+
+    transition: all 0.1s linear;
 }
 
 body.darkMode {
@@ -26,6 +31,12 @@ body.darkMode {
     --globalbg: #282c34;
     --globalbg2: #282c34cd;
     --globalfg: #ffffff;
+
+    transition: all 0.1s linear;
+}
+
+body.customTheme {
+    transition: all 0.1s linear;
 }
 
 
@@ -310,6 +321,9 @@ body.darkMode {
     margin-top: 20px;
     padding: 20px;
     border-radius: 10px;
+}
+
+.maxHeight {
     max-height: 50%;
 }
 
@@ -665,6 +679,7 @@ body.darkMode {
     border: #aaaaaa20 solid 5px;
     /* box-shadow: 0px 0px 10px 10px var(--globalbg); */
     object-fit: fill;
+    background-color: var(--globalbg);
 }
 
 #viewprofileTopp {
@@ -768,6 +783,7 @@ body.darkMode {
 .inputFile {
     padding: 10px;
     border: 2px solid #aaaaaa80;
+    background-color: var(--globalbg);
     border-radius: 9999px;
     /* background-color: #baaaff30; */
     margin-bottom: 10px;
@@ -776,6 +792,7 @@ body.darkMode {
 .inputTextarea{
     padding: 10px;
     border: 2px solid #aaaaaa80;
+    background-color: var(--globalbg);
     border-radius: 5px;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -785,7 +802,7 @@ body.darkMode {
     resize: vertical;
 }
 .inputText {
-
+    background-color: var(--globalbg);
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;

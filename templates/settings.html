@@ -17,7 +17,17 @@
 
 </style>
 
-<body class="{{ 'darkMode' if user['settings']['darkMode'] }}">
+<body
+    {% if user['settings']['theme'] == 'light' %}
+        class="lightMode"
+    {% elif user['settings']['theme'] == 'dark' %}
+        class="darkMode"
+    {% else %}
+        class="customTheme"
+        style="--globalbg:{{ user['settings']['background-color'] }};
+            --globalbg2:{{ user['settings']['background-color'] }};
+            --globalfg:{{ user['settings']['text-color'] }};"
+    {% endif %}">
     <!-- To do!
     Nettsiden skal ha konstant bredde hvis bredden på skjermen er større en 1200 px 
     .container gjør dette for oss
@@ -65,7 +75,7 @@
                                     <input type="text" id="settingsEditProfileDisplayName"
                                         name="settingsEditProfileDisplayName" class="inputText"
                                         value="{{ user['name'] }}" placeholder="Micahale jacksonscript"
-                                        oninput="formSubmit(this);">
+                                        oninput="formSubmit(this, '#profileDisplayName');">
                                     <input type="hidden" name="field" value="name">
                                 </div>
                             </form>
@@ -74,7 +84,7 @@
                                 <div class="inputfield">
                                     <label class="settingssTitles" for="settingsEditProfileBanner">Profile banner</label>
                                     <input type="file" id="settingsEditProfileBanner" name="settingsEditProfileBanner"
-                                        class="inputFile" onchange="formSubmit(this);">
+                                        class="inputFile" onchange="imageSubmit(event, this, '#profilebannerimg');">
                                     <input type="hidden" name="field" value="profileBanner">
                                 </div>
                             </form>
@@ -83,7 +93,7 @@
                                 <div class="inputfield">
                                     <label class="settingssTitles" for="settingsEditProfilePicture">Profile picture</label>
                                     <input type="file" id="settingsEditProfilePicture" name="settingsEditProfilePicture"
-                                        class="inputFile" onchange="formSubmit(this);">
+                                        class="inputFile" onchange="imageSubmit(event, this, '#overskriftPfp');">
                                     <input type="hidden" name="field" value="profilePicture">
                                 </div>
                             </form>
@@ -92,7 +102,7 @@
                                 <div class="inputfield">
                                     <label class="settingssTitles" for="settingsEditProfileBio">Bio</label>
                                     <textarea id="settingsEditProfileBio" name="settingsEditProfileBio" class="inputTextarea"
-                                        placeholder="Rewrite your bio..." oninput="formSubmit(this);">{{ user['bio'] }}</textarea>
+                                        placeholder="Rewrite your bio..." oninput="formSubmit(this, '#profileBio');">{{ user['bio'] }}</textarea>
                                     <input type="hidden" name="field" value="bio">
                                 </div>
                             </form>
@@ -101,7 +111,7 @@
                                 <div class="inputfield">
                                     <label class="settingssTitles" for="settingsEditProfileLocation">Location</label>
                                     <input type="text" id="settingsEditProfileLocation" name="settingsEditProfileLocation"
-                                        class="inputText" value="{{ user['location'] }}" placeholder="Mars" oninput="formSubmit(this);">
+                                        class="inputText" value="{{ user['location'] }}" placeholder="Mars" oninput="formSubmit(this, '#profileLocationName');">
                                     <input type="hidden" name="field" value="location">
                                 </div>
                             </form>
@@ -109,54 +119,60 @@
 
                         </div>
                         <div id="settingsEditAppearance" class="settingsTabKeys" style="display: block;">
-                            <form action="/updateProfile" method="POST" target="invisibleIframe">
-                                <div class="inputfield">
-                                    <div class="settingssTitles">Color theme</div>
+                            <div class="inputfield">
+                                <div class="settingssTitles">Color theme</div>
 
-                                    <div class="horisontalFlex colorThemes">
-                                        <div class="radioElement grayBorder">
-                                            <label for="settingsEditAppearanceColorThemeLight">Light</label>
-                                            <input type="radio" name="colorThemeType"
-                                                id="settingsEditAppearanceColorThemeLight"
-                                                class="settingsEditAppearanceColorThemeType"
-                                                value="0"
-                                                {% if not user['settings']['darkMode'] %}
-                                                    checked
-                                                {% endif %}>
+                                    <form action="/updateProfile" method="POST" target="invisibleIframe">
+                                        <div class="horisontalFlex colorThemes">
+                                            <div class="radioElement grayBorder">
+                                                <label for="settingsEditAppearanceColorThemeLight">Light</label>
+                                                <input type="radio" name="colorThemeType"
+                                                    id="settingsEditAppearanceColorThemeLight"
+                                                    class="settingsEditAppearanceColorThemeType"
+                                                    value="0"
+                                                    {% if user['settings']['theme'] == 'light' %}
+                                                        checked
+                                                    {% endif %}>
+                                            </div>
+                                            <div class="radioElement grayBorder">
+                                                <label for="settingsEditAppearanceColorThemeDark">Dark</label>
+                                                <input type="radio" name="colorThemeType"
+                                                    id="settingsEditAppearanceColorThemeDark"
+                                                    class="settingsEditAppearanceColorThemeType"
+                                                    value="1"
+                                                    {% if user['settings']['theme'] == 'dark' %}
+                                                        checked
+                                                    {% endif %}>
+                                            </div>
+                                            <div class="radioElement grayBorder">
+                                                <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
+                                                <input type="radio" name="colorThemeType"
+                                                    id="settingsEditAppearanceColorThemeCustom"
+                                                    class="settingsEditAppearanceColorThemeType"
+                                                    value="2"
+                                                    {% if user['settings']['theme'] == 'custom' %}
+                                                        checked
+                                                    {% endif %}>
+                                            </div>
                                         </div>
-                                        <div class="radioElement grayBorder">
-                                            <label for="settingsEditAppearanceColorThemeDark">Dark</label>
-                                            <input type="radio" name="colorThemeType"
-                                                id="settingsEditAppearanceColorThemeDark"
-                                                class="settingsEditAppearanceColorThemeType"
-                                                value="1"
-                                                {% if user['settings']['darkMode'] %}
-                                                    checked
-                                                {% endif %}>
-                                        </div>
-                                        <div class="radioElement grayBorder">
-                                            <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
-                                            <input type="radio" name="colorThemeType"
-                                                id="settingsEditAppearanceColorThemeCustom"
-                                                class="settingsEditAppearanceColorThemeType"
-                                                value="2">
-                                        </div>
-                                    </div>
+
+                                        <input type="hidden" name="field" value="theme">
+                                </form>
+                                <form id="customColorsForm" action="/updateProfile" method="POST" target="invisibleIframe">
 
                                     <div class="customColors grayBorder">
                                         <div class="horisontalFlex">
                                             <label for="customColorBackground">Background Color:</label>
-                                            <input type="color" name="" id="customColorBackground">
+                                            <input value="{{ user['settings']['background-color'] }}" onchange="updateCustomCSS();" type="color" name="bgColor" id="customColorBackground">
                                         </div>
                                         <div class="horistontalFlex">
                                             <label for="customColorText">Text Color:</label>
-                                            <input type="color" name="" id="customColorText">
+                                            <input value="{{ user['settings']['text-color'] }}" onchange="updateCustomCSS();" type="color" name="fgColor" id="customColorText">
                                         </div>
                                     </div>
-                                    <input type="hidden" name="field" value="theme">
-                                </div>
-                            </form>
-
+                                    <input type="hidden" name="field" value="customColors">
+                                </form>
+                            </div>
                         </div>
                         <div id="settingsEditOther" class="settingsTabKeys" style="display: none;">
 
@@ -170,39 +186,39 @@
 
                     <div class="whotofollow">
                         <div class="whotofollowheader">Preview</div>
-                        <div class="whotofollowbody">
+                        <div>
                             <div class="profileDisplay">
                                 <div id="profilebanner">
-                                    <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                    <img src="static/userpics/{{ user['bannerImage'] }}"
                                         alt="profilebanner" id="profilebannerimg">
 
                                 </div>
 
                                 <div id="profilePfpShare">
                                     <div>
-                                        <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                        <img src="static/userpics/{{ user['profileImage'] }}"
                                             alt="pfp" id="overskriftPfp" width="150" height="150">
                                     </div>
                                     <button class="genericButton vanligKnapp">Follow</button>
                                 </div>
                                 <div id="profileTextBody">
 
-                                    <h3 id="profileDisplayName">Elon Musk</h3>
-                                    <div id="profileBrukernavn">@elonmusk</div>
-                                    <div id="profileBio">i am a spaceX engineer bla bla bal...</div>
+                                    <h3 id="profileDisplayName">{{ user['name'] }}</h3>
+                                    <div id="profileBrukernavn">@{{ user['username'] }}</div>
+                                    <div id="profileBio">{{ user['bio'] }}</div>
 
                                     <div id="profileLocation">
                                         <img id="profileLocationIcon" src="" alt="map marker icon">
-                                        <div id="profileLocationName">MArs</div>
+                                        <div id="profileLocationName">{{ user['location'] }}</div>
                                     </div>
 
                                     <div id="profileFollowingFollowers">
                                         <div id="profileFollowing">
-                                            <div>300</div>
+                                            <div>{{ user['following']|length }}</div>
                                             <div>Following</div>
                                         </div>
                                         <div id="profileFollowers">
-                                            <div>300</div>
+                                            <div>{{ user['followers']|length }}</div>
                                             <div>Followers</div>
                                         </div>
                                     </div>
@@ -231,6 +247,18 @@
 <script src="static/javascript/leftSidebar.js"></script>
 <script>
 
+    function updateCustomCSS() {
+        let form = document.querySelector("#customColorsForm");
+        form.submit();
+
+        bgEl = document.querySelector("#customColorBackground");
+        fgEl = document.querySelector("#customColorText");
+
+        document.body.style.setProperty("--globalbg", bgEl.value);
+        document.body.style.setProperty("--globalbg2", bgEl.value);
+        document.body.style.setProperty("--globalfg", fgEl.value);
+    }
+
     function selectRadioIfClicked(e) {
         let id = ""
         if (e.target.tagName != "DIV") {
@@ -241,14 +269,34 @@
             e.target.children[1].checked = true;
         }
 
-        if (id == "settingsEditAppearanceColorThemeCustom") {
-            document.querySelector(".customColors").style.display = "flex";
-        } else {
+        if (id == "settingsEditAppearanceColorThemeLight") {
             document.querySelector(".customColors").style.display = "none";
+            document.body.classList.remove("darkMode");
+            document.body.classList.add("lightMode");
+            document.body.classList.remove("customTheme");
+
+            document.body.style.removeProperty("--globalbg");
+            document.body.style.removeProperty("--globalbg2");
+            document.body.style.removeProperty("--globalfg");
+        } else if (id == "settingsEditAppearanceColorThemeDark") {
+            document.querySelector(".customColors").style.display = "none";
+            document.body.classList.add("darkMode");
+            document.body.classList.remove("lightMode");
+            document.body.classList.remove("customTheme");
+
+            document.body.style.removeProperty("--globalbg");
+            document.body.style.removeProperty("--globalbg2");
+            document.body.style.removeProperty("--globalfg");
+        } else if (id == "settingsEditAppearanceColorThemeCustom") {
+            document.querySelector(".customColors").style.display = "flex";
+            document.body.classList.remove("darkMode");
+            document.body.classList.remove("lightMode");
+            document.body.classList.add("customTheme");
+            updateCustomCSS();
         }
 
         input = document.querySelector("#" + id);
-        input.parentElement.parentElement.parentElement.parentElement.submit();
+        input.parentElement.parentElement.parentElement.submit();
 
     }
     let colorThemeButtons = document.querySelectorAll(".radioElement");
@@ -256,8 +304,19 @@
         colorThemeButtons[i].addEventListener("click", selectRadioIfClicked);
     }
 
-    function formSubmit(input) {
+    function formSubmit(input, previewID) {
         input.parentElement.parentElement.submit();
+        var el = document.querySelector(previewID);
+        el.innerHTML = input.value;
+    }
+
+    function imageSubmit(event, input, previewID) {
+        input.parentElement.parentElement.submit();
+        var output = document.querySelector(previewID);
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        };
     }
 
 

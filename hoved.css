@@ -743,6 +743,7 @@ body {
 .inputFile {
     padding: 10px;
     border: 2px solid #aaaaaa80;
+    background-color: var(--globalbg);
     border-radius: 9999px;
     /* background-color: #baaaff30; */
     margin-bottom: 10px;

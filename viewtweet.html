@@ -79,40 +79,25 @@
                 <div id="popupLogout" tabindex="0">
                     <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
                         class="genericButton hiddenButton">Profil</a>
-                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton"
+                        tabindex="0">Innstillinger</a>
                     <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
                 </div>
             </div>
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
+
                     <div id="overskrift">
-                        <div id="overskrifttekst">Home</div>
-                        <div id="overskrifttabs">
-                            <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
-                                <div>
-                                    Following
-                                    <div class="line"></div>
-                                </div>
+                        <div id="viewprofileTopp">
+                            <button class="backButton genericButton hiddenButton">
+                                <img src="bilder/pil_svart.png" alt="arrow" width="30">
                             </button>
-                            <button id="overskriftall" class="overskriftknapp hiddenButton">
-                                <div>
-                                    All
-                                    <div class="line"></div>
-                                </div>
-                            </button>
+                            <h3>Bark</h3>
                         </div>
+
                     </div>
+
                     <div id="feed">
-
-
-
-
-
-
-
-
-
-
                         <div class="tweet">
                             <div class="profilbildekolonne">
                                 <img class="profilbilde"
@@ -162,6 +147,74 @@
                         </div>
 
 
+                        <div id="commentsection">
+                            <div id="addComment">
+                                aaaaaaaaaaaa
+                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                            </div>
+                            <div id="comments">
+                                <div class="comment">
+                                    <div class="indentLinjer">
+                                        <div class="indentLinje"></div>
+                                        <div class="indentLinje"></div>
+                                        <div class="indentLinje"></div>
+                                        <div class="indentLinje"></div>
+                                    </div>
+                                    <div class="tweet">
+                                        <div class="profilbildekolonne">
+                                            <img class="profilbilde"
+                                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                                alt="pfp" height="50" width="50">
+                                            <div class="indentLinjePrime">
+                                            </div>
+                                        </div>
+                                        <div class="tweetkolonne">
+                                            <div class="forfatterinfo">
+                                                <div>Name Lastname</div>
+                                                <div>@elonmusk</div>
+                                                <div>14h</div>
+                                            </div>
+                                            <div class="tweettekst">
+                                                I am a tweet
+                                            </div>
+                                            <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
+
+                                            <div class="tweetknapper">
+
+                                                <button title="trykk for å legge til en kommentar"
+                                                    class="tweetknappkommentar tweetknapp genericButton hiddenButton">
+                                                    <span title="10000">10.0k</span>
+                                                    <img src="bilder/comment_hul.png" height="20" alt="Kommentarer">
+                                                </button>
+
+                                                <button title="trykk for å retweete"
+                                                    class="tweetknappretweet tweetknapp genericButton hiddenButton">
+                                                    <span title="10000">10.0k</span>
+                                                    <img src="bilder/retweet_hul.png" height="20" alt="Retweets">
+
+                                                </button>
+
+                                                <button title="trykk for å like"
+                                                    class="tweetknapplikes tweetknapp genericButton hiddenButton">
+                                                    <span title="10000">10.0k</span>
+                                                    <img src="bilder/heart_hul.png" height="20" alt="Likes">
+
+                                                </button>
+
+                                                <button title="Views"
+                                                    class="tweetknappviews tweetknapp genericButton hidden">
+                                                    <span title="10000">10.0k</span>
+                                                    <img src="bilder/eye_hul.png" height="30" alt="Views">
+
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
 
 
 
@@ -276,7 +329,7 @@
             </div>
 
         </div>
-        
+
 
     </div>
 
@@ -289,7 +342,6 @@
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
 <script>
-    clearHistory();
     leggTilHistory();
 
     let buttonLogout = document.querySelector("#popupLogoutButton");

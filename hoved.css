@@ -334,7 +334,7 @@ body {
 }
 
 .tweet {
-    margin-bottom: 1000px;
+    /* margin-bottom: 1000px; */
 }
 
 #sok {
@@ -1093,4 +1093,44 @@ input[type='range']::-webkit-slider-thumb {
     height: 100%;
     object-fit: scale-down;
     border-radius: 15px;
+}
+
+#commentsection {
+
+}
+.indentLinjer{
+    display: flex;
+    flex-direction: row;
+    height: 0px;
+
+}
+.indentLinje{
+    margin-left: 25px;
+    margin-right: 3px;
+    height: 100%;
+    width: 2px;
+    background-color: #aaaaaa20;
+}
+.comment {
+    display: flex;
+    flex-direction: row;
+
+}
+.comment .tweet {
+    border-bottom: none;
+}
+.indentLinjePrime {
+    height: 200px;
+    width: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #aaaaaa20;
+
+}
+.comment .profilbildekolonne {
+    padding-left: 0px;
+}
+.comment .tweetkolonne {
+    justify-content: flex-start;
+    height: fit-content;
 }

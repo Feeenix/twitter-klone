@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page </title>
+    <link rel="stylesheet" href="hoved.css">
+</head>
+<style>
+
+
+</style>
+
+
+<body>
+    <!-- To do!
+    Nettsiden skal ha konstant bredde hvis bredden på skjermen er større en 1200 px 
+    .container gjør dette for oss
+    vi skal dele opp .container i en venstre- og høyrekolonne der høyrekolonne tar størst plass
+    venstrekolonne vil bli delt opp i 2 deler den ene er logo + meny. den andre delen er bruker sin profil
+    Høyre kolonne vil bli delt opp i 2 deler den ene er størst og vil ligge mer mot midten av siden vi kaller denne Midtkolonne. den andre delen vil fungere som en sidebar hvor man kan søke etter bruker og kunen følge tilfeldige bruker som er valgt av programmet 
+    Midtkolonnen vil bli delt opp i 2 deler overskift/tabs og den andre delen vil være en feed. -->
+
+
+
+    <div class="container">
+        <div class="hovedflex">
+            <div id="venstrekolonne">
+                <div id="meny">
+                    <a href="home.html" id="logo" class="hiddenButton">
+                        <img src="bilder/BARK.png" width="40" alt="BARK.png" class="logoIkon">
+                    </a>
+                    <div id="menyknapper">
+                        <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
+                            <img src="bilder/home.png" height="30" alt="">
+                            <div class="buttonText">Hjem</div>
+                        </a>
+
+                        <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
+                            <img src="bilder/search_hul.png" height="30" alt="">
+                            <div class="buttonText">Søk</div>
+                        </a>
+
+                        <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
+                            id="menyprofil">
+                            <img src="bilder/profil_hul.png" height="30" alt="">
+                            <div class="buttonText">Profil</div>
+                        </a>
+                        <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
+                            <img src="bilder/settings_hul.png" height="30" alt="">
+                            <div class="buttonText">Innstillinger</div>
+                        </a>
+
+                    </div>
+
+                </div>
+                <div class="profil">
+                    <button class="profilknapp genericButton hiddenButton">
+
+                        <div>
+                            <img class="profilbilde"
+                                src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                alt="pfp" height="50" width="50">
+                            <div class="mediumWidth profilnavn">
+                                <div class="mediumWidth profilNavnNavn">Navn</div>
+                                <div class="mediumWidth profilNavnId">@Brukernavn</div>
+                            </div>
+
+
+
+                        </div>
+                        <div id="mediumWidth menyindikator">
+                            <img src="bilder/tredots.png" width="30" height="30" alt="" class="mediumWidth">
+                        </div>
+                    </button>
+                </div>
+                <div id="popupLogout" tabindex="0">
+                    <a href="viewprofile.html?brukernavn=brukernavn" id="popupViewProfile" tabindex="0"
+                        class="genericButton hiddenButton">Profil</a>
+                    <a href="settings.html" id="popupSettings" class="genericButton hiddenButton" tabindex="0">Innstillinger</a>
+                    <button id="popupLogoutButton" class="genericButton hiddenButton" tabindex="0"> Logg ut</button>
+                </div>
+            </div>
+            <div id="hoyrekolonne">
+                <div id="midtkolonne">
+                    <div id="overskrift">
+                        <div id="overskrifttekst">Home</div>
+                        <div id="overskrifttabs">
+                            <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
+                                <div>
+                                    Following
+                                    <div class="line"></div>
+                                </div>
+                            </button>
+                            <button id="overskriftall" class="overskriftknapp hiddenButton">
+                                <div>
+                                    All
+                                    <div class="line"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="feed">
+
+
+
+
+
+
+
+
+
+
+                        <div class="tweet">
+                            <div class="profilbildekolonne">
+                                <img class="profilbilde"
+                                    src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                    alt="pfp" height="50" width="50">
+                            </div>
+                            <div class="tweetkolonne">
+                                <div class="forfatterinfo">
+                                    <div>Name Lastname</div>
+                                    <div>@elonmusk</div>
+                                    <div>14h</div>
+                                </div>
+                                <div class="tweettekst">
+                                    I am a tweet
+                                </div>
+                                <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
+
+                                <div class="tweetknapper">
+
+                                    <button title="trykk for å legge til en kommentar"
+                                        class="tweetknappkommentar tweetknapp genericButton hiddenButton">
+                                        <span title="10000">10.0k</span>
+                                        <img src="bilder/comment_hul.png" height="20" alt="Kommentarer">
+                                    </button>
+
+                                    <button title="trykk for å retweete"
+                                        class="tweetknappretweet tweetknapp genericButton hiddenButton">
+                                        <span title="10000">10.0k</span>
+                                        <img src="bilder/retweet_hul.png" height="20" alt="Retweets">
+
+                                    </button>
+
+                                    <button title="trykk for å like"
+                                        class="tweetknapplikes tweetknapp genericButton hiddenButton">
+                                        <span title="10000">10.0k</span>
+                                        <img src="bilder/heart_hul.png" height="20" alt="Likes">
+
+                                    </button>
+
+                                    <button title="Views" class="tweetknappviews tweetknapp genericButton hidden">
+                                        <span title="10000">10.0k</span>
+                                        <img src="bilder/eye_hul.png" height="30" alt="Views">
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <a class="smallWidth fixedbunnhoyre aatweetknapp " tabindex="0">
+                            BARK
+                            <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+                        </a>
+
+
+                    </div>
+
+                </div>
+                <div id="sidebar">
+                    <div id="sok">
+                        <input type="text" placeholder="Search on the Bark web..." id="sokfelt"></input>
+                        <div>
+                            <button id="fjernQueryKnapp" class="hiddenButton">
+                                <img src="bilder/clear_hul.png" width="20" height="20" alt="fjernQueryKnapp">
+                            </button>
+                            <button id="sokknapp" class="hiddenButton">
+                                <!-- når denne trykkes skal vi navigere til en ny side som ligner
+                                 -->
+                                <img src="bilder/search_hul.png" width="25" height="25" alt="sokeknapp">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="whotofollow">
+                        <div class="whotofollowheader">Who to follow</div>
+                        <div class="whotofollowbody">
+
+                            <div class="whotofollowperson">
+
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
+                                    <div>
+                                        <img class="profilbilde"
+                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                            alt="pfp" height="50" width="50">
+                                        <div class="profilnavn">
+                                            <div class="profilNavnNavn">Navn</div>
+                                            <div class="profilNavnId">@Brukernavn</div>
+                                        </div>
+                                    </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
+
+                            </div>
+                            <div class="whotofollowperson">
+
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
+                                    <div>
+                                        <img class="profilbilde"
+                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                            alt="pfp" height="50" width="50">
+                                        <div class="profilnavn">
+                                            <div class="profilNavnNavn">Navn</div>
+                                            <div class="profilNavnId">@Brukernavn</div>
+                                        </div>
+                                    </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
+
+                            </div>
+                            <div class="whotofollowperson">
+
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
+                                    <div>
+                                        <img class="profilbilde"
+                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                            alt="pfp" height="50" width="50">
+                                        <div class="profilnavn">
+                                            <div class="profilNavnNavn">Navn</div>
+                                            <div class="profilNavnId">@Brukernavn</div>
+                                        </div>
+                                    </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
+
+                            </div>
+                            <div class="whotofollowperson">
+
+                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
+                                    class="folgePerson hiddenButton">
+                                    <div>
+                                        <img class="profilbilde"
+                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
+                                            alt="pfp" height="50" width="50">
+                                        <div class="profilnavn">
+                                            <div class="profilNavnNavn">Navn</div>
+                                            <div class="profilNavnId">@Brukernavn</div>
+                                        </div>
+                                    </div>
+                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <a class="bunnhoyre aatweetknapp " tabindex="0">
+                        BARK
+                        <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+
+    </div>
+
+
+
+
+</body>
+
+<script src="javascript/lib.js"></script>
+<script src="javascript/redirectHvisLoggetUt.js"></script>
+<script src="javascript/urlbarHistory.js"></script>
+<script>
+    clearHistory();
+    leggTilHistory();
+
+    let buttonLogout = document.querySelector("#popupLogoutButton");
+    buttonLogout.addEventListener("click", loggUtBruker);
+
+    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
+    fjernQueryKnapp.addEventListener("click", clearSearch);
+
+    function clearSearch() {
+        let sokfeltEl = document.querySelector("#sokfelt");
+        sokfeltEl.value = "";
+        sokfeltEl.focus();
+    }
+
+
+    function search() {
+        let sokfeltEl = document.querySelector("#sokfelt");
+        let query = sokfeltEl.value;
+        if (query.length > 0) {
+            window.location.href = "search.html?query=" + query;
+        }
+    }
+
+
+
+
+    let profil = document.querySelector(".profil > button");
+    let popupElement = document.querySelector("#popupLogout");
+
+    document.querySelector("#overskriftfollowing").addEventListener("focus", gjemPopup)
+    popupElement.addEventListener("blur", gjemPopup);
+
+    profil.addEventListener("focus", visPopup);
+
+    profil.addEventListener("blur", gjemPopup);
+    gjemPopup();
+    async function gjemPopup() {
+        await sleep(10);
+
+        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
+        let harFokus = false;
+        for (let i = 0; i < elementer.length; i++) {
+            if (elementer[i] == document.activeElement) {
+                harFokus = true;
+            }
+        }
+        if (harFokus) {
+            return
+        }
+
+        console.log("gjemPopup");
+        let popupLogout = document.querySelector("#popupLogout");
+        popupLogout.style.display = "none";
+
+    }
+    function visPopup() {
+        console.log("visPopup");
+        let popupLogout = document.querySelector("#popupLogout");
+        popupLogout.style.display = "block";
+    }
+
+
+    let menyprofil = document.querySelector("#menyprofil");
+    menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
+    menyprofil.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearHistory();
+        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
+    });
+
+
+</script>
+
+</html>

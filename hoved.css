@@ -351,6 +351,16 @@ body {
     border-radius: 9999px;
     border: rgba(222, 230, 232, 0.6) solid 1px;
 }
+#sok:focus-within {
+    border: #baaaff solid 1px;
+}
+#sokfelt {
+    border: none;
+}
+#sokfelt:focus {
+    outline: none;
+    
+}
 
 #sok button {
     border-radius: 9999px;

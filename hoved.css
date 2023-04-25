@@ -451,12 +451,12 @@ body {
     margin-bottom: 10px;
 }
 
-.forfatterinfo>* {
+.forfatterinfo>div {
     margin-right: 15px;
     opacity: 0.8;
 }
 
-.forfatterinfo>*:nth-child(1) {
+.forfatterinfo>div:nth-child(1) {
     font-weight: 700;
     opacity: 1;
 }
@@ -1122,10 +1122,10 @@ input[type='range']::-webkit-slider-thumb {
 
 .indentLinjePrime {
     height: calc(100% - 50px);
-    width: 2px;
+    width: 3px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #aaaaaa20;
+    background-color: #aaaaaa40;
 
 }
 
@@ -1140,7 +1140,10 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 
-
+#addComment{
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px ;
+    padding-bottom: 15px;
+}
 #addComment .tweetInputs {
     border-radius: 15px;
     border: #aaaaaa20 solid 5px;
@@ -1154,7 +1157,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 #addComment #tweetTextArea {
-    width: 60%;
+    width: calc(100% - 10px);
     height: 60px;
     border: none;
     padding: 10px;
@@ -1167,5 +1170,29 @@ input[type='range']::-webkit-slider-thumb {
 }
 #tweetTextArea::placeholder {
     font-size: 1em;
+}
+#addComment .tweettekstBark {
+    width: 100%;
+    max-width: 693px;
+}
 
+.tweetTopRad {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.commentProfilbilde {
+    margin-right: 15px;
+}
+#addComment .forfatterinfo>div:nth-child(1) {
+    font-weight: 400;
+    opacity: 0.6;
+}
+#addComment .forfatterinfo>div:nth-child(1)>* {
+    font-weight: 700;
+    opacity: 1;
+}
+.bold {
+    font-weight: 700;
+    opacity: 1;
 }

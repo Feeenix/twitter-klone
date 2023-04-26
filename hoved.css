@@ -1157,7 +1157,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 #addComment #tweetTextArea {
-    width: calc(100% - 10px);
+    width: calc(95%);
     height: 60px;
     border: none;
     padding: 10px;

@@ -57,7 +57,7 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
 
 
 
-let whoToFollowButtons = document.querySelectorAll(".whotofollow button");
+let whoToFollowButtons = document.querySelectorAll(".whotofollowbody button");
 for (let i = 0; i < whoToFollowButtons.length; i++) {
     let button = whoToFollowButtons[i];
     button.addEventListener("click", whoToFollowOrUnfollow);

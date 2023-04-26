@@ -7,8 +7,10 @@ function leggTilHistory() {
     }
     let currentUrl = window.location.href;
 
+    if (history[history.length - 1] == currentUrl) {
+        return;
+    }
     history.push(currentUrl);
-    console.log(typeof history)
     localStorage.setItem("history", JSON.stringify(history));
 }
 function popHistory() {

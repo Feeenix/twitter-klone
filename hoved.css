@@ -133,6 +133,23 @@ body {
     cursor: unset;
 }
 
+.aatweetknapp {
+    border: none;
+    background-color: #baaaff;
+    color: white;
+    margin: 0 auto;
+    padding: 15px;
+    padding-left: 55px;
+    padding-right: 55px;
+    font-size: 1.25em;
+    border-radius: 20px;
+}
+
+.aatweetknapp:hover {
+    background-color: #a99aff;
+    cursor: pointer;
+}
+
 #venstrekolonne {
     padding-top: 15px;
     flex: 0.6;
@@ -161,6 +178,8 @@ body {
     flex: 2;
     border-right: rgba(222, 230, 232, 0.6) solid 1px;
     max-width: 750px;
+    position: relative;
+
 }
 
 #sidebar {
@@ -394,6 +413,11 @@ body {
     margin: none;
 }
 
+#midtkolonne>.bunnhoyre {
+    bottom: 50px;
+    right: 40px;
+}
+
 .bunnhoyre {
     position: absolute;
     bottom: 100px;
@@ -401,22 +425,6 @@ body {
     margin: none;
 }
 
-.aatweetknapp {
-    border: none;
-    background-color: #baaaff;
-    color: white;
-    margin: 0 auto;
-    padding: 15px;
-    padding-left: 55px;
-    padding-right: 55px;
-    font-size: 1.25em;
-    border-radius: 20px;
-}
-
-.aatweetknapp:hover {
-    background-color: #a99aff;
-    cursor: pointer;
-}
 
 .tweet {
     display: flex;
@@ -613,7 +621,75 @@ body {
     .smallWidth {
         display: none;
     }
+
 }
+.telefontweeting{
+    display: none;
+}
+@media only screen and (max-width: 450px) {
+    .bunnhoyre {
+        display: none;
+    }
+    .verySmallWidth {
+        display: none;
+    }
+
+    .hovedflex {
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+
+    #venstrekolonne {
+        position: fixed;
+        bottom: 0;
+        flex-direction: row;
+        width: 100%;
+        top: auto;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        border-top: rgba(222, 230, 232, 0.6) solid 1px;
+        height: 70px;
+        z-index: 2;
+        background-color: var(--globalbg);
+    }
+
+    #meny {
+        flex-direction: row;
+
+    }
+
+    #menyknapper {
+        flex-direction: row;
+    }
+
+    .container {
+        height: 100vh;
+    }
+
+    .telefontweeting {
+        position: fixed;
+        display: block;
+        bottom: 75px;
+        right: 5px;
+        margin: none;
+        padding: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #feed{
+        bottom: auto;
+        top: 0px;
+
+        padding-top: 100000px;
+
+        height: 10px;
+        width: 100%;
+    }
+
+
+}
+
 
 .profileDisplay {
     position: relative;
@@ -1028,7 +1104,6 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 
-
 #tweetTextArea {
     width: 100%;
     height: 200px;
@@ -1140,20 +1215,21 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 
-#addComment{
-    border-bottom: rgba(222, 230, 232, 0.6) solid 1px ;
+#addComment {
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
     padding-bottom: 15px;
 }
+
 #addComment .tweetInputs {
     border-radius: 15px;
     border: #aaaaaa20 solid 5px;
-    
+
 }
 
 #addComment .tweetInputs:focus {
     outline: none;
     border: #aaaaaa60 solid 5px;
-    
+
 }
 
 #addComment #tweetTextArea {
@@ -1168,9 +1244,11 @@ input[type='range']::-webkit-slider-thumb {
     font-size: 1em;
     font-weight: 400;
 }
+
 #tweetTextArea::placeholder {
     font-size: 1em;
 }
+
 #addComment .tweettekstBark {
     width: 100%;
     max-width: 693px;
@@ -1181,18 +1259,38 @@ input[type='range']::-webkit-slider-thumb {
     flex-direction: row;
     margin-bottom: 10px;
 }
+
 .commentProfilbilde {
     margin-right: 15px;
 }
+
 #addComment .forfatterinfo>div:nth-child(1) {
     font-weight: 400;
     opacity: 0.6;
 }
+
 #addComment .forfatterinfo>div:nth-child(1)>* {
     font-weight: 700;
     opacity: 1;
 }
+
 .bold {
     font-weight: 700;
     opacity: 1;
+}
+
+
+.sokTopp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.sokTopp>#sok {
+    width: min-content;
+    margin-left: 0px;
+
 }

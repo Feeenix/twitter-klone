@@ -520,9 +520,12 @@ body {
 .tweetknapp>*:nth-child(1) {
     margin-right: 5px;
 }
-input,textarea {
+
+input,
+textarea {
     position: relative;
 }
+
 #popupLogout {
     display: none;
     position: absolute;
@@ -530,7 +533,7 @@ input,textarea {
     left: calc(5% + 30px);
     /* width: 300px; */
     background-color: #aaaaaa20;
-    z-index: 9999;
+    z-index: -99999999;
     padding: 15px;
     border-radius: 20px;
     min-width: 170px;
@@ -588,7 +591,7 @@ input,textarea {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *) {
+    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *,#popupLogout *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -626,13 +629,19 @@ input,textarea {
 }
 
 
-.telefontweeting{
+.telefontweeting {
     display: none;
 }
+
 @media only screen and (max-width: 450px) {
-    .bunnhoyre, .fixedbunnhoyre  {
+    #menyprofil, #menyinnstillinger {
         display: none;
     }
+    .bunnhoyre,
+    .fixedbunnhoyre {
+        display: none;
+    }
+
     .verySmallWidth {
         display: none;
     }
@@ -654,6 +663,7 @@ input,textarea {
         border-top: rgba(222, 230, 232, 0.6) solid 1px;
         height: 70px;
         z-index: 2;
+        justify-content: center;
         background-color: var(--globalbg);
     }
 
@@ -661,9 +671,21 @@ input,textarea {
         flex-direction: row;
 
     }
+    #logo.hiddenButton {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 
     #menyknapper {
         flex-direction: row;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *) {
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        padding: 10px;
+        height: min-content;
     }
 
     .container {
@@ -680,15 +702,23 @@ input,textarea {
         padding-left: 20px;
         padding-right: 20px;
     }
-    #feed{
+
+    #feed {
         bottom: auto;
         top: 0px;
+        /* padding-bottom: 100px; */
 
-        padding-top: 100000px;
+        /* padding-top: 100000px; */
 
         height: 10px;
         width: 100%;
     }
+
+    #feed>*:last-child {
+        margin-bottom: 100px;
+    }
+
+
 
 
 }

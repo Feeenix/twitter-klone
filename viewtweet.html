@@ -439,8 +439,7 @@
 <script>
     leggTilHistory();
 
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
+    
 
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
@@ -462,7 +461,8 @@
 
 
 
-
+    let buttonLogout = document.querySelector("#popupLogoutButton");
+    buttonLogout.addEventListener("click", loggUtBruker);
     let profil = document.querySelector(".profil > button");
     let popupElement = document.querySelector("#popupLogout");
 
@@ -472,7 +472,19 @@
     profil.addEventListener("focus", visPopup);
 
     profil.addEventListener("blur", gjemPopup);
+    profil.addEventListener("click", togglePopup);
     gjemPopup();
+
+    function togglePopup() {
+        let popupLogout = document.querySelector("#popupLogout");
+        if (popupLogout.style.display == "block") {
+            popupLogout.style.display = "none";
+        } else {
+
+            popupLogout.style.display = "block";
+        }
+    }
+
     async function gjemPopup() {
         await sleep(10);
 

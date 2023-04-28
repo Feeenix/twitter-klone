@@ -1322,6 +1322,8 @@ input[type='range']::-webkit-slider-thumb {
 
 .sokTopp>#sok {
     width: min-content;
-    margin-left: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 
 }

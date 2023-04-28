@@ -177,6 +177,28 @@ function lagTilfeldigeBrukere(antall) {
     }
 }
 
+function listeBrukereQuery(query) {
+    let users = hentFraLocalStorage("users")
+    let usernames = Object.keys(users);
+    let output = [];
+    
+    for (let i = 0; i < usernames.length; i++) {
+        // match regex
+        if (usernames[i].match(query) || users[usernames[i]]["displayName"].match(query) || users[usernames[i]]["bio"].match(query) || users[usernames[i]]["location"].match(query)) {
+            output.push([
+                usernames[i],
+                users[usernames[i]]["displayName"],
+                users[usernames[i]]["profileImage"]
+            ]);
+        }
+        // if (output.length >= 15) {
+        //     break;
+        // }
+        
+    }
+    console.log(output)
+    return output;
+}
 
 function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en array med brukernavn som ikke er følgt av brukernavn
     let bruker = hentBruker(brukernavn);

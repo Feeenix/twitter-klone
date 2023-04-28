@@ -1,6 +1,12 @@
 
-
-let whoToFollowUsers = listeBrukereSomIkkeErFolgt(hentInnloggetBrukerId(), 4);
+let htmlfilnavn = window.location.pathname.split("/").pop();
+let whoToFollowUsers = []
+if (htmlfilnavn == "sok.html") {
+    whoToFollowUsers = listeBrukereQuery(hentURLSearchParams()["query"]);
+    
+} else {
+    whoToFollowUsers = listeBrukereSomIkkeErFolgt(hentInnloggetBrukerId(), 4);
+}
 let whotofollowbody = document.querySelector(".whotofollowbody")
 console.log(whoToFollowUsers)
 for (let i = 0; i < whoToFollowUsers.length; i++) {
@@ -34,10 +40,15 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
     div3.innerHTML = "@" + whoToFollowUsers[i][0];
 
     let button = document.createElement("button");
-    button.innerHTML = "Follow";
+    if (folgerBruker(hentInnloggetBrukerId(), whoToFollowUsers[i][0])) {
+        button.innerHTML = "Unfollow";
+    } else {
+
+        button.innerHTML = "Follow";
+    }
     button.classList.add("follow");
     button.classList.add("vanligKnapp");
-    button.title="trykk for å følge"
+    button.title = "trykk for å følge"
 
 
     div1.appendChild(div2);

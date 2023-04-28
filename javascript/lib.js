@@ -184,7 +184,8 @@ function listeBrukereQuery(query) {
     
     for (let i = 0; i < usernames.length; i++) {
         // match regex
-        if (usernames[i].match(query) || users[usernames[i]]["displayName"].match(query) || users[usernames[i]]["bio"].match(query) || users[usernames[i]]["location"].match(query)) {
+        const re = new RegExp(query, "i")
+        if (usernames[i].match(re) || users[usernames[i]]["displayName"].match(re) || users[usernames[i]]["bio"].match(re) || users[usernames[i]]["location"].match(re)) {
             output.push([
                 usernames[i],
                 users[usernames[i]]["displayName"],

@@ -1,4 +1,6 @@
 let ls = localStorage
+let htmlfilnavn = window.location.pathname.split("/").pop();
+
 
 async function readfile(File) {
     const reader = new FileReader();
@@ -100,6 +102,13 @@ function hentBruker(brukernavn) { // returnerer et bruker-objekt fra localStorag
     return users[brukernavn];
 }
 
+function hentTweet(tweetId) { // returnerer et tweet-objekt fra localStorage
+    let tweets = hentFraLocalStorage("tweets");
+    if (tweets[tweetId] === undefined) { // hvis tweeten ikke finnes, returner et tomt objekt
+        return {};
+    }
+    return tweets[tweetId];
+}
 
 
 function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localStorage

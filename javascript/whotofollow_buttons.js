@@ -1,9 +1,8 @@
 
-let htmlfilnavn = window.location.pathname.split("/").pop();
 let whoToFollowUsers = []
 if (htmlfilnavn == "sok.html") {
     whoToFollowUsers = listeBrukereQuery(hentURLSearchParams()["query"]);
-    
+
 } else {
     whoToFollowUsers = listeBrukereSomIkkeErFolgt(hentInnloggetBrukerId(), 4);
 }

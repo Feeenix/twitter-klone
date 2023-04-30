@@ -115,6 +115,7 @@ function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localSto
     localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utlopstid": Date.now() + 1000 * 60 * 60 * 24 * 7 })); // utløpsdato er 7 dager fra nå
 }
 function hentInnloggetBrukerId() { // returnerer brukernavnet til den innlogget brukeren
+    
     return JSON.parse(localStorage.getItem("loggedInUser"))["brukernavn"];
 }
 function loggUtBruker() { // logger ut brukeren og redirecter til index.html

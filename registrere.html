@@ -118,6 +118,14 @@
             errorMessage.style.display = 'block';
             return
         }
+        if (brukernavn.match(/[^a-zA-Z\d]/g)) {
+            console.log('Brukernavnet kan bare inneholde symbolene: A-Z, a-z og 0-9');
+            let errorMessage = document.querySelector('.errorMessage');
+            errorMessage.innerHTML = 'Brukernavnet kan bare inneholde symbolene: A-Z, a-z og 0-9';
+            brukernavnEl.focus();
+            errorMessage.style.display = 'block';
+            return
+        }
         if (passord.length === 0) {
             console.log('Du må skrive inn passord');
             let errorMessage = document.querySelector('.errorMessage');

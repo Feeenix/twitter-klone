@@ -158,11 +158,11 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
         bio: "",
         status: "",
         settings: {
-            darkMode: false,
+            theme: "dark", // dark light custom
             "background-color": "#ffffff",
             "text-color": "#000000",
             "font": "Inter",
-            "font-size": "1em"
+            "font-size": "16px",
         }
     }
     lagreData(["users", brukernavn], bruker);

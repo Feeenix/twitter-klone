@@ -126,14 +126,14 @@
                             </div>
 
                             <div class="inputfield">
-                                <label class="settingssTitles" for="settingsEditProfileBio">Bio</label>
-                                <textarea id="settingsEditBio" name="settingsEditProfilePicture" class="inputTextarea"
+                                <label class="settingssTitles" for="settingsEditBio">Bio</label>
+                                <textarea id="settingsEditBio" name="settingsEditBio" class="inputTextarea"
                                     placeholder="Rewrite your bio..."></textarea>
                             </div>
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditProfileLocation">Location</label>
                                 <input type="text" id="settingsEditProfileLocation" name="settingsEditProfileLocation"
-                                    class="inputText" placeholder="Mars">
+                                    class="inputText" placeholder="Your Current City">
                             </div>
 
 
@@ -147,19 +147,22 @@
                                         <label for="settingsEditAppearanceColorThemeLight">Light</label>
                                         <input type="radio" name="colorThemeType"
                                             id="settingsEditAppearanceColorThemeLight"
-                                            class="settingsEditAppearanceColorThemeType" checked>
+                                            class="settingsEditAppearanceColorThemeType"
+                                            value="light">
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeDark">Dark</label>
                                         <input type="radio" name="colorThemeType"
                                             id="settingsEditAppearanceColorThemeDark"
-                                            class="settingsEditAppearanceColorThemeType">
+                                            class="settingsEditAppearanceColorThemeType"
+                                            value="dark">
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
                                         <input type="radio" name="colorThemeType"
                                             id="settingsEditAppearanceColorThemeCustom"
-                                            class="settingsEditAppearanceColorThemeType">
+                                            class="settingsEditAppearanceColorThemeType"
+                                            value="custom">
                                     </div>
                                 </div>
 
@@ -213,14 +216,14 @@
                                 <label class="settingssTitles" for="settingsEditOtherText">Bark text</label>
                                 <div class="horisontalFlex">
                                     <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeLight">On</label>
-                                        <input type="radio" name="barkText" id="settingsEditAppearanceColorThemeLight"
-                                            class="settingsEditAppearanceColorThemeType" checked>
+                                        <label for="settingsEditOtherTextOn">On</label>
+                                        <input type="radio" name="barkText" id="settingsEditOtherTextOn"
+                                            class="settingsEditOtherTextType" checked>
                                     </div>
                                     <div class="radioElement grayBorder">
-                                        <label for="settingsEditAppearanceColorThemeDark">Off</label>
-                                        <input type="radio" name="barkText" id="settingsEditAppearanceColorThemeDark"
-                                            class="settingsEditAppearanceColorThemeType">
+                                        <label for="settingsEditOtherTextOff">Off</label>
+                                        <input type="radio" name="barkText" id="settingsEditOtherTextOff"
+                                            class="settingsEditOtherTextType">
                                     </div>
 
                                 </div>
@@ -304,6 +307,38 @@
     clearHistory();
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
+
+    function setPageState(){
+        let brukerId = hentInnloggetBrukerId();
+        let bruker = hentBruker(brukerId);
+        
+        // profile
+        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
+        settingsEditProfileDisplayName.value = bruker["displayName"];
+        settingsEditProfileDisplayName.placeholder = bruker["displayName"];
+
+        let settingsEditBio = document.querySelector("#settingsEditBio");
+        settingsEditBio.value = bruker["bio"];
+        
+        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
+        settingsEditProfileLocation.value = bruker["location"];
+        
+
+        // appearance
+        let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
+        for (let i = 0; i < themeRadios.length; i++) {
+            if (themeRadios[i].value == bruker["theme"]) {
+                themeRadios[i].checked = true;
+            } else {
+                themeRadios[i].checked = false;
+            }
+        }
+    }
+
+
+
+
+
 
     velgeoverskrifttabknapp({ target: { parentElement: { id: "settingsProfile" } } });
 

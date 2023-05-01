@@ -757,6 +757,8 @@ textarea {
 
 #profilePfpShare>div {
     position: relative;
+    width: 150px;
+    margin-right: 10px;
 }
 
 #profilePfpShare>div>img {

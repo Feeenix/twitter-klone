@@ -187,7 +187,7 @@
                                 <div class="fontsizeflex">
 
                                     <div class="litenfontsizetext"> aA </div>
-                                    <input type="range" step="4" min="12" max="24">
+                                    <input type="range" step="4" min="8" max="24">
                                     <div class="storfontsizetext"> aA </div>
                                 </div>
                             </div>
@@ -328,12 +328,23 @@
         // appearance
         let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
         for (let i = 0; i < themeRadios.length; i++) {
-            if (themeRadios[i].value == bruker["theme"]) {
+            if (themeRadios[i].value == bruker["settings"]["theme"]) {
                 themeRadios[i].checked = true;
             } else {
                 themeRadios[i].checked = false;
+                
+            }
+            if (bruker["settings"]["theme"] == "custom") {
+                document.querySelector(".customColors").style.display = "flex";
+            } else {
+                document.querySelector(".customColors").style.display = "none";
             }
         }
+        
+        let fontsizeflexInput = document.querySelector(".fontsizeflex>input"); 
+        fontsizeflexInput.value = bruker["settings"]["font-size"]
+
+
     }
 
 

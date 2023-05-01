@@ -533,11 +533,12 @@ textarea {
     left: calc(5% + 30px);
     /* width: 300px; */
     background-color: #aaaaaa20;
-    z-index: -99999999;
+    z-index: 100;
     padding: 15px;
     border-radius: 20px;
     min-width: 170px;
     /* width: 100px; */
+    backdrop-filter: blur(1px);
 }
 
 #popupLogout>* {
@@ -572,6 +573,7 @@ textarea {
         padding-left: 15px;
         padding-right: 15px;
         flex: 0;
+        z-index: 99;
     }
 
     .profilknapp {
@@ -649,6 +651,7 @@ textarea {
     .hovedflex {
         flex-direction: column-reverse;
         height: 100%;
+        z-index: 1;
     }
 
     #venstrekolonne {

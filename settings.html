@@ -202,12 +202,12 @@
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherSoundOn">On</label>
                                         <input type="radio" name="barkSound" id="settingsEditOtherSoundOn"
-                                            class="settingsEditOtherSoundType" checked>
+                                            class="settingsEditOtherSoundType" value="true">
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherSoundOff">Off</label>
                                         <input type="radio" name="barkSound" id="settingsEditOtherSoundOff"
-                                            class="settingsEditOtherSoundType">
+                                            class="settingsEditOtherSoundType" value="false">
                                     </div>
 
                                 </div>
@@ -218,12 +218,12 @@
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherTextOn">On</label>
                                         <input type="radio" name="barkText" id="settingsEditOtherTextOn"
-                                            class="settingsEditOtherTextType" checked>
+                                            class="settingsEditOtherTextType" value="true">
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherTextOff">Off</label>
                                         <input type="radio" name="barkText" id="settingsEditOtherTextOff"
-                                            class="settingsEditOtherTextType">
+                                            class="settingsEditOtherTextType" value="false">
                                     </div>
 
                                 </div>
@@ -308,7 +308,7 @@
     clearHistory();
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
-
+    setPageState();
     function setPageState(){
         let brukerId = hentInnloggetBrukerId();
         let bruker = hentBruker(brukerId);
@@ -336,15 +336,39 @@
             }
             if (bruker["settings"]["theme"] == "custom") {
                 document.querySelector(".customColors").style.display = "flex";
+                
             } else {
                 document.querySelector(".customColors").style.display = "none";
             }
         }
+        document.querySelector("#customColorText").value = bruker["settings"]["text-color"];
+        document.querySelector("#customColorBackground").value = bruker["settings"]["background-color"];
+            
         
         let fontsizeflexInput = document.querySelector(".fontsizeflex>input"); 
         fontsizeflexInput.value = bruker["settings"]["font-size"]
 
+        let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
+        for (let i = 0; i < barkSoundRadio.length; i++) {
+            if (barkSoundRadio[i].value == bruker["settings"]["barkSound"]) {
+                barkSoundRadio[i].checked = true;
+            } else {
+                barkSoundRadio[i].checked = false;
+                
+            }
+            
+        }
 
+        let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
+        for (let i = 0; i < barkTextRadio.length; i++) {
+            if (barkTextRadio[i].value == bruker["settings"]["barkText"]) {
+                barkTextRadio[i].checked = true;
+            } else {
+                barkTextRadio[i].checked = false;
+                
+            }
+            
+        }
     }
 
 

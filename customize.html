@@ -146,7 +146,6 @@
             let result = await readfile(file);
             document.querySelector(".imagePreview>img").src = result;
         }
-        reader.readAsDataURL(file);
     })
     document.querySelector(".imagePreview>img").src = "";
 

@@ -115,7 +115,7 @@ function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localSto
     localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utlopstid": Date.now() + 1000 * 60 * 60 * 24 * 7 })); // utløpsdato er 7 dager fra nå
 }
 function hentInnloggetBrukerId() { // returnerer brukernavnet til den innlogget brukeren
-    
+
     return JSON.parse(localStorage.getItem("loggedInUser"))["brukernavn"];
 }
 function loggUtBruker() { // logger ut brukeren og redirecter til index.html
@@ -169,10 +169,12 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
         status: "",
         settings: {
             theme: "dark", // dark light custom
-            "background-color": "#ffffff",
-            "text-color": "#000000",
+            "background-color": "#ffffff", // brukes bare i custom theme
+            "text-color": "#404040", // brukes bare i custom theme
             "font": "Inter",
             "font-size": "16px",
+            "barkSound": "true",
+            "barkText": "true",
         }
     }
     lagreData(["users", brukernavn], bruker);

@@ -444,6 +444,13 @@
         tweettekst.classList.add("tweettekst")
         tweettekst.innerHTML = post["text"]
 
+        if (post["image"]) {
+            let tweetbilde = document.createElement("img")
+            tweetbilde.classList.add("tweetbilde")
+            tweetbilde.src = post["image"]
+            tweetbilde.alt = "tweet bilde"
+            tweetkolonne.appendChild(tweetbilde)
+        }
       
 
 

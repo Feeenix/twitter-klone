@@ -368,76 +368,22 @@
     });
 
     function visFollowingTweets() {
-        let posts = [];
         let brukernavn = hentInnloggetBrukerId();
         let brukermeg = hentBruker(brukernavn);
         let following = brukermeg["following"];
-
-        for (let i = 0; i < following.length; i++) {
-
-            let followingbruker = hentBruker(following[i]);
-            let tweets = followingbruker["posts"];
-            console.log(tweets, followingbruker)
-            for (let j = 0; j < tweets.length; j++) {
-                let tweet = tweets[j];
-                posts.push(tweet);
-            }
-
-            let retweetids = followingbruker["retweets"];
-            for (let j = 0; j < retweetids.length; j++) {
-                let retweet = hentRetweet(retweetids[j]);
-                posts.push(retweet);
-            }
-
-
-        }
-
-        posts.sort(function (a, b) {
-            return b["posted"] - a["posted"];
-        });
-
         let feed = document.querySelector("#feed");
-        for (let i = 0; i < posts.length; i++) {
-            let post = posts[i];
-            let postElement = lagPostElement(post);
-            feed.prepend(postElement);
-        }
+        feed.innerHTML = "";
+        visTweets(following);
     }
     function visAllTweets() {
-        let posts = [];
         let alleBrukere = Object.keys(hentFraLocalStorage("users"));
-
-        for (let i = 0; i < alleBrukere.length; i++) {
-
-            let followingbruker = hentBruker(alleBrukere[i]);
-            let tweets = followingbruker["posts"];
-            console.log(tweets, followingbruker)
-            for (let j = 0; j < tweets.length; j++) {
-                let tweet = tweets[j];
-                posts.push(tweet);
-            }
-
-            let retweetids = followingbruker["retweets"];
-            for (let j = 0; j < retweetids.length; j++) {
-                let retweet = hentRetweet(retweetids[j]);
-                posts.push(retweet);
-            }
-
-        }
-
-        posts.sort(function (a, b) {
-            return b["posted"] - a["posted"];
-        });
-
         let feed = document.querySelector("#feed");
-        for (let i = 0; i < posts.length; i++) {
-            let post = posts[i];
-            let postElement = lagPostElement(post);
-            feed.prepend(postElement);
-        }
+        feed.innerHTML = "";
+        visTweets(alleBrukere);
     }
     
-    
+
+
 
 
 

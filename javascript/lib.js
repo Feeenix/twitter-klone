@@ -547,3 +547,31 @@ function formatTimestampPretty(a) {
     }
     return Math.floor(diffYears) + " år siden";
 }
+
+function visTweets(listeOverBrukere) {
+    let posts = [];
+    for (let i = 0; i < listeOverBrukere.length; i++) {
+        let followingbruker = hentBruker(listeOverBrukere[i]);
+        let tweets = followingbruker["posts"];
+        console.log(tweets, followingbruker)
+        for (let j = 0; j < tweets.length; j++) {
+            let tweet = tweets[j];
+            posts.push(tweet);
+        }
+        let retweetids = followingbruker["retweets"];
+        for (let j = 0; j < retweetids.length; j++) {
+            let retweet = hentRetweet(retweetids[j]);
+            posts.push(retweet);
+        }
+    }
+    posts.sort(function (a, b) {
+        return b["posted"] - a["posted"];
+    });
+
+    let feed = document.querySelector("#feed");
+    for (let i = 0; i < posts.length; i++) {
+        let post = posts[i];
+        let postElement = lagPostElement(post);
+        feed.prepend(postElement);
+    }
+}

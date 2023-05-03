@@ -367,6 +367,48 @@
         window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
     });
 
+    let posts = [];
+    let brukernavn = hentInnloggetBrukerId();
+    let bruker = hentBruker(brukernavn);
+    let following = bruker["following"];
+
+    for (let i = 0; i < following.length; i++) {
+        
+        let followingbruker = hentBruker(following[i]);
+        let followingbrukernavn = followingbruker["brukernavn"];
+        let tweets = followingbruker["tweets"];
+        for (let j = 0; j < tweets.length; j++) {
+            let tweet = tweets[j];
+            posts.push(tweet);
+        }
+        
+        // retweets også
+        let retweets = followingbruker["retweets"];
+        for (let j = 0; j < retweets.length; j++) {
+            let retweet = retweets[j];
+            posts.push(retweet);
+        }
+
+        
+    }
+
+    posts.sort(function (a, b) {
+        return b["posted"] - a["posted"];
+    });
+
+    let feed = document.querySelector("#feed");
+    for (let i = 0; i < posts.length; i++) {
+        let post = posts[i];
+        let postElement = lagPostElement(post);
+        feed.appendChild(postElement);
+    }
+
+
+    
+
+
+
+
 
 </script>
 

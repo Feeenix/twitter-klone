@@ -68,3 +68,4 @@ if (htmlfilnavn == "lagtweet.html" || htmlfilnavn == "viewtweet.html") {
 
     });
 }
+

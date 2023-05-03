@@ -285,6 +285,10 @@
                     </div>
 
 
+                    <div class="horisontalFlex" id="settingsSidebarButtonFlex">
+                        <button class="settingsSidebarButton genericButton" id="settingsButtonDiscard">Discard</button>
+                        <button class="settingsSidebarButton vanligKnapp genericButton" id="settingsButtonSave">Save</button>
+                    </div>
 
                 </div>
 
@@ -379,6 +383,7 @@
     velgeoverskrifttabknapp({ target: { parentElement: { id: "settingsProfile" } } });
 
     function velgeoverskrifttabknapp(e) {
+        console.log("hi")
         let overskriftprofilknapp = document.querySelector("#settingsProfile");
         let overskriftappearanceknapp = document.querySelector("#settingsAppearance");
         let overskriftotherknapp = document.querySelector("#settingsOther");
@@ -387,7 +392,7 @@
         let settingsAppearance = document.querySelector("#settingsEditAppearance");
         let settingsOther = document.querySelector("#settingsEditOther");
 
-        if (e.target.parentElement.id == "settingsProfile") {
+        if (e.target.id == "settingsProfile" || e.target.parentElement.id == "settingsProfile") {
             overskriftprofilknapp.children[0].children[0].style.display = "block"
             overskriftappearanceknapp.children[0].children[0].style.display = "none"
             overskriftotherknapp.children[0].children[0].style.display = "none"
@@ -398,7 +403,7 @@
 
 
         }
-        if (e.target.parentElement.id == "settingsAppearance") {
+        if (e.target.id == "settingsAppearance" || e.target.parentElement.id == "settingsAppearance") {
             overskriftprofilknapp.children[0].children[0].style.display = "none"
             overskriftappearanceknapp.children[0].children[0].style.display = "block"
             overskriftotherknapp.children[0].children[0].style.display = "none"
@@ -408,7 +413,7 @@
             settingsOther.style.display = "none";
 
         }
-        if (e.target.parentElement.id == "settingsOther") {
+        if (e.target.id == "settingsOther" || e.target.parentElement.id == "settingsOther") {
             overskriftprofilknapp.children[0].children[0].style.display = "none"
             overskriftappearanceknapp.children[0].children[0].style.display = "none"
             overskriftotherknapp.children[0].children[0].style.display = "block"

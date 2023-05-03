@@ -110,6 +110,14 @@ function hentTweet(tweetId) { // returnerer et tweet-objekt fra localStorage
     return tweets[tweetId];
 }
 
+function hentRetweet (tweetId) {
+    let retweets = hentFraLocalStorage("retweets");
+    if (retweets[tweetId] === undefined) { 
+        return {};
+    }
+    return retweets[tweetId];
+}
+
 
 function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localStorage
     localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utlopstid": Date.now() + 1000 * 60 * 60 * 24 * 7 })); // utløpsdato er 7 dager fra nå
@@ -162,6 +170,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
         followers: [],
         following: [],
         posts: [],
+        retweets: [],
         displayName: brukernavn,
         pinnedPost: null,
         location: "",
@@ -238,12 +247,12 @@ function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en a
     return output;
 }
 
-function lagNyTweet(brukernavn, path, bilder, text) {
+function lagNyTweet(brukernavn, path, bildeURL, text) {
     let id = genererId();
     let tweet = {
         "author": brukernavn,
         "path": path,
-        "bilder": bilder,
+        "bilde": bildeURL,
         "text": text,
         "likes": [],
         "retweets": [],
@@ -371,3 +380,170 @@ eksempel på retweet-objekt:
 
 
 
+function lagPostElement(postId) {
+    let post = hentTweet(postId);
+    let author = hentBruker(post["author"])
+    let tweet = document.createElement("div");
+    tweet.classList.add("tweet");
+
+    let profilbildekolonne = document.createElement("div");
+    profilbildekolonne.classList.add("profilbildekolonne");
+
+    let profilbilde = document.createElement("img");
+    profilbilde.classList.add("profilbilde");
+    profilbilde.src = author["profileImage"];
+    profilbilde.alt = "profilbilde";
+    profilbilde.width = "50";
+    profilbilde.height = "50";
+
+    profilbildekolonne.appendChild(profilbilde);
+
+
+    let tweetkolonne = document.createElement("div");
+    tweetkolonne.classList.add("tweetkolonne");
+
+    let forfatterinfo = document.createElement("div");
+    forfatterinfo.classList.add("forfatterinfo");
+    let div2 = document.createElement("div")
+    div2.innerHTML = author["displayName"]
+    let div3 = document.createElement("div")
+    div3.innerHTML = "@" + post["author"]
+    let div4 = document.createElement("div")
+    div4.innerHTML = formatTimestampPretty(post["posted"])
+
+    forfatterinfo.appendChild(div2)
+    forfatterinfo.appendChild(div3)
+    forfatterinfo.appendChild(div4)
+
+    tweetkolonne.appendChild(forfatterinfo)
+
+    let tweettekst = document.createElement("div")
+    tweettekst.classList.add("tweettekst")
+    tweettekst.innerHTML = post["text"]
+    tweetkolonne.appendChild(tweettekst)
+
+    if (post["bilde"]) {
+        let tweetbilde = document.createElement("img")
+        tweetbilde.classList.add("tweetbilde")
+        tweetbilde.src = post["bilde"]
+        tweetbilde.alt = "tweet bilde"
+        tweetkolonne.appendChild(tweetbilde)
+    }
+    let tweetknapper = document.createElement("div")
+    tweetknapper.classList.add("tweetknapper")
+
+    let kommentarknapp = document.createElement("button")
+    kommentarknapp.classList.add("hiddenButton")
+    kommentarknapp.classList.add("genericButton")
+    kommentarknapp.classList.add("tweetknapp")
+    kommentarknapp.classList.add("tweetknappkommentar")
+
+    let mengdekommentarer = document.createElement("span")
+
+    mengdekommentarer.innerHTML = post["comments"].length
+
+
+
+    let kommentarikon = document.createElement("img")
+    kommentarikon.src = "bilder/comment_hul.png"
+    kommentarikon.alt = "kommentarikon"
+    kommentarikon.height = "20"
+    kommentarknapp.appendChild(mengdekommentarer)
+    kommentarknapp.appendChild(kommentarikon)
+
+    let retweetknapp = document.createElement("button")
+    retweetknapp.classList.add("hiddenButton")
+    retweetknapp.classList.add("genericButton")
+    retweetknapp.classList.add("tweetknapp")
+    retweetknapp.classList.add("tweetknappretweet")
+
+    let mengderetweets = document.createElement("span")
+    mengderetweets.innerHTML = post["retweets"].length
+
+    let retweetikon = document.createElement("img")
+    retweetikon.src = "bilder/retweet_hul.png"
+    retweetikon.alt = "retweetikon"
+    retweetikon.height = "20"
+
+    retweetknapp.appendChild(mengderetweets)
+    retweetknapp.appendChild(retweetikon)
+
+    let likerknapp = document.createElement("button")
+    likerknapp.classList.add("hiddenButton")
+    likerknapp.classList.add("genericButton")
+    likerknapp.classList.add("tweetknapp")
+    likerknapp.classList.add("tweetknappliker")
+
+    let mengdelikes = document.createElement("span")
+    mengdelikes.innerHTML = post["likes"].length
+
+    let likeikon = document.createElement("img")
+    likeikon.src = "bilder/heart_hul.png"
+    likeikon.alt = "likeikon"
+    likeikon.height = "20"
+
+    likerknapp.appendChild(mengdelikes)
+    likerknapp.appendChild(likeikon)
+
+    let viewknapp = document.createElement("button")
+    viewknapp.classList.add("hidden")
+    viewknapp.classList.add("genericButton")
+    viewknapp.classList.add("tweetknapp")
+    viewknapp.classList.add("tweetknappviews")
+
+    let viewikon = document.createElement("img")
+    viewikon.src = "bilder/eye_hul.png"
+    viewikon.alt = "viewikon"
+    viewikon.height = "20"
+
+    let mengdeviews = document.createElement("span")
+    mengdeviews.innerHTML = post["views"]
+
+    viewknapp.appendChild(mengdeviews)
+    viewknapp.appendChild(viewikon)
+
+    tweetknapper.appendChild(kommentarknapp)
+    tweetknapper.appendChild(retweetknapp)
+    tweetknapper.appendChild(likerknapp)
+    tweetknapper.appendChild(viewknapp)
+
+    tweetkolonne.appendChild(tweetknapper)
+
+    tweet.appendChild(profilbildekolonne)
+    tweet.appendChild(tweetkolonne)
+
+    return tweet;
+}
+
+function formatTimestampPretty(a) {
+
+    let now = Date.now();
+    let diff = now - a;
+    let diffSeconds = diff / 1000;
+    let diffMinutes = diffSeconds / 60;
+    let diffHours = diffMinutes / 60;
+    let diffDays = diffHours / 24;
+    let diffWeeks = diffDays / 7;
+    let diffMonths = diffWeeks / 4;
+    let diffYears = diffMonths / 12;
+
+    if (diffSeconds < 60) {
+        return "nå";
+    }
+    if (diffMinutes < 60) {
+        return Math.floor(diffMinutes) + " minutter siden";
+    }
+    if (diffHours < 24) {
+        return Math.floor(diffHours) + " timer siden";
+    }
+    if (diffDays < 7) {
+        return Math.floor(diffDays) + " dager siden";
+    }
+    if (diffWeeks < 4) {
+        return Math.floor(diffWeeks) + " uker siden";
+    }
+    if (diffMonths < 12) {
+        return Math.floor(diffMonths) + " måneder siden";
+    }
+    return Math.floor(diffYears) + " år siden";
+}

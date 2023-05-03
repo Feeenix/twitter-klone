@@ -367,232 +367,77 @@
         window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
     });
 
-    let posts = [];
-    let brukernavn = hentInnloggetBrukerId();
-    let brukermeg = hentBruker(brukernavn);
-    let following = brukermeg["following"];
+    function visFollowingTweets() {
+        let posts = [];
+        let brukernavn = hentInnloggetBrukerId();
+        let brukermeg = hentBruker(brukernavn);
+        let following = brukermeg["following"];
 
-    for (let i = 0; i < following.length; i++) {
-        
-        let followingbruker = hentBruker(following[i]);
-        let tweets = followingbruker["posts"];
-        console.log(tweets, followingbruker)
-        for (let j = 0; j < tweets.length; j++) {
-            let tweet = tweets[j];
-            posts.push(tweet);
+        for (let i = 0; i < following.length; i++) {
+
+            let followingbruker = hentBruker(following[i]);
+            let tweets = followingbruker["posts"];
+            console.log(tweets, followingbruker)
+            for (let j = 0; j < tweets.length; j++) {
+                let tweet = tweets[j];
+                posts.push(tweet);
+            }
+
+            let retweetids = followingbruker["retweets"];
+            for (let j = 0; j < retweetids.length; j++) {
+                let retweet = hentRetweet(retweetids[j]);
+                posts.push(retweet);
+            }
+
+
         }
-        
-        // // retweets også
-        // let retweets = followingbruker["retweets"];
-        // for (let j = 0; j < retweets.length; j++) {
-        //     let retweet = retweets[j];
-        //     posts.push(retweet);
-        // }
 
-        
+        posts.sort(function (a, b) {
+            return b["posted"] - a["posted"];
+        });
+
+        let feed = document.querySelector("#feed");
+        for (let i = 0; i < posts.length; i++) {
+            let post = posts[i];
+            let postElement = lagPostElement(post);
+            feed.prepend(postElement);
+        }
     }
+    function visAllTweets() {
+        let posts = [];
+        let alleBrukere = Object.keys(hentFraLocalStorage("users"));
 
-    posts.sort(function (a, b) {
-        return b["posted"] - a["posted"];
-    });
+        for (let i = 0; i < alleBrukere.length; i++) {
 
-    let feed = document.querySelector("#feed");
-    for (let i = 0; i < posts.length; i++) {
-        let post = posts[i];
-        let postElement = lagPostElement(post);
-        feed.appendChild(postElement);
+            let followingbruker = hentBruker(alleBrukere[i]);
+            let tweets = followingbruker["posts"];
+            console.log(tweets, followingbruker)
+            for (let j = 0; j < tweets.length; j++) {
+                let tweet = tweets[j];
+                posts.push(tweet);
+            }
+
+            let retweetids = followingbruker["retweets"];
+            for (let j = 0; j < retweetids.length; j++) {
+                let retweet = hentRetweet(retweetids[j]);
+                posts.push(retweet);
+            }
+
+        }
+
+        posts.sort(function (a, b) {
+            return b["posted"] - a["posted"];
+        });
+
+        let feed = document.querySelector("#feed");
+        for (let i = 0; i < posts.length; i++) {
+            let post = posts[i];
+            let postElement = lagPostElement(post);
+            feed.prepend(postElement);
+        }
     }
-    function formatTimestampPretty(a){
-        // lag en funksjon som tar inn en timestamp og returnerer en string som er timestampen på en pen måte
-
-        // hvis timestampen er mindre enn 1 minutt siden, returner "nå"
-        // hvis timestampen er mindre enn 1 time siden, returner "n minutter siden"
-        // hvis timestampen er mindre enn 1 dag siden, returner "n timer siden"
-        // hvis timestampen er mindre enn 1 uke siden, returner "n dager siden"
-        // hvis timestampen er mindre enn 1 måned siden, returner "n uker siden"
-        // hvis timestampen er mindre enn 1 år siden, returner "n måneder siden"
-        // ellers returner "n år siden"
-        
-        let now = Date.now();
-        let diff = now - a;
-        let diffSeconds = diff / 1000;
-        let diffMinutes = diffSeconds / 60;
-        let diffHours = diffMinutes / 60;
-        let diffDays = diffHours / 24;
-        let diffWeeks = diffDays / 7;
-        let diffMonths = diffWeeks / 4;
-        let diffYears = diffMonths / 12;
-
-        if (diffSeconds < 60) {
-            return "nå";
-        }
-        if (diffMinutes < 60) {
-            return Math.floor(diffMinutes) + " minutter siden";
-        }
-        if (diffHours < 24) {
-            return Math.floor(diffHours) + " timer siden";
-        }
-        if (diffDays < 7) {
-            return Math.floor(diffDays) + " dager siden";
-        }
-        if (diffWeeks < 4) {
-            return Math.floor(diffWeeks) + " uker siden";
-        }
-        if (diffMonths < 12) {
-            return Math.floor(diffMonths) + " måneder siden";
-        }
-        return Math.floor(diffYears) + " år siden";
-
-        
-
-
-    }
-    function lagPostElement(post) {
-
-        let author = hentBruker(post["author"])
-        let tweet = document.createElement("div");
-        tweet.classList.add("tweet");
-
-        let profilbildekolonne = document.createElement("div");
-        profilbildekolonne.classList.add("profilbildekolonne");
-
-        let profilbilde = document.createElement("img");
-        profilbilde.classList.add("profilbilde");
-        profilbilde.src = author["profileImage"];
-        profilbilde.alt = "profilbilde";
-        profilebilde.width = "50";
-        profilebilde.height = "50";
-
-        profilbildekolonne.appendChild(profilbilde);
-
-
-        let tweetkolonne = document.createElement("div");
-        tweetkolonne.classList.add("tweetkolonne");
-
-        let forfatterinfo = document.createElement("div");
-        forfatterinfo.classList.add("forfatterinfo");
-        let div2 = document.createElement("div")
-        div2.innerHTML = author["displayName"]
-        let div3 = document.createElement("div")
-        div3.innerHTML = "@"+post["author"]
-        let div4 = document.createElement("div")
-        div4.innerHTML = formatTimestampPretty(post["posted"])
-        
-        forfatterinfo.appendChild(div2)
-        forfatterinfo.appendChild(div3)
-        forfatterinfo.appendChild(div4)
-
-        tweetkolonne.appendChild(forfatterinfo)
-
-        let tweettekst = document.createElement("div")
-        tweettekst.classList.add("tweettekst")
-        tweettekst.innerHTML = post["text"]
-
-        if (post["image"]) {
-            let tweetbilde = document.createElement("img")
-            tweetbilde.classList.add("tweetbilde")
-            tweetbilde.src = post["image"]
-            tweetbilde.alt = "tweet bilde"
-            tweetkolonne.appendChild(tweetbilde)
-        }
-        let tweetknapper = document.createElement("div")
-        tweetknapper.classList.add("tweetknapper")
-
-        let kommentarknapp = document.createElement("button")
-        kommentarknapp.classList.add("hiddenButton")
-        kommentarknapp.classList.add("genericButton")
-        kommentarknapp.classList.add("tweetknapp")
-        kommentarknapp.classList.add("tweetknappkommentar")
-        
-        let mengdekommentarer = document.createElement("span")
-        mengdekommentarer.innerHTML = post["comments"].length
-
-        
-        
-        let kommentarikon = document.createElement("img")
-        kommentarikon.src = "bilder/comment_hul.png"
-        kommentarikon.alt = "kommentarikon"
-        kommentarikon.height = "20"
-        kommentarknapp.appendChild(kommentarikon)
-        kommentarknapp.appendChild(mengdekommentarer)
-
-        let retweetknapp = document.createElement("button")
-        retweetknapp.classList.add("hiddenButton")
-        retweetknapp.classList.add("genericButton")
-        retweetknapp.classList.add("tweetknapp")
-        retweetknapp.classList.add("tweetknappretweet")
-
-        let mengderetweets = document.createElement("span")
-        mengderetweets.innerHTML = post["retweets"].length
-
-        let retweetikon = document.createElement("img")
-        retweetikon.src = "bilder/retweet_hul.png"
-        retweetikon.alt = "retweetikon"
-        retweetikon.height = "20"
-
-        retweetknapp.appendChild(retweetikon)
-        retweetknapp.appendChild(mengderetweets)
-
-        let likerknapp = document.createElement("button")
-        likerknapp.classList.add("hiddenButton")
-        likerknapp.classList.add("genericButton")
-        likerknapp.classList.add("tweetknapp")
-        likerknapp.classList.add("tweetknappliker")
-
-        let mengdelikes = document.createElement("span")
-        mengdelikes.innerHTML = post["likes"].length
-
-        let likeikon = document.createElement("img")
-        likeikon.src = "bilder/heart_hul.png"
-        likeikon.alt = "likeikon"
-        likeikon.height = "20"
-
-        likerknapp.appendChild(likeikon)
-        likerknapp.appendChild(mengdelikes)
-
-        let viewknapp = document.createElement("button")
-        viewknapp.classList.add("hiddenButton")
-        viewknapp.classList.add("genericButton")
-        viewknapp.classList.add("tweetknapp")
-        viewknapp.classList.add("tweetknappview")
-
-        let viewikon = document.createElement("img")
-        viewikon.src = "bilder/eye_hul.png"
-        viewikon.alt = "viewikon"
-        viewikon.height = "20"
-
-        let mengdeviews = document.createElement("span")
-        mengdeviews.innerHTML = post["views"].length
-
-        viewknapp.appendChild(viewikon)
-        viewknapp.appendChild(mengdeviews)
-
-        tweetknapper.appendChild(kommentarknapp)
-        tweetknapper.appendChild(retweetknapp)
-        tweetknapper.appendChild(likerknapp)
-        tweetknapper.appendChild(viewknapp)
-
-        tweetkolonne.appendChild(tweettekst)
-        tweetkolonne.appendChild(tweetknapper)
-
-        tweet.appendChild(profilbildekolonne)
-        tweet.appendChild(tweetkolonne)
-
-        return tweet;
-
-
-
-
-
-
-
-
-      
-
-
-
-
-    }
+    
+    
 
 
 

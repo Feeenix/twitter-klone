@@ -102,7 +102,7 @@
                                 <div class="forfatterinfo">
                                     <div>Name Lastname</div>
                                     <div>@elonmusk</div>
-                                    <div>14h</div>
+                                    <div>Now</div>
                                 </div>
                                 <div class="tweetInputs">
                                     <div class="tweettekstBark">
@@ -153,7 +153,16 @@
 <script src="javascript/tweeteFunksjoner.js"></script>
 <script>
     leggTilHistory();
+    
+    function setPageState(){
+        let brukerId = hentInnloggetBrukerId();
+        let bruker = hentBruker(brukerId);
 
+        document.querySelector(".profilbildekolonne>.profilbilde").src = bruker["profileImage"];
+        document.querySelector(".forfatterinfo>div:first-child").innerHTML = bruker["displayName"];
+        document.querySelector(".forfatterinfo>div:nth-child(2)").innerHTML = "@" + brukerId;
+    }
+    setPageState();
 
     let tweetTextArea = document.querySelector("#tweetTextArea");
     let characterIndicator = document.querySelector(".characterIndicator");

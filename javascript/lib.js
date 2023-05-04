@@ -278,7 +278,7 @@ function leggTilDataPaaBruker(brukernavn, data) { // data er en json.
 
 
 function leggTilDataPaaTweet(postId, data) { // data er en json.
-    let tweet = hentFraLocalStorage("tweets", postId);
+    let tweet = hentFraLocalStorage("tweets")[postId];
     for (let key in data) {
         tweet[key] = data[key];
     }
@@ -292,11 +292,16 @@ function lagNyRetweet(postId, brukernavn) {
         "tweetId": postId,
         "posted": Date.now()
     }
-    lagreData(["tweets", id], retweet);
+    lagreData(["retweets", id], retweet);
     // legg til retweet i postId sine retweets
-    let tweet = hentFraLocalStorage("tweets", postId);
+    let tweet = hentFraLocalStorage("tweets")[postId];
     tweet["retweets"].push(id);
     lagreData(["tweets", postId], tweet);
+
+    // legg til retweet i bruker sin liste over retweets
+    let bruker = hentBruker(brukernavn);
+    bruker["retweets"].push(id);
+    lagreData(["users", brukernavn], bruker);
 
 }
 
@@ -381,25 +386,73 @@ eksempel på retweet-objekt:
 
 
 function lagPostElement(postId) {
-    console.log(postId, "postid")
     let post = hentTweet(postId);
     let erRetweet = false;
-    if (post == null) {
+    let retweetId = postId;
+    let retweetAuthorId
+    // console.log(postId, post, JSON.stringify(post) == "{}")
+
+    if (JSON.stringify(post) == "{}") {
         // det er kanskje en retweet
         postId = hentRetweet(postId)["tweetId"];
         post = hentTweet(postId);
-        if (post == null) {
+        if (JSON.stringify(post) == "{}") {
             // det er ikke en retweet
             return null;
         }
         erRetweet = true;
 
+
+        retweetAuthorId = hentRetweet(retweetId)["author"];
     }
 
     let author = hentBruker(post["author"])
+    
+    let retweetWrapper = document.createElement("div");
+    retweetWrapper.classList.add("retweetWrapper");
     let tweet = document.createElement("div");
+
     tweet.classList.add("tweet");
     // tweet.href = "viewtweet.html?tweetId=" + postId;
+    if (erRetweet) {
+        let retweetIndikator = document.createElement("div");
+        retweetIndikator.classList.add("retweetIndikator");
+
+        let retweetIcon = document.createElement("img");
+        retweetIcon.src = "bilder/retweet.png";
+        retweetIcon.alt = "retweet";
+        retweetIcon.width = "15";
+        retweetIcon.height = "15";
+        retweetIcon.classList.add("retweetIcon");
+
+        retweetIndikator.appendChild(retweetIcon);
+
+        let retweetAuthor = document.createElement("a");
+        retweetAuthor.href = "viewprofile.html?brukernavn=" + retweetAuthorId;
+        retweetAuthor.classList.add("retweetAuthor");
+        retweetAuthor.innerHTML = "@" + retweetAuthorId;
+
+        retweetIndikator.appendChild(retweetAuthor);
+
+        let retweetTekst = document.createElement("div");
+        retweetTekst.classList.add("retweetTekst");
+        retweetTekst.innerHTML = "retweeted";
+
+        retweetIndikator.appendChild(retweetTekst);
+
+        let retweetOriginalAuthor = document.createElement("a");
+        retweetOriginalAuthor.href = "viewtweet.html?tweetId=" + postId;
+        retweetOriginalAuthor.classList.add("retweetOriginalAuthor");
+        retweetOriginalAuthor.innerHTML = "@" + post["author"] + "'s tweet";
+
+        retweetIndikator.appendChild(retweetOriginalAuthor);
+
+
+
+
+
+        tweet.appendChild(retweetIndikator);
+    }
 
     let profilbildekolonne = document.createElement("div");
     profilbildekolonne.classList.add("profilbildekolonne");
@@ -466,7 +519,6 @@ function lagPostElement(postId) {
 
     let mengdekommentarer = document.createElement("span")
 
-    console.log(post)
     mengdekommentarer.innerHTML = post["comments"].length
 
 
@@ -496,7 +548,7 @@ function lagPostElement(postId) {
             span.innerHTML = parseInt(span.innerHTML) + 1
 
             lagNyRetweet(postId, hentInnloggetBrukerId())
-        } 
+        }
         // else {
         //     retweetikon.src = "bilder/retweet_hul.png"
         //     span.innerHTML = parseInt(span.innerHTML) - 1
@@ -560,8 +612,9 @@ function lagPostElement(postId) {
 
     tweetkolonne.appendChild(tweetknapper)
 
-    tweet.appendChild(profilbildekolonne)
-    tweet.appendChild(tweetkolonne)
+    retweetWrapper.appendChild(profilbildekolonne)
+    retweetWrapper.appendChild(tweetkolonne)
+    tweet.appendChild(retweetWrapper);
 
     return tweet;
 }
@@ -602,23 +655,23 @@ function formatTimestampPretty(a) {
 function visTweets(listeOverBrukere) {
     let posts = [];
     for (let i = 0; i < listeOverBrukere.length; i++) {
-        let followingbruker = hentBruker(listeOverBrukere[i]);
-        let tweets = followingbruker["posts"];
+        let bruker = hentBruker(listeOverBrukere[i]);
+        let tweets = bruker["posts"];
         for (let j = 0; j < tweets.length; j++) {
             let tweet = tweets[j];
             posts.push(tweet);
         }
-        let retweetids = followingbruker["retweets"];
+        let retweetids = bruker["retweets"];
         for (let j = 0; j < retweetids.length; j++) {
-            let retweet = hentRetweet(retweetids[j]);
-            posts.push(retweet);
+            // let retweet = hentRetweet(retweetids[j]);
+            // posts.push(retweet["tweetId"]);
+            posts.push(retweetids[j]);
         }
     }
     posts.sort(function (a, b) {
         return b["posted"] - a["posted"];
     });
     posts.reverse();
-
     let feed = document.querySelector("#feed");
     for (let i = 0; i < posts.length; i++) {
         let post = posts[i];

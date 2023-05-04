@@ -366,6 +366,8 @@ body {
 
 .tweet {
     width: 100%;
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
+    transition-duration: 200ms;
     /* margin-bottom: 1000px; */
 }
 
@@ -439,11 +441,10 @@ body {
 }
 
 
-.tweet {
+.retweetWrapper {
     display: flex;
     flex-direction: row;
-    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
-    transition-duration: 200ms;
+    
 
 }
 
@@ -455,6 +456,33 @@ body {
 
     padding: 20px;
     padding-bottom: 0px;
+}
+.retweetIndikator {
+    font-size: 1em;
+    font-weight: 500;
+    opacity: 0.5;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+.retweetIndikator>*{
+    margin-right: 0.5em;
+}
+
+.retweetIndikator>*:nth-child(1){
+    margin-right: 5px;
+}
+
+
+.retweetIndikator a {
+    text-decoration: none;
+}
+
+.retweetIndikator a:hover {
+    text-decoration: underline;
 }
 
 .profilbildekolonne {

@@ -579,24 +579,24 @@ function formatTimestampPretty(a) {
     let diffYears = diffMonths / 12;
 
     if (diffSeconds < 60) {
-        return "nå";
+        return "Now";
     }
     if (diffMinutes < 60) {
-        return Math.floor(diffMinutes) + " minutter siden";
+        return Math.floor(diffMinutes) + " minutes ago";
     }
     if (diffHours < 24) {
-        return Math.floor(diffHours) + " timer siden";
+        return Math.floor(diffHours) + " hours ago";
     }
     if (diffDays < 7) {
-        return Math.floor(diffDays) + " dager siden";
+        return Math.floor(diffDays) + " days ago";
     }
     if (diffWeeks < 4) {
-        return Math.floor(diffWeeks) + " uker siden";
+        return Math.floor(diffWeeks) + " weeks ago";
     }
     if (diffMonths < 12) {
-        return Math.floor(diffMonths) + " måneder siden";
+        return Math.floor(diffMonths) + " months ago";
     }
-    return Math.floor(diffYears) + " år siden";
+    return Math.floor(diffYears) + " years ago";
 }
 
 function visTweets(listeOverBrukere) {

@@ -86,7 +86,12 @@
             <div id="hoyrekolonne">
                 <div id="midtkolonne">
                     <div id="overskrift">
-                        <div id="overskrifttekst">Settings</div>
+                        <div id="viewprofileTopp">
+                            <button class="backButton genericButton hiddenButton">
+                                <img src="bilder/pil_svart.png" alt="arrow" width="30">
+                            </button>
+                            <h3>Settings</h3>
+                        </div>
                         <div id="overskrifttabs">
                             <button id="settingsProfile" class="overskriftknapp hiddenButton">
                                 <div>
@@ -312,7 +317,6 @@
 <script src="javascript/visprofil.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
 <script>
-    clearHistory();
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
     setPageState();

@@ -132,7 +132,7 @@
                                 </div>
                             </div>
 
-                            <div id="overskrifttabs">
+                            <!-- <div id="overskrifttabs">
                                 <button id="overskriftfollowing" class="overskriftknapp hiddenButton">
                                     <div>
                                         Tweets & Retweets
@@ -145,13 +145,13 @@
                                         <div class="line"></div>
                                     </div>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
 
 
 
 
-                        <div class="tweet">
+                        <!-- <div class="tweet">
                             <div class="profilbildekolonne">
                                 <img class="profilbilde"
                                     src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
@@ -166,7 +166,6 @@
                                 <div class="tweettekst">
                                     I am a tweet
                                 </div>
-                                <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
 
                                 <div class="tweetknapper">
 
@@ -197,7 +196,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <a class="telefontweeting aatweetknapp" tabindex="0">
                         BARK
@@ -266,8 +265,15 @@
 <script>
     leggTilHistory();
 
-
+    function visBrukerTweets() {
+        let alleBrukere = [hentURLSearchParams()["brukernavn"],];
+        visTweets(alleBrukere);
+    }
+    visBrukerTweets();
     oppdaterProfil(hentURLSearchParams()["brukernavn"]);
+
+    document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"];
+
 
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);

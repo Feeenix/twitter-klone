@@ -197,7 +197,7 @@
                         <div class="whotofollowheader">Who to follow</div>
                         <div class="whotofollowbody">
 
-                            <div class="whotofollowperson">
+                            <!-- <div class="whotofollowperson">
 
                                 <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
                                     class="folgePerson hiddenButton">
@@ -214,57 +214,7 @@
                                 </a>
 
                             </div>
-                            <div class="whotofollowperson">
-
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
-                                    class="folgePerson hiddenButton">
-                                    <div>
-                                        <img class="profilbilde"
-                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                            alt="pfp" height="50" width="50">
-                                        <div class="profilnavn">
-                                            <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
-                                        </div>
-                                    </div>
-                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
-                                </a>
-
-                            </div>
-                            <div class="whotofollowperson">
-
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
-                                    class="folgePerson hiddenButton">
-                                    <div>
-                                        <img class="profilbilde"
-                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                            alt="pfp" height="50" width="50">
-                                        <div class="profilnavn">
-                                            <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
-                                        </div>
-                                    </div>
-                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
-                                </a>
-
-                            </div>
-                            <div class="whotofollowperson">
-
-                                <a href="viewprofile.html?brukernavn=brukernavn" title="trykk for å se profilen" alt=""
-                                    class="folgePerson hiddenButton">
-                                    <div>
-                                        <img class="profilbilde"
-                                            src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png"
-                                            alt="pfp" height="50" width="50">
-                                        <div class="profilnavn">
-                                            <div class="profilNavnNavn">Navn</div>
-                                            <div class="profilNavnId">@Brukernavn</div>
-                                        </div>
-                                    </div>
-                                    <button class="follow vanligKnapp" title="trykk for å følge">Follow</button>
-                                </a>
-
-                            </div>
+                             -->
 
                         </div>
                     </div>
@@ -293,6 +243,7 @@
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script src="javascript/profilemenu.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
+<script src="javascript/whotofollow_buttons.js"></script>
 <script src="javascript/sokbar.js"></script>
 <script src="javascript/barkKnapp.js"></script>
 <script>
@@ -381,8 +332,36 @@
         feed.innerHTML = "";
         visTweets(alleBrukere);
     }
-    
 
+
+
+
+
+    velgeoverskrifttabknapp({ target: { parentElement: { id: "overskriftfollowing" } } });
+
+    function velgeoverskrifttabknapp(e) {
+        console.log("hi")
+        let overskriftprofilknapp = document.querySelector("#overskriftfollowing");
+        let overskriftappearanceknapp = document.querySelector("#overskriftall");
+        let underline = document.querySelectorAll(".line");
+        let overskriftfollowing = document.querySelector("#settingsEditProfile");
+        let overskriftall = document.querySelector("#settingsEditAppearance");
+        let settingsOther = document.querySelector("#settingsEditOther");
+
+        if (e.target.id == "overskriftfollowing" || e.target.parentElement.id == "overskriftfollowing") {
+            visFollowingTweets();
+
+        }
+        if (e.target.id == "overskriftall" || e.target.parentElement.id == "overskriftall") {
+            visAllTweets();
+        }
+    
+    }
+    let overskriftKnapper = document.querySelectorAll(".overskriftknapp");
+    for (let i = 0; i < overskriftKnapper.length; i++) {
+        overskriftKnapper[i].addEventListener("click", velgeoverskrifttabknapp);
+    
+    }
 
 
 

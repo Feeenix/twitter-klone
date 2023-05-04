@@ -178,8 +178,8 @@ body {
     flex: 2;
     border-right: rgba(222, 230, 232, 0.6) solid 1px;
     max-width: 750px;
+    width: 100%;
     position: relative;
-
 }
 
 #sidebar {
@@ -202,6 +202,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     z-index: 1;
+
 }
 
 #overskrifttabs {
@@ -329,6 +330,14 @@ body {
     font-weight: 700;
 }
 
+.overskriftknapp {
+    /* height: 100%; */
+
+    display: flex;
+    justify-content: center;
+    align-content: end;
+}
+
 .overskriftknapp>div {
     font-size: 1.125em;
     padding: 5px;
@@ -338,7 +347,10 @@ body {
     width: fit-content;
     min-width: 50px;
     margin: 0 auto;
-
+    display: flex;
+    justify-content: center;
+    align-content: flex-end;
+    margin-top: auto;
     position: relative;
 }
 
@@ -353,6 +365,7 @@ body {
 }
 
 .tweet {
+    width: 100%;
     /* margin-bottom: 1000px; */
 }
 
@@ -430,6 +443,8 @@ body {
     display: flex;
     flex-direction: row;
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
+    transition-duration: 200ms;
+
 }
 
 .tweetkolonne {
@@ -448,6 +463,11 @@ body {
     padding-bottom: 10px;
 }
 
+.tweet:hover {
+    background-color: #aaaaaa10;
+    transition-duration: 200ms;
+}
+
 .forfatterinfo {
     display: flex;
     flex-direction: row;
@@ -459,20 +479,30 @@ body {
     margin-bottom: 10px;
 }
 
-.forfatterinfo>div {
+.forfatterinfo>* {
     margin-right: 15px;
     opacity: 0.8;
 }
 
-.forfatterinfo>div:nth-child(1) {
+.forfatterinfo>*:nth-child(1) {
     font-weight: 700;
     opacity: 1;
+}
+
+.forfatterinfo>a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.forfatterinfo>a:hover {
+    text-decoration: underline;
 }
 
 .tweettekst {
     font-size: 1.25em;
     max-width: 450px;
     margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .tweettekstBark {
@@ -495,7 +525,7 @@ body {
 .tweetbilde {
     width: 100%;
     max-width: 550px;
-    min-width: 385px;
+    /* min-width: 385px; */
     margin-bottom: 10px;
     border-radius: 20px;
 }
@@ -538,7 +568,7 @@ textarea {
     border-radius: 20px;
     min-width: 170px;
     /* width: 100px; */
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(3px);
 }
 
 #popupLogout>* {
@@ -593,7 +623,7 @@ textarea {
         margin-right: 0px;
     }
 
-    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *,#popupLogout *) {
+    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *) {
         padding: 10px;
         margin: 0 auto;
     }
@@ -636,9 +666,12 @@ textarea {
 }
 
 @media only screen and (max-width: 450px) {
-    #menyprofil, #menyinnstillinger {
+
+    #menyprofil,
+    #menyinnstillinger {
         display: none;
     }
+
     .bunnhoyre,
     .fixedbunnhoyre {
         display: none;
@@ -674,6 +707,7 @@ textarea {
         flex-direction: row;
 
     }
+
     #logo.hiddenButton {
         margin-left: 0px;
         margin-right: 0px;
@@ -684,6 +718,7 @@ textarea {
         margin-top: auto;
         margin-bottom: auto;
     }
+
     .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *) {
         margin-left: 2.5px;
         margin-right: 2.5px;
@@ -706,20 +741,50 @@ textarea {
         padding-right: 20px;
     }
 
+    .tweetknapper {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+    }
+
+    .tweetknapp {
+        padding: 7px;
+    }
+
+    .tweetkolonne {
+        width: calc(100% - 80px);
+    }
+
+    .profilbildekolonne {
+        padding-left: 10px;
+    }
+
     #feed {
-        bottom: auto;
-        top: 0px;
+        position: fixed;
+        width: 100%;
         /* padding-bottom: 100px; */
 
         /* padding-top: 100000px; */
-
-        height: 10px;
-        width: 100%;
+        position: relative;
+        max-width: 100vh;
+        height: 100vh;
+        /* overflow-y: scroll; */
     }
+
 
     #feed>*:last-child {
         margin-bottom: 100px;
     }
+
+    #feed>*:first-child {
+        padding-top: 90px;
+    }
+
+    #overskrift {
+        position: fixed;
+        width: 100%;
+    }
+
 
 
 
@@ -730,6 +795,7 @@ textarea {
 .profileDisplay {
     position: relative;
     display: block;
+    border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
 #profilebanner {
@@ -806,8 +872,14 @@ textarea {
     padding: 0px;
     padding-left: 15px;
     padding-right: 15px;
-    height: 40px;
     font-size: 1em;
+}
+
+.profileDisplay button:not(.overskriftknapp),
+#overskrift button:not(.overskriftknapp) {
+    height: 40px;
+
+
 }
 
 #profileFollowingFollowers {
@@ -1333,11 +1405,11 @@ input[type='range']::-webkit-slider-thumb {
 
 }
 
-#settingsSidebarButtonFlex{
+#settingsSidebarButtonFlex {
     margin: 0 auto;
-    
+
 }
 
-#settingsSidebarButtonFlex>button{
+#settingsSidebarButtonFlex>button {
     margin: 10px;
 }

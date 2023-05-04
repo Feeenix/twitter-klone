@@ -131,10 +131,17 @@
     clearHistory();
 
     let knapper = document.querySelectorAll("#setupButtons>*")
-
+    let setupInputs = document.querySelectorAll(".inputfield>input[type=text]");
     for (let i = 0; i < knapper.length; i++) {
         knapper[i].addEventListener("click", function () {
             nextPrompt(skip = (i != 1));
+        })
+    }
+    for (let i = 0; i < setupInputs.length; i++) {
+        setupInputs[i].addEventListener("keydown", function (e) {
+            if (e.key == "Enter") {
+                nextPrompt(skip = false);
+            }
         })
     }
 
@@ -177,6 +184,10 @@
                 data = setupInputs[listeOverIndexer[stage]].value;
             } else {
                 let File = setupInputs[listeOverIndexer[stage]].files[0];
+                if (File == undefined) {
+                    nextPrompt(skip = true);
+                    return;
+                }
                 data = await readfile(File);
             }
 

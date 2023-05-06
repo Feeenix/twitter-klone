@@ -350,10 +350,15 @@
 
         if (e.target.id == "overskriftfollowing" || e.target.parentElement.id == "overskriftfollowing") {
             visFollowingTweets();
+            underline[0].style.display = "block";
+            underline[1].style.display = "none";
 
         }
         if (e.target.id == "overskriftall" || e.target.parentElement.id == "overskriftall") {
             visAllTweets();
+            underline[0].style.display = "none";
+            underline[1].style.display = "block";
+            
         }
     
     }
@@ -363,7 +368,7 @@
     
     }
 
-
+   
 
 
 

@@ -48,10 +48,13 @@ if (htmlfilnavn == "lagtweet.html" || htmlfilnavn == "viewtweet.html") {
         let tweetAuthor = hentInnloggetBrukerId();
         let path = []
         if (htmlfilnavn == "viewtweet.html") {
+            console.log("viewtweet.html siden detter en reply")
             let tweetIdParent = hentURLSearchParams()["tweetId"];
             let parentPath = hentTweet(tweetIdParent)["path"];
+            console.log(parentPath)
             parentPath.push(tweetIdParent);
             path = parentPath;
+            console.log(path)
         }
 
         lagNyTweet(tweetAuthor, path, tweetImageURL, tweetTextAreaValue);

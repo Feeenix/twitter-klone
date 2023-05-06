@@ -266,6 +266,12 @@ function lagNyTweet(brukernavn, path, bildeURL, text) {
     let bruker = hentBruker(brukernavn);
     bruker["posts"].push(id);
     lagreData(["users", brukernavn], bruker);
+
+    if (path.length > 0) {
+        let parentTweet = hentTweet(path[path.length - 1]);
+        parentTweet["comments"].push(id);
+        lagreData(["tweets", path[path.length - 1]], parentTweet);
+    }
 }
 
 
@@ -390,7 +396,7 @@ eksempel på retweet-objekt:
 
 
 
-function lagPostElement(postId) {
+function lagPostElement(postId, mainTweet=false) {
     let post = hentTweet(postId);
     let erRetweet = false;
     let retweetId = postId;
@@ -472,8 +478,19 @@ function lagPostElement(postId) {
     profilbildelink.href = "viewprofile.html?brukernavn=" + post["author"]
     profilbildelink.appendChild(profilbilde);
     profilbildekolonne.appendChild(profilbildelink);
-
-
+    console.log(post["comments"].length > 0 , !mainTweet)
+    if (post["comments"].length > 0 && !mainTweet) {
+        let indentLinjePrime = document.createElement("div");
+        indentLinjePrime.classList.add("indentLinjePrime");
+        profilbildekolonne.appendChild(indentLinjePrime);
+        let viewReplies = document.createElement("a");
+        viewReplies.classList.add("viewReplies");
+        viewReplies.href = "viewtweet.html?tweetId=" + postId;
+        viewReplies.innerHTML = "See replies";
+        profilbildekolonne.appendChild(viewReplies);
+        
+    
+    }
     let tweetkolonne = document.createElement("div");
     tweetkolonne.classList.add("tweetkolonne");
 

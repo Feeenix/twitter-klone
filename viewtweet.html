@@ -98,7 +98,7 @@
                     </div>
 
                     <div id="feed">
-                        <div class="tweet">
+                        <!-- <div class="tweet">
 
                             <div class="retweetWrapper">
                                 <div class="profilbildekolonne">
@@ -115,7 +115,6 @@
                                     <div class="tweettekst">
                                         I am a tweet
                                     </div>
-                                    <!-- <img src="https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png" alt="tweet image" class="tweetbilde"> -->
                                     <div class="tweetknapper">
                                         <button title="trykk for å legge til en kommentar"
                                             class="tweetknappkommentar tweetknapp genericButton hiddenButton">
@@ -139,7 +138,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div id="commentsection">
@@ -153,7 +152,6 @@
                                         </div>
 
                                         <div class="forfatterinfo">
-
                                             <div>Reply to @elonmusk</div>
                                         </div>
                                     </div>
@@ -377,12 +375,49 @@
 
     function visTweet() {
         let feed = document.querySelector("#feed");
-        let postElement = lagPostElement(hentURLSearchParams()["tweetId"]);
+        let postElement = lagPostElement(hentURLSearchParams()["tweetId"], mainTweet=true);
         feed.prepend(postElement);
     }
     visTweet();
 
+    function setPageState(){
+        let commentProfilbilde = document.querySelector("#addComment .commentProfilbilde>img");
+        let innloggetBrukerId = hentInnloggetBrukerId();
+        let innloggetBruker = hentBruker(innloggetBrukerId);
+        commentProfilbilde.src = innloggetBruker["profileImage"]; 
 
+        let tweetId = hentURLSearchParams()["tweetId"];
+        let tweet = hentTweet(tweetId);
+
+        let commentReplyTo = document.querySelector("#addComment .forfatterinfo>div");
+        commentReplyTo.innerHTML = "Reply to @" + tweet["author"];
+
+
+
+
+    }
+    setPageState();
+
+    function lagCommentElement(tweetId){
+        let comment = document.createElement("div");
+        comment.classList.add("comment");
+        let tweetElement = lagPostElement(tweetId);
+        comment.appendChild(tweetElement);
+        return comment;
+    }
+
+    function visComments(){
+        let tweetId = hentURLSearchParams()["tweetId"];
+        let tweet = hentTweet(tweetId);
+        let comments = tweet["comments"];
+        let commentFeed = document.querySelector("#comments");
+        commentFeed.innerHTML = "";
+        for (let i = 0; i < comments.length; i++) {
+            let comment = comments[i];
+            let commentElement = lagCommentElement(comment);
+            commentFeed.appendChild(commentElement);
+        }
+    }
 
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);

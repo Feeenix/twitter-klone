@@ -404,11 +404,11 @@
     setPageState();
 
     function lagCommentElement(tweetId){
-        let comment = document.createElement("div");
-        comment.classList.add("comment");
-        let tweetElement = lagPostElement(tweetId);
-        comment.appendChild(tweetElement);
-        return comment;
+        let commentEl = document.createElement("div");
+        commentEl.classList.add("comment");
+        let tweetElement = lagPostElement(tweetId, mainTweet=false,comment=true,);
+        commentEl.appendChild(tweetElement);
+        return commentEl;
     }
 
     function visComments(){

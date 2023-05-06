@@ -396,7 +396,8 @@ eksempel på retweet-objekt:
 
 
 
-function lagPostElement(postId, mainTweet=false) {
+function lagPostElement(postId, mainTweet=false, comment=false) {
+    console.log("mainTweet =",mainTweet)
     let post = hentTweet(postId);
     let erRetweet = false;
     let retweetId = postId;
@@ -457,13 +458,43 @@ function lagPostElement(postId, mainTweet=false) {
         retweetOriginalAuthor.innerHTML = "@" + post["author"] + "'s tweet";
 
         retweetIndikator.appendChild(retweetOriginalAuthor);
-
-
-
-
-
         tweet.appendChild(retweetIndikator);
     }
+    if (!comment && post["path"].length >= 1) {
+        let retweetIndikator = document.createElement("div");
+        retweetIndikator.classList.add("retweetIndikator");
+
+        let retweetIcon = document.createElement("img");
+        retweetIcon.src = "bilder/comment.png";
+        retweetIcon.alt = "retweet";
+        retweetIcon.width = "15";
+        retweetIcon.height = "15";
+        retweetIcon.classList.add("retweetIcon");
+
+        retweetIndikator.appendChild(retweetIcon);
+
+        let retweetAuthor = document.createElement("a");
+        retweetAuthor.href = "viewprofile.html?brukernavn=" + post["author"];
+        retweetAuthor.classList.add("retweetAuthor");
+        retweetAuthor.innerHTML = "@" + post["author"];
+
+        retweetIndikator.appendChild(retweetAuthor);
+
+        let retweetTekst = document.createElement("div");
+        retweetTekst.classList.add("retweetTekst");
+        retweetTekst.innerHTML = "commented on";
+
+        retweetIndikator.appendChild(retweetTekst);
+
+        let retweetOriginalAuthor = document.createElement("a");
+        retweetOriginalAuthor.href = "viewtweet.html?tweetId=" + post["path"][post["path"].length - 1];
+        retweetOriginalAuthor.classList.add("retweetOriginalAuthor");
+        retweetOriginalAuthor.innerHTML = "@" + hentTweet(post["path"][post["path"].length - 1])["author"] + "'s tweet";
+
+        retweetIndikator.appendChild(retweetOriginalAuthor);
+        tweet.appendChild(retweetIndikator);
+    }
+
 
     let profilbildekolonne = document.createElement("div");
     profilbildekolonne.classList.add("profilbildekolonne");
@@ -479,6 +510,7 @@ function lagPostElement(postId, mainTweet=false) {
     profilbildelink.appendChild(profilbilde);
     profilbildekolonne.appendChild(profilbildelink);
     console.log(post["comments"].length > 0 , !mainTweet)
+    console.log("mainTweet =",mainTweet)
     if (post["comments"].length > 0 && !mainTweet) {
         let indentLinjePrime = document.createElement("div");
         indentLinjePrime.classList.add("indentLinjePrime");
@@ -488,7 +520,7 @@ function lagPostElement(postId, mainTweet=false) {
         viewReplies.href = "viewtweet.html?tweetId=" + postId;
         viewReplies.innerHTML = "See replies";
         profilbildekolonne.appendChild(viewReplies);
-        
+
     
     }
     let tweetkolonne = document.createElement("div");
@@ -582,7 +614,7 @@ function lagPostElement(postId, mainTweet=false) {
     mengderetweets.innerHTML = post["retweets"].length
 
     let retweetikon = document.createElement("img")
-    console.log(post["retweetedby"], hentInnloggetBrukerId(), post["retweetedby"].includes(hentInnloggetBrukerId()))
+    // console.log(post["retweetedby"], hentInnloggetBrukerId(), post["retweetedby"].includes(hentInnloggetBrukerId()))
     if (post["retweetedby"].includes(hentInnloggetBrukerId())) {
         retweetikon.src = "bilder/retweet.png"
     } else {

@@ -658,6 +658,14 @@ function formatTimestampPretty(a) {
     return Math.floor(diffYears) + " years ago";
 }
 
+
+function hentTweetEllerRetweet(tweetId) {
+    let tweet = hentTweet(tweetId);
+    if (tweet == null) {
+        tweet = hentRetweet(tweetId);
+    }
+    return tweet;
+}
 function visTweets(listeOverBrukere) {
     let posts = [];
     for (let i = 0; i < listeOverBrukere.length; i++) {
@@ -674,8 +682,10 @@ function visTweets(listeOverBrukere) {
             posts.push(retweetids[j]);
         }
     }
+
+
     posts.sort(function (a, b) {
-        return b["posted"] - a["posted"];
+        return hentTweetEllerRetweet(b)["posted"] - hentTweetEllerRetweet(a)["posted"];
     });
     posts.reverse();
     let feed = document.querySelector("#feed");

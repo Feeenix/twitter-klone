@@ -392,7 +392,12 @@
         let commentReplyTo = document.querySelector("#addComment .forfatterinfo>div");
         commentReplyTo.innerHTML = "Reply to @" + tweet["author"];
 
+        let antallKommentarer = tweet["comments"].length;
+        if (antallKommentarer == 0) {
+            document.querySelector("#commentsHeader").style.display = "none";
+            document.querySelector("#tweetTextArea").placeholder = "No comments yet. Be the first to comment!";
 
+        }
 
 
     }

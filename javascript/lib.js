@@ -255,7 +255,8 @@ function lagNyTweet(brukernavn, path, bildeURL, text) {
         "bilde": bildeURL,
         "text": text,
         "likes": [],
-        "retweets": [], // liste med brukernavn
+        "retweets": [], // liste med retweetid'er
+        "retweetedby": [], // liste med brukernavn
         "comments": [], // liste med kommentar ider
         "views": 0,
         "posted": Date.now()
@@ -296,12 +297,16 @@ function lagNyRetweet(postId, brukernavn) {
     // legg til retweet i postId sine retweets
     let tweet = hentFraLocalStorage("tweets")[postId];
     tweet["retweets"].push(id);
+    //retweetedby
+    tweet["retweetedby"] = brukernavn;
     lagreData(["tweets", postId], tweet);
 
     // legg til retweet i bruker sin liste over retweets
     let bruker = hentBruker(brukernavn);
     bruker["retweets"].push(id);
     lagreData(["users", brukernavn], bruker);
+
+    
 
 }
 
@@ -560,7 +565,8 @@ function lagPostElement(postId) {
     mengderetweets.innerHTML = post["retweets"].length
 
     let retweetikon = document.createElement("img")
-    if (hentInnloggetBrukerId() in post["retweets"]) {
+    console.log(post["retweetedby"], hentInnloggetBrukerId(), post["retweetedby"].includes(hentInnloggetBrukerId()))
+    if (post["retweetedby"].includes(hentInnloggetBrukerId())) {
         retweetikon.src = "bilder/retweet.png"
     } else {
         retweetikon.src = "bilder/retweet_hul.png"

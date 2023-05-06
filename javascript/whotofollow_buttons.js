@@ -56,7 +56,11 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
     div.appendChild(img);
     div.appendChild(div1);
     a.appendChild(div);
-    a.appendChild(button);
+
+    if (whoToFollowUsers[i][0] != hentInnloggetBrukerId()) {
+        a.appendChild(button);
+    }
+    
     whotofollowperson.appendChild(a);
     whotofollowbody.appendChild(whotofollowperson);
 

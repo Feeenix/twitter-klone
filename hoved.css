@@ -536,7 +536,7 @@ body {
 .tweettekstBark {
     font-size: 1.25em;
     max-width: 450px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     position: relative;
 }
 
@@ -620,204 +620,6 @@ textarea {
     background-color: #ffcccc;
 }
 
-@media only screen and (max-width: 1200px) {
-    .buttonText {
-        display: none;
-    }
-
-    #venstrekolonne {
-        width: min-content;
-        min-width: 60px;
-        padding-left: 15px;
-        padding-right: 15px;
-        flex: 0;
-        z-index: 99;
-    }
-
-    .profilknapp {
-        width: min-content;
-        margin: 0 auto;
-    }
-
-    .profil>button {
-        padding: 0px;
-    }
-
-    .profilknapp>div>img {
-        margin-right: 0;
-    }
-
-    #menyknapper>*>img {
-        margin-right: 0px;
-    }
-
-    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *) {
-        padding: 10px;
-        margin: 0 auto;
-    }
-
-    #logo.hiddenButton {
-        padding: 10px;
-        margin: 0 auto;
-    }
-
-    .mediumWidth {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 880px) {
-
-    /* når det er mindre enn 880px*/
-    #sidebar,
-    .largeWidth {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: 880px) {
-
-    #menysok,
-    #menytweet {
-        display: none;
-    }
-
-    .smallWidth {
-        display: none;
-    }
-
-}
-
-
-.telefontweeting {
-    display: none;
-}
-
-@media only screen and (max-width: 450px) {
-
-    #menyprofil,
-    #menyinnstillinger {
-        display: none;
-    }
-
-    .bunnhoyre,
-    .fixedbunnhoyre {
-        display: none;
-    }
-
-    .verySmallWidth {
-        display: none;
-    }
-
-    .hovedflex {
-        flex-direction: column-reverse;
-        height: 100%;
-        z-index: 1;
-    }
-
-    #venstrekolonne {
-        position: fixed;
-        bottom: 0;
-        flex-direction: row;
-        width: 100%;
-        top: auto;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-top: 0px;
-        border-top: rgba(222, 230, 232, 0.6) solid 1px;
-        height: 70px;
-        z-index: 2;
-        justify-content: center;
-        background-color: var(--globalbg);
-    }
-
-    #meny {
-        flex-direction: row;
-
-    }
-
-    #logo.hiddenButton {
-        margin-left: 0px;
-        margin-right: 0px;
-    }
-
-    #menyknapper {
-        flex-direction: row;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-
-    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *) {
-        margin-left: 2.5px;
-        margin-right: 2.5px;
-        padding: 10px;
-        height: min-content;
-    }
-
-    .container {
-        height: 100vh;
-    }
-
-    .telefontweeting {
-        position: fixed;
-        display: block;
-        bottom: 75px;
-        right: 5px;
-        margin: none;
-        padding: 15px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .tweetknapper {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-
-    }
-
-    .tweetknapp {
-        padding: 7px;
-    }
-
-    .tweetkolonne {
-        width: calc(100% - 80px);
-    }
-
-    .profilbildekolonne {
-        padding-left: 10px;
-    }
-
-    #feed {
-        position: fixed;
-        width: 100%;
-        /* padding-bottom: 100px; */
-
-        /* padding-top: 100000px; */
-        position: relative;
-        max-width: 100vh;
-        height: 100vh;
-        /* overflow-y: scroll; */
-    }
-
-
-    #feed>*:last-child {
-        margin-bottom: 100px;
-    }
-
-    #feed>*:first-child {
-        padding-top: 90px;
-    }
-
-    #overskrift {
-        position: fixed;
-        width: 100%;
-    }
-
-
-
-
-
-}
 
 
 .profileDisplay {
@@ -1373,6 +1175,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 #addComment .tweetInputs {
+    width: 100%;
     border-radius: 15px;
     border: #aaaaaa20 solid 5px;
 
@@ -1385,7 +1188,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 #addComment #tweetTextArea {
-    width: calc(95%);
+    width: 95%;
     height: 60px;
     border: none;
     padding: 10px;
@@ -1449,12 +1252,12 @@ input[type='range']::-webkit-slider-thumb {
 
 }
 
-#settingsSidebarButtonFlex {
+.settingsSidebarButtonFlex {
     margin: 0 auto;
 
 }
 
-#settingsSidebarButtonFlex>button {
+.settingsSidebarButtonFlex>button {
     margin: 10px;
 }
 
@@ -1463,4 +1266,208 @@ input[type='range']::-webkit-slider-thumb {
     padding: 15px;
     padding-left: 20px;
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .buttonText {
+        display: none;
+    }
+
+    #venstrekolonne {
+        width: min-content;
+        min-width: 60px;
+        padding-left: 15px;
+        padding-right: 15px;
+        flex: 0;
+        z-index: 99;
+    }
+
+    .profilknapp {
+        width: min-content;
+        margin: 0 auto;
+    }
+
+    .profil>button {
+        padding: 0px;
+    }
+
+    .profilknapp>div>img {
+        margin-right: 0;
+    }
+
+    #menyknapper>*>img {
+        margin-right: 0px;
+    }
+
+    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *,.settingsSidebarButton) {
+        padding: 10px;
+        margin: 0 auto;
+    }
+    
+
+    #logo.hiddenButton {
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .mediumWidth {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 880px) {
+
+    /* når det er mindre enn 880px*/
+    #sidebar,
+    .largeWidth {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 880px) {
+
+    #menysok,
+    #menytweet {
+        display: none;
+    }
+
+    .smallWidth {
+        display: none;
+    }
+
+}
+
+
+@media only screen and (min-width: 450.01px){
+    .telefontweeting {
+        display: none;
+    }
+}
+@media only screen and (max-width: 450px) {
+
+    #menyprofil,
+    #menyinnstillinger {
+        display: none;
+    }
+
+    .bunnhoyre,
+    .fixedbunnhoyre {
+        display: none;
+    }
+
+    .verySmallWidth {
+        display: none;
+    }
+
+    .hovedflex {
+        flex-direction: column-reverse;
+        height: 100%;
+        z-index: 1;
+    }
+
+    #venstrekolonne {
+        position: fixed;
+        bottom: 0;
+        flex-direction: row;
+        width: 100%;
+        top: auto;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        border-top: rgba(222, 230, 232, 0.6) solid 1px;
+        height: 70px;
+        z-index: 2;
+        justify-content: center;
+        background-color: var(--globalbg);
+    }
+
+    #meny {
+        flex-direction: row;
+
+    }
+
+    #logo.hiddenButton {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    #menyknapper {
+        flex-direction: row;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .genericButton:not(#profilePfpShare *, #setupProfile *, #midtkolonne *, #popupLogout *) {
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        padding: 10px;
+        height: min-content;
+    }
+
+    .container {
+        height: 100vh;
+    }
+
+    .telefontweeting {
+        position: fixed;
+        /* display: block; */
+        bottom: 75px;
+        right: 5px;
+        margin: none;
+        padding: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .tweetknapper {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+    }
+
+    .tweetknapp {
+        padding: 7px;
+    }
+
+    .tweetkolonne {
+        width: calc(100% - 45px);
+    }
+
+    .profilbildekolonne {
+        padding-left: 10px;
+    }
+
+    #feed {
+        position: fixed;
+        width: 100%;
+        /* padding-bottom: 100px; */
+
+        /* padding-top: 100000px; */
+        position: relative;
+        max-width: 100vh;
+        height: 100vh;
+        /* overflow-y: scroll; */
+    }
+
+
+    #feed>*:last-child {
+        margin-bottom: 100px;
+    }
+
+    #feed>*:first-child {
+        padding-top: 90px;
+    }
+
+    #overskrift {
+        position: fixed;
+        width: 100%;
+    }
+
+    #addComment #tweetTextArea{
+        width: calc(100% - 20px);
+    }
+
+
+
 }

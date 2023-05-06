@@ -164,7 +164,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
         password: passord,
         joined: new Date().toISOString().split("T")[0], // https://stackoverflow.com/a/29774197 
 
-        bannerImage: "",
+        bannerImage: "bilder/empty.png",
         bannerColor: "#808080",
         profileImage: "https://cdn.discordapp.com/attachments/1095708777027739668/1099642253909172305/default_profilbilde.png",
         followers: [],
@@ -251,6 +251,7 @@ function lagNyTweet(brukernavn, path, bildeURL, text) {
     let id = genererId();
     let tweet = {
         "author": brukernavn,
+        "id": id,
         "path": path,
         "bilde": bildeURL,
         "text": text,

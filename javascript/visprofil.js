@@ -19,6 +19,10 @@ function oppdaterProfil(brukernavn) {
 
 
     profilebannerimg.src = bruker["bannerImage"];
+    if (bruker.bannerImage == "") {
+        profilebannerimg.src = "bilder/empty.png";
+        // profilebannerimg.style.display = "none";
+    }
     profilebanner.style.backgroundColor = bruker.bannerColor;
 
     function unfollow() {

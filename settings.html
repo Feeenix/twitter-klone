@@ -13,7 +13,6 @@
         justify-content: space-between;
         height: 95vh;
     }
-
 </style>
 
 <body>
@@ -125,12 +124,12 @@
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditProfileBanner">Profile banner</label>
                                 <input type="file" id="settingsEditProfileBanner" name="settingsEditProfileBanner"
-                                    class="inputFile">
+                                    class="inputFile" accept="image/*">
                             </div>
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditProfilePicture">Profile picture</label>
                                 <input type="file" id="settingsEditProfilePicture" name="settingsEditProfilePicture"
-                                    class="inputFile">
+                                    class="inputFile" accept="image/*">
                             </div>
 
                             <div class="inputfield">
@@ -155,22 +154,19 @@
                                         <label for="settingsEditAppearanceColorThemeLight">Light</label>
                                         <input type="radio" name="colorThemeType"
                                             id="settingsEditAppearanceColorThemeLight"
-                                            class="settingsEditAppearanceColorThemeType"
-                                            value="light">
+                                            class="settingsEditAppearanceColorThemeType" value="light">
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeDark">Dark</label>
                                         <input type="radio" name="colorThemeType"
                                             id="settingsEditAppearanceColorThemeDark"
-                                            class="settingsEditAppearanceColorThemeType"
-                                            value="dark">
+                                            class="settingsEditAppearanceColorThemeType" value="dark">
                                     </div>
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditAppearanceColorThemeCustom">Custom</label>
                                         <input type="radio" name="colorThemeType"
                                             id="settingsEditAppearanceColorThemeCustom"
-                                            class="settingsEditAppearanceColorThemeType"
-                                            value="custom">
+                                            class="settingsEditAppearanceColorThemeType" value="custom">
                                     </div>
                                 </div>
 
@@ -241,6 +237,14 @@
 
                         </div>
                     </div>
+                    <div class="settingsSidebarButtonFlex telefontweeting horisontalFlex">
+                        <button class="settingsButtonDiscard settingsSidebarButton genericButton">Discard</button>
+                        <button class="settingsButtonSave settingsSidebarButton vanligKnapp genericButton">Save</button>
+                    </div>
+                    <div class="settingsSidebarButtonFlex smallWidth fixedbunnhoyre horisontalFlex">
+                        <button class="settingsButtonDiscard settingsSidebarButton genericButton">Discard</button>
+                        <button class="settingsButtonSave settingsSidebarButton vanligKnapp genericButton">Save</button>
+                    </div>
 
                 </div>
                 <div id="sidebar">
@@ -269,7 +273,8 @@
                                     <div id="profileBio">i am a spaceX engineer bla bla bal...</div>
 
                                     <div id="profileLocation">
-                                        <img id="profileLocationIcon" src="bilder/geotag_hul.png" width="20" height="20" alt="map marker icon">
+                                        <img id="profileLocationIcon" src="bilder/geotag_hul.png" width="20" height="20"
+                                            alt="map marker icon">
                                         <div id="profileLocationName">MArs</div>
                                     </div>
 
@@ -293,9 +298,9 @@
                     </div>
 
 
-                    <div class="horisontalFlex" id="settingsSidebarButtonFlex">
-                        <button class="settingsSidebarButton genericButton" id="settingsButtonDiscard">Discard</button>
-                        <button class="settingsSidebarButton vanligKnapp genericButton" id="settingsButtonSave">Save</button>
+                    <div class="settingsSidebarButtonFlex fixedbunnhoyre horisontalFlex">
+                        <button class="settingsButtonDiscard settingsSidebarButton genericButton">Discard</button>
+                        <button class="settingsButtonSave settingsSidebarButton vanligKnapp genericButton">Save</button>
                     </div>
 
                 </div>
@@ -320,10 +325,15 @@
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
     setPageState();
-    function setPageState(){
+    function setPageState() {
         let brukerId = hentInnloggetBrukerId();
         let bruker = hentBruker(brukerId);
-        
+
+        let inputs = document.querySelectorAll("input");
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+
         // profile
         let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
         settingsEditProfileDisplayName.value = bruker["displayName"];
@@ -331,10 +341,10 @@
 
         let settingsEditBio = document.querySelector("#settingsEditBio");
         settingsEditBio.value = bruker["bio"];
-        
+
         let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
         settingsEditProfileLocation.value = bruker["location"];
-        
+
 
         // appearance
         let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
@@ -343,20 +353,20 @@
                 themeRadios[i].checked = true;
             } else {
                 themeRadios[i].checked = false;
-                
+
             }
             if (bruker["settings"]["theme"] == "custom") {
                 document.querySelector(".customColors").style.display = "flex";
-                
+
             } else {
                 document.querySelector(".customColors").style.display = "none";
             }
         }
         document.querySelector("#customColorText").value = bruker["settings"]["text-color"];
         document.querySelector("#customColorBackground").value = bruker["settings"]["background-color"];
-            
-        
-        let fontsizeflexInput = document.querySelector(".fontsizeflex>input"); 
+
+
+        let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
         fontsizeflexInput.value = bruker["settings"]["font-size"]
 
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
@@ -365,9 +375,9 @@
                 barkSoundRadio[i].checked = true;
             } else {
                 barkSoundRadio[i].checked = false;
-                
+
             }
-            
+
         }
 
         let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
@@ -376,14 +386,215 @@
                 barkTextRadio[i].checked = true;
             } else {
                 barkTextRadio[i].checked = false;
-                
+
             }
-            
+
         }
+
+
+
+
+
     }
 
 
+    let discardKnapper = document.querySelectorAll(".settingsButtonDiscard");
 
+    for (let i = 0; i < discardKnapper.length; i++) {
+        discardKnapper[i].addEventListener("click", setPageState);
+    }
+
+
+    function saveSettings() {
+        let brukerId = hentInnloggetBrukerId();
+        let bruker = hentBruker(brukerId);
+
+        let inputs = document.querySelectorAll("input[type=file]");
+        let bannerFile = inputs[0].files[0];
+        let bannerURL = readfile(bannerFile);
+        bruker["bannerImage"] = bannerURL;
+
+        let pfpFile = inputs[1].files[0];
+        let pfpURL = readfile(pfpFile);
+        bruker["pfpImage"] = pfpURL;
+
+
+        // profile
+        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
+        bruker["displayName"] = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
+
+        let settingsEditBio = document.querySelector("#settingsEditBio");
+        bruker["bio"] = settingsEditBio.value;
+
+        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
+        bruker["location"] = settingsEditProfileLocation.value;
+
+
+        // appearance
+        let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
+        for (let i = 0; i < themeRadios.length; i++) {
+            if (themeRadios[i].checked == true) {
+                bruker["settings"]["theme"] = themeRadios[i].value;
+            }
+        }
+        bruker["settings"]["text-color"] = document.querySelector("#customColorText").value;
+        bruker["settings"]["background-color"] = document.querySelector("#customColorBackground").value;
+
+
+        let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
+        bruker["settings"]["font-size"] = fontsizeflexInput.value
+
+        let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
+        for (let i = 0; i < barkSoundRadio.length; i++) {
+            if (barkSoundRadio[i].checked == true) {
+                bruker["settings"]["barkSound"] = barkSoundRadio[i].value;
+            }
+
+        }
+
+        let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
+        for (let i = 0; i < barkTextRadio.length; i++) {
+            if (barkTextRadio[i].checked == true) {
+                bruker["settings"]["barkText"] = barkTextRadio[i].value;
+            }
+        }
+
+        lagreData(["users", brukerId], bruker);
+    }
+
+
+    function makeEventListenersForLiveUpdating() {
+        let profilebannerimg = document.querySelector("#profilebannerimg"); // img
+        let profilebanner = document.querySelector("#profilebanner"); // brukes for solid farge
+        let profilePfp = document.querySelector("#overskriftPfp"); //img
+        let profileDisplayName = document.querySelector("#profileDisplayName");
+        let profileBrukernavn = document.querySelector("#profileBrukernavn");
+        let profileBio = document.querySelector("#profileBio");
+        let profileLocationName = document.querySelector("#profileLocationName");
+
+        
+        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
+
+        let settingsEditProfileBanner = document.querySelector("#settingsEditProfileBanner");
+        let settingsEditProfilePicture = document.querySelector("#settingsEditProfilePicture");
+
+        let settingsEditBio = document.querySelector("#settingsEditBio");
+        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
+
+        let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
+        let customColorText = document.querySelector("#customColorText");
+        let customColorBackground = document.querySelector("#customColorBackground");
+
+        let fontsizeflexInput = document.querySelector(".fontsizeflex>input"); 
+
+        let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
+        let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
+
+        settingsEditProfileDisplayName.addEventListener("input", function () {
+            profileDisplayName.innerHTML = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
+        });
+
+        settingsEditProfileBanner.addEventListener("change", async function () {
+            let inputs = document.querySelectorAll("input[type=file]");
+            let bannerFile = inputs[0].files[0];
+            let bannerURL = await readfile(bannerFile);
+            profilebannerimg.src = bannerURL;
+        });
+
+        settingsEditProfilePicture.addEventListener("change", async function () {
+            let inputs = document.querySelectorAll("input[type=file]");
+            let pfpFile = inputs[1].files[0];
+            let pfpURL = await readfile(pfpFile);
+            profilePfp.src = pfpURL;
+        });
+
+        settingsEditBio.addEventListener("input", function () {
+            profileBio.innerHTML = settingsEditBio.value;
+        });
+
+        settingsEditProfileLocation.addEventListener("input", function () {
+            if (settingsEditProfileLocation.value == "") {
+                document.querySelector("#profileLocation").style.display = "none";
+            } else {
+                document.querySelector("#profileLocation").style.display = "flex";
+            }
+            profileLocationName.innerHTML = settingsEditProfileLocation.value;
+        });
+
+        for (let i = 0; i < themeRadios.length; i++) {
+            themeRadios[i].addEventListener("change", function () {
+                if (themeRadios[i].checked == true) {
+                    if (themeRadios[i].value == "light"){
+                        body.style.setProperty("--globalfg","#404040")
+                        body.style.setProperty("--globalbg","#ffffff")
+                        body.style.setProperty("--globalbg2","#ffffffcd")
+                    }
+                    if (themeRadios[i].value == "dark"){
+                        body.style.setProperty("--globalfg","#ffffff")
+                        body.style.setProperty("--globalbg","#282c34")
+                        body.style.setProperty("--globalbg2","#282c34cd")
+                    }
+                    if (themeRadios[i].value == "custom"){
+                        let customColorText = document.querySelector("#customColorText");
+                        let customColorBackground = document.querySelector("#customColorBackground");
+                        body.style.setProperty("--globalfg",customColorText.value)
+                        body.style.setProperty("--globalbg",customColorBackground.value)
+                        body.style.setProperty("--globalbg2",customColorBackground.value+"cd")
+                    }
+                }
+            });
+        }
+
+        customColorText.addEventListener("input", function () {
+            body.style.setProperty("--globalfg",customColorText.value)
+        });
+
+        customColorBackground.addEventListener("input", function () {
+            body.style.setProperty("--globalbg",customColorBackground.value)
+            body.style.setProperty("--globalbg2",customColorBackground.value+"cd")
+        });
+
+        fontsizeflexInput.addEventListener("change", function () {
+            body.style.fontsize =  fontsizeflexInput.value+"px"
+        });
+
+        for (let i = 0; i < barkSoundRadio.length; i++) {
+            barkSoundRadio[i].addEventListener("change", function () {
+                if (barkSoundRadio[i].checked == true) {
+                    if (barkSoundRadio[i].value == "true"){
+                    }
+                    if (barkSoundRadio[i].value == "false"){
+                    }
+                }
+            });
+        }
+
+        
+
+
+
+
+        // let inputs = document.querySelectorAll("input[type=file]");
+        // if (inputs[0].files.length == 0) {
+
+        // }
+        // profilebannerimg.src = bruker["bannerImage"];
+        // profilebanner.style.backgroundColor = bruker.bannerColor;
+        
+        // profilePfp.src = bruker["profileImage"];
+        // profileDisplayName.innerHTML = bruker["displayName"];
+        // profileBrukernavn.innerHTML = "@" + brukernavn;
+        // profileBio.innerHTML = bruker["bio"];
+        // profileLocationName.innerHTML = bruker["location"];
+
+        // if (bruker["location"] == "") {
+        //     document.querySelector("#profileLocation").style.display = "none";
+        // } else {
+        //     document.querySelector("#profileLocation").style.display = "flex";
+        // }
+
+
+    }
 
 
 
@@ -472,7 +683,6 @@
     for (let i = 0; i < colorThemeButtons.length; i++) {
         colorThemeButtons[i].addEventListener("click", selectRadioIfClicked);
     }
-
 
 
 

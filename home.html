@@ -358,7 +358,7 @@
             visAllTweets();
             underline[0].style.display = "none";
             underline[1].style.display = "block";
-            
+
         }
     
     }
@@ -367,6 +367,64 @@
         overskriftKnapper[i].addEventListener("click", velgeoverskrifttabknapp);
     
     }
+    
+    function ifNoOneIsfollowed() {
+        let brukernavn = hentInnloggetBrukerId();
+        let brukermeg = hentBruker(brukernavn);
+        let following = brukermeg["following"];
+        if (following.length == 0) {
+            let feed = document.querySelector("#feed");
+            feed.innerHTML = "";
+            feed.style.display = "block";
+            feed.style.backgroundColor = "lightgrey";
+            feed.style.filter = "blur(4px)";
+            feed.style.height = "100%";
+            feed.style.width = "100%";
+           
+            feed.style.top = "0";
+            feed.style.left = "0";
+            feed.style.zIndex = "1";
+            feed.style.margin = "0";
+            feed.style.padding = "0";
+
+            let div = document.createElement("div");
+            div.innerHTML = "You are not following anyone";
+            div.style.textAlign = "center";
+            div.style.position = "absolute";
+            div.style.top = "50%";
+            div.style.left = "50%";
+            div.style.transform = "translate(-50%, -50%)";
+            div.style.boxShadow = "0px 0px 10px black";
+            div.style.backgroundColor = "white";
+            div.style.padding = "20px";
+            div.style.fontSize = "20px";
+            div.style.fontWeight = "bold";
+            div.style.overflow = "visible";
+            feed.style.zIndex = "9999";
+            feed.style.filter = "blur(0px)";
+
+
+            feed.appendChild(div);
+        }
+        
+    }
+
+    let myfollowers = brukermeg["following"]
+    if (myfollowers.length == 0) {
+        ifNoOneIsfollowed();
+    }
+
+    if (myfollowers.length > 0) {
+        visFollowingTweets();
+    }
+        
+    if (underline[1].style.display = "block" && myfollowers.length == 0) {
+        visAllTweets();
+    }
+        
+    
+        
+    
 
    
 

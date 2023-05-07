@@ -171,6 +171,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
         following: [],
         posts: [],
         retweets: [],
+        likes: [],
         displayName: brukernavn,
         pinnedPost: null,
         location: "",
@@ -316,7 +317,32 @@ function lagNyRetweet(postId, brukernavn) {
     
 
 }
+function lagNyLike(postId, brukernavn) {
+    
+    // legg til like i postId sine likes
+    let tweet = hentFraLocalStorage("tweets")[postId];
+    tweet["likes"].push(brukernavn);
+    lagreData(["tweets", postId], tweet);
 
+    // legg til like i bruker sin liste over likes
+    let bruker = hentBruker(brukernavn);
+    bruker["likes"].push(postId);
+    lagreData(["users", brukernavn], bruker);
+    
+}
+
+function slettLike (tweetId, brukernavn) {
+
+    let tweet = hentFraLocalStorage("tweets")[tweetId];
+    let bruker = hentFraLocalStorage("users")[brukernavn];
+    let index = tweet["likes"].indexOf(brukernavn);
+    tweet["likes"].splice(index, 1);
+    index = bruker["likes"].indexOf(tweetId);
+    bruker["likes"].splice(index, 1);
+    lagreData(["tweets", tweetId], tweet);
+    lagreData(["users", brukernavn], bruker);
+    
+}
 function folgerBruker(brukerSomFolger, brukerSomBlirFolgt) {
     let bruker1 = hentBruker(brukerSomFolger);
     let bruker2 = hentBruker(brukerSomBlirFolgt);
@@ -643,6 +669,30 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
 
     likerknapp.appendChild(mengdelikes)
     likerknapp.appendChild(likeikon)
+
+    likerknapp.addEventListener("click", function (e) {
+        let button = e.target
+        while (button.tagName != "BUTTON") {
+            button = button.parentElement
+        }
+        let span = button.querySelector("span")
+        let likeikon = button.querySelector("img")
+        if (likeikon.src.endsWith("hul.png")) {
+            likeikon.src = "bilder/heart.png"
+            span.innerHTML = parseInt(span.innerHTML) + 1
+
+            lagNyLike(postId, hentInnloggetBrukerId())
+        } else {
+            likeikon.src = "bilder/heart_hul.png"
+            span.innerHTML = parseInt(span.innerHTML) - 1
+
+            slettLike(postId, hentInnloggetBrukerId())
+
+        }
+    })
+
+    
+
 
     let viewknapp = document.createElement("button")
     viewknapp.classList.add("hidden")

@@ -445,6 +445,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
         retweetAuthorId = hentRetweet(retweetId)["author"];
     }
 
+    inkrementerViews(postId);
+
     let author = hentBruker(post["author"])
     
     let retweetWrapper = document.createElement("div");
@@ -706,7 +708,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
     viewikon.height = "20"
 
     let mengdeviews = document.createElement("span")
-    mengdeviews.innerHTML = post["views"]
+    mengdeviews.innerHTML = formatViewsPretty( post["views"])
+
 
     viewknapp.appendChild(mengdeviews)
     viewknapp.appendChild(viewikon)
@@ -724,6 +727,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
 
     return tweet;
 }
+
+
 
 function formatTimestampPretty(a) {
 
@@ -815,6 +820,29 @@ function visTweets(listeOverBrukere) {
         feed.append(postElement);
     }
 }
+
+// lag en funksjon som tar imot tweetId og henter tweetet og inkrementerer views, retunerer ingenting
+
+function inkrementerViews(tweetId) {
+    let tweet = hentTweet(tweetId);
+    tweet["views"] = tweet["views"] + 1;
+    lagreData(["tweets",tweetId], tweet);
+    
+}
+
+//lag en funksjon som tar imot et tall for eksmpel 1438 og returnerer 1.4k
+
+function formatViewsPretty(views) {
+    if (views < 1000) {
+        return views;
+    }
+    if (views < 1000000) {
+        return Math.floor(views / 100) / 10 + "k";
+    }
+    return Math.floor(views / 100000) / 10 + "m";
+}
+
+
 
 
 

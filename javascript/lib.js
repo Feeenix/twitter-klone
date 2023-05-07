@@ -1,20 +1,34 @@
 let ls = localStorage
 let htmlfilnavn = window.location.pathname.split("/").pop();
 
+let anythingIsNull = true;
 if (localStorage.getItem("users") == null) {
     localStorage.setItem("users", JSON.stringify({}));
+} else {
+    anythingIsNull = false;
 }
 
 if (localStorage.getItem("tweets") == null) {
     localStorage.setItem("tweets", JSON.stringify({}));
+} else {
+    anythingIsNull = true;
 }
 
 if (localStorage.getItem("retweets") == null) {
     localStorage.setItem("retweets", JSON.stringify({}));
+} else {
+    anythingIsNull = true;
 }
 
 if (localStorage.getItem("history") == null) {
     localStorage.setItem("history", JSON.stringify([]));
+} else {
+    anythingIsNull = true;
+}
+
+if (anythingIsNull ){
+    MASTERMIND();
+    MASTERMIND();
 }
 
 async function readfile(File) {

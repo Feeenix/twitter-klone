@@ -70,5 +70,20 @@ if (htmlfilnavn == "lagtweet.html" || htmlfilnavn == "viewtweet.html") {
 
 
     });
+
+    let tweetTextArea = document.querySelector("#tweetTextArea");
+    tweetTextArea.addEventListener("input", function () {
+        let tweetTextAreaValue = tweetTextArea.value;
+        let tweetKnapp = document.querySelector(".aatweetknapp");
+        if (tweetTextAreaValue.length > 0) {
+            tweetKnapp.disabled = false;
+        } else {
+            if (tweetImagePreview.style.display == "block") {
+                tweetKnapp.disabled = false;
+            } else {
+                tweetKnapp.disabled = true;
+            }
+        }
+    });
 }
 

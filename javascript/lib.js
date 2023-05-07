@@ -870,10 +870,29 @@ function formatViewsPretty(views) { // 1000 -> 1k, 1000000 -> 1m
 
 
 
-function MASTERMIND() {
+async function MASTERMIND() {
+
+    let body = document.querySelector("body");
+    let loadingScreen = document.createElement("div");
+    loadingScreen.classList.add("loadingScreen");
+    let loadingText = document.createElement("h1");
+    loadingText.innerHTML = "Preparing first time use";
+    let loadingText2 = document.createElement("h2");
+    loadingText2.innerHTML = "Please wait while we load assets";
+    
+    let loadingImg = document.createElement("img");
+    loadingImg.src = "bilder/loading.gif";
+    loadingImg.classList.add("loadingImg");
+    loadingScreen.appendChild(loadingText);
+    loadingScreen.appendChild(loadingText2);
+
+    loadingScreen.appendChild(loadingImg);
+    body.appendChild(loadingScreen);
+
+
     let listeOverBrukere = [];
     for (let i = 0; i < 20; i++) {
-        let brukernavn = lagRandomBruker();
+        let brukernavn = await lagRandomBruker();
         listeOverBrukere.push(brukernavn);
     }
     // hente alle tweets til alle brukere
@@ -895,13 +914,15 @@ function MASTERMIND() {
 
     for (let i = 0; i < posts.length; i++) {
         let postId = posts[i];
-        gjorTingPaTweet([], 0, postId, listeOverBrukere);
+        await gjorTingPaTweet([], 0, postId, listeOverBrukere);
     }
 
+    // remove loading screen
+    loadingScreen.remove();
 }
 
 
-function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
+async function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
 
 
 
@@ -936,8 +957,8 @@ function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
                 let choices = ["https://www.cityofturlock.org/_images/dogbarking.jpg","https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
                 bildeURL = choices[Math.floor(Math.random() * choices.length)];
             }
-            let id = lagNyTweet(brukernavn, path, bildeURL, genererTekst());
-            gjorTingPaTweet(path, layerNumber + 1, id, listeOverBrukere);
+            let id = lagNyTweet(brukernavn, path, bildeURL,  await genererChuck());
+            await gjorTingPaTweet(path, layerNumber + 1, id, listeOverBrukere);
             // kommenter
 
         }
@@ -951,10 +972,19 @@ function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
 }
 
 
-function lagRandomBruker() {
+async function lagRandomBruker() {
     let brukernavn = genererId();
     let passord = "passord";
     lagNyBruker(brukernavn, passord);
+
+    let brukerpfp = "https://picsum.photos/seed/"+genererId()+"/500";
+    lagreData(["users", brukernavn, "profileImage"], brukerpfp);
+
+    let brukerBanner = "https://picsum.photos/seed/"+genererId()+"/866/231";
+    lagreData(["users", brukernavn, "bannerImage"], brukerBanner);
+
+    let brukerBio = await genererChuck();
+    lagreData(["users", brukernavn, "bio"], brukerBio);
 
 
     let antallTweets = Math.floor(Math.random() * 3);
@@ -964,12 +994,18 @@ function lagRandomBruker() {
             let choices = ["https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
             bildeURL = choices[Math.floor(Math.random() * choices.length)];
         }
-        lagNyTweet(brukernavn, [], bildeURL, genererTekst());
+        lagNyTweet(brukernavn, [], bildeURL, await genererChuck());
     }
 
     return brukernavn;
 }
 
+
+async function genererChuck(){
+    const response = await fetch("https://api.chucknorris.io/jokes/random");
+    const jsonData = await response.json();
+    return jsonData["value"];
+}
 
 function genererTekst() {
     let tekst = "";

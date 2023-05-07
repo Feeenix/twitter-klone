@@ -202,7 +202,7 @@
 
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditOtherSound">Bark sounds</label>
-                                <div class="horisontalFlex ">
+                                <div class="horisontalFlex barkSound">
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherSoundOn">On</label>
                                         <input type="radio" name="barkSound" id="settingsEditOtherSoundOn"
@@ -218,7 +218,7 @@
                             </div>
                             <div class="inputfield">
                                 <label class="settingssTitles" for="settingsEditOtherText">Bark text</label>
-                                <div class="horisontalFlex">
+                                <div class="horisontalFlex barkText">
                                     <div class="radioElement grayBorder">
                                         <label for="settingsEditOtherTextOn">On</label>
                                         <input type="radio" name="barkText" id="settingsEditOtherTextOn"
@@ -326,7 +326,9 @@
     oppdaterProfil(hentInnloggetBrukerId());
     setPageState();
 
-    let editedParams = {
+
+    // dette fungerer ikke med "let" pga scope greier... 
+    var editedParams = {
         "displayName": false,
         "banner": false,
         "pfp": false,
@@ -438,6 +440,7 @@
             "barkSound": false,
             "barkText": false,
         }
+        setButtonsDisabledState();
 
 
 
@@ -525,9 +528,10 @@
             "barkSound": false,
             "barkText": false,
         }
+        setButtonsDisabledState()
     }
 
-    function setButtonDisabledState() {
+    function setButtonsDisabledState() {
 
         //     editedParams = {
         //     "displayName": false,
@@ -542,7 +546,7 @@
         // }
 
         // sjekke om det er noen endringer
-        let endring = editedParams.values().some(function (value) { return value })
+        let endring = Object.values(editedParams).some(function (value) { return value })
 
         if (endring) {
             // enable save
@@ -591,6 +595,7 @@
             } else {
                 editedParams["displayName"] = false;
             }
+            setButtonsDisabledState()
         });
 
         settingsEditProfileBanner.addEventListener("change", async function () {
@@ -603,6 +608,7 @@
             } else {
                 editedParams["banner"] = false;
             }
+            setButtonsDisabledState()
         });
 
         settingsEditProfilePicture.addEventListener("change", async function () {
@@ -615,6 +621,7 @@
             } else {
                 editedParams["pfp"] = false;
             }
+            setButtonsDisabledState()
         });
 
         settingsEditBio.addEventListener("input", function () {
@@ -624,6 +631,7 @@
             } else {
                 editedParams["bio"] = false;
             }
+            setButtonsDisabledState()
         });
 
         settingsEditProfileLocation.addEventListener("input", function () {
@@ -638,6 +646,7 @@
             } else {
                 editedParams["location"] = false;
             }
+            setButtonsDisabledState()
         });
 
 
@@ -661,6 +670,7 @@
                     } else {
                         editedParams["theme"] = false;
                     }
+                    setButtonsDisabledState()
                 }
                 if (radioEl.value == "dark") {
                     console.log("dark")
@@ -672,6 +682,7 @@
                     } else {
                         editedParams["theme"] = false;
                     }
+                    setButtonsDisabledState()
                 }
                 if (radioEl.value == "custom") {
                     console.log("custom")
@@ -685,6 +696,7 @@
                     } else {
                         editedParams["theme"] = false;
                     }
+                    setButtonsDisabledState()
                 }
 
             });
@@ -698,6 +710,7 @@
             } else {
                 editedParams["theme-fg"] = false;
             }
+            setButtonsDisabledState()
         });
 
         customColorBackground.addEventListener("input", function () {
@@ -709,6 +722,7 @@
             } else {
                 editedParams["theme-bg"] = false;
             }
+            setButtonsDisabledState()
         });
 
         fontsizeflexInput.addEventListener("change", function () {
@@ -717,8 +731,9 @@
         });
 
         let barkSoundRadioEls = document.querySelectorAll(".barkSound .radioElement")
+        console.log(barkSoundRadioEls)
         for (let i = 0; i < barkSoundRadioEls.length; i++) {
-            barkSoundRadioEls[i].addEventListener("change", function (e) {
+            barkSoundRadioEls[i].addEventListener("click", function (e) {
                 let node = e.target;
                 while (!node.classList.contains("radioElement")) { // loop til den finner radioElement i classList
                     node = node.parentElement;
@@ -735,12 +750,44 @@
                         editedParams["barkSound"] = false;
                     }
 
+                    setButtonsDisabledState()
 
                 }
                 if (radioEl.value == "false") {
                     let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
                     barkSoundRadioEls[0].checked = false;
                     barkSoundRadioEls[1].checked = true;
+
+                }
+
+            });
+        }
+
+        let barkTextRadioEls = document.querySelectorAll(".barkText .radioElement")
+        for (let i = 0; i < barkTextRadioEls.length; i++) {
+            barkTextRadioEls[i].addEventListener("click", function (e) {
+                let node = e.target;
+                while (!node.classList.contains("radioElement")) { // loop til den finner radioElement i classList
+                    node = node.parentElement;
+                }
+                let radioEl = node.querySelector("input");
+                if (radioEl.value == "true") {
+                    let barkTextRadioEls = document.querySelectorAll(".settingsEditOtherTextType")
+                    barkTextRadioEls[0].checked = true;
+                    barkTextRadioEls[1].checked = false;
+
+                    if (bruker["settings"]["barkText"] != "true") {
+                        editedParams["barkText"] = true;
+                    } else {
+                        editedParams["barkText"] = false;
+                    }
+
+                    setButtonsDisabledState()
+                }
+                if (radioEl.value == "false") {
+                    let barkTextRadioEls = document.querySelectorAll(".settingsEditOtherTextType")
+                    barkTextRadioEls[0].checked = false;
+                    barkTextRadioEls[1].checked = true;
 
                 }
 

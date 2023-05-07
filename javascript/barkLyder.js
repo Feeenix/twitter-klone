@@ -8,7 +8,7 @@
     body.addEventListener("click", function(){
         let innloggetBruker = hentInnloggetBrukerId();
         let bruker = hentBruker(innloggetBruker);
-        if (bruker["settings"]["barkLyder"] == "false") {
+        if (bruker["settings"]["barkSound"] == "false") {
             return;
         }
         let lyd = arrayAvLyder[Math.floor(Math.random() * arrayAvLyder.length)];

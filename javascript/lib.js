@@ -178,7 +178,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
         bio: "",
         status: "",
         settings: {
-            theme: "dark", // dark light custom
+            "theme": "light", // dark light custom
             "background-color": "#ffffff", // brukes bare i custom theme
             "text-color": "#404040", // brukes bare i custom theme
             "font": "Inter",

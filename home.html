@@ -320,22 +320,23 @@
         window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
     });
 
-    function visFollowingTweets() {
+    async function visFollowingTweets() {
         let brukernavn = hentInnloggetBrukerId();
         let brukermeg = hentBruker(brukernavn);
         let following = brukermeg["following"];
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
-        visTweets(following);
+        await visTweets(following);
         if (hentBruker(hentInnloggetBrukerId())["following"].length == 0) {
             visIngenFollowing();
         }
     }
-    function visAllTweets() {
+    async function visAllTweets() {
         let alleBrukere = Object.keys(hentFraLocalStorage("users"));
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
-        visTweets(alleBrukere);
+
+        await visTweets(alleBrukere);
     }
 
 

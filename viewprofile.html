@@ -267,9 +267,9 @@
 <script>
     leggTilHistory();
 
-    function visBrukerTweets() {
+    async function visBrukerTweets() {
         let alleBrukere = [hentURLSearchParams()["brukernavn"],];
-        visTweets(alleBrukere);
+        await visTweets(alleBrukere);
     }
     visBrukerTweets();
     oppdaterProfil(hentURLSearchParams()["brukernavn"]);

@@ -337,7 +337,7 @@
                     </div>
 
 
-                    
+
 
                 </div>
 
@@ -366,16 +366,16 @@
 
     function visTweet() {
         let feed = document.querySelector("#feed");
-        let postElement = lagPostElement(hentURLSearchParams()["tweetId"], mainTweet=true);
+        let postElement = lagPostElement(hentURLSearchParams()["tweetId"], mainTweet = true);
         feed.prepend(postElement);
     }
     visTweet();
 
-    function setPageState(){
+    function setPageState() {
         let commentProfilbilde = document.querySelector("#addComment .commentProfilbilde>img");
         let innloggetBrukerId = hentInnloggetBrukerId();
         let innloggetBruker = hentBruker(innloggetBrukerId);
-        commentProfilbilde.src = innloggetBruker["profileImage"]; 
+        commentProfilbilde.src = innloggetBruker["profileImage"];
 
         let tweetId = hentURLSearchParams()["tweetId"];
         let tweet = hentTweet(tweetId);
@@ -412,21 +412,24 @@
     changeWhenInput();
 
 
-    function lagCommentElement(tweetId){
+    function lagCommentElement(tweetId) {
         let commentEl = document.createElement("div");
         commentEl.classList.add("comment");
-        let tweetElement = lagPostElement(tweetId, mainTweet=false,comment=true,);
+        let tweetElement = lagPostElement(tweetId, mainTweet = false, comment = true,);
         commentEl.appendChild(tweetElement);
         return commentEl;
     }
 
-    function visComments(){
+    async function visComments() {
         let tweetId = hentURLSearchParams()["tweetId"];
         let tweet = hentTweet(tweetId);
         let comments = tweet["comments"];
         let commentFeed = document.querySelector("#comments");
         commentFeed.innerHTML = "";
         for (let i = 0; i < comments.length; i++) {
+            if (i % 10 == 0 && i != 0) {
+                await sleep(500);
+            }
             let comment = comments[i];
             let commentElement = lagCommentElement(comment);
             commentFeed.appendChild(commentElement);

@@ -1,4 +1,4 @@
-
+(async function(){
 let whoToFollowUsers = []
 if (htmlfilnavn == "sok.html") {
     whoToFollowUsers = listeBrukereQuery(hentURLSearchParams()["query"]);
@@ -9,6 +9,9 @@ if (htmlfilnavn == "sok.html") {
 let whotofollowbody = document.querySelector(".whotofollowbody")
 console.log(whoToFollowUsers)
 for (let i = 0; i < whoToFollowUsers.length; i++) {
+    if (i%10 == 0 && i != 0){
+        await sleep(500);
+    }
     let whotofollowperson = document.createElement("div");
     whotofollowperson.classList.add("whotofollowperson");
 
@@ -94,3 +97,4 @@ function whoToFollowOrUnfollow(a) {
     }
 }
 
+})();

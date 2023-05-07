@@ -152,8 +152,11 @@ function settInnloggetBruker(brukernavn) { // setter innlogget bruker i localSto
     localStorage.setItem("loggedInUser", JSON.stringify({ "brukernavn": brukernavn, "utlopstid": Date.now() + 1000 * 60 * 60 * 24 * 7 })); // utløpsdato er 7 dager fra nå
 }
 function hentInnloggetBrukerId() { // returnerer brukernavnet til den innlogget brukeren
-
-    return JSON.parse(localStorage.getItem("loggedInUser"))["brukernavn"];
+    let logged = JSON.parse(localStorage.getItem("loggedInUser"))
+    if (logged === null) {
+        return undefined;
+    }
+    return logged["brukernavn"];
 }
 function loggUtBruker() { // logger ut brukeren og redirecter til index.html
     localStorage.removeItem("loggedInUser");
@@ -816,7 +819,7 @@ function hentTweetEllerRetweet(tweetId) {
     }
     return tweet;
 }
-function visTweets(listeOverBrukere) {
+async function visTweets(listeOverBrukere) {
     let posts = [];
     for (let i = 0; i < listeOverBrukere.length; i++) {
         let bruker = hentBruker(listeOverBrukere[i]);
@@ -840,6 +843,9 @@ function visTweets(listeOverBrukere) {
     posts.reverse();
     let feed = document.querySelector("#feed");
     for (let i = 0; i < posts.length; i++) {
+        if (i%10 == 0 && i != 0){
+            await sleep(500);
+        }
         let post = posts[i];
         let postElement = lagPostElement(post);
         feed.append(postElement);

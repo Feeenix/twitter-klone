@@ -29,7 +29,6 @@ if (localStorage.getItem("history") == null) {
 
 if (anythingIsNull == true) {
     MASTERMIND();    
-    MASTERMIND();    
 }
 
 async function readfile(File) {
@@ -928,7 +927,8 @@ function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
             // like
             lagNyLike(tweetId, brukernavn);
         }
-        if (Math.random() < (1 / listeOverBrukere.length) * 1.1) {
+        console.log("sjanse for comments:" + (1 / listeOverBrukere.length) * 1.5)
+        if (Math.random() < (1 / listeOverBrukere.length) * 1.5) {  
             path.push(tweetId);
 
             let bildeURL = ""
@@ -936,7 +936,7 @@ function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
                 let choices = ["https://www.cityofturlock.org/_images/dogbarking.jpg","https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
                 bildeURL = choices[Math.floor(Math.random() * choices.length)];
             }
-            let id = lagNyTweet(brukernavn, [], bildeURL, genererTekst());
+            let id = lagNyTweet(brukernavn, path, bildeURL, genererTekst());
             gjorTingPaTweet(path, layerNumber + 1, id, listeOverBrukere);
             // kommenter
 

@@ -29,6 +29,7 @@ if (localStorage.getItem("history") == null) {
 
 if (anythingIsNull == true) {
     MASTERMIND();    
+    MASTERMIND();    
 }
 
 async function readfile(File) {

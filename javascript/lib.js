@@ -233,7 +233,6 @@ function listeBrukereQuery(query) {
         // }
 
     }
-    console.log(output)
     return output;
 }
 
@@ -439,7 +438,6 @@ eksempel på retweet-objekt:
 
 
 function lagPostElement(postId, mainTweet = false, comment = false) {
-    console.log("mainTweet =", mainTweet)
     let post = hentTweet(postId);
     let erRetweet = false;
     let retweetId = postId;
@@ -492,7 +490,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
 
         let retweetTekst = document.createElement("div");
         retweetTekst.classList.add("retweetTekst");
-        retweetTekst.innerHTML = "retweeted";
+        retweetTekst.innerHTML = "rebarked";
 
         retweetIndikator.appendChild(retweetTekst);
 
@@ -553,8 +551,6 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     profilbildelink.href = "viewprofile.html?brukernavn=" + post["author"]
     profilbildelink.appendChild(profilbilde);
     profilbildekolonne.appendChild(profilbildelink);
-    console.log(post["comments"].length > 0, !mainTweet)
-    console.log("mainTweet =", mainTweet)
     if (post["comments"].length > 0 && !mainTweet) {
         let indentLinjePrime = document.createElement("div");
         indentLinjePrime.classList.add("indentLinjePrime");
@@ -907,7 +903,7 @@ function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
         let tweet = hentTweet(tweetId);
         tweet["views"] = tweet["views"] + 1;
         lagreData(["tweets", tweetId], tweet);
-        
+
         if (Math.random() < 0.05) {
             // retweet
             lagNyRetweet(tweetId, brukernavn);
@@ -920,8 +916,12 @@ function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
         if (Math.random() < (1 / listeOverBrukere.length) * 1.1) {
             path.push(tweetId);
 
-
-            let id = lagNyTweet(brukernavn, path, "", genererTekst());
+            let bildeURL = ""
+            if (Math.random() < 0.1) {
+                let choices = ["https://www.cityofturlock.org/_images/dogbarking.jpg","https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
+                bildeURL = choices[Math.floor(Math.random() * choices.length)];
+            }
+            let id = lagNyTweet(brukernavn, [], bildeURL, genererTekst());
             gjorTingPaTweet(path, layerNumber + 1, id, listeOverBrukere);
             // kommenter
 
@@ -944,8 +944,12 @@ function lagRandomBruker() {
 
     let antallTweets = Math.floor(Math.random() * 3);
     for (let i = 0; i < antallTweets; i++) {
-
-        lagNyTweet(brukernavn, [], "", genererTekst());
+        let bildeURL = ""
+        if (Math.random() < 0.1) {
+            let choices = ["https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
+            bildeURL = choices[Math.floor(Math.random() * choices.length)];
+        }
+        lagNyTweet(brukernavn, [], bildeURL, genererTekst());
     }
 
     return brukernavn;
@@ -954,7 +958,7 @@ function lagRandomBruker() {
 
 function genererTekst() {
     let tekst = "";
-    let antallOrd = Math.floor(Math.random() * 10);
+    let antallOrd = Math.ceil(Math.random() * 10);
     for (let i = 0; i < antallOrd; i++) {
         let ord = genererOrd();
         tekst += ord + " ";
@@ -964,7 +968,7 @@ function genererTekst() {
 
 function genererOrd() {
     let ord = "";
-    let antallBokstaver = Math.floor(Math.random() * 10);
+    let antallBokstaver = Math.ceil(Math.random() * 10);
     for (let i = 0; i < antallBokstaver; i++) {
         let bokstav = genererBokstav();
         ord += bokstav;

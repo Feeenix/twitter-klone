@@ -325,11 +325,23 @@
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
     setPageState();
+
+    let editedParams = {
+        "displayName": false,
+        "bio": false,
+        "location": false,
+        "theme": false,
+        "barkSound": false,
+        "barkText": false,
+        "pfp": false,
+        "banner": false
+    }
     function setPageState() {
         let brukerId = hentInnloggetBrukerId();
+        oppdaterProfil(brukerId);
         let bruker = hentBruker(brukerId);
 
-        let inputs = document.querySelectorAll("input");
+        let inputs = document.querySelectorAll("input[type=file]");
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].value = "";
         }
@@ -365,9 +377,32 @@
         document.querySelector("#customColorText").value = bruker["settings"]["text-color"];
         document.querySelector("#customColorBackground").value = bruker["settings"]["background-color"];
 
+        console.log(bruker["settings"]["theme"])
+        let body = document.querySelector("body");
+        if (bruker["settings"]["theme"] == "light") {
+            console.log("light")
+            body.style.setProperty("--globalfg", "#404040")
+            body.style.setProperty("--globalbg", "#ffffff")
+            body.style.setProperty("--globalbg2", "#ffffffcd")
+        }
+        if (bruker["settings"]["theme"] == "dark") {
+            console.log("dark")
+            body.style.setProperty("--globalfg", "#ffffff")
+            body.style.setProperty("--globalbg", "#282c34")
+            body.style.setProperty("--globalbg2", "#282c34cd")
+        }
+        if (bruker["settings"]["theme"] == "custom") {
+            console.log("custom")
+            body.style.setProperty("--globalfg", bruker["settings"]["text-color"].value)
+            body.style.setProperty("--globalbg", bruker["settings"]["background-color"].value)
+            body.style.setProperty("--globalbg2", bruker["settings"]["background-color"].value + "cd")
+        }
 
         let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
         fontsizeflexInput.value = bruker["settings"]["font-size"]
+        changefontsizepreview()
+
+        body.style.fontSize = fontsizeflexInput.value + "px"
 
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
         for (let i = 0; i < barkSoundRadio.length; i++) {
@@ -404,20 +439,27 @@
         discardKnapper[i].addEventListener("click", setPageState);
     }
 
+    let saveKnapper = document.querySelectorAll(".settingsButtonSave");
+    for (let i = 0; i < saveKnapper.length; i++) {
+        saveKnapper[i].addEventListener("click", saveSettings);
+    }
 
-    function saveSettings() {
+
+    async function saveSettings() {
         let brukerId = hentInnloggetBrukerId();
         let bruker = hentBruker(brukerId);
 
         let inputs = document.querySelectorAll("input[type=file]");
-        let bannerFile = inputs[0].files[0];
-        let bannerURL = readfile(bannerFile);
-        bruker["bannerImage"] = bannerURL;
-
-        let pfpFile = inputs[1].files[0];
-        let pfpURL = readfile(pfpFile);
-        bruker["pfpImage"] = pfpURL;
-
+        if (inputs[0].files.length > 0) {
+            let bannerFile = inputs[0].files[0];
+            let bannerURL = await readfile(bannerFile);
+            bruker["bannerImage"] = bannerURL;
+        }
+        if (inputs[1].files.length > 0) {
+            let pfpFile = inputs[1].files[0];
+            let pfpURL = await readfile(pfpFile);
+            bruker["pfpImage"] = pfpURL;
+        }
 
         // profile
         let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
@@ -462,7 +504,7 @@
         lagreData(["users", brukerId], bruker);
     }
 
-
+    makeEventListenersForLiveUpdating();
     function makeEventListenersForLiveUpdating() {
         let profilebannerimg = document.querySelector("#profilebannerimg"); // img
         let profilebanner = document.querySelector("#profilebanner"); // brukes for solid farge
@@ -472,7 +514,7 @@
         let profileBio = document.querySelector("#profileBio");
         let profileLocationName = document.querySelector("#profileLocationName");
 
-        
+
         let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
 
         let settingsEditProfileBanner = document.querySelector("#settingsEditProfileBanner");
@@ -485,7 +527,7 @@
         let customColorText = document.querySelector("#customColorText");
         let customColorBackground = document.querySelector("#customColorBackground");
 
-        let fontsizeflexInput = document.querySelector(".fontsizeflex>input"); 
+        let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
 
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
         let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
@@ -520,56 +562,66 @@
             }
             profileLocationName.innerHTML = settingsEditProfileLocation.value;
         });
-
-        for (let i = 0; i < themeRadios.length; i++) {
-            themeRadios[i].addEventListener("change", function () {
-                if (themeRadios[i].checked == true) {
-                    if (themeRadios[i].value == "light"){
-                        body.style.setProperty("--globalfg","#404040")
-                        body.style.setProperty("--globalbg","#ffffff")
-                        body.style.setProperty("--globalbg2","#ffffffcd")
-                    }
-                    if (themeRadios[i].value == "dark"){
-                        body.style.setProperty("--globalfg","#ffffff")
-                        body.style.setProperty("--globalbg","#282c34")
-                        body.style.setProperty("--globalbg2","#282c34cd")
-                    }
-                    if (themeRadios[i].value == "custom"){
-                        let customColorText = document.querySelector("#customColorText");
-                        let customColorBackground = document.querySelector("#customColorBackground");
-                        body.style.setProperty("--globalfg",customColorText.value)
-                        body.style.setProperty("--globalbg",customColorBackground.value)
-                        body.style.setProperty("--globalbg2",customColorBackground.value+"cd")
-                    }
+        let colorthemeRadioButtons = document.querySelectorAll(".colorThemes .radioElement")
+        for (let i = 0; i < colorthemeRadioButtons.length; i++) {
+            colorthemeRadioButtons[i].addEventListener("click", function (e) {
+                let parent = e.target;
+                while (!parent.classList.contains("radioElement")) { // loop til den finner radioElement i classList
+                    parent = parent.parentElement;
+                }
+                let radioEl = parent.querySelector("input");
+                let body = document.querySelector("body");
+                if (radioEl.value == "light") {
+                    console.log("light")
+                    body.style.setProperty("--globalfg", "#404040")
+                    body.style.setProperty("--globalbg", "#ffffff")
+                    body.style.setProperty("--globalbg2", "#ffffffcd")
+                }
+                if (radioEl.value == "dark") {
+                    console.log("dark")
+                    body.style.setProperty("--globalfg", "#ffffff")
+                    body.style.setProperty("--globalbg", "#282c34")
+                    body.style.setProperty("--globalbg2", "#282c34cd")
+                }
+                if (radioEl.value == "custom") {
+                    console.log("custom")
+                    let customColorText = document.querySelector("#customColorText");
+                    let customColorBackground = document.querySelector("#customColorBackground");
+                    body.style.setProperty("--globalfg", customColorText.value)
+                    body.style.setProperty("--globalbg", customColorBackground.value)
+                    body.style.setProperty("--globalbg2", customColorBackground.value + "cd")
                 }
             });
         }
 
         customColorText.addEventListener("input", function () {
-            body.style.setProperty("--globalfg",customColorText.value)
+            let body = document.querySelector("body");
+            body.style.setProperty("--globalfg", customColorText.value)
         });
 
         customColorBackground.addEventListener("input", function () {
-            body.style.setProperty("--globalbg",customColorBackground.value)
-            body.style.setProperty("--globalbg2",customColorBackground.value+"cd")
+            let body = document.querySelector("body");
+            body.style.setProperty("--globalbg", customColorBackground.value)
+            body.style.setProperty("--globalbg2", customColorBackground.value + "cd")
         });
 
         fontsizeflexInput.addEventListener("change", function () {
-            body.style.fontsize =  fontsizeflexInput.value+"px"
+            let body = document.querySelector("body");
+            body.style.fontSize = fontsizeflexInput.value + "px"
         });
 
         for (let i = 0; i < barkSoundRadio.length; i++) {
             barkSoundRadio[i].addEventListener("change", function () {
                 if (barkSoundRadio[i].checked == true) {
-                    if (barkSoundRadio[i].value == "true"){
+                    if (barkSoundRadio[i].value == "true") {
                     }
-                    if (barkSoundRadio[i].value == "false"){
+                    if (barkSoundRadio[i].value == "false") {
                     }
                 }
             });
         }
 
-        
+
 
 
 
@@ -580,7 +632,7 @@
         // }
         // profilebannerimg.src = bruker["bannerImage"];
         // profilebanner.style.backgroundColor = bruker.bannerColor;
-        
+
         // profilePfp.src = bruker["profileImage"];
         // profileDisplayName.innerHTML = bruker["displayName"];
         // profileBrukernavn.innerHTML = "@" + brukernavn;
@@ -659,7 +711,6 @@
         fontsize.innerHTML = "Current Fontsize is " + fontsizeinput.value + "px";
 
     }
-    changefontsizepreview()
 
 
     function selectRadioIfClicked(e) {

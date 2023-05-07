@@ -2,6 +2,7 @@ let ls = localStorage
 let htmlfilnavn = window.location.pathname.split("/").pop();
 
 let anythingIsNull = true;
+
 if (localStorage.getItem("users") == null) {
     localStorage.setItem("users", JSON.stringify({}));
 } else {
@@ -11,24 +12,23 @@ if (localStorage.getItem("users") == null) {
 if (localStorage.getItem("tweets") == null) {
     localStorage.setItem("tweets", JSON.stringify({}));
 } else {
-    anythingIsNull = true;
+    anythingIsNull = false;
 }
 
 if (localStorage.getItem("retweets") == null) {
     localStorage.setItem("retweets", JSON.stringify({}));
 } else {
-    anythingIsNull = true;
+    anythingIsNull = false;
 }
 
 if (localStorage.getItem("history") == null) {
     localStorage.setItem("history", JSON.stringify([]));
 } else {
-    anythingIsNull = true;
+    anythingIsNull = false;
 }
 
-if (anythingIsNull ){
-    MASTERMIND();
-    MASTERMIND();
+if (anythingIsNull == true) {
+    MASTERMIND();    
 }
 
 async function readfile(File) {

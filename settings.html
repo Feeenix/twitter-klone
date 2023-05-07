@@ -328,13 +328,14 @@
 
     let editedParams = {
         "displayName": false,
+        "banner": false,
+        "pfp": false,
         "bio": false,
         "location": false,
         "theme": false,
+        "fontSize": false,
         "barkSound": false,
         "barkText": false,
-        "pfp": false,
-        "banner": false
     }
     function setPageState() {
         let brukerId = hentInnloggetBrukerId();
@@ -426,6 +427,17 @@
 
         }
 
+        editedParams = {
+            "displayName": false,
+            "banner": false,
+            "pfp": false,
+            "bio": false,
+            "location": false,
+            "theme": false,
+            "fontSize": false,
+            "barkSound": false,
+            "barkText": false,
+        }
 
 
 
@@ -502,6 +514,52 @@
         }
 
         lagreData(["users", brukerId], bruker);
+        editedParams = {
+            "displayName": false,
+            "banner": false,
+            "pfp": false,
+            "bio": false,
+            "location": false,
+            "theme": false,
+            "fontSize": false,
+            "barkSound": false,
+            "barkText": false,
+        }
+    }
+
+    function setButtonDisabledState() {
+
+        //     editedParams = {
+        //     "displayName": false,
+        //     "banner": false,
+        //     "pfp": false,
+        //     "bio": false,
+        //     "location": false,
+        //     "theme": false,
+        //     "fontSize": false,
+        //     "barkSound": false,
+        //     "barkText": false,
+        // }
+
+        // sjekke om det er noen endringer
+        let endring = editedParams.values().some(function (value) { return value })
+
+        if (endring) {
+            // enable save
+            let saveKnapper = document.querySelectorAll(".settingsButtonSave, .settingsButtonDiscard");
+            for (let i = 0; i < saveKnapper.length; i++) {
+                saveKnapper[i].disabled = false;
+            }
+        } else {
+            // disable save
+            let saveKnapper = document.querySelectorAll(".settingsButtonSave, .settingsButtonDiscard");
+            for (let i = 0; i < saveKnapper.length; i++) {
+                saveKnapper[i].disabled = true;
+            }
+        }
+
+
+
     }
 
     makeEventListenersForLiveUpdating();
@@ -514,26 +572,25 @@
         let profileBio = document.querySelector("#profileBio");
         let profileLocationName = document.querySelector("#profileLocationName");
 
-
         let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
-
         let settingsEditProfileBanner = document.querySelector("#settingsEditProfileBanner");
         let settingsEditProfilePicture = document.querySelector("#settingsEditProfilePicture");
-
         let settingsEditBio = document.querySelector("#settingsEditBio");
         let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
-
         let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
         let customColorText = document.querySelector("#customColorText");
         let customColorBackground = document.querySelector("#customColorBackground");
-
         let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
-
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
         let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
 
         settingsEditProfileDisplayName.addEventListener("input", function () {
             profileDisplayName.innerHTML = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
+            if (profileDisplayName.innerHTML != bruker["displayName"]) {
+                editedParams["displayName"] = true;
+            } else {
+                editedParams["displayName"] = false;
+            }
         });
 
         settingsEditProfileBanner.addEventListener("change", async function () {
@@ -541,6 +598,11 @@
             let bannerFile = inputs[0].files[0];
             let bannerURL = await readfile(bannerFile);
             profilebannerimg.src = bannerURL;
+            if (bannerURL != bruker["banner"]) {
+                editedParams["banner"] = true;
+            } else {
+                editedParams["banner"] = false;
+            }
         });
 
         settingsEditProfilePicture.addEventListener("change", async function () {
@@ -548,10 +610,20 @@
             let pfpFile = inputs[1].files[0];
             let pfpURL = await readfile(pfpFile);
             profilePfp.src = pfpURL;
+            if (pfpURL != bruker["pfp"]) {
+                editedParams["pfp"] = true;
+            } else {
+                editedParams["pfp"] = false;
+            }
         });
 
         settingsEditBio.addEventListener("input", function () {
             profileBio.innerHTML = settingsEditBio.value;
+            if (profileBio.innerHTML != bruker["bio"]) {
+                editedParams["bio"] = true;
+            } else {
+                editedParams["bio"] = false;
+            }
         });
 
         settingsEditProfileLocation.addEventListener("input", function () {
@@ -561,10 +633,18 @@
                 document.querySelector("#profileLocation").style.display = "flex";
             }
             profileLocationName.innerHTML = settingsEditProfileLocation.value;
+            if (profileLocationName.innerHTML != bruker["location"]) {
+                editedParams["location"] = true;
+            } else {
+                editedParams["location"] = false;
+            }
         });
+
+
         let colorthemeRadioButtons = document.querySelectorAll(".colorThemes .radioElement")
         for (let i = 0; i < colorthemeRadioButtons.length; i++) {
             colorthemeRadioButtons[i].addEventListener("click", function (e) {
+                let bruker = hentBruker(hentInnloggetBrukerId());
                 let parent = e.target;
                 while (!parent.classList.contains("radioElement")) { // loop til den finner radioElement i classList
                     parent = parent.parentElement;
@@ -576,12 +656,22 @@
                     body.style.setProperty("--globalfg", "#404040")
                     body.style.setProperty("--globalbg", "#ffffff")
                     body.style.setProperty("--globalbg2", "#ffffffcd")
+                    if (bruker["settings"]["theme"] != "light") {
+                        editedParams["theme"] = true;
+                    } else {
+                        editedParams["theme"] = false;
+                    }
                 }
                 if (radioEl.value == "dark") {
                     console.log("dark")
                     body.style.setProperty("--globalfg", "#ffffff")
                     body.style.setProperty("--globalbg", "#282c34")
                     body.style.setProperty("--globalbg2", "#282c34cd")
+                    if (bruker["settings"]["theme"] != "dark") {
+                        editedParams["theme"] = true;
+                    } else {
+                        editedParams["theme"] = false;
+                    }
                 }
                 if (radioEl.value == "custom") {
                     console.log("custom")
@@ -590,19 +680,35 @@
                     body.style.setProperty("--globalfg", customColorText.value)
                     body.style.setProperty("--globalbg", customColorBackground.value)
                     body.style.setProperty("--globalbg2", customColorBackground.value + "cd")
+                    if (bruker["settings"]["theme"] != "custom") {
+                        editedParams["theme"] = true;
+                    } else {
+                        editedParams["theme"] = false;
+                    }
                 }
+
             });
         }
 
         customColorText.addEventListener("input", function () {
             let body = document.querySelector("body");
             body.style.setProperty("--globalfg", customColorText.value)
+            if (customColorText.value != bruker["settings"]["text-color"]) {
+                editedParams["theme-fg"] = true;
+            } else {
+                editedParams["theme-fg"] = false;
+            }
         });
 
         customColorBackground.addEventListener("input", function () {
             let body = document.querySelector("body");
             body.style.setProperty("--globalbg", customColorBackground.value)
             body.style.setProperty("--globalbg2", customColorBackground.value + "cd")
+            if (customColorBackground.value != bruker["settings"]["background-color"]) {
+                editedParams["theme-bg"] = true;
+            } else {
+                editedParams["theme-bg"] = false;
+            }
         });
 
         fontsizeflexInput.addEventListener("change", function () {
@@ -610,14 +716,34 @@
             body.style.fontSize = fontsizeflexInput.value + "px"
         });
 
-        for (let i = 0; i < barkSoundRadio.length; i++) {
-            barkSoundRadio[i].addEventListener("change", function () {
-                if (barkSoundRadio[i].checked == true) {
-                    if (barkSoundRadio[i].value == "true") {
-                    }
-                    if (barkSoundRadio[i].value == "false") {
-                    }
+        let barkSoundRadioEls = document.querySelectorAll(".barkSound .radioElement")
+        for (let i = 0; i < barkSoundRadioEls.length; i++) {
+            barkSoundRadioEls[i].addEventListener("change", function (e) {
+                let node = e.target;
+                while (!node.classList.contains("radioElement")) { // loop til den finner radioElement i classList
+                    node = node.parentElement;
                 }
+                let radioEl = node.querySelector("input");
+                if (radioEl.value == "true") {
+                    let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
+                    barkSoundRadioEls[0].checked = true;
+                    barkSoundRadioEls[1].checked = false;
+
+                    if (bruker["settings"]["barkSound"] != "true") {
+                        editedParams["barkSound"] = true;
+                    } else {
+                        editedParams["barkSound"] = false;
+                    }
+
+
+                }
+                if (radioEl.value == "false") {
+                    let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
+                    barkSoundRadioEls[0].checked = false;
+                    barkSoundRadioEls[1].checked = true;
+
+                }
+
             });
         }
 
@@ -794,7 +920,7 @@
         window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
     });
 
-    
+
 
 
 </script>

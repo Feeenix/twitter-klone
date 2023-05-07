@@ -445,6 +445,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
         retweetAuthorId = hentRetweet(retweetId)["author"];
     }
 
+    inkrementerViews(postId);
+
     let author = hentBruker(post["author"])
     
     let retweetWrapper = document.createElement("div");
@@ -706,7 +708,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
     viewikon.height = "20"
 
     let mengdeviews = document.createElement("span")
-    mengdeviews.innerHTML = post["views"]
+    mengdeviews.innerHTML = formatViewsPretty( post["views"])
+
 
     viewknapp.appendChild(mengdeviews)
     viewknapp.appendChild(viewikon)
@@ -725,6 +728,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
     return tweet;
 }
 
+
+
 function formatTimestampPretty(a) {
 
     let now = Date.now();
@@ -740,20 +745,40 @@ function formatTimestampPretty(a) {
     if (diffSeconds < 60) {
         return "Now";
     }
+
     if (diffMinutes < 60) {
+        if (Math.floor(diffMinutes) == 1) {
+            return Math.floor(diffMinutes) + " minute ago";
+        }
         return Math.floor(diffMinutes) + " minutes ago";
     }
     if (diffHours < 24) {
+        if (Math.floor(diffHours) == 1) {
+            return Math.floor(diffHours) + " hour ago";
+        }
+
         return Math.floor(diffHours) + " hours ago";
     }
     if (diffDays < 7) {
+        if (Math.floor(diffDays) == 1) {
+            return Math.floor(diffDays) + " day ago";
+        }
         return Math.floor(diffDays) + " days ago";
     }
     if (diffWeeks < 4) {
+        if (Math.floor(diffWeeks) == 1) {
+            return Math.floor(diffWeeks) + " week ago";
+        }
         return Math.floor(diffWeeks) + " weeks ago";
     }
     if (diffMonths < 12) {
+        if (Math.floor(diffMonths) == 1) {
+            return Math.floor(diffMonths) + " month ago";
+        }
         return Math.floor(diffMonths) + " months ago";
+    }
+    if (Math.floor(diffYears) == 1) {
+        return Math.floor(diffYears) + " year ago";
     }
     return Math.floor(diffYears) + " years ago";
 }
@@ -761,7 +786,7 @@ function formatTimestampPretty(a) {
 
 function hentTweetEllerRetweet(tweetId) {
     let tweet = hentTweet(tweetId);
-    if (tweet == null) {
+    if (JSON.stringify(tweet)==JSON.stringify({})) {
         tweet = hentRetweet(tweetId);
     }
     return tweet;
@@ -784,7 +809,7 @@ function visTweets(listeOverBrukere) {
     }
 
 
-    posts.sort(function (a, b) {
+    posts.sort(function (b, a) {
         return hentTweetEllerRetweet(b)["posted"] - hentTweetEllerRetweet(a)["posted"];
     });
     posts.reverse();
@@ -795,4 +820,29 @@ function visTweets(listeOverBrukere) {
         feed.append(postElement);
     }
 }
+
+// lag en funksjon som tar imot tweetId og henter tweetet og inkrementerer views, retunerer ingenting
+
+function inkrementerViews(tweetId) {
+    let tweet = hentTweet(tweetId);
+    tweet["views"] = tweet["views"] + 1;
+    lagreData(["tweets",tweetId], tweet);
+    
+}
+
+//lag en funksjon som tar imot et tall for eksmpel 1438 og returnerer 1.4k
+
+function formatViewsPretty(views) {
+    if (views < 1000) {
+        return views;
+    }
+    if (views < 1000000) {
+        return Math.floor(views / 100) / 10 + "k";
+    }
+    return Math.floor(views / 100000) / 10 + "m";
+}
+
+
+
+
 

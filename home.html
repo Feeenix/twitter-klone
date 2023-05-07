@@ -35,22 +35,22 @@
                     <div id="menyknapper">
                         <a href="home.html" class="boldText hiddenButton genericButton" id="menyhjem">
                             <img src="bilder/home.png" height="30" alt="">
-                            <div class="buttonText">Hjem</div>
+                            <div class="buttonText">Home</div>
                         </a>
 
                         <a href="sok.html?query=" class="largeWidth hiddenButton genericButton" id="menysok">
                             <img src="bilder/search_hul.png" height="30" alt="">
-                            <div class="buttonText">Søk</div>
+                            <div class="buttonText">Search</div>
                         </a>
 
                         <a href="viewprofile.html?brukernavn=brukernavn" class="hiddenButton genericButton"
                             id="menyprofil">
                             <img src="bilder/profil_hul.png" height="30" alt="">
-                            <div class="buttonText">Profil</div>
+                            <div class="buttonText">Profile</div>
                         </a>
                         <a href="settings.html" class="hiddenButton genericButton" id="menyinnstillinger">
                             <img src="bilder/settings_hul.png" height="30" alt="">
-                            <div class="buttonText">Innstillinger</div>
+                            <div class="buttonText">Settings</div>
                         </a>
 
                     </div>
@@ -325,6 +325,9 @@
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
         visTweets(following);
+        if (hentBruker(hentInnloggetBrukerId())["following"].length == 0) {
+            visIngenFollowing();
+        }
     }
     function visAllTweets() {
         let alleBrukere = Object.keys(hentFraLocalStorage("users"));
@@ -360,78 +363,41 @@
             underline[1].style.display = "block";
 
         }
-    
+
     }
     let overskriftKnapper = document.querySelectorAll(".overskriftknapp");
     for (let i = 0; i < overskriftKnapper.length; i++) {
         overskriftKnapper[i].addEventListener("click", velgeoverskrifttabknapp);
-    
+
     }
-    
-    // function ifNoOneIsfollowed() {
-    //     let brukernavn = hentInnloggetBrukerId();
-    //     let brukermeg = hentBruker(brukernavn);
-    //     let following = brukermeg["following"];
-    //     if (following.length == 0) {
-    //         let feed = document.querySelector("#feed");
-    //         feed.innerHTML = "";
-    //         feed.style.display = "block";
-    //         feed.style.backgroundColor = "lightgrey";
-    //         feed.style.filter = "blur(4px)";
-    //         feed.style.height = "100%";
-    //         feed.style.width = "100%";
-    //         feed.style.top = "0";
-    //         feed.style.left = "0";
-    //         feed.style.zIndex = "1";
-    //         feed.style.margin = "0";
-    //         feed.style.padding = "0";
 
-    //         let div = document.createElement("div");
-    //         div.innerHTML = "You are not following anyone";
-    //         div.style.textAlign = "center";
-    //         div.style.position = "absolute";
-    //         div.style.top = "50%";
-    //         div.style.left = "50%";
-    //         div.style.transform = "translate(-50%, -50%)";
-    //         div.style.boxShadow = "0px 0px 10px black";
-    //         div.style.backgroundColor = "white";
-    //         div.style.padding = "20px";
-    //         div.style.fontSize = "20px";
-    //         div.style.fontWeight = "bold";
-    //         div.style.overflow = "visible";
-    //         feed.style.zIndex = "9999";
-    //         feed.style.filter = "blur(0px)";
+    //en funksjon som gjør at hvis man ikke følger en person viser feeden at man ikke følger noen og dette skal bare vises når man er under followingtab
+    function visIngenFollowing() {
+        let feed = document.querySelector("#feed");
+        feed.innerHTML = "";
+        let ingenFollowing = document.createElement("div");
+        ingenFollowing.id = "ingenFollowing";
+        ingenFollowing.innerHTML = "You are not following anyone yet.";
+        let a = document.createElement("a");
+        a.href = "sok.html?query=";
+        a.innerHTML = "Click to search for people to follow!";
+        a.id = "soklink";
+        a.classList.add("hiddenButton");
+        a.classList.add("grayBorder");
+        ingenFollowing.appendChild(a);
+        feed.appendChild(ingenFollowing);
+    }
 
 
-    //         feed.appendChild(div);
-    //     }
-        
-    // }
-    // let underlinee = document.querySelectorAll(".line");
-    // let brukernavne = hentInnloggetBrukerId();
-    // let brukermege = hentBruker(brukernavne);
-    // let myfollowers = brukermege["following"]
-    // if (myfollowers.length == 0 && underlinee[0].style.display == "block") {
-    //     ifNoOneIsfollowed();
-    // }
 
-    // if (myfollowers.length > 0) {
-    //     visFollowingTweets();
-    // }
-        
-    // if (underlinee[1].style.display = "block" && myfollowers.length == 0) {
-    //     visAllTweets();
-    //     let feed = document.querySelector("#feed");
-    //     feed.innerHTML = "";
-    //     feed.style.display = "block";
-    //     feed.style.backgroundColor = "white";
-    // }
-        
-    
-        
-    
 
-   
+
+
+
+
+
+
+
 
 
 

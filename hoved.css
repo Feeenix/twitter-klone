@@ -1504,10 +1504,8 @@ button:disabled:hover {
     height: 100%;
     background-color: var(--globalbg);
     color: var(--globaltext);
-    box-shadow: #9279ff 0px 0px 10px 0px;
-    border-radius: 10px;
+    border-bottom: solid rgba(222, 230, 232, 0.6) 1px;
     padding: 20px;
-    margin: 20px;
 
 }
 #soklink{
@@ -1516,6 +1514,5 @@ button:disabled:hover {
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
-    
     transition: 0.2s;
 }

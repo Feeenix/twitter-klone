@@ -745,3 +745,4 @@ function visTweets(listeOverBrukere) {
         feed.append(postElement);
     }
 }
+

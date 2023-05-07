@@ -321,6 +321,7 @@
 <script src="javascript/profilemenu.js"></script>
 <script src="javascript/visprofil.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
+<script src="javascript/barkLyder.js"></script>
 <script>
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
@@ -335,6 +336,8 @@
         "bio": false,
         "location": false,
         "theme": false,
+        "theme-bg": false,
+        "theme-fg": false,
         "fontSize": false,
         "barkSound": false,
         "barkText": false,
@@ -396,9 +399,9 @@
         }
         if (bruker["settings"]["theme"] == "custom") {
             console.log("custom")
-            body.style.setProperty("--globalfg", bruker["settings"]["text-color"].value)
-            body.style.setProperty("--globalbg", bruker["settings"]["background-color"].value)
-            body.style.setProperty("--globalbg2", bruker["settings"]["background-color"].value + "cd")
+            body.style.setProperty("--globalfg", bruker["settings"]["text-color"])
+            body.style.setProperty("--globalbg", bruker["settings"]["background-color"])
+            body.style.setProperty("--globalbg2", bruker["settings"]["background-color"] + "cd")
         }
 
         let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
@@ -436,6 +439,8 @@
             "bio": false,
             "location": false,
             "theme": false,
+            "theme-bg": false,
+            "theme-fg": false,
             "fontSize": false,
             "barkSound": false,
             "barkText": false,
@@ -524,6 +529,8 @@
             "bio": false,
             "location": false,
             "theme": false,
+            "theme-bg": false,
+            "theme-fg": false,
             "fontSize": false,
             "barkSound": false,
             "barkText": false,
@@ -532,18 +539,6 @@
     }
 
     function setButtonsDisabledState() {
-
-        //     editedParams = {
-        //     "displayName": false,
-        //     "banner": false,
-        //     "pfp": false,
-        //     "bio": false,
-        //     "location": false,
-        //     "theme": false,
-        //     "fontSize": false,
-        //     "barkSound": false,
-        //     "barkText": false,
-        // }
 
         // sjekke om det er noen endringer
         let endring = Object.values(editedParams).some(function (value) { return value })
@@ -728,6 +723,13 @@
         fontsizeflexInput.addEventListener("change", function () {
             let body = document.querySelector("body");
             body.style.fontSize = fontsizeflexInput.value + "px"
+            let bruker = hentBruker(hentInnloggetBrukerId());
+            if (fontsizeflexInput.value != bruker["settings"]["font-size"]) {
+                editedParams["fontSize"] = true;
+            } else {
+                editedParams["fontSize"] = false;
+            }
+            setButtonsDisabledState()
         });
 
         let barkSoundRadioEls = document.querySelectorAll(".barkSound .radioElement")
@@ -740,10 +742,14 @@
                 }
                 let radioEl = node.querySelector("input");
                 if (radioEl.value == "true") {
+                    console.log("jeg trakk på true");
+                    
                     let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
                     barkSoundRadioEls[0].checked = true;
                     barkSoundRadioEls[1].checked = false;
+                    let bruker = hentBruker(hentInnloggetBrukerId());
 
+                    console.log(bruker["settings"]["barkSound"])
                     if (bruker["settings"]["barkSound"] != "true") {
                         editedParams["barkSound"] = true;
                     } else {
@@ -758,7 +764,17 @@
                     barkSoundRadioEls[0].checked = false;
                     barkSoundRadioEls[1].checked = true;
 
-                }
+                    let bruker = hentBruker(hentInnloggetBrukerId());
+
+                    console.log(bruker["settings"]["barkSound"])
+                    if (bruker["settings"]["barkSound"] != "true") {
+                        editedParams["barkSound"] = false;
+                    } else {
+                        editedParams["barkSound"] = true;
+                    }
+
+                    setButtonsDisabledState()
+                }   
 
             });
         }
@@ -776,6 +792,7 @@
                     barkTextRadioEls[0].checked = true;
                     barkTextRadioEls[1].checked = false;
 
+                    let bruker = hentBruker(hentInnloggetBrukerId());
                     if (bruker["settings"]["barkText"] != "true") {
                         editedParams["barkText"] = true;
                     } else {
@@ -788,7 +805,14 @@
                     let barkTextRadioEls = document.querySelectorAll(".settingsEditOtherTextType")
                     barkTextRadioEls[0].checked = false;
                     barkTextRadioEls[1].checked = true;
+                    let bruker = hentBruker(hentInnloggetBrukerId());
+                    if (bruker["settings"]["barkText"] != "true") {
+                        editedParams["barkText"] = false;
+                    } else {
+                        editedParams["barkText"] = true;
+                    }
 
+                    setButtonsDisabledState()
                 }
 
             });
@@ -970,6 +994,7 @@
 
 
 
-</script>
 
+
+</script>
 </html>

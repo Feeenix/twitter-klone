@@ -337,10 +337,7 @@
                     </div>
 
 
-                    <a class="bunnhoyre aatweetknapp " tabindex="0">
-                        BARK
-                        <!-- <img src="bilder/BARK.png" alt="tweetknapp" width="50" height="50"> -->
-                    </a>
+                    
 
                 </div>
 
@@ -355,6 +352,7 @@
 </body>
 
 <script src="javascript/lib.js"></script>
+<script src="javascript/lasteSettings.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script src="javascript/profilemenu.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
@@ -362,6 +360,7 @@
 <script src="javascript/whotofollow_buttons.js"></script>
 <script src="javascript/barkKnapp.js"></script>
 <script src="javascript/tweeteFunksjoner.js"></script>
+<script src="javascript/barkLyder.js"></script>
 <script>
     leggTilHistory();
 
@@ -394,6 +393,24 @@
 
     }
     setPageState();
+    let tweetTextArea = document.querySelector("#tweetTextArea");
+    let characterIndicator = document.querySelector(".characterIndicator");
+    tweetTextArea.addEventListener("input", changeWhenInput);
+
+    let previousTextAreaValue = "";
+    function changeWhenInput() {
+        if (tweetTextArea.value.length > 250) {
+            tweetTextArea.value = previousTextAreaValue
+        }
+        let bruker = hentBruker(hentInnloggetBrukerId());
+        if (bruker["settings"]["barkText"] == "true") {
+            tweetTextArea.value = tweetTextArea.value.toUpperCase().replace(/(\.|:|;)/g, "!");
+        }
+        characterIndicator.innerHTML = tweetTextArea.value.length + "/250";
+        previousTextAreaValue = tweetTextArea.value;
+    }
+    changeWhenInput();
+
 
     function lagCommentElement(tweetId){
         let commentEl = document.createElement("div");

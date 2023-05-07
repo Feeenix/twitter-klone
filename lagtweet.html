@@ -147,14 +147,16 @@
 </body>
 
 <script src="javascript/lib.js"></script>
+<script src="javascript/lasteSettings.js"></script>
 <script src="javascript/redirectHvisLoggetUt.js"></script>
 <script src="javascript/profilemenu.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
 <script src="javascript/tweeteFunksjoner.js"></script>
+<script src="javascript/barkLyder.js"></script>
 <script>
     leggTilHistory();
-    
-    function setPageState(){
+
+    function setPageState() {
         let brukerId = hentInnloggetBrukerId();
         let bruker = hentBruker(brukerId);
 
@@ -167,15 +169,18 @@
     let tweetTextArea = document.querySelector("#tweetTextArea");
     let characterIndicator = document.querySelector(".characterIndicator");
     tweetTextArea.addEventListener("input", changeWhenInput);
+
+    let previousTextAreaValue = "";
     function changeWhenInput() {
         if (tweetTextArea.value.length > 250) {
-            tweetTextArea.value = tweetTextArea.value.substring(0, 250);
+            tweetTextArea.value = previousTextAreaValue
         }
-
-        tweetTextArea.value = tweetTextArea.value.toUpperCase().replace(/(\.|:|;)/g, "!");
-
-
+        let bruker = hentBruker(hentInnloggetBrukerId());
+        if (bruker["settings"]["barkText"] == "true") {
+            tweetTextArea.value = tweetTextArea.value.toUpperCase().replace(/(\.|:|;)/g, "!");
+        }
         characterIndicator.innerHTML = tweetTextArea.value.length + "/250";
+        previousTextAreaValue = tweetTextArea.value;
     }
     changeWhenInput();
     tweetTextArea.addEventListener("focus", function (e) {

@@ -1,6 +1,21 @@
 let ls = localStorage
 let htmlfilnavn = window.location.pathname.split("/").pop();
 
+if (localStorage.getItem("users") == null) {
+    localStorage.setItem("users", JSON.stringify({}));
+}
+
+if (localStorage.getItem("tweets") == null) {
+    localStorage.setItem("tweets", JSON.stringify({}));
+}
+
+if (localStorage.getItem("retweets") == null) {
+    localStorage.setItem("retweets", JSON.stringify({}));
+}
+
+if (localStorage.getItem("history") == null) {
+    localStorage.setItem("history", JSON.stringify([]));
+}
 
 async function readfile(File) {
     const reader = new FileReader();
@@ -182,9 +197,9 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
             "background-color": "#ffffff", // brukes bare i custom theme
             "text-color": "#404040", // brukes bare i custom theme
             "font": "Inter",
-            "font-size": "16px",
-            "barkSound": "true",
-            "barkText": "true",
+            "font-size": "16",
+            "barkSound": "false",
+            "barkText": "false",
         }
     }
     lagreData(["users", brukernavn], bruker);
@@ -195,7 +210,6 @@ function lagTilfeldigeBrukere(antall) {
         let brukernavn = genererId();
         let passord = "passord";
         lagNyBruker(brukernavn, passord);
-
     }
 }
 
@@ -274,6 +288,7 @@ function lagNyTweet(brukernavn, path, bildeURL, text) {
         parentTweet["comments"].push(id);
         lagreData(["tweets", path[path.length - 1]], parentTweet);
     }
+    return id;
 }
 
 
@@ -314,11 +329,11 @@ function lagNyRetweet(postId, brukernavn) {
     bruker["retweets"].push(id);
     lagreData(["users", brukernavn], bruker);
 
-    
+
 
 }
 function lagNyLike(postId, brukernavn) {
-    
+
     // legg til like i postId sine likes
     let tweet = hentFraLocalStorage("tweets")[postId];
     tweet["likes"].push(brukernavn);
@@ -328,10 +343,10 @@ function lagNyLike(postId, brukernavn) {
     let bruker = hentBruker(brukernavn);
     bruker["likes"].push(postId);
     lagreData(["users", brukernavn], bruker);
-    
+
 }
 
-function slettLike (tweetId, brukernavn) {
+function slettLike(tweetId, brukernavn) {
 
     let tweet = hentFraLocalStorage("tweets")[tweetId];
     let bruker = hentFraLocalStorage("users")[brukernavn];
@@ -341,7 +356,7 @@ function slettLike (tweetId, brukernavn) {
     bruker["likes"].splice(index, 1);
     lagreData(["tweets", tweetId], tweet);
     lagreData(["users", brukernavn], bruker);
-    
+
 }
 function folgerBruker(brukerSomFolger, brukerSomBlirFolgt) {
     let bruker1 = hentBruker(brukerSomFolger);
@@ -423,8 +438,8 @@ eksempel på retweet-objekt:
 
 
 
-function lagPostElement(postId, mainTweet=false, comment=false) {
-    console.log("mainTweet =",mainTweet)
+function lagPostElement(postId, mainTweet = false, comment = false) {
+    console.log("mainTweet =", mainTweet)
     let post = hentTweet(postId);
     let erRetweet = false;
     let retweetId = postId;
@@ -448,7 +463,7 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
     inkrementerViews(postId);
 
     let author = hentBruker(post["author"])
-    
+
     let retweetWrapper = document.createElement("div");
     retweetWrapper.classList.add("retweetWrapper");
     let tweet = document.createElement("div");
@@ -538,8 +553,8 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
     profilbildelink.href = "viewprofile.html?brukernavn=" + post["author"]
     profilbildelink.appendChild(profilbilde);
     profilbildekolonne.appendChild(profilbildelink);
-    console.log(post["comments"].length > 0 , !mainTweet)
-    console.log("mainTweet =",mainTweet)
+    console.log(post["comments"].length > 0, !mainTweet)
+    console.log("mainTweet =", mainTweet)
     if (post["comments"].length > 0 && !mainTweet) {
         let indentLinjePrime = document.createElement("div");
         indentLinjePrime.classList.add("indentLinjePrime");
@@ -550,7 +565,7 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
         viewReplies.innerHTML = "See replies";
         profilbildekolonne.appendChild(viewReplies);
 
-    
+
     }
     let tweetkolonne = document.createElement("div");
     tweetkolonne.classList.add("tweetkolonne");
@@ -693,7 +708,7 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
         }
     })
 
-    
+
 
 
     let viewknapp = document.createElement("button")
@@ -708,7 +723,7 @@ function lagPostElement(postId, mainTweet=false, comment=false) {
     viewikon.height = "20"
 
     let mengdeviews = document.createElement("span")
-    mengdeviews.innerHTML = formatViewsPretty( post["views"])
+    mengdeviews.innerHTML = formatViewsPretty(post["views"])
 
 
     viewknapp.appendChild(mengdeviews)
@@ -786,7 +801,7 @@ function formatTimestampPretty(a) {
 
 function hentTweetEllerRetweet(tweetId) {
     let tweet = hentTweet(tweetId);
-    if (JSON.stringify(tweet)==JSON.stringify({})) {
+    if (JSON.stringify(tweet) == JSON.stringify({})) {
         tweet = hentRetweet(tweetId);
     }
     return tweet;
@@ -821,18 +836,16 @@ function visTweets(listeOverBrukere) {
     }
 }
 
-// lag en funksjon som tar imot tweetId og henter tweetet og inkrementerer views, retunerer ingenting
 
 function inkrementerViews(tweetId) {
     let tweet = hentTweet(tweetId);
     tweet["views"] = tweet["views"] + 1;
-    lagreData(["tweets",tweetId], tweet);
-    
+    lagreData(["tweets", tweetId], tweet);
+
 }
 
-//lag en funksjon som tar imot et tall for eksmpel 1438 og returnerer 1.4k
 
-function formatViewsPretty(views) {
+function formatViewsPretty(views) { // 1000 -> 1k, 1000000 -> 1m
     if (views < 1000) {
         return views;
     }
@@ -846,3 +859,121 @@ function formatViewsPretty(views) {
 
 
 
+
+function MASTERMIND() {
+    let listeOverBrukere = [];
+    for (let i = 0; i < 20; i++) {
+        let brukernavn = lagRandomBruker();
+        listeOverBrukere.push(brukernavn);
+    }
+    // hente alle tweets til alle brukere
+    let posts = [];
+    for (let i = 0; i < listeOverBrukere.length; i++) {
+        let bruker = hentBruker(listeOverBrukere[i]);
+        let tweets = bruker["posts"];
+        for (let j = 0; j < tweets.length; j++) {
+            let tweet = tweets[j];
+            posts.push(tweet);
+        }
+        let retweetids = bruker["retweets"];
+        for (let j = 0; j < retweetids.length; j++) {
+            // let retweet = hentRetweet(retweetids[j]);
+            // posts.push(retweet["tweetId"]);
+            posts.push(retweetids[j]);
+        }
+    }
+
+    for (let i = 0; i < posts.length; i++) {
+        let postId = posts[i];
+        gjorTingPaTweet([], 0, postId, listeOverBrukere);
+    }
+
+}
+
+
+function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
+
+
+
+    if (layerNumber > 3) {
+        return;
+    }
+    if (path.length > 3) {
+        return;
+    }
+
+    for (let i = 0; i < listeOverBrukere.length; i++) {
+        const brukernavn = listeOverBrukere[i];
+        let tweet = hentTweet(tweetId);
+        tweet["views"] = tweet["views"] + 1;
+        lagreData(["tweets", tweetId], tweet);
+        
+        if (Math.random() < 0.05) {
+            // retweet
+            lagNyRetweet(tweetId, brukernavn);
+        }
+        if (Math.random() < 0.6) {
+
+            // like
+            lagNyLike(tweetId, brukernavn);
+        }
+        if (Math.random() < (1 / listeOverBrukere.length) * 1.1) {
+            path.push(tweetId);
+
+
+            let id = lagNyTweet(brukernavn, path, "", genererTekst());
+            gjorTingPaTweet(path, layerNumber + 1, id, listeOverBrukere);
+            // kommenter
+
+        }
+
+
+    }
+
+
+
+
+}
+
+
+function lagRandomBruker() {
+    let brukernavn = genererId();
+    let passord = "passord";
+    lagNyBruker(brukernavn, passord);
+
+
+    let antallTweets = Math.floor(Math.random() * 3);
+    for (let i = 0; i < antallTweets; i++) {
+
+        lagNyTweet(brukernavn, [], "", genererTekst());
+    }
+
+    return brukernavn;
+}
+
+
+function genererTekst() {
+    let tekst = "";
+    let antallOrd = Math.floor(Math.random() * 10);
+    for (let i = 0; i < antallOrd; i++) {
+        let ord = genererOrd();
+        tekst += ord + " ";
+    }
+    return tekst;
+}
+
+function genererOrd() {
+    let ord = "";
+    let antallBokstaver = Math.floor(Math.random() * 10);
+    for (let i = 0; i < antallBokstaver; i++) {
+        let bokstav = genererBokstav();
+        ord += bokstav;
+    }
+    return ord;
+}
+
+function genererBokstav() {
+    let bokstaver = "abcdefghijklmnopqrstuvwxyz";
+    let bokstav = bokstaver[Math.floor(Math.random() * bokstaver.length)];
+    return bokstav;
+}

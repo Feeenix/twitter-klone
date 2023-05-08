@@ -131,7 +131,6 @@
 <script>
     clearHistory();
 
-    // henetr setupbuttons og setupinputs er globale variabler 
     let knapper = document.querySelectorAll("#setupButtons>*")
     let setupInputs = document.querySelectorAll(".inputfield>input[type=text]");
     for (let i = 0; i < knapper.length; i++) {
@@ -146,7 +145,7 @@
             }
         })
     }
-    let uploadFile = document.querySelector("#uploadFile"); // heneter filopplastningsknappen 
+    let uploadFile = document.querySelector("#uploadFile"); // henter filopplastningsknappen 
     // legger til eventlistener på filopplastningsknappen
     uploadFile.addEventListener("change", async function () { // legger til funksjon på filopplastningsknappen
         let file = this.files[0]; // filen som er valgt
@@ -156,7 +155,7 @@
             document.querySelector(".imagePreview>img").src = result; // viser bildet i previewet
         }
     })
-    document.querySelector(".imagePreview>img").src = ""; // resetter previewet 
+    document.querySelector(".imagePreview>img").src = ""; // resetter previewbildet
 
     let uploadButton = document.querySelector(".inputfield>button"); 
     // legger til eventlistener på knappen som åpner filopplastningsknappen 

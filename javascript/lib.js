@@ -1,4 +1,3 @@
-// Vi skal kommentere hva alle funksjoner gjør, og hvorfor vi har dem.
 let ls = localStorage // forkorter localStorage til ls, fordi det er mye kortere å skrive
 let htmlfilnavn = window.location.pathname.split("/").pop(); // henter filnavnet til html-filen, for eksempel "index.html" eller "login.html"
 
@@ -907,7 +906,8 @@ async function MASTERMIND() {
     // den bruker chuck norris api for å generere teksten. LOL https://api.chucknorris.io/
     // den bruker lorem picsum for å hente tilfeldige bilder. https://picsum.photos/
 
-    let body = document.querySelector("body");
+    // lager loading screen og legger til i body
+    let body = document.querySelector("body"); 
     let loadingScreen = document.createElement("div");
     loadingScreen.classList.add("loadingScreen");
     let loadingText = document.createElement("h1");
@@ -920,7 +920,6 @@ async function MASTERMIND() {
     loadingImg.classList.add("loadingImg");
     loadingScreen.appendChild(loadingText);
     loadingScreen.appendChild(loadingText2);
-
     loadingScreen.appendChild(loadingImg);
     body.appendChild(loadingScreen);
 
@@ -949,18 +948,19 @@ async function MASTERMIND() {
 
     for (let i = 0; i < posts.length; i++) {
         let postId = posts[i];
-        await gjorTingPaTweet([], 0, postId, listeOverBrukere);
+        await gjorTingPaTweet([], 0, postId, listeOverBrukere); // starter rekursjonen på alle tweetsene
     }
 
-    // remove loading screen
+    // fjerner loading screen
     loadingScreen.remove();
 }
 
 
 async function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
-
-
-
+    // denne funksjonen er en rekursiv funksjon som går gjennom alle tweetsene og gjør ting på dem som å like, retweete, kommentere og øke views
+    // vi bruker en path for å unngå å gå i loops og for å ikke gå for dypt
+    // path er en liste med tweetId-er som vi har vært innom
+    // layerNumber er hvor dypt vi er i rekursjonen
     if (layerNumber > 3) {
         return;
     }
@@ -1008,28 +1008,36 @@ async function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
 
 
 async function lagRandomBruker() {
-    let brukernavn = genererId();
-    let passord = "passord";
-    lagNyBruker(brukernavn, passord);
+    // lager en random bruker 
+    // bruker chucknorris.io for å generere bio
+    // bruker picsum.photos for å generere profilbilde og bannerbilde
+    // bruker en random id for å generere brukernavn
+    // bruker passordet "passord" for alle brukere
+    
+    
+
+    let brukernavn = genererId(); // generer random brukernavn
+    let passord = "passord"; // passordet er passord for alle brukere
+    lagNyBruker(brukernavn, passord); // lager en ny bruker med brukernavnet og passordet
 
     let brukerpfp = "https://picsum.photos/seed/"+genererId()+"/500";
-    lagreData(["users", brukernavn, "profileImage"], brukerpfp);
+    lagreData(["users", brukernavn, "profileImage"], brukerpfp); // bruker picsum med et random seed for å generere profilbilde
 
     let brukerBanner = "https://picsum.photos/seed/"+genererId()+"/866/231";
-    lagreData(["users", brukernavn, "bannerImage"], brukerBanner);
+    lagreData(["users", brukernavn, "bannerImage"], brukerBanner); // bruker picsum med et random seed for å generere bannerbilde
 
-    let brukerBio = await genererChuck();
+    let brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
     lagreData(["users", brukernavn, "bio"], brukerBio);
 
 
     let antallTweets = Math.floor(Math.random() * 3);
-    for (let i = 0; i < antallTweets; i++) {
+    for (let i = 0; i < antallTweets; i++) { // looper opp til 3 ganger og lager tweets
         let bildeURL = ""
         if (Math.random() < 0.1) {
             let choices = ["https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
             bildeURL = choices[Math.floor(Math.random() * choices.length)];
         }
-        lagNyTweet(brukernavn, [], bildeURL, await genererChuck());
+        lagNyTweet(brukernavn, [], bildeURL, await genererChuck()); // lager en tweet med random bilde og en chuck norris joke
     }
 
     return brukernavn;
@@ -1037,12 +1045,15 @@ async function lagRandomBruker() {
 
 
 async function genererChuck(){
+// generer en random chuck norris joke fra chucknorris.io sin api. HÅPER DENNE IKKE ER FORBUDT Å BRUKE I PROSJEKTET :(
     const response = await fetch("https://api.chucknorris.io/jokes/random");
     const jsonData = await response.json();
     return jsonData["value"];
 }
 
 function genererTekst() {
+    // ubrukt 
+    // men du kan få brus hvis du vil ha brus du må bare spørre meg!
     let tekst = "";
     let antallOrd = Math.ceil(Math.random() * 10);
     for (let i = 0; i < antallOrd; i++) {
@@ -1053,6 +1064,8 @@ function genererTekst() {
 }
 
 function genererOrd() {
+    // ubrukt
+    // generer et random ord ved å velge random bokstaver
     let ord = "";
     let antallBokstaver = Math.ceil(Math.random() * 10);
     for (let i = 0; i < antallBokstaver; i++) {
@@ -1063,6 +1076,8 @@ function genererOrd() {
 }
 
 function genererBokstav() {
+    // ubrukt
+    // generer en random bokstav
     let bokstaver = "abcdefghijklmnopqrstuvwxyz";
     let bokstav = bokstaver[Math.floor(Math.random() * bokstaver.length)];
     return bokstav;

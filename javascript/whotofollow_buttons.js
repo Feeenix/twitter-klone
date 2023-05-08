@@ -52,6 +52,8 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
     button.classList.add("vanligKnapp");
     button.title = "trykk for å følge"
 
+    button.addEventListener("click", whoToFollowOrUnfollow);
+
 
     div1.appendChild(div2);
     div1.appendChild(div3);
@@ -67,19 +69,7 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
     whotofollowperson.appendChild(a);
     whotofollowbody.appendChild(whotofollowperson);
 
-}
-
-
-
-
-
-
-let whoToFollowButtons = document.querySelectorAll(".whotofollowbody button");
-for (let i = 0; i < whoToFollowButtons.length; i++) {
-    let button = whoToFollowButtons[i];
-    button.addEventListener("click", whoToFollowOrUnfollow);
-}
-
+}})();
 
 
 function whoToFollowOrUnfollow(a) {
@@ -97,4 +87,3 @@ function whoToFollowOrUnfollow(a) {
     }
 }
 
-})();

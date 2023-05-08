@@ -326,7 +326,7 @@
         let following = brukermeg["following"];
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
-        await visTweets(following);
+        await visTweets(following,"following");
         if (hentBruker(hentInnloggetBrukerId())["following"].length == 0) {
             visIngenFollowing();
         }
@@ -336,35 +336,27 @@
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
 
-        await visTweets(alleBrukere);
+        await visTweets(alleBrukere,"all");
     }
 
 
 
 
-
-    velgeoverskrifttabknapp({ target: { parentElement: { id: "overskriftfollowing" } } });
+    window.addEventListener("load", function () {
+        velgeoverskrifttabknapp({ target: { parentElement: { id: "overskriftfollowing" } } });
+    });
 
     function velgeoverskrifttabknapp(e) {
-        console.log("hi")
-        let overskriftprofilknapp = document.querySelector("#overskriftfollowing");
-        let overskriftappearanceknapp = document.querySelector("#overskriftall");
         let underline = document.querySelectorAll(".line");
-        let overskriftfollowing = document.querySelector("#settingsEditProfile");
-        let overskriftall = document.querySelector("#settingsEditAppearance");
-        let settingsOther = document.querySelector("#settingsEditOther");
-
         if (e.target.id == "overskriftfollowing" || e.target.parentElement.id == "overskriftfollowing") {
             visFollowingTweets();
             underline[0].style.display = "block";
             underline[1].style.display = "none";
-
         }
         if (e.target.id == "overskriftall" || e.target.parentElement.id == "overskriftall") {
             visAllTweets();
             underline[0].style.display = "none";
             underline[1].style.display = "block";
-
         }
 
     }

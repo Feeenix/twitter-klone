@@ -454,48 +454,47 @@
     }
 
 
-    let discardKnapper = document.querySelectorAll(".settingsButtonDiscard");
-
-    for (let i = 0; i < discardKnapper.length; i++) {
+    let discardKnapper = document.querySelectorAll(".settingsButtonDiscard"); // henter all discardknapper
+    for (let i = 0; i < discardKnapper.length; i++) { // legger til eventlistener på alle discardknapper, slik at den resetter alle inputs og tekst
         discardKnapper[i].addEventListener("click", setPageState);
     }
 
-    let saveKnapper = document.querySelectorAll(".settingsButtonSave");
-    for (let i = 0; i < saveKnapper.length; i++) {
+    let saveKnapper = document.querySelectorAll(".settingsButtonSave"); // henter alle saveknapper
+    for (let i = 0; i < saveKnapper.length; i++) { // legger til eventlistener på alle saveknapper, slik at det lagres i localstorage
         saveKnapper[i].addEventListener("click", saveSettings);
     }
 
 
-    async function saveSettings() {
+    async function saveSettings() { // funksjon som henter alle inputs og filer og lagrer det i localstorage på brukeren.
         let brukerId = hentInnloggetBrukerId();
         let bruker = hentBruker(brukerId);
 
-        let inputs = document.querySelectorAll("input[type=file]");
+        let inputs = document.querySelectorAll("input[type=file]"); // lagrer bannerbilde
         if (inputs[0].files.length > 0) {
             let bannerFile = inputs[0].files[0];
-            let bannerURL = await readfile(bannerFile);
+            let bannerURL = await readfile(bannerFile); // await trengs fordi readfile er en async funksjon som leser filen som er lastet opp
             bruker["bannerImage"] = bannerURL;
         }
-        if (inputs[1].files.length > 0) {
+        if (inputs[1].files.length > 0) { // lagrer profilbilde
             let pfpFile = inputs[1].files[0];
             let pfpURL = await readfile(pfpFile);
             bruker["pfpImage"] = pfpURL;
         }
 
         // profile
-        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
-        bruker["displayName"] = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
+        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName"); // henter inputen som korresponderer til display name
+        bruker["displayName"] = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder; // hvis verdien er "", skal den hente placeholderen og lagre det istedet, ellers skal det nye navn lagres
 
-        let settingsEditBio = document.querySelector("#settingsEditBio");
+        let settingsEditBio = document.querySelector("#settingsEditBio"); // henter verdien fra textarea som korresponderer med BIO og lagrer det i brukeren
         bruker["bio"] = settingsEditBio.value;
 
-        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
+        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation"); // henter verdien fra inputten som korresponderer med lokasjon og lagrer det i brukeren
         bruker["location"] = settingsEditProfileLocation.value;
 
 
         // appearance
         let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
-        for (let i = 0; i < themeRadios.length; i++) {
+        for (let i = 0; i < themeRadios.length; i++) {// looper gjennom fargetemaradioknappene og setter 
             if (themeRadios[i].checked == true) {
                 bruker["settings"]["theme"] = themeRadios[i].value;
             }

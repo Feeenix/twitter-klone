@@ -846,7 +846,7 @@ function hentTweetEllerRetweet(tweetId) { // henter en tweet eller retweet baser
     }
     return tweet; 
 }
-async function visTweets(listeOverBrukere) { // viser tweets fra en liste over brukere. Dette er async for at brukeren kan se tweetsene mens de laster inn
+async function visTweets(listeOverBrukere, id="") { // viser tweets fra en liste over brukere. Dette er async for at brukeren kan se tweetsene mens de laster inn
     let posts = [];
     for (let i = 0; i < listeOverBrukere.length; i++) { // looper gjennom alle brukerne
         let bruker = hentBruker(listeOverBrukere[i]);
@@ -868,11 +868,25 @@ async function visTweets(listeOverBrukere) { // viser tweets fra en liste over b
     let feed = document.querySelector("#feed");
     for (let i = 0; i < posts.length; i++) { // looper over alle tweetsene og legger dem til i feeden
         if (i%10 == 0 && i != 0){
-            await sleep(500); // venter 500 millisekunder hver 10 tweets for å ikke overbelaste nettleseren
+            // await sleep(500); // venter 500 millisekunder hver 10 tweets for å ikke overbelaste nettleseren
+            if (htmlfilnavn == "home.html"){
+                let underline = document.querySelectorAll(".line");
+                if (underline[1].style.display == "none" && id=="all"){
+                    console.log("return reason: invalid ALL state")
+                    return
+                }
+                if (underline[0].style.display == "none" && id=="following"){
+                    console.log("return reason: invalid FOLLOWING state")
+                    return
+                }            
+    
+            }
         }
+        
+        
         let post = posts[i];
         let postElement = lagPostElement(post);
-        feed.append(postElement);
+        feed.appendChild(postElement);
     }
 }
 

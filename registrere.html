@@ -111,57 +111,57 @@
         let passordRepeat = passordRepeatEl.value;
 
         if (brukernavn.length === 0) {
-            console.log('Du må skrive inn brukernavn');
+            console.log('You must enter a username');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Du må skrive inn brukernavn';
+            errorMessage.innerHTML = 'You must enter a username';
             brukernavnEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (brukernavn.match(/[^a-zA-Z\d]/g)) {
-            console.log('Brukernavnet kan bare inneholde symbolene: A-Z, a-z og 0-9');
+            console.log('The username can only contain the symbols: A-Z, a-z and 0-9');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Brukernavnet kan bare inneholde symbolene: A-Z, a-z og 0-9';
+            errorMessage.innerHTML = 'The username can only contain the symbols: A-Z, a-z and 0-9';
             brukernavnEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (passord.length === 0) {
-            console.log('Du må skrive inn passord');
+            console.log('You must enter a password');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Du må skrive inn passord';
+            errorMessage.innerHTML = 'You must enter a password';
             passordEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (passordRepeat !== passord) {
-            console.log('Passordene er ikke like');
+            console.log('The passwords are not the same');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Passordene er ikke like';
+            errorMessage.innerHTML = 'The passwords are not the same';
             passordRepeatEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (brukernavn.length < 3 || brukernavn.length > 20) {
-            console.log('Brukernavnet må være mellom 3 og 20 tegn');
+            console.log('The username must be between 3 and 20 characters');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Brukernavnet må være mellom 3 og 20 tegn';
+            errorMessage.innerHTML = 'The username must be between 3 and 20 characters';
             brukernavnEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (passord.length < 6) {
-            console.log('Passordet må være minst 6 tegn');
+            console.log('The password must be at least 6 characters');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Passordet må være minst 6 tegn';
+            errorMessage.innerHTML = 'The password must be at least 6 characters';
             passordEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (brukernavnFinnes(brukernavn)) {
-            console.log('Brukernavnet er opptatt');
+            console.log('The username is already taken');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Brukernavnet er allerede tatt, velg et annet';
+            errorMessage.innerHTML = 'The username is already taken';
             brukernavnEl.focus();
             errorMessage.style.display = 'block';
             return
@@ -178,9 +178,9 @@
             window.location.href = 'customize.html';
         } else {
             // ↓ dette burde aldri skje hvis alt er riktig
-            console.log('Feil brukernavn eller passord');
+            console.log('Wrong username or password');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Feil brukernavn eller passord';
+            errorMessage.innerHTML = 'Wrong username or password';
             brukernavnEl.focus();
 
         }

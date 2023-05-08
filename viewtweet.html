@@ -373,7 +373,9 @@
     }
     visTweet();
 
-    function setPageState() {
+    function setPageState() { // setter den initielle tilstanden til siden
+        
+        // setter profilbildet til innlogget bruker
         let commentProfilbilde = document.querySelector("#addComment .commentProfilbilde>img");
         let innloggetBrukerId = hentInnloggetBrukerId();
         let innloggetBruker = hentBruker(innloggetBrukerId);
@@ -382,38 +384,41 @@
         let tweetId = hentURLSearchParams()["tweetId"];
         let tweet = hentTweet(tweetId);
 
+        // setter teksten over kommentarfeltet til å være "Reply to @brukernavn"
         let commentReplyTo = document.querySelector("#addComment .forfatterinfo>div");
         commentReplyTo.innerHTML = "Reply to @" + tweet["author"];
 
+        // hvis det ikke er noen kommentarer, setter vi placeholderen til å være "No comments yet. Be the first to comment!"
         let antallKommentarer = tweet["comments"].length;
         if (antallKommentarer == 0) {
             document.querySelector("#commentsHeader").style.display = "none";
             document.querySelector("#tweetTextArea").placeholder = "No comments yet. Be the first to comment!";
-
         }
-
-
     }
     setPageState();
+
+    // legger til eventlistener på kommentarfeltet som teller bokstaver
     let tweetTextArea = document.querySelector("#tweetTextArea");
     let characterIndicator = document.querySelector(".characterIndicator");
     tweetTextArea.addEventListener("input", changeWhenInput);
 
     let previousTextAreaValue = "";
     function changeWhenInput() {
-        if (tweetTextArea.value.length > 250) {
+        if (tweetTextArea.value.length > 250) { // hvis vi har skrevet mer enn 250 bokstaver skal vi ikke tillate det og reversere endringen
             tweetTextArea.value = previousTextAreaValue
         }
         let bruker = hentBruker(hentInnloggetBrukerId());
-        if (bruker["settings"]["barkText"] == "true") {
-            tweetTextArea.value = tweetTextArea.value.toUpperCase().replace(/(\.|:|;)/g, "!");
+        if (bruker["settings"]["barkText"] == "true") { // hvis instillingene til brukeren er slik at vi skal "barkifye" teksten
+            tweetTextArea.value = tweetTextArea.value.toUpperCase().replace(/(\.|:|;)/g, "!"); // string.replace(RegEx, nyString) vil erstatte __alle__ forekomster av RegEx med nyString
         }
+
+        // oppdaterer antall bokstaver som er skrevet
         characterIndicator.innerHTML = tweetTextArea.value.length + "/250";
         previousTextAreaValue = tweetTextArea.value;
     }
     changeWhenInput();
 
-
+    // fungerer som en wrapper rundt lagPostElement, slik at tweeten blir puttet inni en ny div
     function lagCommentElement(tweetId) {
         let commentEl = document.createElement("div");
         commentEl.classList.add("comment");
@@ -422,23 +427,25 @@
         return commentEl;
     }
 
+    // funksjon som kjører lagCommentElement for alle kommentarene til en tweet og legger dem til i kommentarfeltet
     async function visComments() {
-        let tweetId = hentURLSearchParams()["tweetId"];
+        let tweetId = hentURLSearchParams()["tweetId"]; // henter tweetId fra URLen
         let tweet = hentTweet(tweetId);
-        let comments = tweet["comments"];
+        let comments = tweet["comments"]; // liste med tweetId-er
         let commentFeed = document.querySelector("#comments");
         commentFeed.innerHTML = "";
         for (let i = 0; i < comments.length; i++) {
-            if (i % 10 == 0 && i != 0) {
+            if (i % 10 == 0 && i != 0) { // hver 10. kommentar venter vi 500ms for å gi brukeren en følelse av at det skjer noe
                 await sleep(500);
             }
             let comment = comments[i];
-            let commentElement = lagCommentElement(comment);
-            commentFeed.appendChild(commentElement);
+            let commentElement = lagCommentElement(comment); // lager et element for kommentaren
+            commentFeed.appendChild(commentElement); // legger til kommentaren i kommentarfeltet
         }
     }
     visComments();
 
+    // gjør at X-knappen på søkefeltet fjerner søketeksten
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
 
@@ -449,13 +456,7 @@
     }
 
 
-    function search() {
-        let sokfeltEl = document.querySelector("#sokfelt");
-        let query = sokfeltEl.value;
-        if (query.length > 0) {
-            window.location.href = "search.html?query=" + query;
-        }
-    }
+    
 
 
 

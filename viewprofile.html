@@ -264,19 +264,19 @@
     leggTilHistory();
     // denne funksjonen skal kjøres når siden lastes inn og skal laste inn tweets fra brukeren
     async function visBrukerTweets() {
-        let alleBrukere = [hentURLSearchParams()["brukernavn"],];
-        await visTweets(alleBrukere);
+        let alleBrukere = [hentURLSearchParams()["brukernavn"],]; // legger til brukeren vi skal vise tweets fra i en liste
+        await visTweets(alleBrukere); // kaller på visTweets funksjonen og sender med listen med brukere vi skal vise tweets fra
     }
-    visBrukerTweets();
+    visBrukerTweets(); // kaller på funksjonen
     
-    oppdaterProfil(hentURLSearchParams()["brukernavn"]);
+    oppdaterProfil(hentURLSearchParams()["brukernavn"]); // oppdaterer profilen til brukeren vi skal vise tweets fra
 
-    document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"]; 
+    document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"];  // endrer tittelen på siden til brukernavnet til brukeren vi skal vise tweets fra
 
-    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
-    fjernQueryKnapp.addEventListener("click", clearSearch);
+    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp"); // henter knappen for å fjerne søkequery
+    fjernQueryKnapp.addEventListener("click", clearSearch); // legger til en eventlistener som kjører clearSearch funksjonen når knappen trykkes på
 
-    function clearSearch() {
+    function clearSearch() { // denne funksjonen fjerner søkequeryen og fokuserer på søkefeltet
         let sokfeltEl = document.querySelector("#sokfelt");
         sokfeltEl.value = "";
         sokfeltEl.focus();

@@ -190,7 +190,7 @@
                 let File = setupInputs[listeOverIndexer[stage]].files[0]; // filen som skal lastes opp
                 if (File == undefined) { // hvis det ikke er en fil som er valgt
                     nextPrompt(skip = true); // gå videre til neste prompt
-                    return; // avslutt funksjonen
+                    return; 
                 }
                 data = await readfile(File); // les filen og returner en base64 string
             }
@@ -211,16 +211,15 @@
             setupInputs[listeOverIndexer[stage]].style.display = "none"; // skjul inputfeltet
         }
         stage++;
-        if (stage == 1) { // hvis det er et profilbilde som skal lastes opp
+        if (stage == 1) { // setter størrelsen på bildet til å passe til profilen
             document.querySelector(".imagePreview>img").className = "profileImgCustomize"; // endre størrelsen på previewet
         }
-        if (stage == 2) { // hvis det er en bio som skal skrives 
+        if (stage == 2) { // endrer klassen på bildet til å passe til banneret
             document.querySelector(".imagePreview>img").className = "bannerImgCustomize"; // endre størrelsen på previewet
         }
 
 
         if (stage > 4) {
-            // gå til home
             window.location.href = "viewprofile.html?brukernavn=" + loggetInnBruker; // gå til profilen
         } else {
             // gå til neste prompt

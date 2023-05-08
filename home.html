@@ -326,7 +326,7 @@
         let following = brukermeg["following"];
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
-        await visTweets(following,"following");
+        visTweets(following,"following");
         if (hentBruker(hentInnloggetBrukerId())["following"].length == 0) {
             visIngenFollowing();
         }
@@ -336,7 +336,7 @@
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
 
-        await visTweets(alleBrukere,"all");
+        visTweets(alleBrukere,"all");
     }
 
 

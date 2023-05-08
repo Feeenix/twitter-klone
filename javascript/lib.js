@@ -867,20 +867,21 @@ async function visTweets(listeOverBrukere, id="") { // viser tweets fra en liste
     posts.reverse(); // reverserer listen slik at den nyeste kommer først
     let feed = document.querySelector("#feed");
     for (let i = 0; i < posts.length; i++) { // looper over alle tweetsene og legger dem til i feeden
-        if (i%10 == 0 && i != 0){
-            // await sleep(500); // venter 500 millisekunder hver 10 tweets for å ikke overbelaste nettleseren
-            if (htmlfilnavn == "home.html"){
-                let underline = document.querySelectorAll(".line");
-                if (underline[1].style.display == "none" && id=="all"){
-                    console.log("return reason: invalid ALL state")
-                    return
-                }
-                if (underline[0].style.display == "none" && id=="following"){
-                    console.log("return reason: invalid FOLLOWING state")
-                    return
-                }            
-    
+        if (i%10 == 0){
+            await sleep(500); // venter 500 millisekunder hver 10 tweets for å ikke overbelaste nettleseren
+            
+        }
+        if (htmlfilnavn == "home.html"){
+            let underline = document.querySelectorAll(".line");
+            if (underline[1].style.display == "none" && id=="all"){
+                console.log("return reason: invalid ALL state")
+                return
             }
+            if (underline[0].style.display == "none" && id=="following"){
+                console.log("return reason: invalid FOLLOWING state")
+                return
+            }            
+
         }
         
         

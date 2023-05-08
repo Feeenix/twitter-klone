@@ -690,29 +690,32 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     // lager en tekst som viser antall retweets
     let mengderetweets = document.createElement("span")
     mengderetweets.innerHTML = post["retweets"].length
-
+    // lager et ikon for retweets
     let retweetikon = document.createElement("img")
     // console.log(post["retweetedby"], hentInnloggetBrukerId(), post["retweetedby"].includes(hentInnloggetBrukerId()))
+
     if (post["retweetedby"].includes(hentInnloggetBrukerId())) {
+        // gjør knappen fylt om brukeren har retweetet
         retweetikon.src = "bilder/retweet.png"
     } else {
         retweetikon.src = "bilder/retweet_hul.png"
     }
+    
     retweetikon.alt = "retweetikon"
     retweetikon.height = "20"
 
     retweetknapp.appendChild(mengderetweets)
     retweetknapp.appendChild(retweetikon)
-
+    // lager en knapp for likes
     let likerknapp = document.createElement("button")
     likerknapp.classList.add("hiddenButton")
     likerknapp.classList.add("genericButton")
     likerknapp.classList.add("tweetknapp")
     likerknapp.classList.add("tweetknappliker")
-
+    // lager en tekst som viser antall likes
     let mengdelikes = document.createElement("span")
     mengdelikes.innerHTML = post["likes"].length
-
+    // lager et ikon for likes
     let likeikon = document.createElement("img")
     likeikon.src = "bilder/heart_hul.png"
     likeikon.alt = "likeikon"
@@ -722,6 +725,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     likerknapp.appendChild(likeikon)
 
     likerknapp.addEventListener("click", function (e) {
+        // funksjon for å like en tweet 
         let button = e.target
         while (button.tagName != "BUTTON") {
             button = button.parentElement
@@ -729,11 +733,13 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         let span = button.querySelector("span")
         let likeikon = button.querySelector("img")
         if (likeikon.src.endsWith("hul.png")) {
+            // gjør knappen fylt om brukeren har liket
             likeikon.src = "bilder/heart.png"
             span.innerHTML = parseInt(span.innerHTML) + 1
 
             lagNyLike(postId, hentInnloggetBrukerId())
         } else {
+            // gjør knappen tom om brukeren ikke har liket
             likeikon.src = "bilder/heart_hul.png"
             span.innerHTML = parseInt(span.innerHTML) - 1
 
@@ -744,22 +750,22 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
 
 
 
-
+    // lager en knapp for views
     let viewknapp = document.createElement("button")
     viewknapp.classList.add("hidden")
     viewknapp.classList.add("genericButton")
     viewknapp.classList.add("tweetknapp")
     viewknapp.classList.add("tweetknappviews")
-
+    // lager et ikon for views
     let viewikon = document.createElement("img")
     viewikon.src = "bilder/eye_hul.png"
     viewikon.alt = "viewikon"
     viewikon.height = "20"
-
+    // lager en tekst som viser antall views
     let mengdeviews = document.createElement("span")
     mengdeviews.innerHTML = formatViewsPretty(post["views"])
 
-
+    // legger tagger inni hverandre og returnerer tweeten
     viewknapp.appendChild(mengdeviews)
     viewknapp.appendChild(viewikon)
 
@@ -781,91 +787,89 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
 
 function formatTimestampPretty(a) {
 
-    let now = Date.now();
-    let diff = now - a;
-    let diffSeconds = diff / 1000;
-    let diffMinutes = diffSeconds / 60;
-    let diffHours = diffMinutes / 60;
-    let diffDays = diffHours / 24;
-    let diffWeeks = diffDays / 7;
-    let diffMonths = diffWeeks / 4;
-    let diffYears = diffMonths / 12;
+    let now = Date.now(); // tiden nå i millisekunder siden 1. januar 1970
+    let diff = now - a;  // differansen mellom nå og tiden tweeten ble laget i millisekunder
+    let diffSeconds = diff / 1000; // differansen i sekunder
+    let diffMinutes = diffSeconds / 60; // differansen i minutter
+    let diffHours = diffMinutes / 60;  // differansen i timer
+    let diffDays = diffHours / 24; // differansen i dager
+    let diffWeeks = diffDays / 7;   // differansen i uker
+    let diffMonths = diffWeeks / 4; // differansen i måneder
+    let diffYears = diffMonths / 12; // differansen i år
 
-    if (diffSeconds < 60) {
+    if (diffSeconds < 60) { // hvis tiden er mindre enn 60 sekunder siden
         return "Now";
     }
 
-    if (diffMinutes < 60) {
-        if (Math.floor(diffMinutes) == 1) {
+    if (diffMinutes < 60) { // hvis tiden er mindre enn 60 minutter siden 
+        if (Math.floor(diffMinutes) == 1) { // hvis tiden er 1 minutt siden
             return Math.floor(diffMinutes) + " minute ago";
         }
-        return Math.floor(diffMinutes) + " minutes ago";
+        return Math.floor(diffMinutes) + " minutes ago"; // hvis tiden er mer enn 1 minutt siden og mindre enn 60 minutter siden
     }
-    if (diffHours < 24) {
-        if (Math.floor(diffHours) == 1) {
-            return Math.floor(diffHours) + " hour ago";
+    if (diffHours < 24) { // hvis tiden er mindre enn 24 timer siden
+        if (Math.floor(diffHours) == 1) { // hvis tiden er 1 time siden
+            return Math.floor(diffHours) + " hour ago"; 
         }
 
-        return Math.floor(diffHours) + " hours ago";
+        return Math.floor(diffHours) + " hours ago"; // hvis tiden er mer enn 1 time siden og mindre enn 24 timer siden
     }
-    if (diffDays < 7) {
-        if (Math.floor(diffDays) == 1) {
-            return Math.floor(diffDays) + " day ago";
+    if (diffDays < 7) { // hvis tiden er mindre enn 7 dager siden
+        if (Math.floor(diffDays) == 1) { // hvis tiden er 1 dag siden
+            return Math.floor(diffDays) + " day ago"; 
         }
-        return Math.floor(diffDays) + " days ago";
+        return Math.floor(diffDays) + " days ago"; // hvis tiden er mer enn 1 dag siden og mindre enn 7 dager siden
     }
-    if (diffWeeks < 4) {
-        if (Math.floor(diffWeeks) == 1) {
+    if (diffWeeks < 4) {    // hvis tiden er mindre enn 4 uker siden
+        if (Math.floor(diffWeeks) == 1) { // hvis tiden er 1 uke siden
             return Math.floor(diffWeeks) + " week ago";
         }
-        return Math.floor(diffWeeks) + " weeks ago";
+        return Math.floor(diffWeeks) + " weeks ago"; // hvis tiden er mer enn 1 uke siden og mindre enn 4 uker siden
     }
-    if (diffMonths < 12) {
-        if (Math.floor(diffMonths) == 1) {
+    if (diffMonths < 12) { // hvis tiden er mindre enn 12 måneder siden
+        if (Math.floor(diffMonths) == 1) { // hvis tiden er 1 måned siden
             return Math.floor(diffMonths) + " month ago";
         }
-        return Math.floor(diffMonths) + " months ago";
+        return Math.floor(diffMonths) + " months ago"; // hvis tiden er mer enn 1 måned siden og mindre enn 12 måneder siden
     }
-    if (Math.floor(diffYears) == 1) {
+    if (Math.floor(diffYears) == 1) { // hvis tiden er 1 år siden
         return Math.floor(diffYears) + " year ago";
     }
-    return Math.floor(diffYears) + " years ago";
+    return Math.floor(diffYears) + " years ago"; // hvis tiden er mer enn 1 år siden
 }
 
 
-function hentTweetEllerRetweet(tweetId) {
+function hentTweetEllerRetweet(tweetId) { // henter en tweet eller retweet basert på tweetId
     let tweet = hentTweet(tweetId);
-    if (JSON.stringify(tweet) == JSON.stringify({})) {
+
+    if (JSON.stringify(tweet) == JSON.stringify({})) { // hvis tweeten ikke finnes
         tweet = hentRetweet(tweetId);
     }
-    return tweet;
+    return tweet; 
 }
-async function visTweets(listeOverBrukere) {
+async function visTweets(listeOverBrukere) { // viser tweets fra en liste over brukere. Dette er async for at brukeren kan se tweetsene mens de laster inn
     let posts = [];
-    for (let i = 0; i < listeOverBrukere.length; i++) {
+    for (let i = 0; i < listeOverBrukere.length; i++) { // looper gjennom alle brukerne
         let bruker = hentBruker(listeOverBrukere[i]);
         let tweets = bruker["posts"];
-        for (let j = 0; j < tweets.length; j++) {
-            let tweet = tweets[j];
-            posts.push(tweet);
+        for (let j = 0; j < tweets.length; j++) { // på hver bruker looper vi gjennom alle tweetsene og legger dem til i posts
+            posts.push(tweets[j]);
         }
         let retweetids = bruker["retweets"];
-        for (let j = 0; j < retweetids.length; j++) {
-            // let retweet = hentRetweet(retweetids[j]);
-            // posts.push(retweet["tweetId"]);
+        for (let j = 0; j < retweetids.length; j++) { // på hver bruker looper vi gjennom alle retweetsene og legger dem til i posts
             posts.push(retweetids[j]);
         }
     }
 
 
-    posts.sort(function (b, a) {
+    posts.sort(function (b, a) { // sorterer tweetsene slik at den nyeste kommer sist
         return hentTweetEllerRetweet(b)["posted"] - hentTweetEllerRetweet(a)["posted"];
     });
-    posts.reverse();
+    posts.reverse(); // reverserer listen slik at den nyeste kommer først
     let feed = document.querySelector("#feed");
-    for (let i = 0; i < posts.length; i++) {
+    for (let i = 0; i < posts.length; i++) { // looper over alle tweetsene og legger dem til i feeden
         if (i%10 == 0 && i != 0){
-            await sleep(500);
+            await sleep(500); // venter 500 millisekunder hver 10 tweets for å ikke overbelaste nettleseren
         }
         let post = posts[i];
         let postElement = lagPostElement(post);
@@ -874,7 +878,7 @@ async function visTweets(listeOverBrukere) {
 }
 
 
-function inkrementerViews(tweetId) {
+function inkrementerViews(tweetId) { // henter en tweet og øker views med 1
     let tweet = hentTweet(tweetId);
     tweet["views"] = tweet["views"] + 1;
     lagreData(["tweets", tweetId], tweet);
@@ -898,6 +902,10 @@ function formatViewsPretty(views) { // 1000 -> 1k, 1000000 -> 1m
 
 
 async function MASTERMIND() {
+    // kjøres helt på starten hvis det ikke er noe i localstorage
+    // MASTERMIND lager brukere, tweets, retweets, comments, views og likes.
+    // den bruker chuck norris api for å generere teksten. LOL https://api.chucknorris.io/
+    // den bruker lorem picsum for å hente tilfeldige bilder. https://picsum.photos/
 
     let body = document.querySelector("body");
     let loadingScreen = document.createElement("div");

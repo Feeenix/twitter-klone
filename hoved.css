@@ -1523,12 +1523,23 @@ button:disabled:hover {
     background-color: #ff0000b0;
     animation: shake 2s;
 } */
-@keyframes shake {
+.shaking{
+    animation: shake 1s;
+    border-radius: 10px;
+}
 
-    0% {
+@keyframes shake { 
+/* lager en animasjon ting som rister */
+    0% {/* starter på 0% */
+        /* starter med relativ posisjon 0 0, med 0 grader rotasjon */
+        /* transform endrer på utseendet til en div */
+        /* translate flytter den rundt */
+        /* rotate roterer den */
         transform: translate(0px, 0px) rotate(0deg);
-    }
+    background-color: #ff0000b0;
+}
     10% {
+
         transform: translate(-10px, -20px) rotate(-1deg);
     }
     20% {
@@ -1542,7 +1553,8 @@ button:disabled:hover {
     }
     50% {
         transform: translate(-10px, 20px) rotate(-1deg);
-    }
+    background-color: #ff000060;
+}
     60% {
         transform: translate(-30px, 10px) rotate(0deg);
     }
@@ -1551,13 +1563,15 @@ button:disabled:hover {
     }
     80% {
         transform: translate(-10px, -10px) rotate(1deg);
-    }
+    background-color: #ff000020;
+}
     90% {
         transform: translate(10px, 20px) rotate(0deg);
     }
     100% {
         transform: translate(0px, 0px) rotate(0deg);
-    }
+    background-color: #ff000000;
+}
 
 }
 

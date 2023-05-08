@@ -993,21 +993,17 @@
 
 
 
-    window.addEventListener("beforeunload", function (e) {
+    window.addEventListener("beforeunload", async function (e) { // for å hindre at brukeren går ut av siden når man har ikke lagret endringer
         let endring = Object.values(editedParams).some(function (value) { return value })
         if (endring) {
             let sidebarButtonFlexs = document.querySelectorAll(".settingsSidebarButtonFlex");
             for (let i = 0; i < sidebarButtonFlexs.length; i++) {
                 if (sidebarButtonFlexs[i].style.display != "none") {
-                    sidebarButtonFlexs[i].style.animation = "shake 1s"
-                    sidebarButtonFlexs[i].style.backgroundColor = "#ff0000b0"
-                    sidebarButtonFlexs[i].style.borderRadius = "10px"
+                    sidebarButtonFlexs[i].classList.add("shaking")
 
-                    sleep(1000).then(function () {
+                    sleep(10000).then(function () {
                         console.log("hei")
-                        sidebarButtonFlexs[i].style.animation = ""
-                        sidebarButtonFlexs[i].style.backgroundColor = ""
-                        sidebarButtonFlexs[i].style.borderRadius = ""
+                        sidebarButtonFlexs[i].classList.remove("shaking")
                     });
                 }
             }

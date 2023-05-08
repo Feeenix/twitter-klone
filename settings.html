@@ -560,7 +560,9 @@
     }
 
     makeEventListenersForLiveUpdating();
-    function makeEventListenersForLiveUpdating() { // lager eventlisteners for alle inputs og tekstfelter som oppdaterer brukeren live
+    function makeEventListenersForLiveUpdating() { // lager eventlisteners for alle inputs og tekstfelter som oppdaterer previewet live
+        
+        // ↓ henter alt som kan endres i previewet
         let profilebannerimg = document.querySelector("#profilebannerimg"); // img
         let profilebanner = document.querySelector("#profilebanner"); // brukes for solid farge
         let profilePfp = document.querySelector("#overskriftPfp"); //img
@@ -569,6 +571,7 @@
         let profileBio = document.querySelector("#profileBio");
         let profileLocationName = document.querySelector("#profileLocationName");
 
+        // ↓ henter alle inputs og tekstfelter som kan endres
         let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
         let settingsEditProfileBanner = document.querySelector("#settingsEditProfileBanner");
         let settingsEditProfilePicture = document.querySelector("#settingsEditProfilePicture");
@@ -581,7 +584,7 @@
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
         let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
 
-        settingsEditProfileDisplayName.addEventListener("input", function () { // oppdaterer display name live i preview 
+        settingsEditProfileDisplayName.addEventListener("input", function () { // legger til eventlistener for å oppdatere display name i previewet live
             profileDisplayName.innerHTML = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
             if (profileDisplayName.innerHTML != bruker["displayName"]) {
                 editedParams["displayName"] = true;
@@ -591,61 +594,61 @@
             setButtonsDisabledState()
         });
 
-        settingsEditProfileBanner.addEventListener("change", async function () { 
+        settingsEditProfileBanner.addEventListener("change", async function () {  // legger til eventlistener for å oppdatere banner i previewet live
             let inputs = document.querySelectorAll("input[type=file]");  
             let bannerFile = inputs[0].files[0]; 
-            let bannerURL = await readfile(bannerFile); 
+            let bannerURL = await readfile(bannerFile); // bruker funksjonen readfile for å lese filen og returnere en base64 url
             profilebannerimg.src = bannerURL; 
-            if (bannerURL != bruker["banner"]) {
+            if (bannerURL != bruker["banner"]) { // sjekker om banneret er endret
                 editedParams["banner"] = true;
             } else {
                 editedParams["banner"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
-        settingsEditProfilePicture.addEventListener("change", async function () {
+        settingsEditProfilePicture.addEventListener("change", async function () { // legger til eventlistener for å oppdatere profilbilde i previewet live
             let inputs = document.querySelectorAll("input[type=file]");
             let pfpFile = inputs[1].files[0];
-            let pfpURL = await readfile(pfpFile);
+            let pfpURL = await readfile(pfpFile); // bruker funksjonen readfile for å lese filen og returnere en base64 url
             profilePfp.src = pfpURL;
-            if (pfpURL != bruker["pfp"]) {
+            if (pfpURL != bruker["pfp"]) { // sjekker om profilbildet er endret
                 editedParams["pfp"] = true;
             } else {
                 editedParams["pfp"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
-        settingsEditBio.addEventListener("input", function () {
+        settingsEditBio.addEventListener("input", function () { // legger til eventlistener for å oppdatere bio i previewet live
             profileBio.innerHTML = settingsEditBio.value;
-            if (profileBio.innerHTML != bruker["bio"]) {
+            if (profileBio.innerHTML != bruker["bio"]) { // sjekker om bioen er endret
                 editedParams["bio"] = true;
             } else {
                 editedParams["bio"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
-        settingsEditProfileLocation.addEventListener("input", function () {
+        settingsEditProfileLocation.addEventListener("input", function () { // legger til eventlistener for å oppdatere location i previewet live
             if (settingsEditProfileLocation.value == "") {
                 document.querySelector("#profileLocation").style.display = "none";
             } else {
                 document.querySelector("#profileLocation").style.display = "flex";
             }
-            profileLocationName.innerHTML = settingsEditProfileLocation.value;
-            if (profileLocationName.innerHTML != bruker["location"]) {
+            profileLocationName.innerHTML = settingsEditProfileLocation.value; 
+            if (profileLocationName.innerHTML != bruker["location"]) { // sjekker om location er endret
                 editedParams["location"] = true;
             } else {
                 editedParams["location"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
 
         let colorthemeRadioButtons = document.querySelectorAll(".colorThemes .radioElement")
-        for (let i = 0; i < colorthemeRadioButtons.length; i++) {
-            colorthemeRadioButtons[i].addEventListener("click", function (e) {
+        for (let i = 0; i < colorthemeRadioButtons.length; i++) { //              for hver radio knapp i colorthemeRadioButtons
+            colorthemeRadioButtons[i].addEventListener("click", function (e) { // legger den til en eventlistener som kjører når den blir klikket på
                 let bruker = hentBruker(hentInnloggetBrukerId());
                 let parent = e.target;
                 while (!parent.classList.contains("radioElement")) { // loop til den finner radioElement i classList
@@ -653,164 +656,164 @@
                 }
                 let radioEl = parent.querySelector("input");
                 let body = document.querySelector("body");
-                if (radioEl.value == "light") {
+                if (radioEl.value == "light") { // hvis verdien til radioEl er light
                     console.log("light")
                     body.style.setProperty("--globalfg", "#404040")
                     body.style.setProperty("--globalbg", "#ffffff")
                     body.style.setProperty("--globalbg2", "#ffffffcd")
-                    if (bruker["settings"]["theme"] != "light") {
+                    if (bruker["settings"]["theme"] != "light") { // sjekker om brukerens tema er endret
                         editedParams["theme"] = true;
                     } else {
                         editedParams["theme"] = false;
                     }
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
                 }
-                if (radioEl.value == "dark") {
+                if (radioEl.value == "dark") { // hvis verdien til radioEl er dark
                     console.log("dark")
                     body.style.setProperty("--globalfg", "#ffffff")
                     body.style.setProperty("--globalbg", "#282c34")
                     body.style.setProperty("--globalbg2", "#282c34cd")
-                    if (bruker["settings"]["theme"] != "dark") {
+                    if (bruker["settings"]["theme"] != "dark") { // sjekker om brukerens tema er endret 
                         editedParams["theme"] = true;
                     } else {
                         editedParams["theme"] = false;
                     }
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
                 }
-                if (radioEl.value == "custom") {
+                if (radioEl.value == "custom") { // hvis verdien til radioEl er custom
                     console.log("custom")
                     let customColorText = document.querySelector("#customColorText");
                     let customColorBackground = document.querySelector("#customColorBackground");
                     body.style.setProperty("--globalfg", customColorText.value)
                     body.style.setProperty("--globalbg", customColorBackground.value)
                     body.style.setProperty("--globalbg2", customColorBackground.value + "cd")
-                    if (bruker["settings"]["theme"] != "custom") {
+                    if (bruker["settings"]["theme"] != "custom") { // sjekker om brukerens tema er endret
                         editedParams["theme"] = true;
                     } else {
                         editedParams["theme"] = false;
                     }
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
                 }
 
             });
         }
 
-        customColorText.addEventListener("input", function () {
+        customColorText.addEventListener("input", function () { // legger til eventlistener for å oppdatere custom farge i previewet live
             let body = document.querySelector("body");
             body.style.setProperty("--globalfg", customColorText.value)
-            if (customColorText.value != bruker["settings"]["text-color"]) {
+            if (customColorText.value != bruker["settings"]["text-color"]) { // sjekker om fargen er endret
                 editedParams["theme-fg"] = true;
             } else {
                 editedParams["theme-fg"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
-        customColorBackground.addEventListener("input", function () {
+        customColorBackground.addEventListener("input", function () { // legger til eventlistener for å oppdatere custom farge i previewet live
             let body = document.querySelector("body");
             body.style.setProperty("--globalbg", customColorBackground.value)
             body.style.setProperty("--globalbg2", customColorBackground.value + "cd")
-            if (customColorBackground.value != bruker["settings"]["background-color"]) {
+            if (customColorBackground.value != bruker["settings"]["background-color"]) { // sjekker om fargen er endret
                 editedParams["theme-bg"] = true;
             } else {
                 editedParams["theme-bg"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
-        fontsizeflexInput.addEventListener("change", function () {
+        fontsizeflexInput.addEventListener("change", function () { // legger til eventlistener for å oppdatere font size i previewet live
             let body = document.querySelector("body");
             body.style.fontSize = fontsizeflexInput.value + "px"
             let bruker = hentBruker(hentInnloggetBrukerId());
-            if (fontsizeflexInput.value != bruker["settings"]["font-size"]) {
+            if (fontsizeflexInput.value != bruker["settings"]["font-size"]) { // sjekker om font size er endret
                 editedParams["fontSize"] = true;
             } else {
                 editedParams["fontSize"] = false;
             }
-            setButtonsDisabledState()
+            setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
         });
 
         let barkSoundRadioEls = document.querySelectorAll(".barkSound .radioElement")
         console.log(barkSoundRadioEls)
-        for (let i = 0; i < barkSoundRadioEls.length; i++) {
-            barkSoundRadioEls[i].addEventListener("click", function (e) {
+        for (let i = 0; i < barkSoundRadioEls.length; i++) { //              for hver radio knapp i barkSoundRadioEls
+            barkSoundRadioEls[i].addEventListener("click", function (e) { // legger den til en eventlistener som kjører når den blir klikket på
                 let node = e.target;
                 while (!node.classList.contains("radioElement")) { // loop til den finner radioElement i classList
                     node = node.parentElement;
                 }
                 let radioEl = node.querySelector("input");
-                if (radioEl.value == "true") {
+                if (radioEl.value == "true") { // hvis verdien til radioEl er true
                     console.log("jeg trakk på true");
 
                     let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
-                    barkSoundRadioEls[0].checked = true;
+                    barkSoundRadioEls[0].checked = true; // setter om de er avkrysset manuelt
                     barkSoundRadioEls[1].checked = false;
                     let bruker = hentBruker(hentInnloggetBrukerId());
 
                     console.log(bruker["settings"]["barkSound"])
-                    if (bruker["settings"]["barkSound"] != "true") {
+                    if (bruker["settings"]["barkSound"] != "true") { // sjekker om barkSound er endret
                         editedParams["barkSound"] = true;
                     } else {
                         editedParams["barkSound"] = false;
                     }
 
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
 
                 }
-                if (radioEl.value == "false") {
+                if (radioEl.value == "false") { // hvis verdien til radioEl er false
                     let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
-                    barkSoundRadioEls[0].checked = false;
+                    barkSoundRadioEls[0].checked = false; // setter om de er avkrysset manuelt
                     barkSoundRadioEls[1].checked = true;
 
                     let bruker = hentBruker(hentInnloggetBrukerId());
 
                     console.log(bruker["settings"]["barkSound"])
-                    if (bruker["settings"]["barkSound"] != "true") {
+                    if (bruker["settings"]["barkSound"] != "true") { // sjekker om barkSound er endret
                         editedParams["barkSound"] = false;
                     } else {
                         editedParams["barkSound"] = true;
                     }
 
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
                 }
 
             });
         }
 
         let barkTextRadioEls = document.querySelectorAll(".barkText .radioElement")
-        for (let i = 0; i < barkTextRadioEls.length; i++) {
-            barkTextRadioEls[i].addEventListener("click", function (e) {
+        for (let i = 0; i < barkTextRadioEls.length; i++) { //              for hver radio knapp i barkTextRadioEls
+            barkTextRadioEls[i].addEventListener("click", function (e) { // legger den til en eventlistener som kjører når den blir klikket på
                 let node = e.target;
                 while (!node.classList.contains("radioElement")) { // loop til den finner radioElement i classList
                     node = node.parentElement;
                 }
                 let radioEl = node.querySelector("input");
-                if (radioEl.value == "true") {
+                if (radioEl.value == "true") { // hvis verdien til radioEl er true
                     let barkTextRadioEls = document.querySelectorAll(".settingsEditOtherTextType")
-                    barkTextRadioEls[0].checked = true;
+                    barkTextRadioEls[0].checked = true; // setter om de er avkrysset manuelt
                     barkTextRadioEls[1].checked = false;
 
                     let bruker = hentBruker(hentInnloggetBrukerId());
-                    if (bruker["settings"]["barkText"] != "true") {
+                    if (bruker["settings"]["barkText"] != "true") { // sjekker om barkText er endret
                         editedParams["barkText"] = true;
                     } else {
                         editedParams["barkText"] = false;
                     }
 
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
                 }
-                if (radioEl.value == "false") {
+                if (radioEl.value == "false") { // hvis verdien til radioEl er false
                     let barkTextRadioEls = document.querySelectorAll(".settingsEditOtherTextType")
                     barkTextRadioEls[0].checked = false;
                     barkTextRadioEls[1].checked = true;
                     let bruker = hentBruker(hentInnloggetBrukerId());
-                    if (bruker["settings"]["barkText"] != "true") {
+                    if (bruker["settings"]["barkText"] != "true") { // sjekker om barkText er endret
                         editedParams["barkText"] = false;
                     } else {
                         editedParams["barkText"] = true;
                     }
 
-                    setButtonsDisabledState()
+                    setButtonsDisabledState() // oppdaterer knappene hvis det er endringer
                 }
 
             });

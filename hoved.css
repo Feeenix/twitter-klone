@@ -131,9 +131,11 @@ body {
     color: #404040;
     background-color: #dddddd;
 }
+/* Den knappen når man hover men når knappen ikke er disabled  */
 .settingsButtonDiscard:hover:not(button:disabled) {
     color: #404040;
     background-color: #aaaaaa;
+    
 }
 
 
@@ -157,6 +159,7 @@ body {
     border-radius: 20px;
 }
 
+/* nr man hover  */
 .aatweetknapp:hover {
     background-color: #a99aff;
     cursor: pointer;
@@ -331,7 +334,7 @@ body {
 
 #overskrift {
     backdrop-filter: blur(6px);
-    background-color: var(--overskriftfarge);
+    background-color: var(--overskriftfarge); /* Setter background color til de farge varibalene vi har satt i starten va documentet  */
     position: sticky;
     top: -0.5px;
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
@@ -399,7 +402,8 @@ body {
     border: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
-#sok:focus-within {
+/* dette er når man focuserer på det altså har trykket inn på selve sok så vil den lage en border */
+#sok:focus-within { 
     border: #baaaff solid 1px;
 }
 
@@ -484,7 +488,7 @@ body {
 .retweetIndikator>*{
     margin-right: 0.5em;
 }
-
+/* sitt første barn vil få margin right 5px */
 .retweetIndikator>*:nth-child(1){
     margin-right: 5px;
 }
@@ -504,6 +508,7 @@ body {
     padding-bottom: 10px;
 }
 
+/* hover så når du hover vil den bytte bakgrunnsfarge  */
 .tweet:hover {
     background-color: #aaaaaa10;
     transition-duration: 200ms;
@@ -717,7 +722,7 @@ textarea {
     padding-right: 15px;
     font-size: 1em;
 }
-
+/* denne gjør at alle profildisplay sine knapper utenom overskriftknapp får height 40 og overskrift knapp sine knapper hvor ingen av de er overskrift kanpper   */
 .profileDisplay button:not(.overskriftknapp),
 #overskrift button:not(.overskriftknapp) {
     height: 40px;
@@ -739,7 +744,7 @@ textarea {
     flex-direction: row;
     margin-bottom: 20px;
 }
-
+/*  alle disse handler om barna til profileFOllowingfollowers sine barn sin 1 child */
 #profileFollowingFollowers>*>*:nth-child(1) {
     margin-right: 5px;
     font-weight: 700;
@@ -969,6 +974,8 @@ textarea {
 }
 
 /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+/* dette er hentet fra w3 school og gjør at vi kan endre på sliderene i settings 
+Webik apperance none gjør at den defualt css til sliders forsvinner så vi kan endere på den selv */
 input[type='range'] {
     -webkit-appearance: none;
     width: 50%;
@@ -983,7 +990,7 @@ input[type='range'] {
 input[type='range']:hover {
     opacity: 1;
 }
-
+/* dette gjør at vi kan endre selve slider thumb sin css */
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -1075,17 +1082,17 @@ input[type='range']::-webkit-slider-thumb {
     border-radius: 15px;
     border: #aaaaaa20 solid 5px;
 }
-
+/* når tweetinputs er i focus altså man har trykket inn på de får den disse css instillingene  */
 .tweetInputs:focus {
     outline: none;
     border: #aaaaaa60 solid 5px;
 }
-
+/* når den er i focus */
 #tweetTextArea:focus {
     outline: none;
 
 }
-
+/* enderer på placeholder */
 #tweetTextArea::placeholder {
     font-size: 1.125em;
 
@@ -1100,7 +1107,7 @@ input[type='range']::-webkit-slider-thumb {
     margin-top: 10px;
 
 }
-
+/* disse er for de forkjellige barna til tweetbottomrow altså de forkjellige divene under */
 .tweetBottomRow>*:nth-child(1) {
     margin-left: 10px;
 }
@@ -1131,7 +1138,7 @@ input[type='range']::-webkit-slider-thumb {
     border-radius: 15px;
 }
 
-#commentsection {}
+
 
 .comment {
     display: flex;
@@ -1282,7 +1289,7 @@ input[type='range']::-webkit-slider-thumb {
     border-bottom: rgba(222, 230, 232, 0.6) solid 1px;
 }
 
-
+/* gjør endringener for større skjerm */
 @media only screen and (max-width: 1200px) {
     .buttonText {
         display: none;
@@ -1351,7 +1358,7 @@ input[type='range']::-webkit-slider-thumb {
     }
 
 }
-
+/*  disse gjør at det passer til mobil  */
 
 @media only screen and (min-width: 450.01px){
     .telefontweeting {
@@ -1488,11 +1495,12 @@ input[type='range']::-webkit-slider-thumb {
 
 
 
-
+/* gjør at når den er disabled så vil den se ut som den ikke kan trykkes på og den vil ha sånn stopp tegn den erdisabloed når du ikke har gjort noe endringer på settings */
 
 button:disabled {
     opacity: 0.5;
 }
+
 button:disabled:hover {
     cursor: not-allowed;
     opacity: 0.5;

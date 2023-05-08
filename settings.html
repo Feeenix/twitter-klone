@@ -848,7 +848,8 @@
 
 
 
-    velgeoverskrifttabknapp({ target: { parentElement: { id: "settingsProfile" } } });
+    velgeoverskrifttabknapp({ target: { parentElement: { id: "settingsProfile" } } }); // kjører funksjonen med en fake event for å sette opp siden
+
 
     function velgeoverskrifttabknapp(e) {
         console.log("hi")
@@ -860,47 +861,44 @@
         let settingsAppearance = document.querySelector("#settingsEditAppearance");
         let settingsOther = document.querySelector("#settingsEditOther");
 
-        if (e.target.id == "settingsProfile" || e.target.parentElement.id == "settingsProfile") {
-            overskriftprofilknapp.children[0].children[0].style.display = "block"
+        if (e.target.id == "settingsProfile" || e.target.parentElement.id == "settingsProfile") { // hvis vi trakk på profil tabknappen
+            overskriftprofilknapp.children[0].children[0].style.display = "block" // viser understrekingen til profil tabknappen og skjuler de andre
             overskriftappearanceknapp.children[0].children[0].style.display = "none"
             overskriftotherknapp.children[0].children[0].style.display = "none"
 
-            settingsProfile.style.display = "block";
+            settingsProfile.style.display = "block"; // viser innholdet til profil-inputtene og skjuler de andre
             settingsAppearance.style.display = "none";
             settingsOther.style.display = "none";
 
 
         }
-        if (e.target.id == "settingsAppearance" || e.target.parentElement.id == "settingsAppearance") {
-            overskriftprofilknapp.children[0].children[0].style.display = "none"
+        if (e.target.id == "settingsAppearance" || e.target.parentElement.id == "settingsAppearance") { // hvis vi trakk på utseende tabknappen
+            overskriftprofilknapp.children[0].children[0].style.display = "none" // viser understrekingen til utseende tabknappen og skjuler de andre
             overskriftappearanceknapp.children[0].children[0].style.display = "block"
             overskriftotherknapp.children[0].children[0].style.display = "none"
 
-            settingsProfile.style.display = "none";
+            settingsProfile.style.display = "none"; // viser innholdet til utseende-inputtene og skjuler de andre
             settingsAppearance.style.display = "block";
             settingsOther.style.display = "none";
 
         }
-        if (e.target.id == "settingsOther" || e.target.parentElement.id == "settingsOther") {
-            overskriftprofilknapp.children[0].children[0].style.display = "none"
+        if (e.target.id == "settingsOther" || e.target.parentElement.id == "settingsOther") { // hvis vi trakk på annet tabknappen
+            overskriftprofilknapp.children[0].children[0].style.display = "none" // viser understrekingen til annet tabknappen og skjuler de andre
             overskriftappearanceknapp.children[0].children[0].style.display = "none"
             overskriftotherknapp.children[0].children[0].style.display = "block"
 
-            settingsProfile.style.display = "none";
+            settingsProfile.style.display = "none"; // viser innholdet til annet-inputtene og skjuler de andre
             settingsAppearance.style.display = "none";
             settingsOther.style.display = "block";
-
-
-
         }
     }
-    let overskriftKnapper = document.querySelectorAll(".overskriftknapp");
+    let overskriftKnapper = document.querySelectorAll(".overskriftknapp"); // legger til eventlistener på alle tabknappene
     for (let i = 0; i < overskriftKnapper.length; i++) {
         overskriftKnapper[i].addEventListener("click", velgeoverskrifttabknapp);
     }
 
 
-    let range = document.querySelector(".fontsizeflex input");
+    let range = document.querySelector(".fontsizeflex input"); // legger til eventlistener på fontstørrelse slideren
     range.addEventListener("input", changefontsizepreview);
 
     function changefontsizepreview() {
@@ -911,7 +909,7 @@
     }
 
 
-    function selectRadioIfClicked(e) {
+    function selectRadioIfClicked(e) { // funksjon for å velge radio knappene til farge temaene
         let id = ""
         if (e.target.tagName != "DIV") {
             e.target.parentElement.children[1].checked = true;
@@ -928,18 +926,10 @@
         }
 
     }
-    let colorThemeButtons = document.querySelectorAll(".colorThemes .radioElement");
+    let colorThemeButtons = document.querySelectorAll(".colorThemes .radioElement"); // legger til eventlistener på alle radio knappene
     for (let i = 0; i < colorThemeButtons.length; i++) {
         colorThemeButtons[i].addEventListener("click", selectRadioIfClicked);
     }
-
-
-
-
-
-
-
-
 
 
 

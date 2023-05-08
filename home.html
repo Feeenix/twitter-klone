@@ -273,20 +273,22 @@
         }
     }
 
-
+// 
     async function visFollowingTweets() {
+        // viser tweets fra de du følger
         let brukernavn = hentInnloggetBrukerId();
         let brukermeg = hentBruker(brukernavn);
         let following = brukermeg["following"];
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
         visTweets(following,"following");
-        if (hentBruker(hentInnloggetBrukerId())["following"].length == 0) {
+        if (hentBruker(hentInnloggetBrukerId())["following"].length == 0) { // hvis du ikke følger noen så vises det en melding om det 
             visIngenFollowing();
         }
     }
     async function visAllTweets() {
-        let alleBrukere = Object.keys(hentFraLocalStorage("users"));
+        // viser alle tweets
+        let alleBrukere = Object.keys(hentFraLocalStorage("users")); // henter alle brukere fra localstorage og legger de i en liste 
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
 
@@ -295,12 +297,13 @@
 
 
 
-
+ 
     window.addEventListener("load", function () {
-        velgeoverskrifttabknapp({ target: { parentElement: { id: "overskriftfollowing" } } });
+        velgeoverskrifttabknapp({ target: { parentElement: { id: "overskriftfollowing" } } }); // COMMENT HER
     });
 
     function velgeoverskrifttabknapp(e) {
+        // funksjon for å velge mellom overskriftene "following" og "all" 
         let underline = document.querySelectorAll(".line");
         if (e.target.id == "overskriftfollowing" || e.target.parentElement.id == "overskriftfollowing") {
             visFollowingTweets();
@@ -314,6 +317,7 @@
         }
 
     }
+    // lager en eventlistener for alle overskriftknappene
     let overskriftKnapper = document.querySelectorAll(".overskriftknapp");
     for (let i = 0; i < overskriftKnapper.length; i++) {
         overskriftKnapper[i].addEventListener("click", velgeoverskrifttabknapp);
@@ -322,6 +326,7 @@
 
     //en funksjon som gjør at hvis man ikke følger en person viser feeden at man ikke følger noen og dette skal bare vises når man er under followingtab
     function visIngenFollowing() {
+        // viser en melding om at du ikke følger noen
         let feed = document.querySelector("#feed");
         feed.innerHTML = "";
         let ingenFollowing = document.createElement("div");

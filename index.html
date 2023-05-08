@@ -100,7 +100,7 @@
         let passordEl = document.querySelector('#passord');
         let brukernavn = brukernavnEl.value;
         let passord = passordEl.value;
-        // feil melding hvis brukernavn eller passord er tomme
+        // feil melding hvis brukernavn er tom
         if (brukernavn.length === 0) {
             console.log('You must enter a username');
             let errorMessage = document.querySelector('.errorMessage');
@@ -109,6 +109,7 @@
             errorMessage.style.display = 'block';
             return
         }
+        // feil melding hvis passord er tom
         if (passord.length === 0) {
             console.log('You must enter a password');
             let errorMessage = document.querySelector('.errorMessage');

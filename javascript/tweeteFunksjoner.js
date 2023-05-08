@@ -18,14 +18,22 @@ function removeImage() {
     let tweetImagePreview = document.querySelector(".tweetImagePreview")
     tweetImagePreview.innerHTML = "";
     tweetImagePreview.style.display = "none";
+    let tweetTextArea = document.querySelector("#tweetTextArea");
+    let tweetTextAreaValue = tweetTextArea.value;
+    let tweetKnapp = document.querySelector(".aatweetknapp");
+    if (tweetTextAreaValue.length > 0) {
+        tweetKnapp.disabled = false;
+    } else {
+        tweetKnapp.disabled = true;
+    }
 }
 
 
-tweetUploadInput.addEventListener("change", async function (e) { 
+tweetUploadInput.addEventListener("change", async function (e) {
     // legger til en eventlistener på inputten (type=file) som gjør at når det blir lastet opp et bilde, 
     // så vil den lese dataURLen til bildet og sette sourcen til tweetImagePreview (img)
-    
-    
+
+
     removeImage(); // starter med å fjerne eventuelle bilder som allerede er der
     let file = this.files[0];
     console.log(file)
@@ -36,10 +44,14 @@ tweetUploadInput.addEventListener("change", async function (e) {
     let tweetImagePreview = document.querySelector(".tweetImagePreview")
     tweetImagePreview.appendChild(img);
     tweetImagePreview.style.display = "block";
+    let tweetKnapp = document.querySelector(".aatweetknapp");
+    tweetKnapp.disabled = false;
+
 });
 
 if (htmlfilnavn == "lagtweet.html" || htmlfilnavn == "viewtweet.html") { // en liten sjekk for om den er på riktig side
     let tweetKnapp = document.querySelector(".aatweetknapp");
+    tweetKnapp.disabled = true;
 
     tweetKnapp.addEventListener("click", function () { // legger til en eventlistener på tweet knappen som poster tweeten
         let tweetTextArea = document.querySelector("#tweetTextArea");
@@ -67,7 +79,7 @@ if (htmlfilnavn == "lagtweet.html" || htmlfilnavn == "viewtweet.html") { // en l
         lagNyTweet(tweetAuthor, path, tweetImageURL, tweetTextAreaValue);
 
         // resetter tweeten
-        tweetTextArea.value = ""; 
+        tweetTextArea.value = "";
         removeImage();
 
 
@@ -81,7 +93,7 @@ if (htmlfilnavn == "lagtweet.html" || htmlfilnavn == "viewtweet.html") { // en l
 
     });
 
-    let tweetTextArea = document.querySelector("#tweetTextArea");
+    let tweetTextArea = document.querySelector("#tweetTextArea"); // eventlistener som setter tweetknappen til disabled hvis man ikke kan tweete, altså når du ikke har en fil og ikke har tekst
     tweetTextArea.addEventListener("input", function () {
         let tweetTextAreaValue = tweetTextArea.value;
         let tweetKnapp = document.querySelector(".aatweetknapp");

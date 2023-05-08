@@ -97,16 +97,6 @@ async function readFiles(filesArray) { // tar inn et array med fil-objekter og r
     return imageDataUrls;
 }
 
-// async function fileToDataURL(file) {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-//         reader.readAsDataURL(file);
-//         reader.onload = () => {
-//             resolve(reader.result);
-//         };
-//         reader.onerror = reject;
-//     });
-// }
 
 
 async function sleep(ms) { // venter i ms millisekunder før den returnerer
@@ -118,7 +108,7 @@ function exportLocalStorage() { // exporterer localStorage til en string
     let data = JSON.stringify((localStorage));
     console.log(data.replace(/"/g, "\\\"")); // bruker regex til å erstatte alle " med \"
 }
-function importLocalStorage(jsonDataString = ' {\"loggedInUser\":\"{\\"brukernavn\\":\\"admin\\",\\"utlopstid\\":1682623180913}\",\"users\":\"{\\"admin\\":{\\"password\\":\\"admin\\",\\"joined\\":\\"2023-04-20\\",\\"bannerImage\\":\\"\\",\\"bannerColor\\":\\"#808080\\",\\"profileImage\\":\\"https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png\\",\\"followers\\":[],\\"following\\":[\\"brukernavn\\"],\\"posts\\":[\\"jm71fzfo\\"],\\"displayName\\":\\"admin\\",\\"pinnedPost\\":null,\\"location\\":\\"\\",\\"bio\\":\\"\\",\\"status\\":\\"\\",\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}},\\"brukernavn\\":{\\"password\\":\\"passord\\",\\"joined\\":\\"2023-04-20\\",\\"bannerImage\\":\\"\\",\\"bannerColor\\":\\"#808080\\",\\"profileImage\\":\\"https://cdn.discordapp.com/attachments/1095708777027739668/1096797766228918313/IT_logo.png\\",\\"followers\\":[\\"admin\\"],\\"following\\":[],\\"posts\\":[],\\"displayName\\":\\"brukernavn\\",\\"pinnedPost\\":null,\\"location\\":\\"\\",\\"bio\\":\\"\\",\\"status\\":\\"\\",\\"settings\\":{\\"darkMode\\":false,\\"background-color\\":\\"#ffffff\\",\\"text-color\\":\\"#000000\\",\\"font\\":\\"Inter\\",\\"font-size\\":\\"1em\\"}}}\",\"tweets\":\"{\\"jm71fzfo\\":{\\"author\\":\\"admin\\",\\"path\\":[],\\"likes\\":[],\\"retweets\\":[],\\"comments\\":[],\\"views\\":0,\\"posted\\":1682018365824}}\"}') { // importerer localStorage fra en string
+function importLocalStorage(jsonDataString = '') { // importerer localStorage fra en string
     localStorage.clear();
     let jsonData = JSON.parse(jsonDataString);
     for (let key in jsonData) {

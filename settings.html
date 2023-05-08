@@ -566,11 +566,11 @@
     }
 
     makeEventListenersForLiveUpdating();
-    function makeEventListenersForLiveUpdating() { 
+    function makeEventListenersForLiveUpdating() { // lager eventlisteners for alle inputs og tekstfelter som oppdaterer brukeren live
         let profilebannerimg = document.querySelector("#profilebannerimg"); // img
         let profilebanner = document.querySelector("#profilebanner"); // brukes for solid farge
         let profilePfp = document.querySelector("#overskriftPfp"); //img
-        let profileDisplayName = document.querySelector("#profileDisplayName");
+        let profileDisplayName = document.querySelector("#profileDisplayName"); // h2
         let profileBrukernavn = document.querySelector("#profileBrukernavn");
         let profileBio = document.querySelector("#profileBio");
         let profileLocationName = document.querySelector("#profileLocationName");
@@ -587,7 +587,7 @@
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
         let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
 
-        settingsEditProfileDisplayName.addEventListener("input", function () {
+        settingsEditProfileDisplayName.addEventListener("input", function () { // oppdaterer display name live i preview 
             profileDisplayName.innerHTML = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
             if (profileDisplayName.innerHTML != bruker["displayName"]) {
                 editedParams["displayName"] = true;
@@ -597,11 +597,11 @@
             setButtonsDisabledState()
         });
 
-        settingsEditProfileBanner.addEventListener("change", async function () {
-            let inputs = document.querySelectorAll("input[type=file]");
-            let bannerFile = inputs[0].files[0];
-            let bannerURL = await readfile(bannerFile);
-            profilebannerimg.src = bannerURL;
+        settingsEditProfileBanner.addEventListener("change", async function () { 
+            let inputs = document.querySelectorAll("input[type=file]");  
+            let bannerFile = inputs[0].files[0]; 
+            let bannerURL = await readfile(bannerFile); 
+            profilebannerimg.src = bannerURL; 
             if (bannerURL != bruker["banner"]) {
                 editedParams["banner"] = true;
             } else {

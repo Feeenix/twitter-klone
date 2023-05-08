@@ -69,18 +69,19 @@
     let inputBrukernavn = document.querySelector('#brukernavn');
     let inputPassord = document.querySelector('#passord');
 
+    // legger til event listeners for å kunne trykke enter for å logge inn
     inputBrukernavn.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
             inputPassord.focus();
         }
     });
-
+        // legger til event listeners for å kunne trykke enter for å logge inn
     inputPassord.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
             loggInn();
         }
     });
-
+    // legger til event listeners for å kunne trykke enter for å logge inn
     loggInnKnapp.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
             loggInn();
@@ -92,13 +93,14 @@
 
 
 
-
+    
     function loggInn(e) {
+        // henter brukernavn og passord fra inputfeltene
         let brukernavnEl = document.querySelector('#brukernavn');
         let passordEl = document.querySelector('#passord');
         let brukernavn = brukernavnEl.value;
         let passord = passordEl.value;
-
+        // feil melding hvis brukernavn eller passord er tomme
         if (brukernavn.length === 0) {
             console.log('You must enter a username');
             let errorMessage = document.querySelector('.errorMessage');
@@ -116,6 +118,7 @@
             return
         }
 
+        // sjekker om brukernavn og passord er riktig
 
         if (testBrukernavnOgPassord(brukernavn, passord)) {
             console.log('Du er logget inn');

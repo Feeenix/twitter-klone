@@ -131,106 +131,110 @@
 <script>
     clearHistory();
 
+    // henetr setupbuttons og setupinputs er globale variabler 
     let knapper = document.querySelectorAll("#setupButtons>*")
     let setupInputs = document.querySelectorAll(".inputfield>input[type=text]");
     for (let i = 0; i < knapper.length; i++) {
-        knapper[i].addEventListener("click", function () {
+        knapper[i].addEventListener("click", function () { // legger til eventlistener på alle knappene
             nextPrompt(skip = (i != 1));
         })
     }
     for (let i = 0; i < setupInputs.length; i++) {
-        setupInputs[i].addEventListener("keydown", function (e) {
+        setupInputs[i].addEventListener("keydown", function (e) { // legger til eventlistener på alle inputfeltene som gjør at man kan trykke enter for å gå videre
             if (e.key == "Enter") {
                 nextPrompt(skip = false);
             }
         })
     }
-
-    let uploadFile = document.querySelector("#uploadFile")
-    uploadFile.addEventListener("change", async function () {
-        let file = this.files[0];
+    let uploadFile = document.querySelector("#uploadFile"); // heneter filopplastningsknappen 
+    // legger til eventlistener på filopplastningsknappen
+    uploadFile.addEventListener("change", async function () { // legger til funksjon på filopplastningsknappen
+        let file = this.files[0]; // filen som er valgt
         if (file) {
-            document.querySelector(".imagePreview").style.display = "block";
-            let result = await readfile(file);
-            document.querySelector(".imagePreview>img").src = result;
+            document.querySelector(".imagePreview").style.display = "block"; // viser preview av bildet
+            let result = await readfile(file);  // leser filen og returnerer en base64 string
+            document.querySelector(".imagePreview>img").src = result; // viser bildet i previewet
         }
     })
-    document.querySelector(".imagePreview>img").src = "";
+    document.querySelector(".imagePreview>img").src = ""; // resetter previewet 
 
-    let uploadButton = document.querySelector(".inputfield>button");
-    uploadButton.addEventListener("click", function () {
-        document.querySelector("#uploadFile").click();
+    let uploadButton = document.querySelector(".inputfield>button"); 
+    // legger til eventlistener på knappen som åpner filopplastningsknappen 
+    uploadButton.addEventListener("click", function () { // legger til funksjon på knappen som åpner filopplastningsknappen
+        document.querySelector("#uploadFile").click(); // åpner filopplastningsknappen
     })
     async function nextPrompt(skip = false) {
+        // funksjonen som går videre til neste prompt hvis man ikke har trykket på skip knappen, men også hvis skip er true går man videre og får default verdi 
         let setupInputs = document.querySelectorAll(".inputfield>*"); // array med 3 inputs
-        let setupHeader = document.querySelector(".settingsheader");
+        let setupHeader = document.querySelector(".settingsheader"); 
 
-        let stage = Number(setupHeader.getAttribute("value"));
+        let stage = Number(setupHeader.getAttribute("value")); // hvilket stadiet i customize siden man er på 
 
-        let loggetInnBruker = hentInnloggetBrukerId();
-        console.log(loggetInnBruker)
-        let listeOverType = ["text", "file", "textarea", "file", "text"];
-        let listeOverIndexer = [0, 1, 3, 1, 0];
-        let listeOverNokler = ["displayName", "profileImage", "bio", "bannerImage", "location"];
-        let listeOverSprml = ["What do you want to be called?", "What do you want your profile picture to be?", "What do you want your bio to be?", "What do you want your profile banner to be?", "What is your location?"]
+        let loggetInnBruker = hentInnloggetBrukerId(); // hvem som er logget inn
+        console.log(loggetInnBruker) 
+        let listeOverType = ["text", "file", "textarea", "file", "text"]; // liste over hvilken type input som skal brukes på hvert steg
+        let listeOverIndexer = [0, 1, 3, 1, 0]; // liste over hvilken input som skal brukes på hvert steg
+        let listeOverNokler = ["displayName", "profileImage", "bio", "bannerImage", "location"]; // liste over hvilken nøkkel som skal brukes på hvert steg
+        let listeOverSprml = ["What do you want to be called?", "What do you want your profile picture to be?", "What do you want your bio to be?", "What do you want your profile banner to be?", "What is your location?"] // liste over hvilken spørsmål som skal brukes på hvert steg
 
-        let nokkel = listeOverNokler[stage];
-        let type = listeOverType[stage];
+        let nokkel = listeOverNokler[stage]; // hvilken nøkkel som skal brukes på dette stadiet
+        let type = listeOverType[stage]; // hvilken type input som skal brukes på dette stadiet
 
-        if (!skip) {
+        if (!skip) { 
             // lagre dataen
             let data = ""
 
-            if (type != "file") {
+            if (type != "file") { // hvis det ikke er en fil som skal lastes opp 
+                
                 data = setupInputs[listeOverIndexer[stage]].value;
             } else {
-                let File = setupInputs[listeOverIndexer[stage]].files[0];
-                if (File == undefined) {
-                    nextPrompt(skip = true);
-                    return;
+                let File = setupInputs[listeOverIndexer[stage]].files[0]; // filen som skal lastes opp
+                if (File == undefined) { // hvis det ikke er en fil som er valgt
+                    nextPrompt(skip = true); // gå videre til neste prompt
+                    return; // avslutt funksjonen
                 }
-                data = await readfile(File);
+                data = await readfile(File); // les filen og returner en base64 string
             }
 
             console.log(type, data)
-            if (data.length > 0) {
-                let objektTing = { [nokkel]: data }
-                leggTilDataPaaBruker(loggetInnBruker, objektTing)
+            if (data.length > 0) { // hvis det er noe data
+                let objektTing = { [nokkel]: data } // lag et objekt med nøkkelen og dataen
+                leggTilDataPaaBruker(loggetInnBruker, objektTing) // legg til dataen på brukeren
             }
         }
+ 
+        setupInputs[listeOverIndexer[stage]].value = ""; // resetter inputfeltet
 
-        setupInputs[listeOverIndexer[stage]].value = "";
-
-        if (listeOverIndexer[stage] == 1) {
-            setupInputs[listeOverIndexer[stage] + 1].style.display = "none";
-            document.querySelector(".imagePreview").style.display = "none";
+        if (listeOverIndexer[stage] == 1) { // hvis det er et bilde som skal lastes opp
+            setupInputs[listeOverIndexer[stage] + 1].style.display = "none"; // skjul knappen som åpner filopplastningsknappen
+            document.querySelector(".imagePreview").style.display = "none"; // skjul previewet
         } else {
-            setupInputs[listeOverIndexer[stage]].style.display = "none";
+            setupInputs[listeOverIndexer[stage]].style.display = "none"; // skjul inputfeltet
         }
         stage++;
-        if (stage == 1) {
-            document.querySelector(".imagePreview>img").className = "profileImgCustomize";
+        if (stage == 1) { // hvis det er et profilbilde som skal lastes opp
+            document.querySelector(".imagePreview>img").className = "profileImgCustomize"; // endre størrelsen på previewet
         }
-        if (stage == 2) {
-            document.querySelector(".imagePreview>img").className = "bannerImgCustomize";
+        if (stage == 2) { // hvis det er en bio som skal skrives 
+            document.querySelector(".imagePreview>img").className = "bannerImgCustomize"; // endre størrelsen på previewet
         }
 
 
         if (stage > 4) {
             // gå til home
-            window.location.href = "viewprofile.html?brukernavn=" + loggetInnBruker;
+            window.location.href = "viewprofile.html?brukernavn=" + loggetInnBruker; // gå til profilen
         } else {
             // gå til neste prompt
-            setupHeader.setAttribute("value", stage);
+            setupHeader.setAttribute("value", stage); 
             setupHeader.innerHTML = listeOverSprml[stage];
 
-            if (listeOverIndexer[stage] == 1) {
-                setupInputs[listeOverIndexer[stage] + 1].style.display = "block";
+            if (listeOverIndexer[stage] == 1) { // hvis det er et bilde som skal lastes opp
+                setupInputs[listeOverIndexer[stage] + 1].style.display = "block"; // vis knappen som åpner filopplastningsknappen
 
-                setupInputs[listeOverIndexer[stage] + 1].focus();
+                setupInputs[listeOverIndexer[stage] + 1].focus(); // fokuser på knappen som åpner filopplastningsknappen
             } else {
-                setupInputs[listeOverIndexer[stage]].style.display = "block";
-                setupInputs[listeOverIndexer[stage]].focus();
+                setupInputs[listeOverIndexer[stage]].style.display = "block"; // vis inputfeltet
+                setupInputs[listeOverIndexer[stage]].focus(); // fokuser på inputfeltet
             }
         }
 

@@ -181,7 +181,8 @@
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
 
-    function clearSearch() {
+    function clearSearch() { 
+        // fjerner query fra søkefeltet og fokuserer på søkefeltet
         let sokfeltEl = document.querySelector("#sokfelt");
         sokfeltEl.value = "";
         sokfeltEl.focus();

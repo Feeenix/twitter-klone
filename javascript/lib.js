@@ -1,33 +1,34 @@
-let ls = localStorage
-let htmlfilnavn = window.location.pathname.split("/").pop();
+// Vi skal kommentere hva alle funksjoner gjør, og hvorfor vi har dem.
+let ls = localStorage // forkorter localStorage til ls, fordi det er mye kortere å skrive
+let htmlfilnavn = window.location.pathname.split("/").pop(); // henter filnavnet til html-filen, for eksempel "index.html" eller "login.html"
 
-let anythingIsNull = true;
+let anythingIsNull = true; // denne brukes for å sjekke om localStorage er tom, hvis den er det, så kjører vi MASTERMIND() for å fylle den opp med data
 
-if (localStorage.getItem("users") == null) {
+if (localStorage.getItem("users") == null) { // hvis det ikke finnes noe objekt med key "users" i localStorage, lag et tomt objekt med key "users"
     localStorage.setItem("users", JSON.stringify({}));
 } else {
     anythingIsNull = false;
 }
 
-if (localStorage.getItem("tweets") == null) {
+if (localStorage.getItem("tweets") == null) { // hvis det ikke finnes noe objekt med key "tweets" i localStorage, lag et tomt objekt med key "tweets"
     localStorage.setItem("tweets", JSON.stringify({}));
 } else {
     anythingIsNull = false;
 }
 
-if (localStorage.getItem("retweets") == null) {
+if (localStorage.getItem("retweets") == null) { // hvis det ikke finnes noe objekt med key "retweets" i localStorage, lag et tomt objekt med key "retweets"
     localStorage.setItem("retweets", JSON.stringify({}));
 } else {
     anythingIsNull = false;
 }
 
-if (localStorage.getItem("history") == null) {
+if (localStorage.getItem("history") == null) { // hvis det ikke finnes noe objekt med key "history" i localStorage, lag et tomt objekt med key "history"
     localStorage.setItem("history", JSON.stringify([]));
 } else {
     anythingIsNull = false;
 }
 
-if (anythingIsNull == true) {
+if (anythingIsNull == true) { // hvis det ikke finnes noe i localStorage, så kjører vi MASTERMIND() for å fylle den opp med data
     MASTERMIND();    
 }
 
@@ -64,8 +65,8 @@ async function readFiles(filesArray) { // tar inn et array med fil-objekter og r
 // }
 
 
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+async function sleep(ms) { // venter i ms millisekunder før den returnerer
+    return new Promise(resolve => setTimeout(resolve, ms)); 
 }
 
 // disse to funksjonene brukes for å omgjøre localStorage til en string, som vi kan dele med andre folk som så kan importere den til sin egen localStorage
@@ -112,7 +113,7 @@ function brukernavnFinnes(brukernavn) { // sjekker om et brukernavn finnes ved �
     }
     return false;
 }
-function testBrukernavnOgPassord(brukernavn, passord) {
+function testBrukernavnOgPassord(brukernavn, passord) { // sjekker om et brukernavn og passord er gyldig
     if (!brukernavnFinnes(brukernavn)) {
         return false;
     }
@@ -177,10 +178,8 @@ function lagreData(locationPath, data) {// for eksempel lagreData(["users", "elo
     }
     pointer[keys.shift()] = data
 
-    // console.log(locationData)
 
     // lagrer dataen til localStorage
-    // console.log("mainPath: " + mainPath, "locationData: " + JSON.stringify(locationData))
     localStorage.setItem(mainPath, JSON.stringify(locationData));
 }
 
@@ -222,7 +221,7 @@ function lagNyBruker(brukernavn, passord) { //initialiserer en ny bruker med bar
     lagreData(["users", brukernavn], bruker);
 }
 
-function lagTilfeldigeBrukere(antall) {
+function lagTilfeldigeBrukere(antall) { // lager tilfeldige brukere og bruker funksjonen lagNyBruker og genererId
     for (let i = 0; i < antall; i++) {
         let brukernavn = genererId();
         let passord = "passord";
@@ -230,7 +229,7 @@ function lagTilfeldigeBrukere(antall) {
     }
 }
 
-function listeBrukereQuery(query) {
+function listeBrukereQuery(query) { // returnerer en array med brukernavn som matcher query
     let users = hentFraLocalStorage("users")
     let usernames = Object.keys(users);
     let output = [];
@@ -260,13 +259,14 @@ function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en a
     let usernames = Object.keys(users);
     let ikkeFolgt = [];
     for (let i = 0; i < usernames.length; i++) {
-        if (!following.includes(usernames[i]) && usernames[i] !== brukernavn) {
+        if (!following.includes(usernames[i]) && usernames[i] !== brukernavn) { //
             ikkeFolgt.push(usernames[i]);
         }
     }
     let output = [];
     let looplengde = Math.min(antall, ikkeFolgt.length)
-    for (let i = 0; i < looplengde; i++) {
+    for (let i = 0; i < looplengde; i++) { 
+        // velger ut antall brukere fra ikkeFolgt arrayen og legger de til i output arrayen
         let randomIndex = Math.floor(Math.random() * ikkeFolgt.length);
         let randomUsername = ikkeFolgt.splice(randomIndex, 1)[0]
         output.push([
@@ -278,10 +278,10 @@ function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en a
     return output;
 }
 
-function lagNyTweet(brukernavn, path, bildeURL, text) {
+function lagNyTweet(brukernavn, path, bildeURL, text) { // lager en ny tweet og legger den til i bruker sin liste over tweets
     let id = genererId();
-    let tweet = {
-        "author": brukernavn,
+    let tweet = { // dette er en objekt 
+        "author": brukernavn, 
         "id": id,
         "path": path,
         "bilde": bildeURL,
@@ -309,6 +309,7 @@ function lagNyTweet(brukernavn, path, bildeURL, text) {
 
 
 function leggTilDataPaaBruker(brukernavn, data) { // data er en json.
+    // itererer gjennom data og legger til i bruker 
     let bruker = hentBruker(brukernavn);
     for (let key in data) {
         bruker[key] = data[key];
@@ -318,6 +319,7 @@ function leggTilDataPaaBruker(brukernavn, data) { // data er en json.
 
 
 function leggTilDataPaaTweet(postId, data) { // data er en json.
+    // itererer gjennom data og legger til i tweet
     let tweet = hentFraLocalStorage("tweets")[postId];
     for (let key in data) {
         tweet[key] = data[key];
@@ -362,8 +364,9 @@ function lagNyLike(postId, brukernavn) {
 
 }
 
-function slettLike(tweetId, brukernavn) {
+function slettLike(tweetId, brukernavn) { 
 
+    // henter inn tweet og bruker fra localStorage og fjerner like fra begge
     let tweet = hentFraLocalStorage("tweets")[tweetId];
     let bruker = hentFraLocalStorage("users")[brukernavn];
     let index = tweet["likes"].indexOf(brukernavn);
@@ -375,12 +378,14 @@ function slettLike(tweetId, brukernavn) {
 
 }
 function folgerBruker(brukerSomFolger, brukerSomBlirFolgt) {
+    // sjekker om brukerSomFolger følger brukerSomBlirFolgt
     let bruker1 = hentBruker(brukerSomFolger);
     let bruker2 = hentBruker(brukerSomBlirFolgt);
     return bruker1["following"].includes(brukerSomBlirFolgt) && bruker2["followers"].includes(brukerSomFolger);
 }
 
 function followBruker(brukerSomFolger, brukerSomBlirFolgt) {
+    // legger til brukerSomBlirFolgt i brukerSomFolger sin liste over brukere den følger
     let bruker1 = hentBruker(brukerSomFolger);
     let bruker2 = hentBruker(brukerSomBlirFolgt);
     bruker1["following"].push(brukerSomBlirFolgt);
@@ -390,6 +395,7 @@ function followBruker(brukerSomFolger, brukerSomBlirFolgt) {
 }
 
 function unfollowBruker(brukerSomFolger, brukerSomBlirFolgt) {
+    // fjerner brukerSomBlirFolgt fra brukerSomFolger sin liste over brukere den følger
     let bruker1 = hentBruker(brukerSomFolger);
     let bruker2 = hentBruker(brukerSomBlirFolgt);
     bruker1["following"].splice(bruker1["following"].indexOf(brukerSomBlirFolgt), 1);
@@ -455,12 +461,16 @@ eksempel på retweet-objekt:
 
 
 function lagPostElement(postId, mainTweet = false, comment = false) {
+    // lager et element som viser en tweet
+    // brukes for å vise tweets i feeden, på profilen, i kommentarer, osv.
+    // mainTweet er true for den øverste tweeten i viewtweet.html, da kommer ikke den grå linjen under
+    // comment er true for kommentarer, da vises ikke den teksten som sier at den er en kommentar
     let post = hentTweet(postId);
     let erRetweet = false;
     let retweetId = postId;
     let retweetAuthorId
-    // console.log(postId, post, JSON.stringify(post) == "{}")
 
+    // JSON.stringify gjør om objektet til en string, så vi kan lettere sjekke om det er tomt
     if (JSON.stringify(post) == "{}") {
         // det er kanskje en retweet
         postId = hentRetweet(postId)["tweetId"];
@@ -471,10 +481,10 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         }
         erRetweet = true;
 
-
         retweetAuthorId = hentRetweet(retweetId)["author"];
     }
 
+    // øker antall views på tweeten
     inkrementerViews(postId);
 
     let author = hentBruker(post["author"])
@@ -486,9 +496,10 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     tweet.classList.add("tweet");
     // tweet.href = "viewtweet.html?tweetId=" + postId;
     if (erRetweet) {
+        // lager en retweet-indikator som viser hvem som retweetet
         let retweetIndikator = document.createElement("div");
         retweetIndikator.classList.add("retweetIndikator");
-
+        // lager et bilde som viser en retweet ikon
         let retweetIcon = document.createElement("img");
         retweetIcon.src = "bilder/retweet.png";
         retweetIcon.alt = "retweet";
@@ -497,32 +508,33 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         retweetIcon.classList.add("retweetIcon");
 
         retweetIndikator.appendChild(retweetIcon);
-
+        // lager en tekst som viser hvem som retweetet
         let retweetAuthor = document.createElement("a");
         retweetAuthor.href = "viewprofile.html?brukernavn=" + retweetAuthorId;
         retweetAuthor.classList.add("retweetAuthor");
         retweetAuthor.innerHTML = "@" + retweetAuthorId;
 
         retweetIndikator.appendChild(retweetAuthor);
-
+        // lager en tekst som viser at det er en retweet
         let retweetTekst = document.createElement("div");
         retweetTekst.classList.add("retweetTekst");
         retweetTekst.innerHTML = "rebarked";
 
         retweetIndikator.appendChild(retweetTekst);
-
+        // lager en tekst som viser hvem som er originalforfatteren
         let retweetOriginalAuthor = document.createElement("a");
         retweetOriginalAuthor.href = "viewtweet.html?tweetId=" + postId;
         retweetOriginalAuthor.classList.add("retweetOriginalAuthor");
         retweetOriginalAuthor.innerHTML = "@" + post["author"] + "'s tweet";
-
+        // legger til alle elementene i tweeten
         retweetIndikator.appendChild(retweetOriginalAuthor);
         tweet.appendChild(retweetIndikator);
     }
     if (!comment && post["path"].length >= 1) {
+        // lager en tekst som viser at det er en kommentar
         let retweetIndikator = document.createElement("div");
         retweetIndikator.classList.add("retweetIndikator");
-
+        // lager et bilde som viser en kommentar ikon
         let retweetIcon = document.createElement("img");
         retweetIcon.src = "bilder/comment.png";
         retweetIcon.alt = "retweet";
@@ -531,34 +543,35 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         retweetIcon.classList.add("retweetIcon");
 
         retweetIndikator.appendChild(retweetIcon);
-
+        // lager en tekst som viser hvem som kommenterte
         let retweetAuthor = document.createElement("a");
         retweetAuthor.href = "viewprofile.html?brukernavn=" + post["author"];
         retweetAuthor.classList.add("retweetAuthor");
         retweetAuthor.innerHTML = "@" + post["author"];
 
         retweetIndikator.appendChild(retweetAuthor);
-
+        // lager en tekst som viser at det er en kommentar
         let retweetTekst = document.createElement("div");
         retweetTekst.classList.add("retweetTekst");
         retweetTekst.innerHTML = "commented on";
 
         retweetIndikator.appendChild(retweetTekst);
-
+        // lager en tekst som viser hvem som er originalforfatteren
         let retweetOriginalAuthor = document.createElement("a");
         retweetOriginalAuthor.href = "viewtweet.html?tweetId=" + post["path"][post["path"].length - 1];
         retweetOriginalAuthor.classList.add("retweetOriginalAuthor");
         retweetOriginalAuthor.innerHTML = "@" + hentTweet(post["path"][post["path"].length - 1])["author"] + "'s tweet";
-
+        // legger til alle elementene i tweeten
         retweetIndikator.appendChild(retweetOriginalAuthor);
         tweet.appendChild(retweetIndikator);
     }
 
-
+    // lager en kolonne for profilbildet
     let profilbildekolonne = document.createElement("div");
     profilbildekolonne.classList.add("profilbildekolonne");
-
+    // lager en link til brukerens profilbilde
     let profilbildelink = document.createElement("a");
+    // lager et bilde som viser brukerens profilbilde
     let profilbilde = document.createElement("img");
     profilbilde.classList.add("profilbilde");
     profilbilde.src = author["profileImage"];
@@ -569,9 +582,11 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     profilbildelink.appendChild(profilbilde);
     profilbildekolonne.appendChild(profilbildelink);
     if (post["comments"].length > 0 && !mainTweet) {
+        // lager en linje som viser at det er en kommentar
         let indentLinjePrime = document.createElement("div");
         indentLinjePrime.classList.add("indentLinjePrime");
         profilbildekolonne.appendChild(indentLinjePrime);
+        // lager en linje som viser at det er en kommentar
         let viewReplies = document.createElement("a");
         viewReplies.classList.add("viewReplies");
         viewReplies.href = "viewtweet.html?tweetId=" + postId;
@@ -580,19 +595,21 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
 
 
     }
+    // legger til kolonnen i tweeten
     let tweetkolonne = document.createElement("div");
     tweetkolonne.classList.add("tweetkolonne");
-
+    // lager en div for forfatterinfo
     let forfatterinfo = document.createElement("div");
     forfatterinfo.classList.add("forfatterinfo");
+    // lager en link til forfatterens profil
     let div2 = document.createElement("a")
     div2.innerHTML = author["displayName"]
     div2.href = "viewprofile.html?brukernavn=" + post["author"]
-
+    // lager en tekst som viser forfatterens brukernavn
     let div3 = document.createElement("a")
     div3.innerHTML = "@" + post["author"]
     div3.href = "viewprofile.html?brukernavn=" + post["author"]
-
+    // lager en tekst som viser når tweeten ble postet
     let div4 = document.createElement("div")
     div4.innerHTML = formatTimestampPretty(post["posted"])
 
@@ -601,22 +618,24 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     forfatterinfo.appendChild(div4)
 
     tweetkolonne.appendChild(forfatterinfo)
-
+    // lager en tekst som viser tweeten
     let tweettekst = document.createElement("div")
     tweettekst.classList.add("tweettekst")
     tweettekst.innerHTML = post["text"]
     tweetkolonne.appendChild(tweettekst)
 
     if (post["bilde"]) {
+        // lager et bilde som viser tweeten
         let tweetbilde = document.createElement("img")
         tweetbilde.classList.add("tweetbilde")
         tweetbilde.src = post["bilde"]
         tweetbilde.alt = "tweet bilde"
         tweetkolonne.appendChild(tweetbilde)
     }
+    // lager en div for knappene
     let tweetknapper = document.createElement("div")
     tweetknapper.classList.add("tweetknapper")
-
+    // lager en knapp for kommentarer
     let kommentarknapp = document.createElement("button")
     kommentarknapp.classList.add("hiddenButton")
     kommentarknapp.classList.add("genericButton")
@@ -627,31 +646,33 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         window.location.href = "viewtweet.html?tweetId=" + postId
     })
 
-
+    // lager en tekst som viser antall kommentarer
     let mengdekommentarer = document.createElement("span")
 
     mengdekommentarer.innerHTML = post["comments"].length
 
 
-
+    //  lager et ikon for kommentarer
     let kommentarikon = document.createElement("img")
     kommentarikon.src = "bilder/comment_hul.png"
     kommentarikon.alt = "kommentarikon"
     kommentarikon.height = "20"
     kommentarknapp.appendChild(mengdekommentarer)
     kommentarknapp.appendChild(kommentarikon)
-
+    //  lager en knapp for retweets
     let retweetknapp = document.createElement("button")
     retweetknapp.classList.add("hiddenButton")
     retweetknapp.classList.add("genericButton")
     retweetknapp.classList.add("tweetknapp")
     retweetknapp.classList.add("tweetknappretweet")
-
-    retweetknapp.addEventListener("click", function (e) {
+    
+    retweetknapp.addEventListener("click", function (e) { 
+        // funksjon for å retweete en tweet 
         let button = e.target
         while (button.tagName != "BUTTON") {
             button = button.parentElement
         }
+        // lager en variabel for antall retweets og endrer den. den endrer også ikonet
         let span = button.querySelector("span")
         let retweetikon = button.querySelector("img")
         if (retweetikon.src.endsWith("hul.png")) {
@@ -666,7 +687,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         // }
     })
 
-
+    // lager en tekst som viser antall retweets
     let mengderetweets = document.createElement("span")
     mengderetweets.innerHTML = post["retweets"].length
 

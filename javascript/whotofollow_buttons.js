@@ -12,49 +12,48 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
     if (i%10 == 0 && i != 0){
         await sleep(500);
     }
-    let whotofollowperson = document.createElement("div");
+    let whotofollowperson = document.createElement("div"); // lager en div som skal inneholde en bruker
     whotofollowperson.classList.add("whotofollowperson");
 
-    let a = document.createElement("a");
+    let a = document.createElement("a"); // lager en a tag som skal være en link til profilen til brukeren
     a.href = "viewprofile.html?brukernavn=" + whoToFollowUsers[i][0];
     a.title = "trykk for å se profil";
     a.classList.add("folgePerson");
     a.classList.add("hiddenButton");
 
-    let div = document.createElement("div");
+    let div = document.createElement("div"); // lager en div som skal inneholde profilbilde og navn
 
-    let img = document.createElement("img");
+    let img = document.createElement("img"); // lager et img tag som skal være profilbildet
     img.src = whoToFollowUsers[i][2];
     img.height = 50;
     img.width = 50;
     img.alt = "profilbilde";
     img.classList.add("profilbilde");
 
-    let div1 = document.createElement("div");
+    let div1 = document.createElement("div"); // lager en div som skal inneholde navn og brukernavn
     div1.classList.add("profilnavn");
 
-    let div2 = document.createElement("div");
+    let div2 = document.createElement("div"); // lager en div som skal inneholde displayname
     div2.classList.add("profilNavnNavn");
     div2.innerHTML = whoToFollowUsers[i][1];
 
-    let div3 = document.createElement("div");
+    let div3 = document.createElement("div"); // lager en div som skal inneholde brukernavn
     div3.classList.add("profilNavnId");
     div3.innerHTML = "@" + whoToFollowUsers[i][0];
 
-    let button = document.createElement("button");
-    if (folgerBruker(hentInnloggetBrukerId(), whoToFollowUsers[i][0])) {
+    let button = document.createElement("button"); // lager en button som gjør at man kan følge brukeren eller unfollowe brukeren
+    if (folgerBruker(hentInnloggetBrukerId(), whoToFollowUsers[i][0])) { // setter innerHTML til button basert på om man har fulgt brukeren eller ikke
         button.innerHTML = "Unfollow";
     } else {
-
         button.innerHTML = "Follow";
     }
     button.classList.add("follow");
     button.classList.add("vanligKnapp");
-    button.title = "trykk for å følge"
 
-    button.addEventListener("click", whoToFollowOrUnfollow);
+    button.addEventListener("click", whoToFollowOrUnfollow); // legger til eventlistener på button
 
 
+    // putter elementer inni elementer
     div1.appendChild(div2);
     div1.appendChild(div3);
 
@@ -62,6 +61,7 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
     div.appendChild(div1);
     a.appendChild(div);
 
+    // hvis brukeren ikke er seg selv, så skal button legges til, man kan ikke følge seg selv
     if (whoToFollowUsers[i][0] != hentInnloggetBrukerId()) {
         a.appendChild(button);
     }
@@ -73,9 +73,9 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
 
 
 function whoToFollowOrUnfollow(a) {
-    a.preventDefault();
+    a.preventDefault(); // stopper at man navigerer til en annen side, fungerer bare på events
     let button = a.target;
-    // sibling tag above
+    
     let brukernavn = button.previousElementSibling.children[1].children[1].innerHTML.replace("@", "");
     let loggedInbrukernavn = hentInnloggetBrukerId();
     if (folgerBruker(loggedInbrukernavn, brukernavn)) {

@@ -59,6 +59,7 @@ function oppdaterProfil(brukernavn) {
 
     }
 
+    // setter inn data i html elementene
     profilePfp.src = bruker["profileImage"];
     profileDisplayName.innerHTML = bruker["displayName"];
     profileBrukernavn.innerHTML = "@"+brukernavn;
@@ -66,7 +67,7 @@ function oppdaterProfil(brukernavn) {
 
     profileLocationName.innerHTML = bruker["location"];
 
-    if (bruker["location"] == "") {
+    if (bruker["location"] == "") { // hvis det ikke er noen location så skjuler den location elementet
         document.querySelector("#profileLocation").style.display = "none";
     } else {
         document.querySelector("#profileLocation").style.display = "flex";

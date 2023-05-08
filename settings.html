@@ -541,6 +541,8 @@
     function setButtonsDisabledState() {
 
         // sjekke om det er noen endringer
+        // Object.values henter alle values i hashmappet og lager en array med dem.
+        // array.some() returnerer true hvis en av verdiene i arrayen er true
         let endring = Object.values(editedParams).some(function (value) { return value })
 
         if (endring) {
@@ -994,6 +996,8 @@
 
 
     window.addEventListener("beforeunload", async function (e) { // for å hindre at brukeren går ut av siden når man har ikke lagret endringer
+        // Object.values henter alle values i hashmappet og lager en array med dem.
+        // array.some() returnerer true hvis en av verdiene i arrayen er true
         let endring = Object.values(editedParams).some(function (value) { return value })
         if (endring) {
             let sidebarButtonFlexs = document.querySelectorAll(".settingsSidebarButtonFlex");
@@ -1001,8 +1005,7 @@
                 if (sidebarButtonFlexs[i].style.display != "none") {
                     sidebarButtonFlexs[i].classList.add("shaking")
 
-                    sleep(10000).then(function () {
-                        console.log("hei")
+                    sleep(10000).then(function () { // queuer at den fjerner shaking etter 10 sekunder
                         sidebarButtonFlexs[i].classList.remove("shaking")
                     });
                 }

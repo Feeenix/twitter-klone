@@ -329,7 +329,7 @@
 
 
     // dette fungerer ikke med "let" pga scope greier... 
-    var editedParams = {
+    var editedParams = { // alle parametre som kan bli endret, brukes for å sette save og discard til å være disabled eller ikke
         "displayName": false,
         "banner": false,
         "pfp": false,
@@ -342,7 +342,7 @@
         "barkSound": false,
         "barkText": false,
     }
-    function setPageState() {
+    function setPageState() { // funksjonen brukes for å sette alle de initielle verdiene til input og tekstfeltene
         let brukerId = hentInnloggetBrukerId();
         oppdaterProfil(brukerId);
         let bruker = hentBruker(brukerId);
@@ -353,19 +353,19 @@
         }
 
         // profile
-        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName");
+        let settingsEditProfileDisplayName = document.querySelector("#settingsEditProfileDisplayName"); // setter display name til å være det samme som det som er i databasen
         settingsEditProfileDisplayName.value = bruker["displayName"];
         settingsEditProfileDisplayName.placeholder = bruker["displayName"];
 
-        let settingsEditBio = document.querySelector("#settingsEditBio");
+        let settingsEditBio = document.querySelector("#settingsEditBio"); // setter bio til å være det samme som i localstorage
         settingsEditBio.value = bruker["bio"];
 
-        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation");
+        let settingsEditProfileLocation = document.querySelector("#settingsEditProfileLocation"); // setter location til å være det samme som i localstorage
         settingsEditProfileLocation.value = bruker["location"];
 
 
         // appearance
-        let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType");
+        let themeRadios = document.querySelectorAll(".settingsEditAppearanceColorThemeType"); // setter theme til å være det samme som i localstorage
         for (let i = 0; i < themeRadios.length; i++) {
             if (themeRadios[i].value == bruker["settings"]["theme"]) {
                 themeRadios[i].checked = true;
@@ -373,44 +373,45 @@
                 themeRadios[i].checked = false;
 
             }
-            if (bruker["settings"]["theme"] == "custom") {
+            if (bruker["settings"]["theme"] == "custom") { // hvis custom er valgt, viser vi custom colors
                 document.querySelector(".customColors").style.display = "flex";
 
             } else {
                 document.querySelector(".customColors").style.display = "none";
             }
         }
+        // uansett hva man har valgt, setter vi custom colors til å være det samme som i localstorage
         document.querySelector("#customColorText").value = bruker["settings"]["text-color"];
         document.querySelector("#customColorBackground").value = bruker["settings"]["background-color"];
 
         console.log(bruker["settings"]["theme"])
         let body = document.querySelector("body");
-        if (bruker["settings"]["theme"] == "light") {
+        if (bruker["settings"]["theme"] == "light") { // hvis light er valgt, setter vi stylen  til body til å være lightmode
             console.log("light")
             body.style.setProperty("--globalfg", "#404040")
             body.style.setProperty("--globalbg", "#ffffff")
             body.style.setProperty("--globalbg2", "#ffffffcd")
         }
-        if (bruker["settings"]["theme"] == "dark") {
+        if (bruker["settings"]["theme"] == "dark") { // hvis dark er valgt, setter vi stylen  til body til å være darkmode
             console.log("dark")
             body.style.setProperty("--globalfg", "#ffffff")
             body.style.setProperty("--globalbg", "#282c34")
             body.style.setProperty("--globalbg2", "#282c34cd")
         }
-        if (bruker["settings"]["theme"] == "custom") {
+        if (bruker["settings"]["theme"] == "custom") { // hvis custom er valgt, setter vi stylen  til body til å være de custom fargene
             console.log("custom")
             body.style.setProperty("--globalfg", bruker["settings"]["text-color"])
             body.style.setProperty("--globalbg", bruker["settings"]["background-color"])
             body.style.setProperty("--globalbg2", bruker["settings"]["background-color"] + "cd")
         }
 
-        let fontsizeflexInput = document.querySelector(".fontsizeflex>input");
+        let fontsizeflexInput = document.querySelector(".fontsizeflex>input");// setter font size
         fontsizeflexInput.value = bruker["settings"]["font-size"]
         changefontsizepreview()
 
         body.style.fontSize = fontsizeflexInput.value + "px"
 
-        let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
+        let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType"); // setter bark sound
         for (let i = 0; i < barkSoundRadio.length; i++) {
             if (barkSoundRadio[i].value == bruker["settings"]["barkSound"]) {
                 barkSoundRadio[i].checked = true;
@@ -421,7 +422,7 @@
 
         }
 
-        let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
+        let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType"); // setter bark text
         for (let i = 0; i < barkTextRadio.length; i++) {
             if (barkTextRadio[i].value == bruker["settings"]["barkText"]) {
                 barkTextRadio[i].checked = true;
@@ -432,7 +433,7 @@
 
         }
 
-        editedParams = {
+        editedParams = { // setter alle parametre til false
             "displayName": false,
             "banner": false,
             "pfp": false,
@@ -445,7 +446,7 @@
             "barkSound": false,
             "barkText": false,
         }
-        setButtonsDisabledState();
+        setButtonsDisabledState(); // setter save- og discardknappene til disabled
 
 
 
@@ -948,7 +949,11 @@
     buttonLogout.addEventListener("click", loggUtBruker);
 
 
+    /**
+    
+    det som skjer under her er at når du trykker på profilbildet ditt så kommer det opp en popup som lar deg logge ut
 
+    */
     let profil = document.querySelector(".profil > button");
     let popupElement = document.querySelector("#popupLogout");
 
@@ -985,6 +990,8 @@
     }
 
 
+
+    // gjør at når man trykker på profilknappen fra menyen så fjernes hele history
     let menyprofil = document.querySelector("#menyprofil");
     menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
     menyprofil.addEventListener("click", function (event) {
@@ -996,6 +1003,7 @@
 
 
     window.addEventListener("beforeunload", async function (e) { // for å hindre at brukeren går ut av siden når man har ikke lagret endringer
+        // funksjonen trenger å være async fordi den queuer en sleep funksjon som er skjer asynkront
         // Object.values henter alle values i hashmappet og lager en array med dem.
         // array.some() returnerer true hvis en av verdiene i arrayen er true
         let endring = Object.values(editedParams).some(function (value) { return value })
@@ -1006,11 +1014,13 @@
                     sidebarButtonFlexs[i].classList.add("shaking")
 
                     sleep(10000).then(function () { // queuer at den fjerner shaking etter 10 sekunder
+                        console.log("fjerne shaking")
                         sidebarButtonFlexs[i].classList.remove("shaking")
+
                     });
                 }
             }
-            e.preventDefault();
+            // e.preventDefault();
             e.returnValue = 'You need to save your changes. Anything you have changed will be lost if you leave this page now.';
         }
     });

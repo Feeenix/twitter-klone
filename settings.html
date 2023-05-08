@@ -743,7 +743,7 @@
                 let radioEl = node.querySelector("input");
                 if (radioEl.value == "true") {
                     console.log("jeg trakk på true");
-                    
+
                     let barkSoundRadioEls = document.querySelectorAll(".settingsEditOtherSoundType")
                     barkSoundRadioEls[0].checked = true;
                     barkSoundRadioEls[1].checked = false;
@@ -774,7 +774,7 @@
                     }
 
                     setButtonsDisabledState()
-                }   
+                }
 
             });
         }
@@ -993,8 +993,30 @@
 
 
 
+    window.addEventListener("beforeunload", function (e) {
+        let endring = Object.values(editedParams).some(function (value) { return value })
+        if (endring) {
+            let sidebarButtonFlexs = document.querySelectorAll(".settingsSidebarButtonFlex");
+            for (let i = 0; i < sidebarButtonFlexs.length; i++) {
+                if (sidebarButtonFlexs[i].style.display != "none") {
+                    sidebarButtonFlexs[i].style.animation = "shake 1s"
+                    sidebarButtonFlexs[i].style.backgroundColor = "#ff0000b0"
+                    sidebarButtonFlexs[i].style.borderRadius = "10px"
 
+                    sleep(1000).then(function () {
+                        console.log("hei")
+                        sidebarButtonFlexs[i].style.animation = ""
+                        sidebarButtonFlexs[i].style.backgroundColor = ""
+                        sidebarButtonFlexs[i].style.borderRadius = ""
+                    });
+                }
+            }
+            e.preventDefault();
+            e.returnValue = 'You need to save your changes. Anything you have changed will be lost if you leave this page now.';
+        }
+    });
 
 
 </script>
+
 </html>

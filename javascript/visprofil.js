@@ -41,8 +41,8 @@ function oppdaterProfil(brukernavn) {
 
     let htmlfilnavn = window.location.pathname.split("/").pop();
     let loggedInbrukernavn = hentInnloggetBrukerId();
-    if (brukernavn == loggedInbrukernavn) {
-        if (htmlfilnavn != "settings.html") {
+    if (brukernavn == loggedInbrukernavn) { // hvis det er den innloggede brukeren så setter den inn en knapp som tar deg til settings med mindre du er i settings
+        if (htmlfilnavn != "settings.html") { 
             knapp.innerHTML = "Rediger profil";
             knapp.onclick = function () {
                 window.location.href = "settings.html";

@@ -177,10 +177,11 @@
 <script>
     leggTilHistory();
 
-    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
-    fjernQueryKnapp.addEventListener("click", clearSearch);
+    let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp"); // knappen som fjerner query fra søkefeltet
+    fjernQueryKnapp.addEventListener("click", clearSearch); // legger til eventlistener på knappen
 
-    function clearSearch() {
+    function clearSearch() { 
+        // fjerner query fra søkefeltet og fokuserer på søkefeltet
         let sokfeltEl = document.querySelector("#sokfelt");
         sokfeltEl.value = "";
         sokfeltEl.focus();

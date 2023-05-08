@@ -186,11 +186,13 @@
     changeWhenInput();
     // denne gjør at den blir mer grå når du trykker på den og at den blir mindre grå når du ikke trykker på den lengre (fokus)
     tweetTextArea.addEventListener("focus", function (e) {
-        console.log(document.querySelector(".tweetImagePreview").style.border)
+        // når tweetTextArea får fokus så blir borderen til tweetImagePreview mer grå 
+        console.log(document.querySelector(".tweetImagePreview").style.border) 
         document.querySelector(".tweetImagePreview").style.borderTopColor = "#aaaaaa60;";
         e.target.parentElement.parentElement.style.border = "#aaaaaa60 solid 5px";
     });
     tweetTextArea.addEventListener("blur", function (e) {
+        // når tweetTextArea mister fokus så blir borderen til tweetImagePreview mindre grå 
         document.querySelector(".tweetImagePreview").style.borderTopColor = "#aaaaaa20;";
         e.target.parentElement.parentElement.style.border = "#aaaaaa20 solid 5px";
     });

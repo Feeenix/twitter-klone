@@ -536,7 +536,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         // lager et bilde som viser en retweet ikon
         let retweetIcon = document.createElement("img");
         retweetIcon.src = "bilder/retweet.png";
-        retweetIcon.alt = "retweet";
+        retweetIcon.alt = "rebark";
         retweetIcon.width = "15";
         retweetIcon.height = "15";
         retweetIcon.classList.add("retweetIcon");
@@ -559,7 +559,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         let retweetOriginalAuthor = document.createElement("a");
         retweetOriginalAuthor.href = "viewtweet.html?tweetId=" + postId;
         retweetOriginalAuthor.classList.add("retweetOriginalAuthor");
-        retweetOriginalAuthor.innerHTML = "@" + post["author"] + "'s tweet";
+        retweetOriginalAuthor.innerHTML = "@" + post["author"] + "'s bark";
         // legger til alle elementene i tweeten
         retweetIndikator.appendChild(retweetOriginalAuthor);
         tweet.appendChild(retweetIndikator);
@@ -571,7 +571,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         // lager et bilde som viser en kommentar ikon
         let retweetIcon = document.createElement("img");
         retweetIcon.src = "bilder/comment.png";
-        retweetIcon.alt = "retweet";
+        retweetIcon.alt = "rebark";
         retweetIcon.width = "15";
         retweetIcon.height = "15";
         retweetIcon.classList.add("retweetIcon");
@@ -594,7 +594,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         let retweetOriginalAuthor = document.createElement("a");
         retweetOriginalAuthor.href = "viewtweet.html?tweetId=" + post["path"][post["path"].length - 1];
         retweetOriginalAuthor.classList.add("retweetOriginalAuthor");
-        retweetOriginalAuthor.innerHTML = "@" + hentTweet(post["path"][post["path"].length - 1])["author"] + "'s tweet";
+        retweetOriginalAuthor.innerHTML = "@" + hentTweet(post["path"][post["path"].length - 1])["author"] + "'s bark";
         // legger til alle elementene i tweeten
         retweetIndikator.appendChild(retweetOriginalAuthor);
         tweet.appendChild(retweetIndikator);
@@ -609,7 +609,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     let profilbilde = document.createElement("img");
     profilbilde.classList.add("profilbilde");
     profilbilde.src = author["profileImage"];
-    profilbilde.alt = "profilbilde";
+    profilbilde.alt = "profile image";
     profilbilde.width = "50";
     profilbilde.height = "50";
     profilbildelink.href = "viewprofile.html?brukernavn=" + post["author"]
@@ -663,7 +663,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         let tweetbilde = document.createElement("img")
         tweetbilde.classList.add("tweetbilde")
         tweetbilde.src = post["bilde"]
-        tweetbilde.alt = "tweet bilde"
+        tweetbilde.alt = "tweet image"
         tweetkolonne.appendChild(tweetbilde)
     }
     // lager en div for knappene
@@ -689,7 +689,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     //  lager et ikon for kommentarer
     let kommentarikon = document.createElement("img")
     kommentarikon.src = "bilder/comment_hul.png"
-    kommentarikon.alt = "kommentarikon"
+    kommentarikon.alt = "comment icon"
     kommentarikon.height = "20"
     kommentarknapp.appendChild(mengdekommentarer)
     kommentarknapp.appendChild(kommentarikon)
@@ -711,13 +711,13 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         let retweetikon = button.querySelector("img")
         if (retweetikon.src.endsWith("hul.png")) {
             retweetikon.src = "bilder/retweet.png"
-            span.innerHTML = parseInt(span.innerHTML) + 1
+            span.innerHTML = Number(span.innerHTML) + 1
 
             lagNyRetweet(postId, hentInnloggetBrukerId())
         }
         // else {
         //     retweetikon.src = "bilder/retweet_hul.png"
-        //     span.innerHTML = parseInt(span.innerHTML) - 1
+        //     span.innerHTML = Number(span.innerHTML) - 1
         // }
     })
 
@@ -735,7 +735,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         retweetikon.src = "bilder/retweet_hul.png"
     }
 
-    retweetikon.alt = "retweetikon"
+    retweetikon.alt = "rebark icon"
     retweetikon.height = "20"
 
     retweetknapp.appendChild(mengderetweets)
@@ -752,7 +752,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     // lager et ikon for likes
     let likeikon = document.createElement("img")
     likeikon.src = "bilder/heart_hul.png"
-    likeikon.alt = "likeikon"
+    likeikon.alt = "like icon"
     likeikon.height = "20"
 
     likerknapp.appendChild(mengdelikes)
@@ -769,13 +769,13 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
         if (likeikon.src.endsWith("hul.png")) {
             // gjør knappen fylt om brukeren har liket
             likeikon.src = "bilder/heart.png"
-            span.innerHTML = parseInt(span.innerHTML) + 1
+            span.innerHTML = Number(span.innerHTML) + 1
 
             lagNyLike(postId, hentInnloggetBrukerId())
         } else {
             // gjør knappen tom om brukeren ikke har liket
             likeikon.src = "bilder/heart_hul.png"
-            span.innerHTML = parseInt(span.innerHTML) - 1
+            span.innerHTML = Number(span.innerHTML) - 1
 
             slettLike(postId, hentInnloggetBrukerId())
 
@@ -793,7 +793,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     // lager et ikon for views
     let viewikon = document.createElement("img")
     viewikon.src = "bilder/eye_hul.png"
-    viewikon.alt = "viewikon"
+    viewikon.alt = "view icon"
     viewikon.height = "20"
     // lager en tekst som viser antall views
     let mengdeviews = document.createElement("span")

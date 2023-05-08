@@ -584,7 +584,9 @@
         let barkSoundRadio = document.querySelectorAll(".settingsEditOtherSoundType");
         let barkTextRadio = document.querySelectorAll(".settingsEditOtherTextType");
 
+
         settingsEditProfileDisplayName.addEventListener("input", function () { // legger til eventlistener for å oppdatere display name i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             profileDisplayName.innerHTML = settingsEditProfileDisplayName.value.length > 0 ? settingsEditProfileDisplayName.value : settingsEditProfileDisplayName.placeholder;
             if (profileDisplayName.innerHTML != bruker["displayName"]) {
                 editedParams["displayName"] = true;
@@ -595,6 +597,7 @@
         });
 
         settingsEditProfileBanner.addEventListener("change", async function () {  // legger til eventlistener for å oppdatere banner i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             let inputs = document.querySelectorAll("input[type=file]");  
             let bannerFile = inputs[0].files[0]; 
             let bannerURL = await readfile(bannerFile); // bruker funksjonen readfile for å lese filen og returnere en base64 url
@@ -608,6 +611,7 @@
         });
 
         settingsEditProfilePicture.addEventListener("change", async function () { // legger til eventlistener for å oppdatere profilbilde i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             let inputs = document.querySelectorAll("input[type=file]");
             let pfpFile = inputs[1].files[0];
             let pfpURL = await readfile(pfpFile); // bruker funksjonen readfile for å lese filen og returnere en base64 url
@@ -621,6 +625,7 @@
         });
 
         settingsEditBio.addEventListener("input", function () { // legger til eventlistener for å oppdatere bio i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             profileBio.innerHTML = settingsEditBio.value;
             if (profileBio.innerHTML != bruker["bio"]) { // sjekker om bioen er endret
                 editedParams["bio"] = true;
@@ -631,6 +636,7 @@
         });
 
         settingsEditProfileLocation.addEventListener("input", function () { // legger til eventlistener for å oppdatere location i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             if (settingsEditProfileLocation.value == "") {
                 document.querySelector("#profileLocation").style.display = "none";
             } else {
@@ -699,6 +705,7 @@
         }
 
         customColorText.addEventListener("input", function () { // legger til eventlistener for å oppdatere custom farge i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             let body = document.querySelector("body");
             body.style.setProperty("--globalfg", customColorText.value)
             if (customColorText.value != bruker["settings"]["text-color"]) { // sjekker om fargen er endret
@@ -710,6 +717,7 @@
         });
 
         customColorBackground.addEventListener("input", function () { // legger til eventlistener for å oppdatere custom farge i previewet live
+            let bruker = hentBruker(hentInnloggetBrukerId()); // henter brukeren som er logget inn
             let body = document.querySelector("body");
             body.style.setProperty("--globalbg", customColorBackground.value)
             body.style.setProperty("--globalbg2", customColorBackground.value + "cd")

@@ -43,7 +43,7 @@ function oppdaterProfil(brukernavn) {
     let loggedInbrukernavn = hentInnloggetBrukerId();
     if (brukernavn == loggedInbrukernavn) { // hvis det er den innloggede brukeren så setter den inn en knapp som tar deg til settings med mindre du er i settings
         if (htmlfilnavn != "settings.html") { 
-            knapp.innerHTML = "Rediger profil";
+            knapp.innerHTML = "Edit profile";
             knapp.onclick = function () {
                 window.location.href = "settings.html";
             }

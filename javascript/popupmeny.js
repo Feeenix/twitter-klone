@@ -10,7 +10,7 @@ function settOppPopupMeny() {
     }
     
     nextElement.addEventListener("focus", gjemPopup)
-    popupElement.addEventListener("blur", gjemPopup);
+    popupElement.addEventListener("blur", gjemPopup); // blur er det motsatte av focus
 
     profil.addEventListener("focus", visPopup);
 

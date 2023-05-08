@@ -17,7 +17,7 @@ for (let i = 0; i < whoToFollowUsers.length; i++) {
 
     let a = document.createElement("a"); // lager en a tag som skal være en link til profilen til brukeren
     a.href = "viewprofile.html?brukernavn=" + whoToFollowUsers[i][0];
-    a.title = "trykk for å se profil";
+    a.title = "click to see profile";
     a.classList.add("folgePerson");
     a.classList.add("hiddenButton");
 

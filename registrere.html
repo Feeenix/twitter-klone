@@ -119,6 +119,16 @@
             return
         }
         if (brukernavn.match(/[^a-zA-Z\d]/g)) {
+            /*
+            regexen matcher alle tegn som ikke er a-z, A-Z eller 0-9
+            for eksempel:
+            "aa" -> ingen match
+            "AA" -> ingen match
+            "13hs" -> ingen match
+            "aaa!" -> match
+            "håkon" -> match
+            "er best" -> match
+            */
             console.log('The username can only contain the symbols: A-Z, a-z and 0-9');
             let errorMessage = document.querySelector('.errorMessage');
             errorMessage.innerHTML = 'The username can only contain the symbols: A-Z, a-z and 0-9';
@@ -168,7 +178,7 @@
         }
 
 
-        lagNyBruker(brukernavn, passord);
+        lagNyBruker(brukernavn, passord); // lager ny bruker
 
 
 

@@ -1,3 +1,5 @@
+
+// 
 let menyprofil = document.querySelector("#menyprofil");
 menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
 menyprofil.addEventListener("click", function (event) {

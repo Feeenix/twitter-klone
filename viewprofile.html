@@ -266,12 +266,13 @@
 <script src="javascript/barkLyder.js"></script>
 <script>
     leggTilHistory();
-
+    // denne funksjonen skal kjøres når siden lastes inn og skal laste inn tweets fra brukeren
     async function visBrukerTweets() {
         let alleBrukere = [hentURLSearchParams()["brukernavn"],];
         await visTweets(alleBrukere);
     }
     visBrukerTweets();
+    
     oppdaterProfil(hentURLSearchParams()["brukernavn"]);
 
     document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"];
@@ -289,7 +290,7 @@
         sokfeltEl.focus();
     }
 
-
+// dette er en funksjon som gjør at vi kan søke etter brukere
     function search() {
         let sokfeltEl = document.querySelector("#sokfelt");
         let query = sokfeltEl.value;

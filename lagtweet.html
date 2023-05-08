@@ -162,19 +162,22 @@
         // Setter profilbilde, navn og brukernavn til innlogget bruker
         let brukerId = hentInnloggetBrukerId();
         let bruker = hentBruker(brukerId);
-
+        
         document.querySelector(".profilbildekolonne>.profilbilde").src = bruker["profileImage"];
         document.querySelector(".forfatterinfo>div:first-child").innerHTML = bruker["displayName"];
         document.querySelector(".forfatterinfo>div:nth-child(2)").innerHTML = "@" + brukerId;
     }
     setPageState();
 
+    // henter tweetTextArea og characterIndicator og legger til eventListener på tweetTextArea
     let tweetTextArea = document.querySelector("#tweetTextArea");
     let characterIndicator = document.querySelector(".characterIndicator");
     tweetTextArea.addEventListener("input", changeWhenInput);
 
+
     let previousTextAreaValue = "";
     function changeWhenInput() {
+        // denne funksjonen gjør at man ikke kan skrive mer enn 250 tegn i tweetTextArea og at characterIndicator oppdateres med antall tegn
         if (tweetTextArea.value.length > 250) {
             tweetTextArea.value = previousTextAreaValue
         }
@@ -185,7 +188,9 @@
         characterIndicator.innerHTML = tweetTextArea.value.length + "/250";
         previousTextAreaValue = tweetTextArea.value;
     }
+
     changeWhenInput();
+    // denne gjør at den blir mer grå når du trykker på den og at den blir mindre grå når du ikke trykker på den lengre (fokus)
     tweetTextArea.addEventListener("focus", function (e) {
         console.log(document.querySelector(".tweetImagePreview").style.border)
         document.querySelector(".tweetImagePreview").style.borderTopColor = "#aaaaaa60;";
@@ -199,11 +204,11 @@
 
 
 
-
+    // dette er et popup element som vi bruker på alle sidene for å logge ut
     let buttonLogout = document.querySelector("#popupLogoutButton");
     buttonLogout.addEventListener("click", loggUtBruker);
 
-
+    
     let profil = document.querySelector(".profil > button");
     let popupElement = document.querySelector("#popupLogout");
     document.querySelector(".backButton").addEventListener("focus", gjemPopup)
@@ -240,7 +245,7 @@
 
 
 
-
+    
     let menyprofil = document.querySelector("#menyprofil");
     menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
     menyprofil.addEventListener("click", function (event) {

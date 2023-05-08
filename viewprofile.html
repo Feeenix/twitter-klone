@@ -264,6 +264,8 @@
 <script src="javascript/sokbar.js"></script>
 <script src="javascript/barkKnapp.js"></script>
 <script src="javascript/barkLyder.js"></script>
+<script src="javascript/popupmeny.js"></script>
+<script src="javascript/alleSider.js"></script>
 <script>
     leggTilHistory();
     // denne funksjonen skal kjøres når siden lastes inn og skal laste inn tweets fra brukeren
@@ -276,10 +278,6 @@
     oppdaterProfil(hentURLSearchParams()["brukernavn"]);
 
     document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"];
-
-
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
 
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
@@ -298,52 +296,6 @@
             window.location.href = "search.html?query=" + query;
         }
     }
-
-
-
-
-    let profil = document.querySelector(".profil > button");
-    let popupElement = document.querySelector("#popupLogout");
-    document.querySelector(".backButton").addEventListener("focus", gjemPopup)
-    popupElement.addEventListener("blur", gjemPopup);
-
-    profil.addEventListener("focus", visPopup);
-
-    profil.addEventListener("blur", gjemPopup);
-    gjemPopup();
-    async function gjemPopup() {
-        await sleep(10);
-
-        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
-        let harFokus = false;
-        for (let i = 0; i < elementer.length; i++) {
-            if (elementer[i] == document.activeElement) {
-                harFokus = true;
-            }
-        }
-        if (harFokus) {
-            return
-        }
-
-        console.log("gjemPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "none";
-
-    }
-    function visPopup() {
-        console.log("visPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "block";
-    }
-
-    let menyprofil = document.querySelector("#menyprofil");
-    menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-    menyprofil.addEventListener("click", function (event) {
-        event.preventDefault();
-        clearHistory();
-        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-    });
-
 
     document.querySelector("title").innerHTML = "@"+ hentURLSearchParams()["brukernavn"] + "'s profil";
 </script>

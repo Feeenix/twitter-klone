@@ -322,6 +322,8 @@
 <script src="javascript/visprofil.js"></script>
 <script src="javascript/urlbarHistory.js"></script>
 <script src="javascript/barkLyder.js"></script>
+<script src="javascript/popupmeny.js"></script>
+<script src="javascript/alleSider.js"></script>
 <script>
     leggTilHistory();
     oppdaterProfil(hentInnloggetBrukerId());
@@ -943,61 +945,6 @@
 
 
 
-
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
-
-
-    /**
-    
-    det som skjer under her er at når du trykker på profilbildet ditt så kommer det opp en popup som lar deg logge ut
-
-    */
-    let profil = document.querySelector(".profil > button");
-    let popupElement = document.querySelector("#popupLogout");
-
-    document.querySelector("#settingsProfile").addEventListener("focus", gjemPopup)
-    popupElement.addEventListener("blur", gjemPopup);
-
-    profil.addEventListener("focus", visPopup);
-
-    profil.addEventListener("blur", gjemPopup);
-    gjemPopup();
-    async function gjemPopup() {
-        await sleep(10);
-
-        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
-        let harFokus = false;
-        for (let i = 0; i < elementer.length; i++) {
-            if (elementer[i] == document.activeElement) {
-                harFokus = true;
-            }
-        }
-        if (harFokus) {
-            return
-        }
-
-        console.log("gjemPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "none";
-
-    }
-    function visPopup() {
-        console.log("visPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "block";
-    }
-
-
-
-    // gjør at når man trykker på profilknappen fra menyen så fjernes hele history
-    let menyprofil = document.querySelector("#menyprofil");
-    menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-    menyprofil.addEventListener("click", function (event) {
-        event.preventDefault();
-        clearHistory();
-        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-    });
 
 
 

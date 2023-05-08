@@ -248,12 +248,12 @@
 <script src="javascript/sokbar.js"></script>
 <script src="javascript/barkKnapp.js"></script>
 <script src="javascript/barkLyder.js"></script>
+<script src="javascript/popupmeny.js"></script>
+<script src="javascript/alleSider.js"></script>
 <script>
     clearHistory();
     leggTilHistory();
-    // henter logg ut knappen
-    let buttonLogout = document.querySelector("#popupLogoutButton");
-    buttonLogout.addEventListener("click", loggUtBruker);
+    
     // henter fjerne query knappen
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);
@@ -273,55 +273,6 @@
         }
     }
 
-
-
-    // henter popup elementet
-    let profil = document.querySelector(".profil > button");
-    let popupElement = document.querySelector("#popupLogout");
-
-    document.querySelector("#overskriftfollowing").addEventListener("focus", gjemPopup)
-    popupElement.addEventListener("blur", gjemPopup);
-
-    profil.addEventListener("focus", visPopup);
-
-    profil.addEventListener("blur", gjemPopup);
-    gjemPopup();
-    async function gjemPopup() {
-        // denne funkjsonen venter 10ms før den gjemmer popupen for å gi tid til å trykke på knappen i popupen før den gjemmes 
-    
-        await sleep(10);
-
-        let elementer = document.querySelectorAll("#popupLogout > *, #popupLogout");
-        let harFokus = false;
-        for (let i = 0; i < elementer.length; i++) {
-            if (elementer[i] == document.activeElement) { // sjekker om et av elementene har fokus hvis det har fokus skal vi ikke gjemme popupen
-                harFokus = true;
-            }
-        }
-        if (harFokus) { // hvis har fokus er true skal vi gjemme popupen
-            return
-        }
-
-        console.log("gjemPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "none"; // gjemmer popupen
-
-    }
-    function visPopup() {
-        // denne funksjonen viser popupen. den runner bare hvis popupen ikke er synlig fra før av 
-        console.log("visPopup");
-        let popupLogout = document.querySelector("#popupLogout");
-        popupLogout.style.display = "block";
-    }
-
-
-    let menyprofil = document.querySelector("#menyprofil");
-    menyprofil.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-    menyprofil.addEventListener("click", function (event) {
-        event.preventDefault();
-        clearHistory();
-        window.location.href = "viewprofile.html?brukernavn=" + hentInnloggetBrukerId();
-    });
 
     async function visFollowingTweets() {
         let brukernavn = hentInnloggetBrukerId();

@@ -271,7 +271,7 @@
     
     oppdaterProfil(hentURLSearchParams()["brukernavn"]);
 
-    document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"];
+    document.querySelector("#viewprofileTopp>h3").innerHTML = "@" + hentURLSearchParams()["brukernavn"]; 
 
     let fjernQueryKnapp = document.querySelector("#fjernQueryKnapp");
     fjernQueryKnapp.addEventListener("click", clearSearch);

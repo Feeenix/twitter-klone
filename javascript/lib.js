@@ -1028,8 +1028,6 @@ async function lagRandomBruker() {
     // bruker picsum.photos for å generere profilbilde og bannerbilde
     // bruker en random id for å generere brukernavn
     // bruker passordet "passord" for alle brukere
-    
-    
 
     let brukernavn = genererId(); // generer random brukernavn
     let passord = "passord"; // passordet er passord for alle brukere

@@ -297,6 +297,9 @@ body {
     width: fit-content;
 }
 
+.folgePerson img{
+    object-fit: cover;
+}
 .folgePerson {
     text-decoration: none;
     /* background-color: ; */
@@ -681,14 +684,14 @@ textarea {
     border-radius: 9999px;
     border: #aaaaaa20 solid 5px;
     /* box-shadow: 0px 0px 10px 10px var(--globalbg); */
-    object-fit: fill;
+    object-fit: cover;
     background-color: var(--globalbg);
 }
 
 .imagePreview>.profileImgCustomize {
     border-radius: 9999px;
     border: #aaaaaa20 solid 5px;
-    object-fit: fill;
+    object-fit: cover;
     width: 150px;
     height: 150px;
 }

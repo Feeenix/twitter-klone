@@ -2,7 +2,7 @@
 
 
 // setter profilbilde og navn i profilknappen som er nederst til venstre
-
+(function () {
 // henter elementer
 let profilknapp = document.querySelector(".profilknapp");
 let profilknappBilde = document.querySelector(".profilknapp>div>img");
@@ -25,6 +25,6 @@ let popupViewProfile = document.querySelector("#popupViewProfile");
 popupViewProfile.href = "viewprofile.html?brukernavn=" + loggedInUser;
 
 
-
+})();
 
 

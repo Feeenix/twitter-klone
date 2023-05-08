@@ -28,7 +28,51 @@ if (localStorage.getItem("history") == null) { // hvis det ikke finnes noe objek
 }
 
 if (anythingIsNull == true) { // hvis det ikke finnes noe i localStorage, så kjører vi MASTERMIND() for å fylle den opp med data
-    MASTERMIND();    
+    MASTERMIND(); // fyller opp localStorage med data
+    (async function () {
+        // lager brukere
+        lagNyBruker("brukernavn", "passord");
+        lagNyBruker("admin", "admin");
+        lagNyBruker("test", "test");
+        lagNyBruker("elonmusk", "teshla");
+        lagNyBruker("billgates", "microsoft");
+        lagNyBruker("mark_zuck", "metaverse");
+        lagNyBruker("jbezos", "smilemazon");
+        lagNyBruker("timcook", "crookednook");
+
+        let brukerBio
+        lagreData(["users", "elonmusk", "displayName"], "Elon Musk");
+        lagreData(["users", "elonmusk", "bannerImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105180504958976030/elonBanner.png");
+        lagreData(["users", "elonmusk", "profileImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105179317165625384/image.png");
+        brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
+        lagreData(["users", "elonmusk", "bio"], brukerBio);
+
+        lagreData(["users", "billgates", "displayName"], "Bill Gates");
+        lagreData(["users", "billgates", "bannerImage"], "https://cdn.wallpapersafari.com/21/84/T9JMAG.jpeg");
+        lagreData(["users", "billgates", "profileImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105180832706088971/image.png");
+        brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
+        lagreData(["users", "billgates", "bio"], brukerBio);
+
+        lagreData(["users", "mark_zuck", "displayName"], "Mark Zuckerberg");
+        lagreData(["users", "mark_zuck", "bannerImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105181703204515950/green-sand-lizard-lacerta-agilis-panoramic-banner-112672374.jpg");
+        lagreData(["users", "mark_zuck", "profileImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105181194959720519/0x0.jpg.webp");
+        brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
+        lagreData(["users", "mark_zuck", "bio"], brukerBio);
+
+        lagreData(["users", "jbezos", "displayName"], "Jeff Bezos");
+        lagreData(["users", "jbezos", "bannerImage"], "https://s3-mittlag-prod.innocode.dev/production/uploads/image/image/432185/1551344398664.jpg");
+        lagreData(["users", "jbezos", "profileImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105182890301607986/image.png");
+        brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
+        lagreData(["users", "jbezos", "bio"], brukerBio);
+
+        lagreData(["users", "timcook", "displayName"], "Tim Cook");
+        lagreData(["users", "timcook", "bannerImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105185030835273818/im-696621.jpeg");
+        lagreData(["users", "timcook", "profileImage"], "https://cdn.discordapp.com/attachments/1095708215402045522/1105184648432205915/apples-tim-cook-making-peace-sign.jpg");
+        brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
+        lagreData(["users", "timcook", "bio"], brukerBio);
+
+
+    })();
 }
 
 async function readfile(File) {
@@ -66,7 +110,7 @@ async function readFiles(filesArray) { // tar inn et array med fil-objekter og r
 
 
 async function sleep(ms) { // venter i ms millisekunder før den returnerer
-    return new Promise(resolve => setTimeout(resolve, ms)); 
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // disse to funksjonene brukes for å omgjøre localStorage til en string, som vi kan dele med andre folk som så kan importere den til sin egen localStorage
@@ -265,7 +309,7 @@ function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en a
     }
     let output = [];
     let looplengde = Math.min(antall, ikkeFolgt.length)
-    for (let i = 0; i < looplengde; i++) { 
+    for (let i = 0; i < looplengde; i++) {
         // velger ut antall brukere fra ikkeFolgt arrayen og legger de til i output arrayen
         let randomIndex = Math.floor(Math.random() * ikkeFolgt.length);
         let randomUsername = ikkeFolgt.splice(randomIndex, 1)[0]
@@ -281,7 +325,7 @@ function listeBrukereSomIkkeErFolgt(brukernavn, antall = 4) { // returnerer en a
 function lagNyTweet(brukernavn, path, bildeURL, text) { // lager en ny tweet og legger den til i bruker sin liste over tweets
     let id = genererId();
     let tweet = { // dette er en objekt 
-        "author": brukernavn, 
+        "author": brukernavn,
         "id": id,
         "path": path,
         "bilde": bildeURL,
@@ -364,7 +408,7 @@ function lagNyLike(postId, brukernavn) {
 
 }
 
-function slettLike(tweetId, brukernavn) { 
+function slettLike(tweetId, brukernavn) {
 
     // henter inn tweet og bruker fra localStorage og fjerner like fra begge
     let tweet = hentFraLocalStorage("tweets")[tweetId];
@@ -665,8 +709,8 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     retweetknapp.classList.add("genericButton")
     retweetknapp.classList.add("tweetknapp")
     retweetknapp.classList.add("tweetknappretweet")
-    
-    retweetknapp.addEventListener("click", function (e) { 
+
+    retweetknapp.addEventListener("click", function (e) {
         // funksjon for å retweete en tweet 
         let button = e.target
         while (button.tagName != "BUTTON") {
@@ -700,7 +744,7 @@ function lagPostElement(postId, mainTweet = false, comment = false) {
     } else {
         retweetikon.src = "bilder/retweet_hul.png"
     }
-    
+
     retweetikon.alt = "retweetikon"
     retweetikon.height = "20"
 
@@ -809,14 +853,14 @@ function formatTimestampPretty(a) {
     }
     if (diffHours < 24) { // hvis tiden er mindre enn 24 timer siden
         if (Math.floor(diffHours) == 1) { // hvis tiden er 1 time siden
-            return Math.floor(diffHours) + " hour ago"; 
+            return Math.floor(diffHours) + " hour ago";
         }
 
         return Math.floor(diffHours) + " hours ago"; // hvis tiden er mer enn 1 time siden og mindre enn 24 timer siden
     }
     if (diffDays < 7) { // hvis tiden er mindre enn 7 dager siden
         if (Math.floor(diffDays) == 1) { // hvis tiden er 1 dag siden
-            return Math.floor(diffDays) + " day ago"; 
+            return Math.floor(diffDays) + " day ago";
         }
         return Math.floor(diffDays) + " days ago"; // hvis tiden er mer enn 1 dag siden og mindre enn 7 dager siden
     }
@@ -845,9 +889,9 @@ function hentTweetEllerRetweet(tweetId) { // henter en tweet eller retweet baser
     if (JSON.stringify(tweet) == JSON.stringify({})) { // hvis tweeten ikke finnes
         tweet = hentRetweet(tweetId);
     }
-    return tweet; 
+    return tweet;
 }
-async function visTweets(listeOverBrukere, id="") { // viser tweets fra en liste over brukere. Dette er async for at brukeren kan se tweetsene mens de laster inn
+async function visTweets(listeOverBrukere, id = "") { // viser tweets fra en liste over brukere. Dette er async for at brukeren kan se tweetsene mens de laster inn
     let posts = [];
     for (let i = 0; i < listeOverBrukere.length; i++) { // looper gjennom alle brukerne
         let bruker = hentBruker(listeOverBrukere[i]);
@@ -868,24 +912,24 @@ async function visTweets(listeOverBrukere, id="") { // viser tweets fra en liste
     posts.reverse(); // reverserer listen slik at den nyeste kommer først
     let feed = document.querySelector("#feed");
     for (let i = 0; i < posts.length; i++) { // looper over alle tweetsene og legger dem til i feeden
-        if (i%10 == 0){
+        if (i % 10 == 0) {
             await sleep(500); // venter 500 millisekunder hver 10 tweets for å ikke overbelaste nettleseren
-            
+
         }
-        if (htmlfilnavn == "home.html"){
+        if (htmlfilnavn == "home.html") {
             let underline = document.querySelectorAll(".line");
-            if (underline[1].style.display == "none" && id=="all"){
+            if (underline[1].style.display == "none" && id == "all") {
                 console.log("return reason: invalid ALL state")
                 return
             }
-            if (underline[0].style.display == "none" && id=="following"){
+            if (underline[0].style.display == "none" && id == "following") {
                 console.log("return reason: invalid FOLLOWING state")
                 return
-            }            
+            }
 
         }
-        
-        
+
+
         let post = posts[i];
         let postElement = lagPostElement(post);
         feed.appendChild(postElement);
@@ -923,14 +967,14 @@ async function MASTERMIND() {
     // den bruker lorem picsum for å hente tilfeldige bilder. https://picsum.photos/
 
     // lager loading screen og legger til i body
-    let body = document.querySelector("body"); 
+    let body = document.querySelector("body");
     let loadingScreen = document.createElement("div");
     loadingScreen.classList.add("loadingScreen");
     let loadingText = document.createElement("h1");
     loadingText.innerHTML = "Preparing first time use";
     let loadingText2 = document.createElement("h2");
     loadingText2.innerHTML = "Please wait while we load assets";
-    
+
     let loadingImg = document.createElement("img");
     loadingImg.src = "bilder/loading.gif";
     loadingImg.classList.add("loadingImg");
@@ -1000,15 +1044,15 @@ async function gjorTingPaTweet(path, layerNumber, tweetId, listeOverBrukere) {
             lagNyLike(tweetId, brukernavn);
         }
         console.log("sjanse for comments:" + (1 / listeOverBrukere.length) * 1.5)
-        if (Math.random() < (1 / listeOverBrukere.length) * 1.5) {  
+        if (Math.random() < (1 / listeOverBrukere.length) * 1.5) {
             path.push(tweetId);
 
             let bildeURL = ""
             if (Math.random() < 0.1) {
-                let choices = ["https://www.cityofturlock.org/_images/dogbarking.jpg","https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
+                let choices = ["https://www.cityofturlock.org/_images/dogbarking.jpg", "https://d3i6fh83elv35t.cloudfront.net/static/2018/10/RTX6EQS0-1024x681.jpg", "https://bilder.kolonial.no/produkter/4ba60b0c-7b2f-43bb-8883-5732108cbdd6.jpg?auto=format&fit=max&w=500&s=337035e9b5dd0dbcb91991355b70438a", "https://image.cnbcfm.com/api/v1/image/107083077-1656593419933-gettyimages-1395062617-t_w16437_4934a878-972d-4bea-b6ef-b61f4ceeb787.jpeg?v=1682101376&w=929&h=523&vtcrop=y", "https://www.dagbladet.no/images/76697370.jpg?imageId=76697370&x=0.27624309392265&y=8.5106382978723&cropw=91.436464088398&croph=80.283687943262&width=386&height=221", "https://pbs.twimg.com/profile_images/1067088217093038080/ipCa7oOb_400x400.jpg"]
                 bildeURL = choices[Math.floor(Math.random() * choices.length)];
             }
-            let id = lagNyTweet(brukernavn, path, bildeURL,  await genererChuck());
+            let id = lagNyTweet(brukernavn, path, bildeURL, await genererChuck());
             await gjorTingPaTweet(path, layerNumber + 1, id, listeOverBrukere);
             // kommenter
 
@@ -1034,10 +1078,10 @@ async function lagRandomBruker() {
     let passord = "passord"; // passordet er passord for alle brukere
     lagNyBruker(brukernavn, passord); // lager en ny bruker med brukernavnet og passordet
 
-    let brukerpfp = "https://picsum.photos/seed/"+genererId()+"/500";
+    let brukerpfp = "https://picsum.photos/seed/" + genererId() + "/500";
     lagreData(["users", brukernavn, "profileImage"], brukerpfp); // bruker picsum med et random seed for å generere profilbilde
 
-    let brukerBanner = "https://picsum.photos/seed/"+genererId()+"/866/231";
+    let brukerBanner = "https://picsum.photos/seed/" + genererId() + "/866/231";
     lagreData(["users", brukernavn, "bannerImage"], brukerBanner); // bruker picsum med et random seed for å generere bannerbilde
 
     let brukerBio = await genererChuck(); // bruker api.chucknorris.io for å generere bio
@@ -1058,8 +1102,8 @@ async function lagRandomBruker() {
 }
 
 
-async function genererChuck(){
-// generer en random chuck norris joke fra chucknorris.io sin api. HÅPER DENNE IKKE ER FORBUDT Å BRUKE I PROSJEKTET :(
+async function genererChuck() {
+    // generer en random chuck norris joke fra chucknorris.io sin api. HÅPER DENNE IKKE ER FORBUDT Å BRUKE I PROSJEKTET :(
     const response = await fetch("https://api.chucknorris.io/jokes/random");
     const jsonData = await response.json();
     return jsonData["value"];

@@ -100,17 +100,17 @@
         let passord = passordEl.value;
 
         if (brukernavn.length === 0) {
-            console.log('Du må skrive inn brukernavn');
+            console.log('You must enter a username');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Du må skrive inn brukernavn';
+            errorMessage.innerHTML = 'You must enter a username';
             brukernavnEl.focus();
             errorMessage.style.display = 'block';
             return
         }
         if (passord.length === 0) {
-            console.log('Du må skrive inn passord');
+            console.log('You must enter a password');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Du må skrive inn passord';
+            errorMessage.innerHTML = 'You must enter a password';
             passordEl.focus();
             errorMessage.style.display = 'block';
             return
@@ -122,9 +122,9 @@
             settInnloggetBruker(brukernavn);
             window.location.href = 'viewprofile.html?brukernavn=' + brukernavn;
         } else {
-            console.log('Feil brukernavn eller passord');
+            console.log('Wrong username or password');
             let errorMessage = document.querySelector('.errorMessage');
-            errorMessage.innerHTML = 'Feil brukernavn eller passord';
+            errorMessage.innerHTML = 'Wrong username or password';
             brukernavnEl.focus();
             errorMessage.style.display = 'block';
         }

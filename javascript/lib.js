@@ -34,11 +34,12 @@ if (anythingIsNull == true) { // hvis det ikke finnes noe i localStorage, så kj
 async function readfile(File) {
     const reader = new FileReader();
     reader.readAsDataURL(File); // gjør om et fil-objekt til en base64 url string (data:image/png;base64,....)
-    return await new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => { // lager en ny promise objekt som er async. når den er ferdig med å lese vil den returnere base64 url stringen til fildataen
         reader.onload = () => {
             resolve(reader.result);
         };
         reader.onerror = reject;
+        // ^ dette har aldri skjedd tror jeg
     });
 }
 

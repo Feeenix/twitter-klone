@@ -8,7 +8,6 @@
 6. logg inn eller registrer en ny bruker.
 
 ## Brukere du kan logge inn med:
-<!-- brukernavn, passord123 -->
 1. Brukernavn: `brukernavn`, Passord: `passord`
 2. Brukernavn: `admin`, Passord: `admin`
 3. Brukernavn: `test`, Passord: `test`
